@@ -9,6 +9,8 @@ package vue;
 import controleur.Controleur;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import modele.Pilote;
 import modele.Voiture;
 
@@ -135,7 +137,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         jLabel11.setText("nb");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("nb");
+        jLabel12.setText("0");
         
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel());
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -253,15 +255,10 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
+        //TableModel modeleTable = new TableModel();
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                
             },
             new String [] {
                 "N° Tour", "N° Voiture", "Pilote", "Temps", "Relai", "Etat", "Heure", "Commentaire"
@@ -451,14 +448,26 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
             String[] ligneTable = new String[8];
             //on incrémente le nombre de tours finis
             int nbTours =Integer.parseInt(jLabel12.getText());
+            //int nbTours = 0;
+
             nbTours++;
             jLabel12.setText(Integer.toString(nbTours));
             ligneTable[0] = Integer.toString(nbTours);//num tours
-            ligneTable[0] = (String)jComboBox1.getSelectedItem();//numéro voiture
+            ligneTable[1] = jComboBox1.getSelectedItem().toString();//numéro voiture
+            ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
+            ligneTable[3] =tempsEcoule.getTemps() ;//temps
+            ligneTable[4] = "";
+            ligneTable[5] = "TOP IN";//type de top
+            ligneTable[6] = "";
+            ligneTable[7] = "";
             
-            //jTable1.getModel().a
-            //addRow(Object[] rowData
-            tempsEcoule.getTemps();
+            DefaultTableModel modele3 = (DefaultTableModel)jTable1.getModel();   
+       
+              
+             modele3.addRow(ligneTable); 
+             jTable1.setModel(modele3); 
+             jTable1.repaint(); 
+ 
         }
     }                                       
 
@@ -470,7 +479,29 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
             jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
         }
         else{
+            String[] ligneTable = new String[8];
+            //on incrémente le nombre de tours finis
+            int nbTours =Integer.parseInt(jLabel12.getText());
+            //int nbTours = 0;
+
+            nbTours++;
+            jLabel12.setText(Integer.toString(nbTours));
+            ligneTable[0] = Integer.toString(nbTours);//num tours
+            ligneTable[1] = jComboBox1.getSelectedItem().toString();//numéro voiture
+            ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
+            ligneTable[3] =tempsEcoule.getTemps() ;//temps
+            ligneTable[4] = "";
+            ligneTable[5] = "TOP TOUR";//type de top
+            ligneTable[6] = "";
+            ligneTable[7] = "";
             
+            DefaultTableModel modele3 = (DefaultTableModel)jTable1.getModel();   
+       
+              
+             modele3.addRow(ligneTable); 
+             jTable1.setModel(modele3); 
+             jTable1.repaint(); 
+ 
         }
     }                                       
 
@@ -482,7 +513,29 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
             jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
         }
         else{
+            String[] ligneTable = new String[8];
+            //on incrémente le nombre de tours finis
+            int nbTours =Integer.parseInt(jLabel12.getText());
+            //int nbTours = 0;
+
+            nbTours++;
+            jLabel12.setText(Integer.toString(nbTours));
+            ligneTable[0] = Integer.toString(nbTours);//num tours
+            ligneTable[1] = jComboBox1.getSelectedItem().toString();//numéro voiture
+            ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
+            ligneTable[3] =tempsEcoule.getTemps() ;//temps
+            ligneTable[4] = "";
+            ligneTable[5] = "TOP OUT";//type de top
+            ligneTable[6] = "";
+            ligneTable[7] = "";
             
+            DefaultTableModel modele3 = (DefaultTableModel)jTable1.getModel();   
+       
+              
+             modele3.addRow(ligneTable); 
+             jTable1.setModel(modele3); 
+             jTable1.repaint(); 
+ 
         }
         
     }  
