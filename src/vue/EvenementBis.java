@@ -15,14 +15,14 @@ import modele.*;
 
 /**
  *
- * @author Co
+ * @author Corinne Bechepois & Coralie Gendrier & Elisabeth Recule
  */
 public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
     
     //nos variables
     //private EvenementSportif evtS;
      private Controleur controleur;
-    
+     private Vue vue;
     /**
      * Creates new form Evt
      */
@@ -284,32 +284,44 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        // Bouton "Creer nouvelle course"
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        // Bouton "Modifier la course"
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        // Bouton "Supprimer la course"
     }                                        
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        // Bouton "Ajouter/Enlever Voiture"
+        vue.ouvrirAjouterEnleverVoiture();
+        
     }                                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        // Bouton "Modifier Voiture"
+        vue.ouvrirCreerModifierVoiture();
     }                                        
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        // Bouton "Supprimer Voiture"
+        String voiture = (String)jList2.getSelectedValue();
+        
+        if(voiture == null){
+            //Boîte du message d'erreur
+            JOptionPane jop3 = new JOptionPane();
+            jop3.showMessageDialog(null, "Vous devez sélectionner une voiture !", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }else{
+            controleur.supprimerVoiture(Integer.parseInt(voiture));
+        }
     }                                        
 
-    //Bouton pour démarrer la course sélectionnée
+    
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        //Bouton pour démarrer la course sélectionnée
         String course = (String)jList1.getSelectedValue();
         //System.out.println("course = "+course);
         if(course == null){
@@ -324,7 +336,7 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
     }                                        
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        // Bouton "Annuler"
         controleur.retour();
     }                                        
 

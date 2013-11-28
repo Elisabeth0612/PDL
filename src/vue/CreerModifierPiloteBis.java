@@ -181,6 +181,7 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
+        controleur.retour();
     }
 
 

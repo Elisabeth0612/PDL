@@ -125,4 +125,13 @@ public class Controleur {
             ouvrirEvenement();
         }
     }
+    
+    public void supprimerVoiture(int numVoiture){
+        if(evtS.supprimerVoiture(numVoiture)){
+            // voiture supprimé
+            
+        }else{
+            // voiture non supprimé
+        }
+    }
 }

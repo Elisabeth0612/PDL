@@ -109,6 +109,16 @@ public class EvenementSportif extends Observable {
         }
         return null;
     }
+    
+    public boolean supprimerVoiture(int numVoiture){
+        for(Voiture v : listV){
+            if(v.getNumVoiture()==numVoiture){
+                listV.remove(v);
+                return true;
+            }
+        }
+        return false;
+    }
 
     //Implémentation du pattern observer
     public void addObserver(Observer obs) {
