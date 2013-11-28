@@ -23,6 +23,11 @@ public class Vue implements Observer {
     private EvenementBis evt;
     private ChronoCourseBis chrono;
     
+    private AjouterEnleverPiloteBis aePilote;
+    private CreerModifierVoitureBis cmVoiture;
+    private AjouterEnleverVoitureBis aeVoiture;
+    private CreerModifierPiloteBis cmPilote;
+    
     //autres variables
     private Controleur control;
     
@@ -37,6 +42,12 @@ public class Vue implements Observer {
         newEvt = new NouvelEvt(control,cce);
         evt = new EvenementBis(control);
         chrono = new ChronoCourseBis(control);
+        
+        aePilote = new AjouterEnleverPiloteBis(control);
+        cmVoiture = new CreerModifierVoitureBis(control);
+        aeVoiture = new AjouterEnleverVoitureBis(control);
+        cmPilote = new CreerModifierPiloteBis(control);
+        
         precedente = cce;
         courante = cce;
         
@@ -74,6 +85,34 @@ public class Vue implements Observer {
         courante.masquer();
         precedente = evt; //creer charger evenement
         courante = chrono; // choix
+        courante.afficher();
+    }
+    
+    public void ouvrirAjouterEnleverPilote(){
+        courante.masquer();
+        precedente = cmVoiture;
+        courante = aePilote;
+        courante.afficher();
+    }
+    
+    public void ouvrirAjouterEnleverVoiture(){
+        courante.masquer();
+        precedente = evt;
+        courante = aeVoiture;
+        courante.afficher();
+    }
+    
+    public void ouvrirCreerModifierVoiture(){
+        courante.masquer();
+        precedente = evt;
+        courante = cmVoiture;
+        courante.afficher();
+    }
+    
+    public void ouvrirCreerModifierPilote(){
+        courante.masquer();
+        precedente = cmVoiture;
+        courante = cmPilote;
         courante.afficher();
     }
     
