@@ -308,14 +308,19 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Supprimer Voiture"
-        String voiture = (String)jList2.getSelectedValue();
-        
-        if(voiture == null){
+        Object oV = jList2.getSelectedValue();
+        if(oV == null){
             //Boîte du message d'erreur
             JOptionPane jop3 = new JOptionPane();
             jop3.showMessageDialog(null, "Vous devez sélectionner une voiture !", "Erreur", JOptionPane.ERROR_MESSAGE);
         }else{
-            controleur.supprimerVoiture(Integer.parseInt(voiture));
+            String voiture = jList2.getSelectedValue().toString();
+            int iV = jList2.getSelectedIndex();
+            if(controleur.supprimerVoiture(Integer.parseInt(voiture))){
+                System.out.println("iV="+iV);
+                jList2.removeSelectionInterval(iV-1, iV);
+                jList2.repaint();
+            }
         }
     }                                        
 

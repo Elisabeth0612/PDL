@@ -128,12 +128,13 @@ public class Controleur {
         }
     }
     
-    public void supprimerVoiture(int numVoiture){
+    public boolean supprimerVoiture(int numVoiture){
         if(evtS.supprimerVoiture(numVoiture)){
             // voiture supprimé
-            
+            return true;
         }else{
             // voiture non supprimé
+            return false;
         }
     }
 }
