@@ -68,7 +68,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         jTextField1.setText(couleur);
         int NbToursRelai = controleur.getNbToursRelaiVoiture(numV);
         jTextField2.setText(Integer.toString(NbToursRelai));
-        jList1.setListP(numV);
+        //jList1.setListP(numV);
         Pilote p = controleur.getPiloteActuel(numV);
         // ici
         Boolean voitureActive = controleur.getVoitureActive(numV);
