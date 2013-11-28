@@ -137,4 +137,20 @@ public class Controleur {
             return false;
         }
     }
+    
+    public void ouvrirAjouterEnleverPilote(){
+        vue.ouvrirAjouterEnleverPilote();
+    }
+    
+    public void ouvrirAjouterEnleverVoiture(){
+        vue.ouvrirAjouterEnleverVoiture();
+    }
+    
+    public void ouvrirCreerModifierVoiture(){
+        vue.ouvrirCreerModifierVoiture();
+    }
+    
+    public void ouvrirCreerModifierPilote(){
+        vue.ouvrirCreerModifierVoiture();
+    }
 }

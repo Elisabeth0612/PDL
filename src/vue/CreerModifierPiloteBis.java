@@ -15,7 +15,6 @@ import controleur.Controleur;
 public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
     private Controleur controleur;
-    private Vue vue;
     
     /**
      * Creates new form CréerModifierPilote

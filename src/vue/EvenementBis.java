@@ -22,7 +22,6 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
     //nos variables
     //private EvenementSportif evtS;
      private Controleur controleur;
-     private Vue vue;
     /**
      * Creates new form Evt
      */
@@ -297,13 +296,12 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Ajouter/Enlever Voiture"
-        vue.ouvrirAjouterEnleverVoiture();
-        
+        controleur.ouvrirAjouterEnleverVoiture();
     }                                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Modifier Voiture"
-        vue.ouvrirCreerModifierVoiture();
+        controleur.ouvrirCreerModifierVoiture();
     }                                        
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         

@@ -100,6 +100,7 @@ public class Vue implements Observer {
         precedente = evt;
         courante = aeVoiture;
         courante.afficher();
+        System.out.println("courante = "+courante+" -- precedente ="+precedente);
     }
     
     public void ouvrirCreerModifierVoiture(){

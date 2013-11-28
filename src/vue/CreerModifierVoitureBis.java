@@ -15,7 +15,6 @@ import controleur.Controleur;
 public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFenetre {
 
     private Controleur controleur;
-    private Vue vue;
     /**
      * Creates new form CreerModifierVoiture
      */
@@ -249,12 +248,12 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Ajouter/Enlever Pilote"
-        vue.ouvrirAjouterEnleverPilote();
+        controleur.ouvrirAjouterEnleverPilote();
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Modifier Pilote"
-        vue.ouvrirCreerModifierPilote();
+        controleur.ouvrirCreerModifierPilote();
     }
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {

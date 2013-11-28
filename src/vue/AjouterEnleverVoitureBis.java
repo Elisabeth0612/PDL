@@ -15,7 +15,6 @@ import controleur.Controleur;
 public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFenetre{
 
      private Controleur controleur;
-     private Vue vue;
     /**
      * Creates new form AjouterEnleverVoiture
      */
@@ -237,7 +236,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Créer une nouvelle voiture"
-        vue.ouvrirCreerModifierVoiture();
+        controleur.ouvrirCreerModifierVoiture();
         
     }
 
