@@ -41,6 +41,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         this.implementerListeVoiture();
         //on affiche la fenetre
         setVisible(true);
+        raffraichir();
         
         
     }
@@ -57,6 +58,9 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
     
     @Override
     public void raffraichir() {
+        jPanel1.invalidate();
+        jPanel1.validate();
+        jLabel10.repaint();
         jPanel1.repaint();
         
         
@@ -131,7 +135,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         
         
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("nb");
+        jLabel10.setText(Integer.toString(controleur.getNbToursMaxCourse()));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("nb");
@@ -448,10 +452,13 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
             String[] ligneTable = new String[8];
             //on incrémente le nombre de tours finis
             int nbTours =Integer.parseInt(jLabel12.getText());
-            //int nbTours = 0;
-
             nbTours++;
             jLabel12.setText(Integer.toString(nbTours));
+            //on décrémente nombre de tours effectués
+            int nbToursMax =Integer.parseInt(jLabel10.getText());
+            nbToursMax--;
+            jLabel10.setText(Integer.toString(nbToursMax));
+            
             ligneTable[0] = Integer.toString(nbTours);//num tours
             ligneTable[1] = jComboBox1.getSelectedItem().toString();//numéro voiture
             ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
@@ -482,10 +489,13 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
             String[] ligneTable = new String[8];
             //on incrémente le nombre de tours finis
             int nbTours =Integer.parseInt(jLabel12.getText());
-            //int nbTours = 0;
-
             nbTours++;
             jLabel12.setText(Integer.toString(nbTours));
+            //on décrémente nombre de tours effectués
+            int nbToursMax =Integer.parseInt(jLabel10.getText());
+            nbToursMax--;
+            jLabel10.setText(Integer.toString(nbToursMax));
+            
             ligneTable[0] = Integer.toString(nbTours);//num tours
             ligneTable[1] = jComboBox1.getSelectedItem().toString();//numéro voiture
             ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
@@ -516,10 +526,13 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
             String[] ligneTable = new String[8];
             //on incrémente le nombre de tours finis
             int nbTours =Integer.parseInt(jLabel12.getText());
-            //int nbTours = 0;
-
             nbTours++;
             jLabel12.setText(Integer.toString(nbTours));
+            //on décrémente nombre de tours effectués
+            int nbToursMax =Integer.parseInt(jLabel10.getText());
+            nbToursMax--;
+            jLabel10.setText(Integer.toString(nbToursMax));
+            
             ligneTable[0] = Integer.toString(nbTours);//num tours
             ligneTable[1] = jComboBox1.getSelectedItem().toString();//numéro voiture
             ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote

@@ -182,4 +182,8 @@ public class Controleur {
         Voiture v = getVoitureCourseByNum(num);
         return v.getListP();
     }
+    
+    public int getNbToursMaxCourse(){
+        return courseEnCours.getNbToursMax();
+    }
 }

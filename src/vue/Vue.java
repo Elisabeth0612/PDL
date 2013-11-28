@@ -41,7 +41,7 @@ public class Vue implements Observer {
         cce = new CreerChargerEvt(control);
         newEvt = new NouvelEvt(control,cce);
         evt = new EvenementBis(control);
-        chrono = new ChronoCourseBis(control);
+        //chrono = new ChronoCourseBis(control);
         
         aePilote = new AjouterEnleverPiloteBis(control);
         cmVoiture = new CreerModifierVoitureBis(control);
@@ -82,6 +82,7 @@ public class Vue implements Observer {
     }
     
     public void ouvrirChrono(){
+        chrono = new ChronoCourseBis(control);
         courante.masquer();
         precedente = evt; //creer charger evenement
         courante = chrono; // choix
@@ -101,7 +102,7 @@ public class Vue implements Observer {
         courante = aeVoiture;
         courante.afficher();
     }
-    
+    //Pb ici !!! il faut jouer avec le Observer/observable il me semble vu que le modele est mis à jour, la fenetre devrait être notifée du changement
     public void ouvrirCreerModifierVoiture(int numV){
         courante.masquer();
         precedente = evt;
