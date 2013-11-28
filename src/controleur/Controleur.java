@@ -117,6 +117,8 @@ public class Controleur {
         Course c = evtS.chercherCourse(nomCourse);
         if(c != null){
             this.courseEnCours = c;
+            System.out.println("course courante "+courseEnCours.getNomCourse());
+            System.out.println("nb voitures = "+courseEnCours.getListV().size());
             //on lance l'affichage de la fenetre de chrono
             vue.ouvrirChrono();
             

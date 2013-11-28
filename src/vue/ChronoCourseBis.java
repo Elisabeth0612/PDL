@@ -52,7 +52,9 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
     
     @Override
     public void raffraichir() {
-        jPanel2.repaint();
+        jPanel1.repaint();
+        jPanel1.validate();
+        jPanel2.validate();
     }
 
     @Override
@@ -119,13 +121,18 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Voiture sélectionnée :");
         
+        //on alimente la combobox avec les voitures de la course
+         List<Voiture> lesV = controleur.getVoituresCourse();
+        String[] sVoitures = new String[lesV.size()];  
+        System.out.println("nb tuture :"+lesV.size());
+        int count = 0;  
+        for (Voiture v  : lesV) {  
+            sVoitures[count] = Integer.toString(v.getNumVoiture());  
+            count++;  
+        } 
+        System.out.println("nb tuture :"+sVoitures.length);
         
-        
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(){
-            List<Voiture> lesV = controleur.getVoituresCourse();
-            public int getSize() { return lesV.size(); }
-            public Object getElementAt(int i) { return lesV.get(i).getNumVoiture(); }
-        });
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(sVoitures));
             
             
         jLabel2.setText("Pilote actuel : ");
