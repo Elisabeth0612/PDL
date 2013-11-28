@@ -167,7 +167,7 @@ public class Controleur {
     }
     
     public List<Pilote> getListP(int numVoiture){
-        return evtS.chercherVoiture(numVoiture).getListP();
+        return null;//evtS.chercherVoiture(numVoiture).getListP();
     }
     
     public Pilote getPiloteActuel(int numVoiture){

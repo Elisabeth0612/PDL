@@ -119,7 +119,8 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
             List<Pilote> lesP = controleur.getListP(-1);
             
             //String[] strings = {lesC.get(0).getNomCourse(),lesC.get(1).getNomCourse()};
-            public int getSize() { return lesP.size(); }
+            public int getSize() { return 0;//lesP.size();
+            }
             public void setListP(int numV){ lesP=controleur.getListP(numV); }
             public Object getElementAt(int i) { return lesP.get(i).getNom()+" "+lesP.get(i).getPrenom(); }
         });
