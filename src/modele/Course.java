@@ -148,4 +148,13 @@ public class Course {
 	public List<Voiture> getListV() {
 		return listV;
 	}
+        
+        public Voiture getUneVoiture(int num){
+            for (Voiture v : listV){
+                if(v.getNumVoiture()==num){
+                    return v;
+                }
+            }
+            return null;
+        }
 }

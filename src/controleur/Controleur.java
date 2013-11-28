@@ -173,4 +173,13 @@ public class Controleur {
     public Pilote getPiloteActuel(int numVoiture){
         return evtS.chercherVoiture(numVoiture).getPiloteActuel();
     }
+    
+    public Voiture getVoitureCourseByNum(int num){
+        return courseEnCours.getUneVoiture(num);
+    }
+    
+    public List<Pilote> getPilotesVoiture(int num){
+        Voiture v = getVoitureCourseByNum(num);
+        return v.getListP();
+    }
 }

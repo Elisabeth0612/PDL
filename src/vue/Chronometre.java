@@ -41,8 +41,9 @@ protected Timer timer;		// objet javax.swing.Timer
 	}
 	
 	// permet de recuperer le temps deja ecoule
-	public int getTemps ()
-	{	return ( this.timeCount );
+	public String getTemps ()
+	{	
+            return ""+this.h+":"+this.m+":"+this.s+":"+this.timeCount;
 	}
 	
 	// permet de connaitre l'etat d'activite du timer (lance ou non)
