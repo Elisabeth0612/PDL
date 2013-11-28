@@ -17,6 +17,11 @@ public class Course {
 	private String typeFin;
 	private int nbToursMax;
 
+        public Course(){
+            this.listT=new ArrayList<Top>();
+            this.listV=new ArrayList<Voiture>();
+            this.evt=null;
+        }
 	public Course(EvenementSportif evt,String nomCourse,Date heureDeb, Date heureFin, int dureePilotageMaxParPilote, int dureeConsecutivePilotageMaxParPilote, String meteo, int nbToursMax, String typeFin){
 		this.evt=evt;
                 this.nomCourse = nomCourse;
