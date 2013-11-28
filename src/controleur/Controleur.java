@@ -17,10 +17,11 @@ import vue.Vue;
  * @author 13008360
  */
 public class Controleur {
-    //private Vue vueCourante;
     private EvenementSportif evtS;
     
     private Vue vue;
+    
+    private Course demarrerCourse;
     
     public Controleur(EvenementSportif e){
         evtS = e;
@@ -31,8 +32,6 @@ public class Controleur {
         evtS.addListV(new Voiture(1, new Pilote("nomP1", "prenomP1","rouge"),"rouge", 5,true));
         evtS.addListV(new Voiture(2, new Pilote("nomP2", "prenomP2","bleu"),"bleue", 5,true));
         
-        //System.out.println("nb elem = "+evtS.getListC().size());
-       //System.out.println("control"+evtS.getListC().get(0).getNomCourse());
         
     }
    
@@ -91,4 +90,16 @@ public class Controleur {
         vue.precedent();
     }
     
+    public void demarrerCourse(String nomCourse){
+        Course c = evtS.chercherCourse(nomCourse);
+        if(c != null){
+            this.demarrerCourse = c;
+            //on lance l'affichage de la fenetre de chrono
+            vue.ouvrirChrono();
+            
+        }
+        else{
+            ouvrirEvenement();
+        }
+    }
 }

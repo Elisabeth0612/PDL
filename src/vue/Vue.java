@@ -20,6 +20,7 @@ public class Vue implements Observer {
     private CreerChargerEvt cce;
     private NouvelEvt newEvt;
     private EvenementBis evt;
+    private ChronoCourse chrono;
     
     //autres variables
     private Controleur control;
@@ -34,6 +35,7 @@ public class Vue implements Observer {
         cce = new CreerChargerEvt(control);
         newEvt = new NouvelEvt(control,cce);
         evt = new EvenementBis(control);
+        chrono = new ChronoCourse(control);
         precedente = cce;
         courante = cce;
         
@@ -59,13 +61,19 @@ public class Vue implements Observer {
     }
     
     public void ouvrirEvenement(){
-        //courante.raffraichir();
         courante.masquer();
         precedente = cce; //creer charger evenement
         courante = evt; // choix
         //newEvt.setPrecedent(cce);
         courante.afficher();
         
+    }
+    
+    public void ouvrirChrono(){
+        courante.masquer();
+        precedente = evt; //creer charger evenement
+        courante = chrono; // choix
+        courante.afficher();
     }
     
     public void lancer(){
@@ -76,11 +84,8 @@ public class Vue implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        //evtS = (EvenementSportif) arg;
-        System.out.println("On update");
-        //courante.masquer();
+        //System.out.println("On update");
         courante.afficher();
-        //courante.raffaichir();
     }
     
 }

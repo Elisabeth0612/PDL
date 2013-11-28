@@ -8,6 +8,8 @@ package vue;
 
 import controleur.Controleur;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import modele.*;
 
 
@@ -66,7 +68,7 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
     
     @Override
     public void vider() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //throw new UnsupportedOperationException("Not supported yet.");
     }
     
     
@@ -308,7 +310,16 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
     //Bouton pour démarrer la course sélectionnée
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        //jList1.getSelectedValue()
+        String course = (String)jList1.getSelectedValue();
+        //System.out.println("course = "+course);
+        if(course == null){
+            //Boîte du message d'erreur
+            JOptionPane jop3 = new JOptionPane();
+            jop3.showMessageDialog(null, "Vous devez sélectionner une course !", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            controleur.demarrerCourse(course);
+        }
         
     }                                        
 

@@ -100,6 +100,15 @@ public class EvenementSportif extends Observable {
     public List<Voiture> getListV() {
         return listV;
     }
+    
+    public Course chercherCourse(String nomC){
+        for(Course c : listC){
+            if(c.getNomCourse()==nomC){
+                return c;
+            }
+        }
+        return null;
+    }
 
     //Implémentation du pattern observer
     public void addObserver(Observer obs) {
