@@ -6,6 +6,7 @@
 
 package vue;
 
+import vue_defaut.ChronoCourse;
 import controleur.Controleur;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,7 +21,7 @@ public class Vue implements Observer {
     private CreerChargerEvt cce;
     private NouvelEvt newEvt;
     private EvenementBis evt;
-    private ChronoCourse chrono;
+    private ChronoCourseBis chrono;
     
     //autres variables
     private Controleur control;
@@ -35,7 +36,7 @@ public class Vue implements Observer {
         cce = new CreerChargerEvt(control);
         newEvt = new NouvelEvt(control,cce);
         evt = new EvenementBis(control);
-        chrono = new ChronoCourse(control);
+        chrono = new ChronoCourseBis(control);
         precedente = cce;
         courante = cce;
         

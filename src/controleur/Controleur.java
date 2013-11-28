@@ -21,16 +21,35 @@ public class Controleur {
     
     private Vue vue;
     
-    private Course demarrerCourse;
+    private Course courseEnCours;
     
     public Controleur(EvenementSportif e){
         evtS = e;
-        //pour tester on remplie quelques données
-        evtS.addListC(new Course(evtS,"Course 1",null, null, 2, 3,"beau", 8, "Tours"));
-        evtS.addListC(new Course(evtS,"Course 2",null,null, 2, 3,"beau", 8, "Tours"));
-  
-        evtS.addListV(new Voiture(1, new Pilote("nomP1", "prenomP1","rouge"),"rouge", 5,true));
-        evtS.addListV(new Voiture(2, new Pilote("nomP2", "prenomP2","bleu"),"bleue", 5,true));
+        courseEnCours = new Course();
+      
+        
+        /*
+        * pour tester on remplie quelques données
+        */
+        Course c1 = new Course(evtS,"Course 1",null, null, 2, 3,"beau", 8, "Tours");
+        Course c2 = new Course(evtS,"Course 2",null,null, 2, 3,"beau", 8, "Tours");
+        //ajout des courses
+        evtS.addListC(c1);
+        evtS.addListC(c2);
+        Pilote v1p1 = new Pilote("nomV1P1", "prenomV1P1","rouge");
+        Pilote v1p2 = new Pilote("nomV1P2", "prenomV1P2","rouge");
+        Pilote v2p1 = new Pilote("nomV2P1", "prenomV2P1","bleu");
+        Pilote v2p2 = new Pilote("nomV2P2", "prenomV2P2","bleu");
+        Voiture v1 = new Voiture(1, v1p1,"rouge", 5,true);
+        v1.addListT(v1p2);
+        Voiture v2 = new Voiture(1, v2p1,"bleue", 5,true);
+        v2.addListT(v2p2);
+        //Ajout des voiture à l'evenement
+        evtS.addListV(v1);
+        evtS.addListV(v2);
+        //ajout des voiture à une course
+        c1.addListV(v1);
+        c1.addListV(v2);
         
         
     }
@@ -75,6 +94,10 @@ public class Controleur {
         return evtS.getListV();
     }
     
+    public List getVoituresCourse(){
+        return courseEnCours.getListV();
+    }
+    
     /*
     *Gestion de la vue
     */
@@ -93,7 +116,7 @@ public class Controleur {
     public void demarrerCourse(String nomCourse){
         Course c = evtS.chercherCourse(nomCourse);
         if(c != null){
-            this.demarrerCourse = c;
+            this.courseEnCours = c;
             //on lance l'affichage de la fenetre de chrono
             vue.ouvrirChrono();
             
