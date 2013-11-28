@@ -219,9 +219,9 @@ pip-log.txt
 #############
 
 # Directories content
-build/
-dist/
-nbproject/
+/build
+/dist
+/nbproject
 
 #files
 build.xml
