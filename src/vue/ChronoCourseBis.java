@@ -8,6 +8,8 @@ package vue;
 
 import controleur.Controleur;
 import java.util.List;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -240,6 +242,11 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
                         .addGap(61, 61, 61)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jCheckBox2)
+                            //.addComponent(jCheckBox4)
+                            //.addComponent(jCheckBox5)
+                            //.addComponent(jCheckBox6)
+                            //.addComponent(jCheckBox7)
+                            //.addComponent(jCheckBox8)
                             .addComponent(jCheckBox1)
                             .addComponent(jCheckBox3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
@@ -259,6 +266,8 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        
+        
         //TableModel modeleTable = new TableModel();
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
