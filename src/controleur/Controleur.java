@@ -41,9 +41,9 @@ public class Controleur {
         Pilote v2p1 = new Pilote("nomV2P1", "prenomV2P1","bleu");
         Pilote v2p2 = new Pilote("nomV2P2", "prenomV2P2","bleu");
         Voiture v1 = new Voiture(1, v1p1,"rouge", 5,true);
-        v1.addListT(v1p2);
-        Voiture v2 = new Voiture(1, v2p1,"bleue", 5,true);
-        v2.addListT(v2p2);
+        v1.addListP(v1p2);
+        Voiture v2 = new Voiture(2, v2p1,"bleue", 5,true);
+        v2.addListP(v2p2);
         //Ajout des voiture à l'evenement
         evtS.addListV(v1);
         evtS.addListV(v2);

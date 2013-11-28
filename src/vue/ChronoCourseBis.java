@@ -123,7 +123,6 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(){
             List<Voiture> lesV = controleur.getVoituresCourse();
-            //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return lesV.size(); }
             public Object getElementAt(int i) { return lesV.get(i).getNumVoiture(); }
         });

@@ -28,7 +28,7 @@ public class Voiture {
 		setVoitureActive(voitureActive);
 	}
 	
-	public void addListT(Pilote p){
+	public void addListP(Pilote p){
 		if (!listP.contains(p)){
 			listP.add(p);
 		}
