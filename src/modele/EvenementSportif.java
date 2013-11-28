@@ -110,6 +110,15 @@ public class EvenementSportif extends Observable {
         return null;
     }
     
+    public Voiture chercherVoiture(int numVoiture){
+        for(Voiture v : listV){
+            if(v.getNumVoiture()==numVoiture){
+                return v;
+            }
+        }
+        return null;
+    }
+    
     public boolean supprimerVoiture(int numVoiture){
         for(Voiture v : listV){
             if(v.getNumVoiture()==numVoiture){

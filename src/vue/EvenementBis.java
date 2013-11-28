@@ -301,7 +301,18 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Modifier Voiture"
-        controleur.ouvrirCreerModifierVoiture();
+        Object oV = jList2.getSelectedValue();
+        if(oV == null){
+             //Boîte du message d'erreur
+            JOptionPane jop3 = new JOptionPane();
+            jop3.showMessageDialog(null, "Vous devez sélectionner une voiture !", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }else{
+            String voiture = jList2.getSelectedValue().toString();
+            int numV = Integer.parseInt(voiture);
+            
+            controleur.ouvrirCreerModifierVoiture(numV);
+            
+        }
     }                                        
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         

@@ -7,6 +7,8 @@
 package vue;
 
 import controleur.Controleur;
+import java.util.List;
+import modele.Pilote;
 
 /**
  *
@@ -61,6 +63,17 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         //throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    public void miseAJour(int numV){ 
+        String couleur = controleur.getCouleurVoiture(numV);
+        jTextField1.setText(couleur);
+        int NbToursRelai = controleur.getNbToursRelaiVoiture(numV);
+        jTextField2.setText(Integer.toString(NbToursRelai));
+        jList1.setListP(numV);
+        Pilote p = controleur.getPiloteActuel(numV);
+        // ici
+        Boolean voitureActive = controleur.getVoitureActive(numV);
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,12 +114,16 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
                 jCheckBox1ActionPerformed(evt);
             }
         });
-
+        jList1.setSelectionMode(1);
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            List<Pilote> lesP = controleur.getListP(-1);
+            
+            //String[] strings = {lesC.get(0).getNomCourse(),lesC.get(1).getNomCourse()};
+            public int getSize() { return lesP.size(); }
+            public void setListP(int numV){ lesP=controleur.getListP(numV); }
+            public Object getElementAt(int i) { return lesP.get(i).getNom()+" "+lesP.get(i).getPrenom(); }
         });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 
         jLabel3.setText("Liste des pilotes pour la voiture :");
