@@ -8,6 +8,7 @@ package vue;
 
 import controleur.Controleur;
 import java.util.List;
+import javax.swing.JOptionPane;
 import modele.Voiture;
 
 /**
@@ -34,9 +35,10 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
     @Override
     public void afficher() {
         raffraichir();
-        
+        this.implementerListeVoiture();
         //on affiche la fenetre
         setVisible(true);
+        
         
     }
 
@@ -53,8 +55,8 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
     @Override
     public void raffraichir() {
         jPanel1.repaint();
-        jPanel1.validate();
-        jPanel2.validate();
+        
+        
     }
 
     @Override
@@ -121,19 +123,10 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Voiture sélectionnée :");
         
-        //on alimente la combobox avec les voitures de la course
-         List<Voiture> lesV = controleur.getVoituresCourse();
-        String[] sVoitures = new String[lesV.size()];  
-        System.out.println("nb tuture :"+lesV.size());
-        int count = 0;  
-        for (Voiture v  : lesV) {  
-            sVoitures[count] = Integer.toString(v.getNumVoiture());  
-            count++;  
-        } 
-        System.out.println("nb tuture :"+sVoitures.length);
         
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(sVoitures));
-            
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel());
+        
+        
             
         jLabel2.setText("Pilote actuel : ");
 
@@ -434,14 +427,38 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
     
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
+        if(!tempsEcoule.isActif()){
+            //Boîte du message d'erreur
+            JOptionPane jop3 = new JOptionPane();
+            jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
+        }
+        else{
+            
+        }
     }                                       
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
+        if(!tempsEcoule.isActif()){
+            //Boîte du message d'erreur
+            JOptionPane jop3 = new JOptionPane();
+            jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
+        }
+        else{
+            
+        }
     }                                       
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
+        if(!tempsEcoule.isActif()){
+            //Boîte du message d'erreur
+            JOptionPane jop3 = new JOptionPane();
+            jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
+        }
+        else{
+            
+        }
     }  
 
     // Variables declaration - do not modify                     
@@ -482,5 +499,10 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
     private javax.swing.JTextField jTextField3;
     // End of variables declaration                   
 
-    
+    public void implementerListeVoiture(){
+        List<Voiture> lesV = controleur.getVoituresCourse();
+        for (Voiture v  : lesV) {  
+            jComboBox1.addItem(v.getNumVoiture());
+        }  
+    }
 }
