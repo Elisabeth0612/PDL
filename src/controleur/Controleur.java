@@ -30,8 +30,8 @@ public class Controleur {
         /*
         * pour tester on remplie quelques données
         */
-        Course c1 = new Course(evtS,"Course 1",null, null, 2, 3,"beau", 8, "Tours");
-        Course c2 = new Course(evtS,"Course 2",null,null, 2, 3,"beau", 8, "Tours");
+        Course c1 = new Course("Course 1",null, null, 2, 3,"beau", 8, "Tours");
+        Course c2 = new Course("Course 2",null,null, 2, 3,"beau", 8, "Tours");
         //ajout des courses
         evtS.addListC(c1);
         evtS.addListC(c2);

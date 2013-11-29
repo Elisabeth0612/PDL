@@ -7,6 +7,8 @@
 package vue;
 
 import controleur.Controleur;
+import javax.swing.JOptionPane;
+import modele.Course;
 import vue_defaut.Evenement;
 
 /**
@@ -15,16 +17,29 @@ import vue_defaut.Evenement;
  */
 public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre{
     
-    private Controleur control;
+    private Controleur controleur;
     private MaFenetre jfPrecedente;
     /**
      * Creates new form CreerModifierCourse
      */
     public CreerModifierCourse(Controleur control, EvenementBis evt) {
         initComponents();
-        this.control=control;
+        this.controleur=control;
         this.jfPrecedente=evt;
         
+    }
+    
+    public boolean controleChampsSaisis(){
+        boolean ok=true;
+        if (jTextField1.getText().isEmpty()) ok=false;
+        if (jTextField2.getText().isEmpty()) ok=false;
+        if (jTextField3.getText().isEmpty()) ok=false;
+        if (jTextField4.getText().isEmpty()) ok=false;
+        if (jTextField5.getText().isEmpty()) ok=false;
+        if (jTextField6.getText().isEmpty()) ok=false;
+        if (jTextField7.getText().isEmpty()) ok=false;
+        if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) ok=false;
+        return ok;
     }
 
     /**
@@ -80,8 +95,18 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
         jLabel4.setText("Nombre de tours maximum :");
 
         jRadioButton1.setText("Nombre de tours");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         jRadioButton2.setText("Temps");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Type de fin :");
@@ -112,8 +137,18 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setText("Enregistrer");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Annuler");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Liste des voitures inscrites à l'événement :");
@@ -265,6 +300,34 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        controleur.retour();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (!controleChampsSaisis()){
+            JOptionPane.showMessageDialog(this,"Veuillez renseigner tous les champs pour créer la course","Titre : Erreur",JOptionPane.ERROR_MESSAGE);
+        }else{
+            String typeFin=null;
+            if (jRadioButton1.isSelected()){
+                typeFin=jRadioButton1.getText();
+            }
+            else{
+                typeFin=jRadioButton2.getText();
+            }
+            controleur.getCoursesEvenement().add(new Course(jTextField1.getText(),null,null,Integer.parseInt(jTextField5.getText()),Integer.parseInt(jTextField6.getText()),jTextField7.getText(),Integer.parseInt(jTextField4.getText()),typeFin));
+            controleur.retour();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        jRadioButton2.setSelected(!jRadioButton1.isSelected());
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        jRadioButton1.setSelected(!jRadioButton2.isSelected());
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

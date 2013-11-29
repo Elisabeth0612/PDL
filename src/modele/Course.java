@@ -5,7 +5,6 @@ import java.util.*;
 
 public class Course {
 	
-	private EvenementSportif evt;
 	private List<Top> listT;
 	private List<Voiture> listV;
 	private String nomCourse;
@@ -20,10 +19,8 @@ public class Course {
         public Course(){
             this.listT=new ArrayList<Top>();
             this.listV=new ArrayList<Voiture>();
-            this.evt=null;
         }
-	public Course(EvenementSportif evt,String nomCourse,Date heureDeb, Date heureFin, int dureePilotageMaxParPilote, int dureeConsecutivePilotageMaxParPilote, String meteo, int nbToursMax, String typeFin){
-		this.evt=evt;
+	public Course(String nomCourse,Date heureDeb, Date heureFin, int dureePilotageMaxParPilote, int dureeConsecutivePilotageMaxParPilote, String meteo, int nbToursMax, String typeFin){
                 this.nomCourse = nomCourse;
 		this.heureDeb=heureDeb;
 		this.heureFin=heureFin;
@@ -36,8 +33,7 @@ public class Course {
 		this.typeFin=typeFin;
 	}
 	
-	public void modifierCourse(EvenementSportif evt,String nomCourse,Date heureDeb, Date heureFin, int dureePilotageMaxParPilote, int dureeConsecutivePilotageMaxParPilote, String meteo, int nbToursMax, String typeFin){
-		setEvt(evt);
+	public void modifierCourse(String nomCourse,Date heureDeb, Date heureFin, int dureePilotageMaxParPilote, int dureeConsecutivePilotageMaxParPilote, String meteo, int nbToursMax, String typeFin){
 		setNomCourse(nomCourse);
 		setHeureDeb(heureDeb);
 		setHeureFin(heureFin);
@@ -66,14 +62,6 @@ public class Course {
 	
 	public void removeListV(Voiture v){
 		listV.remove(v);
-	}
-
-	public EvenementSportif getEvt() {
-		return evt;
-	}
-
-	public void setEvt(EvenementSportif evt) {
-		this.evt = evt;
 	}
 
 	public String getNomCourse() {
