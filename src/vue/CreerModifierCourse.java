@@ -6,17 +6,25 @@
 
 package vue;
 
+import controleur.Controleur;
+import vue_defaut.Evenement;
+
 /**
  *
  * @author Co
  */
-public class CreerModifierCourse extends javax.swing.JFrame {
-
+public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre{
+    
+    private Controleur control;
+    private MaFenetre jfPrecedente;
     /**
      * Creates new form CreerModifierCourse
      */
-    public CreerModifierCourse() {
+    public CreerModifierCourse(Controleur control, EvenementBis evt) {
         initComponents();
+        this.control=control;
+        this.jfPrecedente=evt;
+        
     }
 
     /**
@@ -258,40 +266,6 @@ public class CreerModifierCourse extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreerModifierCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreerModifierCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreerModifierCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreerModifierCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreerModifierCourse().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -323,4 +297,38 @@ public class CreerModifierCourse extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
+
+        @Override
+    public void afficher() {
+        raffraichir();
+        
+        //on affiche la fenetre
+        setVisible(true);
+        
+    }
+
+    @Override
+    public void masquer() {
+        setVisible(false);
+    }
+
+    @Override
+    public void fermer() {
+        dispose();
+    }
+    
+    @Override
+    public void raffraichir() {
+        //jPanel2.repaint();
+    }
+
+    @Override
+    public MaFenetre getPrecedent() {
+       return jfPrecedente; 
+    }
+    
+    @Override
+    public void vider() {
+        //throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

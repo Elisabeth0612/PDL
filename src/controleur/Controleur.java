@@ -4,7 +4,6 @@
  */
 package controleur;
 
-import modele.EvenementSportif;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
@@ -185,5 +184,9 @@ public class Controleur {
     
     public int getNbToursMaxCourse(){
         return courseEnCours.getNbToursMax();
+    }
+
+    public void ouvrirCreerModifierCourse() {
+        vue.ouvrirCreerModifierCourse();
     }
 }

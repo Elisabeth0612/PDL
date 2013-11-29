@@ -284,6 +284,7 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Creer nouvelle course"
+        controleur.ouvrirCreerModifierCourse();
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         

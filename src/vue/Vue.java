@@ -10,7 +10,8 @@ import vue_defaut.ChronoCourse;
 import controleur.Controleur;
 import java.util.Observable;
 import java.util.Observer;
-import modele.EvenementSportif;
+import modele.*;
+
 
 /**
  *
@@ -28,6 +29,8 @@ public class Vue implements Observer {
     private AjouterEnleverVoitureBis aeVoiture;
     private CreerModifierPiloteBis cmPilote;
     
+    private CreerModifierCourse cmCourse;
+    
     //autres variables
     private Controleur control;
     
@@ -42,12 +45,14 @@ public class Vue implements Observer {
         newEvt = new NouvelEvt(control,cce);
         evt = new EvenementBis(control);
         //chrono = new ChronoCourseBis(control);
+       
         
         aePilote = new AjouterEnleverPiloteBis(control);
         cmVoiture = new CreerModifierVoitureBis(control);
         aeVoiture = new AjouterEnleverVoitureBis(control);
         cmPilote = new CreerModifierPiloteBis(control);
         
+        cmCourse=new CreerModifierCourse(control,evt);
         precedente = cce;
         courante = cce;
         
@@ -124,7 +129,12 @@ public class Vue implements Observer {
         courante.afficher();
     }
 
-    
+    public void ouvrirCreerModifierCourse(){
+        courante.masquer();
+        precedente=evt;
+        courante=cmCourse;
+        courante.afficher();
+    }
 
     @Override
     public void update(Observable o, Object arg) {

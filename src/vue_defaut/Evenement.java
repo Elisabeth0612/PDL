@@ -85,10 +85,10 @@ public class Evenement extends javax.swing.JFrame implements MaFenetre {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Courses :");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Voitures inscrites :");
 
         jList1.setModel(new javax.swing.AbstractListModel() {
@@ -187,13 +187,13 @@ public class Evenement extends javax.swing.JFrame implements MaFenetre {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton6)
-                                    .addComponent(jButton5)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jButton4)))
-                                .addGap(36, 36, 36))
+                                    .addComponent(jButton5))
+                                .addGap(102, 102, 102))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton4)
                                 .addContainerGap())))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
