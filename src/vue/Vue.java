@@ -135,6 +135,13 @@ public class Vue implements Observer {
         courante=cmCourse;
         courante.afficher();
     }
+    
+    public void ouvrirCreerModifierCourse(Course c){
+        courante.masquer();
+        precedente=evt;
+        courante=cmCourse;
+        courante.afficher();
+    }
 
     @Override
     public void update(Observable o, Object arg) {
