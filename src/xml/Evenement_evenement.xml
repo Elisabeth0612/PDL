@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Evenementevenement>
+  <Information_Evenement Nom_Evenement="evenement" Date_Evenement="Date inconnue" Nom_Circuit="circuit" Longueur_Circuit="0" />
+  <Les_Courses>
+    <Course Nom="Course 1" Heure_début="heure inconnue" Heure_fin="heure inconnue" durée_max_pilotage="2" durée_consecutive_pilotage="3" meteo="beau" type_fin="Tours" nb_tours_max="8">
+      <les_voitures_course Num_Voiture="2" />
+    </Course>
+    <Course Nom="Course 2" Heure_début="heure inconnue" Heure_fin="heure inconnue" durée_max_pilotage="2" durée_consecutive_pilotage="3" meteo="beau" type_fin="Tours" nb_tours_max="8">
+      <les_voitures_course />
+    </Course>
+  </Les_Courses>
+</Evenementevenement>

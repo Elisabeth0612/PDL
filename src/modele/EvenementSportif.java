@@ -37,7 +37,7 @@ public class EvenementSportif extends Observable {
         setDateEvt(dateEvt);
         setNomCircuit(nomCircuit);
         setLongueurCircuit(longueurCircuit);
-        System.out.println("evt = "+this.nomEvt);
+        //System.out.println("evt = "+this.nomEvt);
         notifyObserver();
     }
 

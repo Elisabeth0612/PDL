@@ -7,8 +7,12 @@
 package vue;
 
 import controleur.Controleur;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modele.*;
 import xml.EvenementSportifXML;
@@ -19,7 +23,7 @@ import xml.VoitureXML;
  *
  * @author Corinne Bechepois & Coralie Gendrier & Elisabeth Recule
  */
-public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
+public class EvenementBis extends JFrame implements MaFenetre {
     
     //nos variables
     //private EvenementSportif evtS;
@@ -28,10 +32,12 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
      * Creates new form Evt
      */
     public EvenementBis(Controleur c) {
+        super("EvenementBis");
         controleur = c;
-        c.enregistrer();
+        //c.enregistrer();
         
         initComponents();
+        //this.setVisible(true);
     }
 
     public void lancer(){
@@ -46,7 +52,9 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
         //on affiche la fenetre
         setVisible(true);
         raffraichir();
-        
+        setVisible(true);
+        //jPanel2.updateUI();
+        //jPanel2.
     }
 
     @Override
@@ -61,10 +69,18 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
     
     @Override
     public void raffraichir() {
-        jPanel2.repaint();
-        jLabel3.repaint();
-        jPanel2.validate();
+        
+        /*if(controleur.getDateEvt()!=null){
+            jLabel3.setText("Evenement : "+controleur.getNomEvt()+" - "+controleur.getDateEvt().toString()+" - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());
+        }
+        else{
+            jLabel3.setText("Evenement : "+controleur.getNomEvt()+" - ?? - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());  
+        }*/
+        
         jPanel2.revalidate();
+        jPanel2.repaint();
+        jLabel3.revalidate();
+        jLabel3.repaint();
         
     }
 
@@ -87,7 +103,7 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">    
     private void initComponents() {
-        setResizable(false);
+        
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -105,8 +121,29 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
         jButton8 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter(){
+             public void windowClosing(WindowEvent e){
+                   int reponse = JOptionPane.showConfirmDialog(null,
+                                        "Voulez-vous quitter l'application",
+                                        "Confirmation",
+                                        JOptionPane.YES_NO_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE);
+                   if (reponse==JOptionPane.YES_OPTION){
+                       controleur.enregistrer();
+                       //controleur.fermerApplication();
+                       dispose();
+                   }
+             }
+        });
+        setResizable(false);
+        /*addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                repaint();
+                jPanel2.repaint();
+                System.out.println("focus on");
+            }
+        });*/
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Courses :");
 
@@ -194,13 +231,12 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
 
         
         if(controleur.getDateEvt()!=null){
-            System.out.println("Evenement : "+controleur.getNomEvt()+" - "+controleur.getDateEvt().toString()+" - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());
+            //System.out.println("Evenement : "+controleur.getNomEvt()+" - "+controleur.getDateEvt().toString()+" - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());
             jLabel3.setText("Evenement : "+controleur.getNomEvt()+" - "+controleur.getDateEvt().toString()+" - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());
         }
         else{
-            System.out.println("Evenement : "+controleur.getNomEvt()+" - ?? - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());
-            jLabel3.setText("Evenement : "+controleur.getNomEvt()+" - ?? - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());
-        
+            //System.out.println("Evenement : "+controleur.getNomEvt()+" - ?? - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());
+            jLabel3.setText("Evenement : "+controleur.getNomEvt()+" - ?? - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());  
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -411,6 +447,7 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration
 
+    
     
 
     

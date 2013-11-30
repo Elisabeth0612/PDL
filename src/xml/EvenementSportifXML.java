@@ -8,8 +8,11 @@ package xml;
 
 
 import java.io.*;
+import java.util.Date;
 import javax.xml.*;
+import modele.Course;
 import modele.EvenementSportif;
+import modele.Voiture;
 import org.jdom2.*;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
@@ -36,49 +39,66 @@ public class EvenementSportifXML {
         Element racine = new Element("Evenement"+evtS.getNomEvt());
         document = new Document(racine);
         
-        Element nomE = new Element("Nom_Evenement");
-        nomE.addContent(evtS.getNomEvt());
-        racine.addContent(nomE);
+        Element infE = new Element("Information_Evenement");
+            infE.setAttribute("Nom_Evenement",evtS.getNomEvt());
+            if(evtS.getDateEvt()!=null){
+                infE.setAttribute("Date_Evenement",evtS.getDateEvt().toString());
+            }
+            else{
+                infE.setAttribute("Date_Evenement","Date inconnue");
+            }
+            infE.setAttribute("Nom_Circuit",evtS.getNomCircuit());
+            infE.setAttribute("Longueur_Circuit",Integer.toString(evtS.getLongueurCircuit()));
+        racine.addContent(infE);
         
-        Element nomC = new Element("Nom_Circuit");
-        nomC.addContent(evtS.getNomCircuit());
-        racine.addContent(nomC);
+        /*****************************
+         * on gère les informations des courses de l'evenement
+         * ***************************/
+        Element infCourses = new Element("Les_Courses");
+        //pour chaque course
+        for(Course c : evtS.getListC()){
+            Element course = new Element("Course");
+            course.setAttribute("Nom",c.getNomCourse());
+            if(c.getHeureDeb()!=null){
+                course.setAttribute("Heure_début",c.getHeureDeb().toString());
+            }
+            else{
+                course.setAttribute("Heure_début","heure inconnue");
+            }
+            if(c.getHeureFin()!=null){
+                course.setAttribute("Heure_fin",c.getHeureFin().toString());
+            }
+            else{
+                course.setAttribute("Heure_fin","heure inconnue");
+            }
+            course.setAttribute("durée_max_pilotage",Integer.toString(c.getDureePilotageMaxParPilote()));
+            course.setAttribute("durée_consecutive_pilotage",Integer.toString(c.getDureeConsecutivePilotageMaxParPilote()));
+            course.setAttribute("meteo",c.getMeteo());
+            course.setAttribute("type_fin",c.getTypeFin());
+            course.setAttribute("nb_tours_max",Integer.toString(c.getNbToursMax()));
+            
+                /*****************************
+                 * on gère les informations des voitures de la course (on enregistre seulement le nom des voitures)
+                 * ***************************/
+                 Element courseVoitures = new Element("les_voitures_course");
+                 for (Voiture v : c.getListV()){
+                    courseVoitures.setAttribute("Num_Voiture",Integer.toString(v.getNumVoiture()));
+                 }
+                 course.addContent(courseVoitures);
+                /*****************************
+                * on gère les informations des tops de la course
+                 * ***************************/
+            
+            infCourses.addContent(course);
+        }
         
-        Element longC = new Element("Longueur_Circuit");
-        longC.addContent(Integer.toString(evtS.getLongueurCircuit()));
-        racine.addContent(longC);
-        
-        /*Element dateE = new Element("Date_Evenement");
-        dateE.addContent(evtS.getDateEvt().toString());
-        racine.addContent(dateE);*/
-        
+        racine.addContent(infCourses);
         afficher();
+        enregistrer();
    }
-   /*public void executer()
-   {
-       System.out.println("on execute enreg");
-      //On crée un nouvel Element etudiant et on l'ajoute
-      //en tant qu'Element de racine
-      Element evenement = new Element("evenement");
-      racine.addContent(evenement);
-
-      //On crée un nouvel Attribut classe et on l'ajoute à etudiant
-     //grâce à la méthode setAttribute
-      Attribute nomEvt = new Attribute("nom","NomE");
-      evenement.setAttribute(nomEvt);
-
-      //On crée un nouvel Element nom, on lui assigne du texte
-      //et on l'ajoute en tant qu'Element de etudiant
-      Element nom = new Element("nom");
-      nom.setText("CynO");
-      evenement.addContent(nom);
-
-      //Les deux méthodes qui suivent seront définies plus loin dans l'article
-      affiche();
-      enregistre("evenements.xml");
-   }*/
    
-   static void afficher()
+   
+   public void afficher()
 {
    try
    {
@@ -89,12 +109,13 @@ public class EvenementSportifXML {
    catch (java.io.IOException e){}
 }
 
-static void enregistre(String fichier)
+public void enregistrer()
 {
+   //String s = evtS.getNomEvt();
    try
    {
-        FileOutputStream fos = new FileOutputStream("./src/xml/evenement.xml");
-        OutputStreamWriter out = new OutputStreamWriter(fos, "ISO-8859-1");
+        FileOutputStream fos = new FileOutputStream("./src/xml/Evenement_"+evtS.getNomEvt()+".xml");
+        OutputStreamWriter out = new OutputStreamWriter(fos);
 
       //On utilise ici un affichage classique avec getPrettyFormat()
       XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());

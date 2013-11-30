@@ -44,15 +44,16 @@ public class Vue implements Observer {
         cce = new CreerChargerEvt(control);
         newEvt = new NouvelEvt(control,cce);
         evt = new EvenementBis(control);
+        evt.dispose();
         //chrono = new ChronoCourseBis(control);
        
         
-        aePilote = new AjouterEnleverPiloteBis(control);
+       /* aePilote = new AjouterEnleverPiloteBis(control);
         cmVoiture = new CreerModifierVoitureBis(control);
         aeVoiture = new AjouterEnleverVoitureBis(control);
-        cmPilote = new CreerModifierPiloteBis(control);
+        cmPilote = new CreerModifierPiloteBis(control);*/
         
-        cmCourse=new CreerModifierCourse(control,evt,null);
+        //cmCourse=new CreerModifierCourse(control,evt,null);
         precedente = cce;
         courante = cce;
         
@@ -60,7 +61,7 @@ public class Vue implements Observer {
     
     
     public void precedent(){
-        courante.masquer();
+        courante.fermer();
         courante=precedente;
         System.out.println("objet dans courante = "+(Object)courante.getClass().toString());
         //courante.afficher();
@@ -72,13 +73,13 @@ public class Vue implements Observer {
     
     public void ouvrirNouvelEvt(){
         precedente = courante;
-        precedente.masquer();
+        precedente.fermer();
         courante = newEvt;
         courante.afficher();
     }
     
     public void ouvrirEvenement(){
-        courante.masquer();
+        courante.fermer();
         precedente = cce; //creer charger evenement
         courante = evt; // choix
         courante.raffraichir();
@@ -140,7 +141,8 @@ public class Vue implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         //System.out.println("On update");
-        courante.afficher();
+        courante.raffraichir();
+        //courante.afficher();
     }
     
 }

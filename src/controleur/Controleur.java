@@ -4,6 +4,7 @@
  */
 package controleur;
 
+import xml.GestionnaireExistant;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
@@ -71,6 +72,7 @@ public class Controleur {
     
     
     public String getNomEvt(){
+        //System.out.println("=="+evtS.getNomEvt());
         return evtS.getNomEvt();
     }
     
@@ -196,7 +198,9 @@ public class Controleur {
     }
     
     public void enregistrer(){
-        EvenementSportifXML eXML = new EvenementSportifXML(evtS);
-        eXML.executer();
+        GestionnaireExistant.getInstance().enregistrerNouvelEvenement(evtS);
+        
+        //EvenementSportifXML eXML = new EvenementSportifXML(evtS);
+        //eXML.executer();
     }
 }
