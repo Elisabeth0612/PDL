@@ -71,6 +71,7 @@ public class Controleur {
     
     
     public String getNomEvt(){
+        //System.out.println("=="+evtS.getNomEvt());
         return evtS.getNomEvt();
     }
     
