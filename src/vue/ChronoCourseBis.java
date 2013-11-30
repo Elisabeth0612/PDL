@@ -7,10 +7,13 @@
 package vue;
 
 import controleur.Controleur;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import modele.Pilote;
@@ -24,7 +27,12 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
 
     //nos variables 
     Controleur controleur;
-    Chronometre tempsEcoule;
+    //Chronometre tempsEcoule;
+    Timer chronometre;
+    int timeCount=0;
+    long h =0;
+    long m = 0;
+    long s = 0;
     
     
     /**
@@ -34,7 +42,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         controleur = c;
         //tempsEcoule = new Chronometre();
         initComponents();
-        tempsEcoule = new Chronometre(jLabel9);
+        //tempsEcoule = new Chronometre(jLabel9);
     }
     
     @Override
@@ -87,6 +95,22 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+        //System.n
+        chronometre = new Timer(1, new ActionListener(){
+            public void actionPerformed (ActionEvent e)
+            {	// Cas d'un evenement genere par le bouton
+                    timeCount++;
+                    long reste = timeCount /1000;
+                    s  = reste % 60;
+                    reste /=60;
+                    m = reste % 60;
+                    reste /= 60;
+                    h = reste;
+                
+                jLabel9.setText(""+timeCount);
+            }
+        }
+        );
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -135,7 +159,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Voiture sélectionnée :");
         
-        
+        //
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText(Integer.toString(controleur.getNbToursMaxCourse()));
 
@@ -451,15 +475,20 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        tempsEcoule.demarrerArreter();
-        //jLabel9.setText(tempsEcoule.getTop());
+        //tempsEcoule.demarrerArreter();
+        if(!chronometre.isRunning()){
+            chronometre.start();
+        }
+        else{
+            chronometre.stop();
+        }
         
         
     } 
     
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-        if(!tempsEcoule.isActif()){
+        if(!chronometre.isRunning()){
             //Boîte du message d'erreur
             JOptionPane jop3 = new JOptionPane();
             jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
@@ -478,7 +507,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
             ligneTable[0] = Integer.toString(nbTours);//num tours
             ligneTable[1] = jComboBox1.getSelectedItem().toString();//numéro voiture
             ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
-            ligneTable[3] =tempsEcoule.getTemps() ;//temps
+            ligneTable[3] =jLabel9.getText() ;//temps
             ligneTable[4] = "";
             ligneTable[5] = "TOP IN";//type de top
             ligneTable[6] = "";
@@ -496,7 +525,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-        if(!tempsEcoule.isActif()){
+        if(!chronometre.isRunning()){
             //Boîte du message d'erreur
             JOptionPane jop3 = new JOptionPane();
             jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
@@ -515,7 +544,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
             ligneTable[0] = Integer.toString(nbTours);//num tours
             ligneTable[1] = jComboBox1.getSelectedItem().toString();//numéro voiture
             ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
-            ligneTable[3] =tempsEcoule.getTemps() ;//temps
+            ligneTable[3] = jLabel9.getText() ;//temps
             ligneTable[4] = "";
             ligneTable[5] = "TOP TOUR";//type de top
             ligneTable[6] = "";
@@ -533,7 +562,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-        if(!tempsEcoule.isActif()){
+        if(!chronometre.isRunning()){
             //Boîte du message d'erreur
             JOptionPane jop3 = new JOptionPane();
             jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
@@ -552,7 +581,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
             ligneTable[0] = Integer.toString(nbTours);//num tours
             ligneTable[1] = jComboBox1.getSelectedItem().toString();//numéro voiture
             ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
-            ligneTable[3] =tempsEcoule.getTemps() ;//temps
+            ligneTable[3] =jLabel9.getText() ;//temps
             ligneTable[4] = "";
             ligneTable[5] = "TOP OUT";//type de top
             ligneTable[6] = "";
