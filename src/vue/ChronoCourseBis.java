@@ -219,7 +219,8 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
 
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
+        jPanel3.setAutoscrolls(true);
+        
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Voitures actuellement en course :");
 
@@ -228,8 +229,10 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         jCheckBox2.setText("jCheckBox2");
 
         jCheckBox3.setText("jCheckBox3");
+        
+        jPanel3.add(jLabel6);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        /*javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +268,11 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
                 .addComponent(jCheckBox3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        );*/
+        //JCheckBox jcb1 = new JCheckBox();
+        
+        //Générer des checkbox en fonction du nombre de voiture en course
+        //jPanel3.add(jCheckBox1);
         
         
         //TableModel modeleTable = new TableModel();
@@ -567,6 +574,20 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         implementerListePilote();
     } 
 
+    private void jCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        JCheckBox check = (JCheckBox)evt.getSource();
+        String num = check.getText();
+        if(!check.isSelected()){
+            enleverItem(num);
+            //jComboBox1..removeItem(jc);
+        }
+        else{
+            ajouterItem(num);
+        }
+    }  
+    
+    
     // Variables declaration - do not modify                     
     private java.awt.Button button1;
     private java.awt.Button button2;
@@ -610,10 +631,21 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
     // End of variables declaration                   
 
     public void implementerListeVoiture(){
+        JCheckBox jcb = new JCheckBox();
         List<Voiture> lesV = controleur.getVoituresCourse();
         for (Voiture v  : lesV) {  
             jComboBox1.addItem(v.getNumVoiture());
+            jcb = new JCheckBox();
+            jcb.setSelected(true);
+            jcb.setText(Integer.toString(v.getNumVoiture()));
+            jPanel3.add(jcb);
+            jcb.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jCheckBoxActionPerformed(evt);
+                }
+            });
         } 
+        
         
     }
     
@@ -628,5 +660,18 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
             }
         }
         
+    }
+    
+    public void enleverItem(String numV){
+        for(int i = 0 ; i<jComboBox1.getItemCount() ; i++){//Combo étant ton JComboBox 
+            if(jComboBox1.getItemAt(i).toString().compareTo(numV)==0){
+                jComboBox1.removeItemAt(i);
+            }
+        } 
+
+    }
+    
+    public void ajouterItem(String numV){
+        jComboBox1.addItem(numV);
     }
 }

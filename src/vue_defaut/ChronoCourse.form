@@ -334,7 +334,11 @@
                 <LineBorder/>
               </Border>
             </Property>
+            <Property name="autoscrolls" type="boolean" value="true"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="ChronoCourse_jPanel3"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -354,8 +358,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="79" max="32767" attributes="0"/>
-                      <Component id="jScrollBar1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="96" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -370,9 +373,8 @@
                       <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="298" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollBar1" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -387,8 +389,12 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCheckBox1">
               <Properties>
+                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="jCheckBox1"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCheckBox2">
               <Properties>
@@ -399,8 +405,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="jCheckBox3"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JScrollBar" name="jScrollBar1">
             </Component>
           </SubComponents>
         </Container>
