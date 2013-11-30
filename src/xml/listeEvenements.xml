@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Evenements Nom_evenement="evenement" />
+<Evenements>
+  <Evenement>
+    <Nom_Evenement>evenement</Nom_Evenement>
+  </Evenement>
+  <Evenement>
+    <Nom_Evenement>evenement</Nom_Evenement>
+  </Evenement>
+</Evenements>

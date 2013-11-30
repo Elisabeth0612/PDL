@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import modele.*;
 import vue.MaFenetre;
 import vue.Vue;
-import xml.EvenementSportifXML;
+
 
 /**
  *
@@ -199,7 +199,7 @@ public class Controleur {
     
     public void enregistrer(){
         GestionnaireExistant.getInstance().enregistrerNouvelEvenement(evtS);
-        
+        GestionnaireExistant.getInstance().enregistrementFermeture(evtS);
         //EvenementSportifXML eXML = new EvenementSportifXML(evtS);
         //eXML.executer();
     }
