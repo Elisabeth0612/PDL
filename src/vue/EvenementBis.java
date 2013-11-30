@@ -290,11 +290,10 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Modifier la course"
         if (!jList1.isSelectionEmpty()){
-            System.out.println(controleur.getCoursesEvenement().get(jList1.getSelectedIndex()));
             controleur.ouvrirCreerModifierCourse((Course) controleur.getCoursesEvenement().get(jList1.getSelectedIndex()));
         }
         else{
-            JOptionPane.showMessageDialog(this,"Veuillez sélectionner la course que vous souhaitez modifier.","Titre : Erreur",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Veuillez sélectionner la course que vous souhaitez modifier.","Erreur",JOptionPane.ERROR_MESSAGE);
         }
     }                                        
 

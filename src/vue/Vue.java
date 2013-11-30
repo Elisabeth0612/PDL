@@ -52,7 +52,7 @@ public class Vue implements Observer {
         aeVoiture = new AjouterEnleverVoitureBis(control);
         cmPilote = new CreerModifierPiloteBis(control);
         
-        cmCourse=new CreerModifierCourse(control,evt);
+        cmCourse=new CreerModifierCourse(control,evt,null);
         precedente = cce;
         courante = cce;
         
@@ -128,19 +128,13 @@ public class Vue implements Observer {
     public void lancer(){
         courante.afficher();
     }
-
-    public void ouvrirCreerModifierCourse(){
-        courante.masquer();
-        precedente=evt;
-        courante=cmCourse;
-        courante.afficher();
-    }
     
     public void ouvrirCreerModifierCourse(Course c){
         courante.masquer();
         precedente=evt;
         courante=cmCourse;
         courante.afficher();
+        cmCourse.setcModifier(c);
     }
 
     @Override

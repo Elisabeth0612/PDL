@@ -187,7 +187,7 @@ public class Controleur {
     }
 
     public void ouvrirCreerModifierCourse() {
-        vue.ouvrirCreerModifierCourse();
+        vue.ouvrirCreerModifierCourse(null);
     }
     
     public void ouvrirCreerModifierCourse(Course c){

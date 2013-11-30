@@ -19,16 +19,25 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
     
     private Controleur controleur;
     private MaFenetre jfPrecedente;
+    private Course cModifier;
     /**
      * Creates new form CreerModifierCourse
      */
-    public CreerModifierCourse(Controleur control, EvenementBis evt) {
+    public CreerModifierCourse(Controleur control, EvenementBis evt,Course c) {
         initComponents();
         this.controleur=control;
         this.jfPrecedente=evt;
-        
+        this.cModifier=c;   
     }
-    
+
+    public Course getcModifier() {
+        return cModifier;
+    }
+
+    public void setcModifier(Course cModifier) {
+        this.cModifier = cModifier;
+    }
+   
     public boolean controleChampsSaisis(){
         boolean ok=true;
         if (jTextField1.getText().isEmpty()) ok=false;
@@ -37,9 +46,26 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
         if (jTextField4.getText().isEmpty()) ok=false;
         if (jTextField5.getText().isEmpty()) ok=false;
         if (jTextField6.getText().isEmpty()) ok=false;
-        if (jTextField7.getText().isEmpty()) ok=false;
         if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) ok=false;
         return ok;
+    }
+    
+    public void miseAJourCModifier(){
+        cModifier.setNomCourse(jTextField1.getText());
+        cModifier.setHeureDeb(null);
+        cModifier.setHeureFin(null);
+        cModifier.setDureePilotageMaxParPilote(Integer.parseInt(jTextField5.getText()));
+        cModifier.setDureeConsecutivePilotageMaxParPilote(Integer.parseInt(jTextField6.getText()));
+        cModifier.setMeteo(jTextField7.getText());
+        String typeFin=null;
+            if (jRadioButton1.isSelected()){
+                typeFin=jRadioButton1.getText();
+            }
+            else{
+                typeFin=jRadioButton2.getText();
+            }
+        cModifier.setTypeFin(typeFin);
+        cModifier.setNbToursMax(Integer.parseInt(jTextField4.getText()));
     }
 
     /**
@@ -307,8 +333,9 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (!controleChampsSaisis()){
-            JOptionPane.showMessageDialog(this,"Veuillez renseigner tous les champs pour créer la course","Titre : Erreur",JOptionPane.ERROR_MESSAGE);
-        }else{
+            JOptionPane.showMessageDialog(this,"Veuillez renseigner tous les champs pour créer la course","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
+        if (cModifier==null){
             String typeFin=null;
             if (jRadioButton1.isSelected()){
                 typeFin=jRadioButton1.getText();
@@ -318,6 +345,8 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
             }
             controleur.getCoursesEvenement().add(new Course(jTextField1.getText(),null,null,Integer.parseInt(jTextField5.getText()),Integer.parseInt(jTextField6.getText()),jTextField7.getText(),Integer.parseInt(jTextField4.getText()),typeFin));
             controleur.retour();
+        }else{
+            miseAJourCModifier();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
