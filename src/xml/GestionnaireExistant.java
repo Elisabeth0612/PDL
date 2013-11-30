@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -32,14 +33,15 @@ import org.jdom2.output.XMLOutputter;
  * @author 13008360
  */
 public class GestionnaireExistant {
-    /*private List<EvenementSportif> lesEvtExistants;
-    private List<Voiture> lesVoituresExistantes;
+    private List<String> lesEvtExistants = new ArrayList<String>();
+    /*private List<Voiture> lesVoituresExistantes;
     private List<Pilote> lesPilotesExistants;
     private List<Course> lesCoursesExistantes;*/
     
      private static final GestionnaireExistant INSTANCE = new GestionnaireExistant();
     
      private GestionnaireExistant() {
+         //chargerExistants();
          //on va charger ici les données à partir des fichiers xml
      }
      public static GestionnaireExistant getInstance() {
@@ -160,5 +162,35 @@ public class GestionnaireExistant {
          }
 
      }
+     
+     public void chargerExistants(){
+        try {
+            
+            //on s'occupe de la liste des evenements
+            SAXBuilder builder = new SAXBuilder();
+            Document document = builder.build(new File("./src/xml/listeEvenements.xml"));
+            Element racine = (Element) document.getRootElement();
+            
+            List fils = racine.getContent();
+            Iterator iterator = fils.iterator();
+            while (iterator.hasNext()) {
+                //System.out.println("on fait 1 tour");
+                Object objetFils = iterator.next();
+                if (objetFils instanceof Element) {
+                    Element elementFils = (Element) objetFils;
+                    this.lesEvtExistants.add(elementFils.getChildren().get(0).getText());
+                    
+                }
+            }
+        } catch (JDOMException ex) {
+            Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+
+    public List<String> getEvenementsExistants() {
+        return this.lesEvtExistants; 
+    }
     
 }

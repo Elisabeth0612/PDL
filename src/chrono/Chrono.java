@@ -8,6 +8,7 @@ import controleur.Controleur;
 import javax.swing.JFrame;
 import modele.EvenementSportif;
 import vue.*;
+import xml.GestionnaireExistant;
 
 
 /**
@@ -27,7 +28,7 @@ public class Chrono {
     
     public Chrono(){
         //on charge les existants
-        //GestionnaireExistant gExist = GestionnaireExistant.getInstance();
+        GestionnaireExistant.getInstance().chargerExistants();
         
         evtS = new EvenementSportif();
         controleur = new Controleur(evtS);

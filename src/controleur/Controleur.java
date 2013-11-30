@@ -203,4 +203,16 @@ public class Controleur {
         //EvenementSportifXML eXML = new EvenementSportifXML(evtS);
         //eXML.executer();
     }
+
+    public void chargerExistant() {
+        GestionnaireExistant.getInstance().chargerExistants();
+    }
+
+    public void chargerEvenement() {
+        vue.ouvrirChargerEvenement();
+    }
+
+    public List<String> getEvenementsExistants() {
+        return GestionnaireExistant.getInstance().getEvenementsExistants();
+    }
 }

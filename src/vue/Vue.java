@@ -21,6 +21,7 @@ public class Vue implements Observer {
     //listing de toutes les fenetres
     private CreerChargerEvt cce;
     private NouvelEvt newEvt;
+    private ChargerEvtBis chargE;
     private EvenementBis evt;
     private ChronoCourseBis chrono;
     
@@ -43,15 +44,16 @@ public class Vue implements Observer {
         //evtS = new EvenementSportif();
         cce = new CreerChargerEvt(control);
         newEvt = new NouvelEvt(control,cce);
+        //chargE = new ChargerEvtBis(control,cce);
         evt = new EvenementBis(control);
         evt.dispose();
         //chrono = new ChronoCourseBis(control);
        
         
-       /* aePilote = new AjouterEnleverPiloteBis(control);
+        aePilote = new AjouterEnleverPiloteBis(control);
         cmVoiture = new CreerModifierVoitureBis(control);
         aeVoiture = new AjouterEnleverVoitureBis(control);
-        cmPilote = new CreerModifierPiloteBis(control);*/
+        cmPilote = new CreerModifierPiloteBis(control);
         
         //cmCourse=new CreerModifierCourse(control,evt,null);
         precedente = cce;
@@ -143,6 +145,15 @@ public class Vue implements Observer {
         //System.out.println("On update");
         courante.raffraichir();
         //courante.afficher();
+    }
+
+    public void ouvrirChargerEvenement() {
+        precedente = courante;
+        precedente.fermer();
+        chargE = new ChargerEvtBis(control,cce);
+        courante = chargE;
+        courante.afficher();
+        
     }
     
 }

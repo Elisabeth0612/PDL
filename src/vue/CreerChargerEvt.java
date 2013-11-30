@@ -118,7 +118,7 @@ public class CreerChargerEvt extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+        controleur.chargerEvenement();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
