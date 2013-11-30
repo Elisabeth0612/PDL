@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import modele.*;
+import xml.EvenementSportifXML;
 
 
 /**
@@ -27,6 +28,8 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
      */
     public EvenementBis(Controleur c) {
         controleur = c;
+        EvenementSportifXML xmlE = new EvenementSportifXML();
+        xmlE.executer();
         
         initComponents();
     }
