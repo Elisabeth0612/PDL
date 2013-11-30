@@ -81,7 +81,7 @@ public class Vue implements Observer {
         courante.masquer();
         precedente = cce; //creer charger evenement
         courante = evt; // choix
-        //newEvt.setPrecedent(cce);
+        courante.raffraichir();
         courante.afficher();
         
     }

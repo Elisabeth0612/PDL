@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import modele.*;
 import vue.MaFenetre;
 import vue.Vue;
+import xml.EvenementSportifXML;
 
 /**
  *
@@ -192,5 +193,10 @@ public class Controleur {
     
     public void ouvrirCreerModifierCourse(Course c){
         vue.ouvrirCreerModifierCourse(c);
+    }
+    
+    public void enregistrer(){
+        EvenementSportifXML eXML = new EvenementSportifXML(evtS);
+        eXML.executer();
     }
 }
