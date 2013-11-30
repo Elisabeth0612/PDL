@@ -299,6 +299,12 @@ public class EvenementBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Supprimer la course"
+        if (!jList1.isSelectionEmpty()){
+            controleur.getCoursesEvenement().remove(jList1.getSelectedIndex());
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Veuillez sélectionner la course que vous souhaitez supprimer.","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
     }                                        
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         

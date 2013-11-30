@@ -347,6 +347,7 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
             controleur.retour();
         }else{
             miseAJourCModifier();
+            controleur.retour();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
