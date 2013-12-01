@@ -43,8 +43,10 @@ public class Controleur {
         Pilote v2p2 = new Pilote("nomV2P2", "prenomV2P2","bleu");
         Voiture v1 = new Voiture(1, v1p1,"rouge", 5,true);
         v1.addListP(v1p2);
+        GestionnaireExistant.getInstance().creerNouvelleVoiture(v1);
         Voiture v2 = new Voiture(2, v2p1,"bleue", 5,true);
         v2.addListP(v2p2);
+        GestionnaireExistant.getInstance().creerNouvelleVoiture(v2);
         //Ajout des voiture à l'evenement
         evtS.addListV(v1);
         evtS.addListV(v2);
@@ -198,7 +200,7 @@ public class Controleur {
     }
     
     public void enregistrer(){
-        GestionnaireExistant.getInstance().enregistrerNouvelEvenement(evtS);
+        GestionnaireExistant.getInstance().genererFichierEvenements(evtS);
         GestionnaireExistant.getInstance().enregistrementFermeture(evtS);
         //EvenementSportifXML eXML = new EvenementSportifXML(evtS);
         //eXML.executer();

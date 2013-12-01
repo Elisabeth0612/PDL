@@ -45,7 +45,7 @@ public class CreerChargerEvt extends javax.swing.JFrame implements MaFenetre {
     
     @Override
     public void vider() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
     @Override
