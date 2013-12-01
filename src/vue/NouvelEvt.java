@@ -59,14 +59,15 @@ public class NouvelEvt extends javax.swing.JFrame implements MaFenetre {
      
      @Override
     public void vider() {
-        //jFormattedTextField1.setText("");
-        //jTextField1.setText("");
-        //jTextField3.setText("");
-        //jTextField4.setText("");
+        
     }
     
       @Override
     public void raffraichir() {
+        jFormattedTextField1.setText("");
+        jTextField1.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
         jPanel1.repaint();
     }
      

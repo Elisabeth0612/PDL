@@ -31,7 +31,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
      * Creates new form Evt
      */
     public EvenementBis(Controleur c) {
-        super("EvenementBis");
+        super("Gestion de l'evenement");
         controleur = c;
         initComponents();
         //this.setVisible(true);

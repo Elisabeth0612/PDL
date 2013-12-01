@@ -45,8 +45,8 @@ public class Vue implements Observer {
         cce = new CreerChargerEvt(control);
         newEvt = new NouvelEvt(control,cce);
         //chargE = new ChargerEvtBis(control,cce);
-        evt = new EvenementBis(control);
-        evt.dispose();
+        //evt = new EvenementBis(control);
+        //evt.dispose();
         //chrono = new ChronoCourseBis(control);
        
         
@@ -82,6 +82,7 @@ public class Vue implements Observer {
     }
     
     public void ouvrirEvenement(){
+        evt = new EvenementBis(control);
         courante.fermer();
         precedente = cce; //creer charger evenement
         courante = evt; // choix
