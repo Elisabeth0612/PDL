@@ -116,7 +116,8 @@ public class ChargerEvtBis extends javax.swing.JFrame implements MaFenetre {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        controleur.retour();
+        String evtN = (String) jList1.getSelectedValue();
+        controleur.creerChargerEvt(evtN);
     }                                        
 
     

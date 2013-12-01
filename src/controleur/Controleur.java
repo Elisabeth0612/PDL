@@ -32,7 +32,7 @@ public class Controleur {
         /*
         * pour tester on remplie quelques données
         */
-        Course c1 = new Course("Course 1",null, null, 2, 3,"beau", 8, "Tours");
+        /*Course c1 = new Course("Course 1",null, null, 2, 3,"beau", 8, "Tours");
         Course c2 = new Course("Course 2",null,null, 2, 3,"beau", 8, "Tours");
         //ajout des courses
         evtS.addListC(c1);
@@ -49,9 +49,14 @@ public class Controleur {
         //Ajout des voiture à l'evenement
         evtS.addListV(v1);
         evtS.addListV(v2);
+        
         //ajout des voiture à une course
         c1.addListV(v1);
         c1.addListV(v2);
+        
+        //ajout des courses
+        evtS.addListC(c1);
+        evtS.addListC(c2);*/
         
         /*GestionnaireExistant.getInstance().creerNouveauPilote(v2p2);
         GestionnaireExistant.getInstance().creerNouveauPilote(v1p2);
@@ -75,9 +80,47 @@ public class Controleur {
     */
     public void creerEvt(String nomE,Date d,String nomC,int longueur){
         evtS.modifierEvenement(nomE,d,nomC,longueur);
+         /*
+        * pour tester on remplie quelques données 
+        * A ENLEVER !!!!
+        */
+        Course c1 = new Course("Course 1",null, null, 2, 3,"beau", 8, "Tours");
+        Course c2 = new Course("Course 2",null,null, 2, 3,"beau", 8, "Tours");
+        //ajout des courses
+        evtS.addListC(c1);
+        evtS.addListC(c2);
+        Pilote v1p1 = new Pilote("nomV1P1", "prenomV1P1","rouge");
+        Pilote v1p2 = new Pilote("nomV1P2", "prenomV1P2","rouge");
+        Pilote v2p1 = new Pilote("nomV2P1", "prenomV2P1","bleu");
+        Pilote v2p2 = new Pilote("nomV2P2", "prenomV2P2","bleu");
+        
+        Voiture v1 = new Voiture(1, v1p1,"rouge", 5,true);
+        v1.addListP(v1p2);
+        Voiture v2 = new Voiture(2, v2p1,"bleue", 5,true);
+        v2.addListP(v2p2);
+        //Ajout des voiture à l'evenement
+        evtS.addListV(v1);
+        evtS.addListV(v2);
+        
+        //ajout des voiture à une course
+        c1.addListV(v1);
+        c1.addListV(v2);
+        
+        //ajout des courses
+        evtS.addListC(c1);
+        evtS.addListC(c2);
+        /*
+        * fin ajout test
+        */
+        
         vue.ouvrirEvenement();
     }  
     
+   public void creerChargerEvt(String nomEvt){
+       evtS = GestionnaireExistant.getInstance().chargerUnEvenementExistant(nomEvt);
+       vue.ouvrirEvenement();
+       //vue.
+   }
     
     public String getNomEvt(){
         //System.out.println("=="+evtS.getNomEvt());
@@ -206,7 +249,7 @@ public class Controleur {
     }
     
     public void enregistrer(){
-        GestionnaireExistant.getInstance().genererFichierEvenements(evtS);
+        //GestionnaireExistant.getInstance().genererFichierEvenements(evtS);
         GestionnaireExistant.getInstance().enregistrementFermeture(evtS);
         //EvenementSportifXML eXML = new EvenementSportifXML(evtS);
         //eXML.executer();

@@ -6,8 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -58,10 +61,30 @@ public class GestionnaireExistant {
      
      //genere les fichiers des existants
      public void enregistrementFermeture(EvenementSportif evtS){
+         genererFichierEvenements(evtS);
          genererFichierPilotes();
          genererFichierVoitures();
-         
-         
+         genererFichierUnEvtExistant(evtS);
+    }
+   
+     
+     //cree le fichier
+     public void creerFichier(String nomFic,Document document){
+         try {
+             //enregistrement fichier
+             FileOutputStream fos = new FileOutputStream(nomFic) ;
+             OutputStreamWriter out = new OutputStreamWriter(fos);
+             XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+             sortie.output(document, out);
+         } catch (IOException ex) {
+             Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
+     }
+     
+     //Gestion fichier un evenement
+     public void genererFichierUnEvtExistant(EvenementSportif evtS){
+         //on s'occupe de l'evenement courant
          Element racine = new Element("Evenement"+evtS.getNomEvt());
         Document document = new Document(racine);
         
@@ -78,7 +101,7 @@ public class GestionnaireExistant {
         racine.addContent(infE);
         
         /*****************************
-         * on gère les informations des courses de l'evenement
+         * on gère les informations des courses de l'evenement (et les voitures de la course)
          * ***************************/
         Element infCourses = new Element("Les_Courses");
         //pour chaque course
@@ -107,8 +130,11 @@ public class GestionnaireExistant {
                  * on gère les informations des voitures de la course (on enregistre seulement le nom des voitures)
                  * ***************************/
                  Element courseVoitures = new Element("les_voitures_course");
+                 System.out.println(c.getListV().size());
                  for (Voiture v : c.getListV()){
-                    courseVoitures.setAttribute("Num_Voiture",Integer.toString(v.getNumVoiture()));
+                    Element voiture = new Element("voiture");
+                    voiture.setAttribute("Num_Voiture",Integer.toString(v.getNumVoiture()));
+                    courseVoitures.addContent(voiture);
                  }
                  course.addContent(courseVoitures);
                 /*****************************
@@ -119,25 +145,117 @@ public class GestionnaireExistant {
         }
         
         racine.addContent(infCourses);
+        
+        /*****************************
+         * on gère les informations des voitures de l'evenement
+         * ***************************/
+        Element infVoitures = new Element("Les_Voitures");
+        //pour chaque voiture
+        for(Voiture v : evtS.getListV()){
+            Element voiture = new Element("Voiture");
+            voiture.setAttribute("Num_Voiture",Integer.toString(v.getNumVoiture()));
+            infVoitures.addContent(voiture);
+        }
+        racine.addContent(infVoitures);
+        
         String fic = "./src/xml/Evenement_"+evtS.getNomEvt()+".xml";
         creerFichier(fic,document);
-    }
-   
-     
-     //cree le fichier
-     public void creerFichier(String nomFic,Document document){
-         try {
-             //enregistrement fichier
-             FileOutputStream fos = new FileOutputStream(nomFic) ;
-             OutputStreamWriter out = new OutputStreamWriter(fos);
-             XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-             sortie.output(document, out);
-         } catch (IOException ex) {
-             Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
-         }
-
      }
      
+     public EvenementSportif chargerUnEvenementExistant(String nomEvenement){
+         EvenementSportif evtS = null;
+         try {
+            
+            //on s'occupe de l'evenement
+            SAXBuilder builder = new SAXBuilder();
+            Document document = builder.build(new File("./src/xml/Evenement_"+nomEvenement+".xml"));
+            Element racine = (Element) document.getRootElement();
+            
+            Element infEvt = racine.getChildren().get(0);
+                String nomE = racine.getChildren().get(0).getAttributeValue("Nom_Evenement");
+                String date = racine.getChildren().get(0).getAttributeValue("Date_Evenement");
+                Date dateE = null;
+                if(date.compareTo("Date inconnue")!=0){
+                    
+                
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+                    try {
+                        dateE = sdf.parse(racine.getChildren().get(0).getAttributeValue("Date_Evenement"));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+                String nomCircuit = racine.getChildren().get(0).getAttributeValue("Nom_Circuit");
+                int longueur = Integer.parseInt(racine.getChildren().get(0).getAttributeValue("Longueur_Circuit"));
+                //on crée l'evenement..
+                evtS = new EvenementSportif(nomE,dateE,nomCircuit,longueur);
+                
+            Element infCourses = racine.getChildren().get(1);
+            List filsCourses = infCourses.getContent();
+            Iterator iterator = filsCourses.iterator();
+            while (iterator.hasNext()) {
+                Object objetFils = iterator.next();
+                if (objetFils instanceof Element) {
+                    Element course = (Element) objetFils;
+                    String nomC = course.getAttributeValue("Nom");
+                    //modifier ici
+                    Date hdeb = null;
+                    Date hfin = null;
+                    //*******
+                    int dureeMP = Integer.parseInt(course.getAttributeValue("durée_max_pilotage"));
+                    int dureeCP =  Integer.parseInt(course.getAttributeValue("durée_consecutive_pilotage"));
+                    String meteo = course.getAttributeValue("meteo");
+                    String fin = course.getAttributeValue("type_fin");
+                    int nbTours = Integer.parseInt(course.getAttributeValue("nb_tours_max"));
+                    //on crée la course et on l'ajoute à levenement
+                    Course c = new Course(nomC,hdeb, hfin, dureeMP, dureeCP, meteo, nbTours, fin);
+                    
+                    //on s'occupe des voitures de la course
+                    Element infVoituresCourse = course.getChildren().get(0);
+                    List filsVoitures = infVoituresCourse.getContent();
+                    Iterator iterator2 = filsVoitures.iterator();
+                    while (iterator2.hasNext()) {
+                        Object objetFils2 = iterator2.next();
+                        if (objetFils2 instanceof Element) {
+                            Element voiture = (Element) objetFils2;
+                            int numV = Integer.parseInt(voiture.getAttributeValue("Num_Voiture"));
+                            Voiture v =this.getUneVoiture(numV);
+                            if(v!=null){
+                                c.addListV(v);
+                            }
+                        }
+                    }
+                    
+                    evtS.addListC(c);
+                }
+                    
+                
+            }
+            
+            //on recupere la liste des voitures de levenement
+            Element infVoituresE = racine.getChildren().get(2);
+            List filsVoituresE = infVoituresE.getContent();
+            Iterator iterator3 = filsVoituresE.iterator();
+            while (iterator3.hasNext()) {
+                Object objetFils3 = iterator3.next();
+                if (objetFils3 instanceof Element) {
+                    Element voitE = (Element) objetFils3;
+                    int numVE = Integer.parseInt(voitE.getAttributeValue("Num_Voiture"));
+                    Voiture v2 = this.getUneVoiture(numVE);
+                    if(v2!=null){
+                        evtS.addListV(v2);
+                    }
+                }
+            }
+        } catch (JDOMException ex) {
+            Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return evtS;
+     }
+           
      
      //Gestion Existants Evenement
      public void genererFichierEvenements(EvenementSportif e){
@@ -366,6 +484,14 @@ public class GestionnaireExistant {
         return null;
     }
     
+    public Voiture getUneVoiture(int numV){
+        for(Voiture v : this.lesVoituresExistantes){
+            if(v.getNumVoiture()==numV){
+                return v;
+            }
+        }
+        return null;
+    }
     //les setteurs
     public void creerNouvelleVoiture(Voiture v){
         this.lesVoituresExistantes.add(v);
