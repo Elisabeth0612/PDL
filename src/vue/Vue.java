@@ -50,12 +50,13 @@ public class Vue implements Observer {
         //chrono = new ChronoCourseBis(control);
        
         
-        aePilote = new AjouterEnleverPiloteBis(control);
+        /*aePilote = new AjouterEnleverPiloteBis(control);
         cmVoiture = new CreerModifierVoitureBis(control);
         aeVoiture = new AjouterEnleverVoitureBis(control);
         cmPilote = new CreerModifierPiloteBis(control);
         
-        //cmCourse=new CreerModifierCourse(control,evt,null);
+        cmCourse=new CreerModifierCourse(control,evt,null);*/
+        
         precedente = cce;
         courante = cce;
         
