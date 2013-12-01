@@ -36,8 +36,8 @@ import org.jdom2.output.XMLOutputter;
 public class GestionnaireExistant {
     private List<String> lesEvtExistants = new ArrayList<String>();
     private List<Voiture> lesVoituresExistantes=new ArrayList<Voiture>();
-    /*private List<Pilote> lesPilotesExistants;
-    private List<Course> lesCoursesExistantes;*/
+    private List<Pilote> lesPilotesExistants = new ArrayList<Pilote>();
+    //private List<Course> lesCoursesExistantes;*/
     
      private static final GestionnaireExistant INSTANCE = new GestionnaireExistant();
     
@@ -52,12 +52,15 @@ public class GestionnaireExistant {
      //genere la liste des existants
      public void chargerExistants(){
          chargerExistantsEvenement();
+         chargerExistantsPilote();
          chargerExistantsVoiture();
      }
      
      //genere les fichiers des existants
      public void enregistrementFermeture(EvenementSportif evtS){
+         genererFichierPilotes();
          genererFichierVoitures();
+         
          
          Element racine = new Element("Evenement"+evtS.getNomEvt());
         Document document = new Document(racine);
@@ -236,13 +239,6 @@ public class GestionnaireExistant {
      }
 
      public void chargerExistantsVoiture(){
-         /* Modele :
-         * Voiture = num,couleur,pilote actuel,liste des pilotes, nb tours par relai,voiture active ou non
-         *<Num_Voiture>1</Num_Voiture>
-    <Couleur_casque>rouge</Couleur_casque>
-    <nb_tours_relai>5</nb_tours_relai>
-    <Voi
-         */
          try {
             
             //on s'occupe de la liste des evenements
@@ -261,16 +257,84 @@ public class GestionnaireExistant {
                     String couleur = elementFils.getChildren().get(1).getText();
                     int nb = Integer.parseInt(elementFils.getChildren().get(2).getText());
                     boolean active = Boolean.parseBoolean(elementFils.getChildren().get(3).getText());
-                    /*
-                    *pour la liste des pilotes et le pilote actuel, il faut d'abord charger les pilotes
-                    *
-                    */
-                   Voiture v = new Voiture(num,null,couleur,nb,active);
+                    String piloteAct = elementFils.getChildren().get(4).getText();
+                        String nomP = piloteAct.split("-")[0];
+                        String prenonP = piloteAct.split("-")[1];
+                        Pilote p = this.getUnPilote(nomP, prenonP);
+                   
+                   Voiture v = new Voiture(num,p,couleur,nb,active);
+                   /*
+                   *on charge la liste des pilotes associés
+                   */
+                   List lesPilotes = elementFils.getChildren().get(5).getContent();
+                   Iterator iterator2 = lesPilotes.iterator();
+                    //pour chaque element <Pilote>
+                    while (iterator2.hasNext()) {
+                        Object objetFils2 = iterator2.next();
+                        if (objetFils2 instanceof Element) {
+                            Element unPilote = (Element) objetFils2;
+                            //System.out.println(unPilote.getText());
+                            String nomP2 = unPilote.getText().split("-")[0];
+                            String prenomP2 = unPilote.getText().split("-")[1];
+                            Pilote p2 = this.getUnPilote(nomP2, prenomP2);
+                            v.addListP(p2);
+                        }
+                    }
+                   this.lesVoituresExistantes.add(v);
+                }
+            }
+        } catch (JDOMException ex) {
+            Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     //Gestion Existants Pilote
+     public void genererFichierPilotes(){
+         Element racine = new Element("Pilotes");
+         Document document = new Document(racine);
+         for(Pilote p : this.lesPilotesExistants){
+             Element pilote = new Element("Pilote");
+             Element nomP = new Element("Nom_Pilote").setText(p.getNom());
+             pilote.addContent(nomP);
+             Element prenomP = new Element("Prenom_Pilote").setText(p.getPrenom());
+             pilote.addContent(prenomP);
+             Element couleur = new Element("Couleur_casque").setText(p.getCouleursCasque());
+             pilote.addContent(couleur);
+             
+             racine.addContent(pilote);
+         }
+         
+         String fic = "./src/xml/listePilotes.xml";
+         creerFichier(fic,document);
+     }
+     
+     public void chargerExistantsPilote(){
+         try {
+            
+            //on s'occupe de la liste des evenements
+            SAXBuilder builder = new SAXBuilder();
+            Document document = builder.build(new File("./src/xml/listePilotes.xml"));
+            Element racine = (Element) document.getRootElement();
+            
+            List fils = racine.getContent();
+            Iterator iterator = fils.iterator();
+            //pour chaque element <Pilote>
+            while (iterator.hasNext()) {
+                Object objetFils = iterator.next();
+                if (objetFils instanceof Element) {
+                    Element elementFils = (Element) objetFils;
+                    String nomP = elementFils.getChildren().get(0).getText();
+                    String prenomP = elementFils.getChildren().get(1).getText();
+                    String couleur = elementFils.getChildren().get(2).getText();
+                    
+                   Pilote p  = new Pilote(nomP,prenomP,couleur);
                    /*
                    *ici ajout des pilotes à la liste voiture
                    */
                    
-                   this.lesVoituresExistantes.add(v);
+                   this.lesPilotesExistants.add(p);
                 }
             }
         } catch (JDOMException ex) {
@@ -285,9 +349,30 @@ public class GestionnaireExistant {
         return this.lesEvtExistants; 
     }
     
+    public List<Pilote> getPilotesExistants(){
+        return this.lesPilotesExistants;
+    }
+    
+    public List<Voiture> getVoituresExistantes(){
+        return this.lesVoituresExistantes;
+    }
+    
+    public Pilote getUnPilote(String nom,String prenom){
+        for(Pilote p : this.lesPilotesExistants){
+            if(p.getNom().compareTo(nom)==0 && p.getPrenom().compareTo(prenom)==0){
+                return p;
+            }
+        }
+        return null;
+    }
+    
     //les setteurs
     public void creerNouvelleVoiture(Voiture v){
         this.lesVoituresExistantes.add(v);
     }
     
+    public void creerNouveauPilote(Pilote p){
+        this.lesPilotesExistants.add(p);
     }
+    
+}

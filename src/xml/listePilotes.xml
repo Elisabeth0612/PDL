@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Pilotes>
+  <Pilote>
+    <Nom_Pilote>nomV2P2</Nom_Pilote>
+    <Prenom_Pilote>prenomV2P2</Prenom_Pilote>
+    <Couleur_casque>bleu</Couleur_casque>
+  </Pilote>
+  <Pilote>
+    <Nom_Pilote>nomV1P2</Nom_Pilote>
+    <Prenom_Pilote>prenomV1P2</Prenom_Pilote>
+    <Couleur_casque>rouge</Couleur_casque>
+  </Pilote>
+  <Pilote>
+    <Nom_Pilote>nomV2P1</Nom_Pilote>
+    <Prenom_Pilote>prenomV2P1</Prenom_Pilote>
+    <Couleur_casque>bleu</Couleur_casque>
+  </Pilote>
+  <Pilote>
+    <Nom_Pilote>nomV1P1</Nom_Pilote>
+    <Prenom_Pilote>prenomV1P1</Prenom_Pilote>
+    <Couleur_casque>rouge</Couleur_casque>
+  </Pilote>
+</Pilotes>
