@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package vue;
+package vue_defaut;
 
 import controleur.Controleur;
 import java.awt.event.ActionEvent;
@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import modele.Pilote;
 import modele.Voiture;
+import vue.MaFenetre;
 
 /**
  *

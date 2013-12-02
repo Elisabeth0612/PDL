@@ -30,7 +30,7 @@ public class Vue implements Observer {
     private AjouterEnleverVoitureBis aeVoiture;
     private CreerModifierPiloteBis cmPilote;
     
-    private CreerModifierCourse cmCourse;
+    //private CreerModifierCourse cmCourse;
     
     //autres variables
     private Controleur control;
@@ -50,7 +50,7 @@ public class Vue implements Observer {
         chargE = new ChargerEvtBis(control,cce);
         evt = new EvenementBis(control);
         evt.dispose();
-        chrono = new ChronoCourseBis(control);
+        //chrono = new ChronoCourseBis(control);
        
         
         aePilote = new AjouterEnleverPiloteBis(control);
@@ -58,7 +58,7 @@ public class Vue implements Observer {
         aeVoiture = new AjouterEnleverVoitureBis(control);
         cmPilote = new CreerModifierPiloteBis(control);
         
-        cmCourse=new CreerModifierCourse(control,evt,null);
+        //cmCourse=new CreerModifierCourse(control,evt,null);
         
         precedente = cce;
         courante = cce;
@@ -146,9 +146,9 @@ public class Vue implements Observer {
     public void ouvrirCreerModifierCourse(Course c){
         courante.masquer();
         precedente=evt;
-        courante=cmCourse;
+       // courante=cmCourse;
         courante.afficher();
-        cmCourse.setcModifier(c);
+        //cmCourse.setcModifier(c);
     }
 
     @Override
