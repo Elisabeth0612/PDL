@@ -47,10 +47,10 @@ public class Vue implements Observer {
         //evtS = new EvenementSportif();
         cce = new CreerChargerEvt(control);
         newEvt = new NouvelEvt(control,cce);
-        //chargE = new ChargerEvtBis(control,cce);
-        //evt = new EvenementBis(control);
-        //evt.dispose();
-        //chrono = new ChronoCourseBis(control);
+        chargE = new ChargerEvtBis(control,cce);
+        evt = new EvenementBis(control);
+        evt.dispose();
+        chrono = new ChronoCourseBis(control);
        
         
         aePilote = new AjouterEnleverPiloteBis(control);
@@ -58,7 +58,7 @@ public class Vue implements Observer {
         aeVoiture = new AjouterEnleverVoitureBis(control);
         cmPilote = new CreerModifierPiloteBis(control);
         
-        //cmCourse=new CreerModifierCourse(control,evt,null);
+        cmCourse=new CreerModifierCourse(control,evt,null);
         
         precedente = cce;
         courante = cce;
