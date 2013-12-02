@@ -145,4 +145,8 @@ public class Course {
             }
             return null;
         }
+        
+        public int getNbVoituresInscrites(){
+            return this.listV.size();
+        }
 }

@@ -39,7 +39,7 @@ private Controleur control;
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,12 +97,13 @@ private Controleur control;
 
     @Override
     public void masquer() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.setVisible(true);
+    
     }
 
     @Override
     public void fermer() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        dispose();
     }
 
     @Override

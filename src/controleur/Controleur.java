@@ -286,4 +286,18 @@ public class Controleur {
     public void creerUnTop(String[] ligneTable) {
         vue.ajouterLigneTableurCourse(ligneTable);
     }
+
+    public void fermerChronoCourse() {
+        vue.fermerChronoCourse();
+    }
+
+    public int nbVoituresInscritesCourses(String course) {
+        Course c = evtS.chercherCourse(course);
+        if(c != null && c.getNbVoituresInscrites()!=0){
+            return c.getNbVoituresInscrites();
+        }
+        else{
+            return 0;
+        }
+    }
 }

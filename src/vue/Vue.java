@@ -99,7 +99,7 @@ public class Vue implements Observer {
     public void ouvrirChrono(){
         chrono = new ChronometreCourseBis(control);
         //chrono = new ChronoCourseBis(control);
-        courante.masquer();
+        courante.fermer();
         precedente = evt; //creer charger evenement
         courante = chrono; // choix
         courante.afficher();
@@ -114,14 +114,14 @@ public class Vue implements Observer {
     }
     
     public void ouvrirAjouterEnleverPilote(){
-        courante.masquer();
+        courante.fermer();
         precedente = cmVoiture;
         courante = aePilote;
         courante.afficher();
     }
     
     public void ouvrirAjouterEnleverVoiture(){
-        courante.masquer();
+        courante.fermer();
         precedente = evt;
         courante = aeVoiture;
         courante.afficher();
@@ -129,7 +129,7 @@ public class Vue implements Observer {
     //Pb ici !!! il faut jouer avec le Observer/observable il me semble vu que le modele est mis à jour, la fenetre devrait être notifée du changement
     public void ouvrirCreerModifierVoiture(Voiture v){
             System.out.println(v.toString());
-        courante.masquer();
+        courante.fermer();
         precedente = evt;
         courante = cmVoiture;
         courante.afficher();
@@ -139,7 +139,7 @@ public class Vue implements Observer {
     }
     
     public void ouvrirCreerModifierPilote(){
-        courante.masquer();
+        courante.fermer();
         precedente = cmVoiture;
         courante = cmPilote;
         courante.afficher();
@@ -150,7 +150,7 @@ public class Vue implements Observer {
     }
     
     public void ouvrirCreerModifierCourse(Course c){
-        courante.masquer();
+        courante.fermer();
         precedente=evt;
        // courante=cmCourse;
         courante.afficher();
@@ -171,6 +171,12 @@ public class Vue implements Observer {
         courante = chargE;
         courante.afficher();
         
+    }
+
+    public void fermerChronoCourse() {
+        optionnelle.fermer();
+        //courante.fermer();
+        this.ouvrirEvenement();
     }
     
 }
