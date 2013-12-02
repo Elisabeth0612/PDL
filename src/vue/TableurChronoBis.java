@@ -11,6 +11,7 @@
 package vue;
 
 import controleur.Controleur;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -42,12 +43,7 @@ private Controleur control;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                
             },
             new String [] {
                 "N° Tour", "N° Voiture", "Pilote", "Temps", "Relai", "Etat", "Heure", "Commentaire"
@@ -122,6 +118,15 @@ private Controleur control;
     @Override
     public void raffraichir() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    
+
+    void ajouterLigne(String[] ligneTable) {
+        DefaultTableModel modele3 = (DefaultTableModel)jTable1.getModel();   
+        modele3.addRow(ligneTable); 
+        jTable1.setModel(modele3); 
+        jTable1.repaint(); 
     }
 
    

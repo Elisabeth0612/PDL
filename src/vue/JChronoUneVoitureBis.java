@@ -73,7 +73,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Voiture n° :"+numV);
+        jLabel1.setText("Voiture n°"+numV);
 
         jLabel2.setText("Pilote actuel : ");
 
@@ -89,13 +89,13 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         jLabel5.setText("Nombre de tours effectuée :");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("nb");
+        jLabel10.setText(Integer.toString(controleur.getNbToursMaxCourse()));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("nb");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("nb");
+        jLabel12.setText("0");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -299,7 +299,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
             ligneTable[6] = "";
             ligneTable[7] = "";
             
-            //controleur.creerUnTop(ligneTable);
+            controleur.creerUnTop(ligneTable);
  
         }
     }                                       
@@ -331,7 +331,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
             ligneTable[6] = "";
             ligneTable[7] = "";
             
-            //controleur.creerUnTop(ligneTable);
+            controleur.creerUnTop(ligneTable);
  
         }
     }                                       
@@ -363,13 +363,8 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
             ligneTable[6] = "";
             ligneTable[7] = "";
             
-            //controleur.creerUnTop(ligneTable);
-            //DefaultTableModel modele3 = (DefaultTableModel)jTable1.getModel();   
-       
-              
-             //modele3.addRow(ligneTable); 
-             //jTable1.setModel(modele3); 
-             //jTable1.repaint(); 
+            controleur.creerUnTop(ligneTable);
+            
  
         }
         
@@ -440,6 +435,10 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
             for (Pilote p  : lesP) {  
                 jComboBox2.addItem(p.getNom()+" - "+p.getPrenom());
             }
+    }
+    
+    public void setEtatChrono(){
+        chronoEnRoute=!chronoEnRoute;
     }
 
     

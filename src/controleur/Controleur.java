@@ -282,4 +282,8 @@ public class Controleur {
         }
         return null;
     }
+
+    public void creerUnTop(String[] ligneTable) {
+        vue.ajouterLigneTableurCourse(ligneTable);
+    }
 }

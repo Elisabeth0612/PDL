@@ -14,6 +14,7 @@ import controleur.Controleur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 import javax.swing.JCheckBox;
@@ -188,6 +189,12 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
         }
         else{
             chronometre.stop();
+        }
+        
+        Enumeration e = this.lesFenetresVoitures.elements();
+        //Parourir les valeurs
+        while(e.hasMoreElements()){
+            ((JChronoUneVoitureBis)e.nextElement()).setEtatChrono();
         }
     }
 
