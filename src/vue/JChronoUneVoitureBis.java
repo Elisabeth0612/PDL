@@ -11,8 +11,11 @@
 package vue;
 
 import controleur.Controleur;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import modele.Pilote;
 
 /**
@@ -24,6 +27,13 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
     private int numV;
     private Controleur controleur;
     private boolean chronoEnRoute = false;
+    private long progressMax;
+    private long tempsEcoule=0;
+    private Timer chrono;
+    private long tempsEcouleTot = 0;
+    private long h =0;
+    private long m = 0;
+    private long s = 0;
     
     /** Creates new form jChronoUneVoiture */
     public JChronoUneVoitureBis(Controleur c,int num) {
@@ -35,7 +45,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
     
                           
     private void initComponents() {
-
+        
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -61,6 +71,27 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
+        chrono = new Timer(1, new ActionListener(){
+            public void actionPerformed (ActionEvent e)
+            {	// Cas d'un evenement genere par le bouton
+                    tempsEcoule++;
+                    
+                    if(tempsEcoule>999){
+                       tempsEcoule = 0;
+                        s++;
+                        if(s>59){
+                            m++;
+                            s=0;
+                            if(m>59){
+                                h++;
+                            }
+                        }
+                    }
+                    jProgressBar1.setString(""+h+":"+m+":"+s+":"+tempsEcoule);
+                    jProgressBar1.setValue((int) tempsEcoule);
+                  
+            }});
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -175,6 +206,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         jProgressBar1.setToolTipText("");
         jProgressBar1.setString("Temps");
         jProgressBar1.setStringPainted(true);
+        jProgressBar1.setMinimum(0);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Temps moyen par tour pour la voiture");
@@ -274,6 +306,12 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         }
         else{
             if(Integer.parseInt(jLabel10.getText())!=0){
+                //on stoppe les chrono quand la voiture est dans le stand
+                //on prépare afin de relancer à la sortie du stand
+                tempsEcouleTot = tempsEcouleTot + tempsEcoule;
+                tempsEcoule = 0;
+                chrono.stop();
+                
                 String[] ligneTable = new String[8];
                 //on incrémente le nombre de tours finis
                 int nbTours =Integer.parseInt(jLabel12.getText());
@@ -296,6 +334,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
                 controleur.creerUnTop(ligneTable);
                 
                 //on stoppera la barre de progression
+                jProgressBar1.setMaximum((int) (tempsEcouleTot/nbTours));
             }
         }
     }                                       
@@ -309,6 +348,10 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         }
         else{
             if(Integer.parseInt(jLabel10.getText())!=0){
+                tempsEcouleTot = tempsEcouleTot + tempsEcoule;
+                tempsEcoule = 0;
+                chrono.restart();
+                
                 String[] ligneTable = new String[8];
                 //on incrémente le nombre de tours finis
                 int nbTours =Integer.parseInt(jLabel12.getText());
@@ -318,7 +361,8 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
                 int nbToursMax =Integer.parseInt(jLabel10.getText());
                 nbToursMax--;
                 jLabel10.setText(Integer.toString(nbToursMax));
-
+                
+                //on prépare la ligne de résultat
                 ligneTable[0] = Integer.toString(nbTours);//num tours
                 ligneTable[1] = Integer.toString(numV);//numéro voiture
                 ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
@@ -327,10 +371,12 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
                 ligneTable[5] = "TOP TOUR";//type de top
                 ligneTable[6] = "";
                 ligneTable[7] = "";
-
+                //on insere la ligne dans le tableur
                 controleur.creerUnTop(ligneTable);
                 
                 //on mettra à jour les barres de progression
+                jProgressBar1.setMaximum((int) (tempsEcouleTot/nbTours));
+                //jProgressBar1.
             }
         }
     }                                       
@@ -344,6 +390,10 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         }
         else{
             if(Integer.parseInt(jLabel10.getText())!=0){
+                //on sort du stand donc on relance le chorono
+                chrono.restart();
+                chrono.start();
+                
                 String[] ligneTable = new String[8];
                 //on incrémente le nombre de tours finis
                 int nbTours =Integer.parseInt(jLabel12.getText());
@@ -440,7 +490,14 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
     }
     
     public void setEtatChrono(){
-        chronoEnRoute=!chronoEnRoute;
+        if(chronoEnRoute){
+            chronoEnRoute = false;
+            chrono.stop();
+        }
+        else{
+            chronoEnRoute=true;
+            chrono.start();
+        }
     }
 
     

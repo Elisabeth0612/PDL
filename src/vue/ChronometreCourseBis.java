@@ -185,6 +185,7 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
         }
         else{
             chronometre.stop();
+            jButton1.invalidate();
         }
         
         Enumeration e = this.lesFenetresVoitures.elements();
