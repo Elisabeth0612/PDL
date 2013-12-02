@@ -7,8 +7,11 @@
 package vue;
 
 import controleur.Controleur;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import modele.Pilote;
+import modele.Voiture;
 
 /**
  *
@@ -17,6 +20,7 @@ import modele.Pilote;
 public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFenetre {
 
     private Controleur controleur;
+    private DefaultListModel<String> model;
     /**
      * Creates new form CreerModifierVoiture
      */
@@ -63,15 +67,25 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         //throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public void miseAJour(int numV){ 
-        String couleur = controleur.getCouleurVoiture(numV);
+    public void miseAJour(Voiture v){ 
+        String couleur = v.getCouleur();
         jTextField1.setText(couleur);
-        int NbToursRelai = controleur.getNbToursRelaiVoiture(numV);
+        int NbToursRelai = v.getNbToursParRelai();
         jTextField2.setText(Integer.toString(NbToursRelai));
         //jList1.setListP(numV);
-        Pilote p = controleur.getPiloteActuel(numV);
-        // ici
-        Boolean voitureActive = controleur.getVoitureActive(numV);
+        List<Pilote> lesP = controleur.getPilotesVoiture(v.getNumVoiture());
+        model = new DefaultListModel<String>();
+        for(Pilote p : lesP){
+            model.addElement(p.getNom()+" "+p.getPrenom());
+        }
+        jList1.setModel(model);
+        jList1.setSelectedIndex(0);
+        
+        Pilote p = v.getPiloteActuel();
+        jTextField3.setText(p.getNom()+" "+p.getPrenom());
+        
+        Boolean voitureActive = v.getVoitureActive();
+        jCheckBox1.setSelected(voitureActive);
     }
     
     
@@ -114,19 +128,21 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
                 jCheckBox1ActionPerformed(evt);
             }
         });
+        
+        
         jList1.setSelectionMode(1);
         jList1.setModel(new javax.swing.AbstractListModel() {
-            List<Pilote> lesP = controleur.getListP(-1);
-            
-            //String[] strings = {lesC.get(0).getNomCourse(),lesC.get(1).getNomCourse()};
-            public int getSize() { return 0;//lesP.size();
+            //List<Pilote> lesP = controleur.getPilotesVoiture(int numV);
+            List<Pilote> lesP = new ArrayList<Pilote>();
+            public int getSize() { return lesP.size();
             }
-            public void setListP(int numV){ lesP=controleur.getListP(numV); }
             public Object getElementAt(int i) { return lesP.get(i).getNom()+" "+lesP.get(i).getPrenom(); }
         });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 
+        
+        
         jLabel3.setText("Liste des pilotes pour la voiture :");
 
         jButton1.setText("Modifier le pilote");

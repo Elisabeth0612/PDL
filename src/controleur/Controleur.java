@@ -199,32 +199,12 @@ public class Controleur {
         vue.ouvrirAjouterEnleverVoiture();
     }
     
-    public void ouvrirCreerModifierVoiture(int numV){
-        vue.ouvrirCreerModifierVoiture(numV);
+    public void ouvrirCreerModifierVoiture(Voiture v){
+        vue.ouvrirCreerModifierVoiture(v);
     }
     
     public void ouvrirCreerModifierPilote(){
-        vue.ouvrirCreerModifierVoiture(-1);
-    }
-    
-    public String getCouleurVoiture(int numVoiture){
-        return evtS.chercherVoiture(numVoiture).getCouleur();
-    }
-    
-    public int getNbToursRelaiVoiture(int numVoiture){
-        return evtS.chercherVoiture(numVoiture).getNbToursParRelai();
-    }
-    
-    public boolean getVoitureActive(int numVoiture){
-        return evtS.chercherVoiture(numVoiture).getVoitureActive();
-    }
-    
-    public List<Pilote> getListP(int numVoiture){
-        return null;//evtS.chercherVoiture(numVoiture).getListP();
-    }
-    
-    public Pilote getPiloteActuel(int numVoiture){
-        return evtS.chercherVoiture(numVoiture).getPiloteActuel();
+        vue.ouvrirCreerModifierVoiture(null);
     }
     
     public Voiture getVoitureCourseByNum(int num){

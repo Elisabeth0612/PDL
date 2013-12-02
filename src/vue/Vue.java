@@ -113,12 +113,12 @@ public class Vue implements Observer {
         courante.afficher();
     }
     //Pb ici !!! il faut jouer avec le Observer/observable il me semble vu que le modele est mis à jour, la fenetre devrait être notifée du changement
-    public void ouvrirCreerModifierVoiture(int numV){
+    public void ouvrirCreerModifierVoiture(Voiture v){
         courante.masquer();
         precedente = evt;
         courante = cmVoiture;
-        if(numV != -1){
-            cmVoiture.miseAJour(numV);
+        if(v!=null){
+            cmVoiture.miseAJour(v);
         }
         courante.afficher();
     }
