@@ -7,6 +7,11 @@
 package vue;
 
 import controleur.Controleur;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import modele.Voiture;
 
 /**
  *
@@ -15,6 +20,7 @@ import controleur.Controleur;
 public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFenetre{
 
      private Controleur controleur;
+     private DefaultListModel<String> model;
     /**
      * Creates new form AjouterEnleverVoiture
      */
@@ -30,7 +36,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     @Override
     public void afficher() {
         raffraichir();
-        
+        charger();
         //on affiche la fenetre
         setVisible(true);
         
@@ -61,7 +67,29 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
         //throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    
+    public void charger(){
+        List<Voiture> lesV = controleur.getListVoituresExistantes();
+        if(lesV.size()!=0){
+            model = new DefaultListModel<String>();
+            for(Voiture v : lesV){
+                model.addElement(Integer.toString(v.getNumVoiture()));
+            }
+            jList1.setModel(model);
+            jList1.setSelectedIndex(0);
+            jList1.repaint();
+       }
+        
+        List<Voiture> lesVE = controleur.getVoituresEvenement();
+        if(lesVE.size()!=0){
+            model = new DefaultListModel<String>();
+            for(Voiture v : lesVE){
+                model.addElement(Integer.toString(v.getNumVoiture()));
+            }
+            jList2.setModel(model);
+            jList2.setSelectedIndex(0);
+            jList2.repaint();
+       }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,17 +115,20 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            List<Voiture> lesV = new ArrayList<Voiture>();
+            public int getSize() { return lesV.size();
+            }
+            public Object getElementAt(int i) { return lesV.get(i).getNumVoiture(); }
         });
         jScrollPane1.setViewportView(jList1);
 
         jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            List<Voiture> lesVE = new ArrayList<Voiture>();
+            public int getSize() { return lesVE.size();
+            }
+            public Object getElementAt(int i) { return lesVE.get(i).getNumVoiture(); }
         });
+        
         jScrollPane2.setViewportView(jList2);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12));
@@ -227,11 +258,19 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Bouton ">>"
+        // Bouton ">>" - ajoute VoituresExistantes à VoituresEvenements
+       /* int numV = (int) jList1.getSelectedValue();
+        if(controleur.getVoitureEvenementByNum(numV) != null){
+            JOptionPane.showMessageDialog(this,"La voiture est déjà présente dans l'Evenement.","Erreur",JOptionPane.ERROR_MESSAGE);
+        }else{
+            Voiture vE = controleur.getVoitureExistante(numV);
+            controleur.getVoituresEvenement().add(vE);
+        }*/
+        
     }
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Bouton "<<"
+        // Bouton "<<" - ajoute VoituresEvenements à VoituresExistantes
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
