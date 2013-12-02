@@ -68,24 +68,34 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     }
     
     public void miseAJour(Voiture v){ 
+        
         String couleur = v.getCouleur();
         jTextField1.setText(couleur);
+        jTextField1.repaint();
+        
         int NbToursRelai = v.getNbToursParRelai();
         jTextField2.setText(Integer.toString(NbToursRelai));
-        //jList1.setListP(numV);
-        List<Pilote> lesP = controleur.getPilotesVoiture(v.getNumVoiture());
-        model = new DefaultListModel<String>();
-        for(Pilote p : lesP){
-            model.addElement(p.getNom()+" "+p.getPrenom());
-        }
-        jList1.setModel(model);
-        jList1.setSelectedIndex(0);
+        jTextField2.repaint();
         
+      
+       List<Pilote> lesP = controleur.getPilotesVoiture(v.getNumVoiture());
+       if(lesP.size()!=0){
+            model = new DefaultListModel<String>();
+            for(Pilote p : lesP){
+                model.addElement(p.getNom()+" "+p.getPrenom());
+            }
+            jList1.setModel(model);
+            jList1.setSelectedIndex(0);
+            jList1.repaint();
+       }
+       
         Pilote p = v.getPiloteActuel();
         jTextField3.setText(p.getNom()+" "+p.getPrenom());
+        jTextField3.repaint();
         
         Boolean voitureActive = v.getVoitureActive();
         jCheckBox1.setSelected(voitureActive);
+        jCheckBox1.repaint();
     }
     
     
@@ -132,7 +142,6 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         
         jList1.setSelectionMode(1);
         jList1.setModel(new javax.swing.AbstractListModel() {
-            //List<Pilote> lesP = controleur.getPilotesVoiture(int numV);
             List<Pilote> lesP = new ArrayList<Pilote>();
             public int getSize() { return lesP.size();
             }
