@@ -23,7 +23,7 @@ public class Vue implements Observer {
     private NouvelEvt newEvt;
     private ChargerEvtBis chargE;
     private EvenementBis evt;
-    private ChronoCourseBis chrono;
+    //private ChronoCourseBis chrono;
     
     private AjouterEnleverPiloteBis aePilote;
     private CreerModifierVoitureBis cmVoiture;
@@ -38,6 +38,9 @@ public class Vue implements Observer {
     //variable pour revenir aux fenetres precedentes
     private MaFenetre precedente;
     private MaFenetre courante;
+    private MaFenetre optionnelle;
+    
+    private ChronometreCourseBis chrono;
     
     public Vue(Controleur c){
         control = c;
@@ -59,6 +62,8 @@ public class Vue implements Observer {
         
         precedente = cce;
         courante = cce;
+        
+        
         
     }
     
@@ -92,11 +97,14 @@ public class Vue implements Observer {
     }
     
     public void ouvrirChrono(){
-        chrono = new ChronoCourseBis(control);
+        chrono = new ChronometreCourseBis(control);
+        //chrono = new ChronoCourseBis(control);
         courante.masquer();
         precedente = evt; //creer charger evenement
         courante = chrono; // choix
         courante.afficher();
+        optionnelle = new TableurChronoBis(control);
+        optionnelle.afficher();
     }
     
     public void ouvrirAjouterEnleverPilote(){
