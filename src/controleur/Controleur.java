@@ -145,6 +145,27 @@ public class Controleur {
     
     public List getVoituresEvenement(){
         return evtS.getListV();
+    }   
+    
+    public boolean supprimerVoituresEvenement(int numV){
+        List<Voiture> lesV = evtS.getListV();
+        for(Voiture v:lesV){
+            if(v.getNumVoiture()==numV){
+                lesV.remove(v);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Voiture getVoitureEvenementByNum(int numV){
+        List<Voiture> lesV = evtS.getListV();
+        for(Voiture v: lesV){
+            if(v.getNumVoiture()==numV){
+                return v;
+            }
+        }
+        return null;
     }
     
     public List getVoituresCourse(){
@@ -245,5 +266,19 @@ public class Controleur {
 
     public List<String> getEvenementsExistants() {
         return GestionnaireExistant.getInstance().getEvenementsExistants();
+    }
+    
+    public List<Voiture> getListVoituresExistantes(){
+        return GestionnaireExistant.getInstance().getVoituresExistantes();
+    }
+    
+    public Voiture getVoitureExistante(int numV){
+        List<Voiture> lesVE = GestionnaireExistant.getInstance().getVoituresExistantes();
+        for(Voiture v:lesVE){
+            if(v.getNumVoiture()==numV){
+                return v;
+            }
+        }
+        return null;
     }
 }

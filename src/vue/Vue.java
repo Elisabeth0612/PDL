@@ -53,12 +53,12 @@ public class Vue implements Observer {
         //chrono = new ChronoCourseBis(control);
        
         
-        /*aePilote = new AjouterEnleverPiloteBis(control);
+        aePilote = new AjouterEnleverPiloteBis(control);
         cmVoiture = new CreerModifierVoitureBis(control);
         aeVoiture = new AjouterEnleverVoitureBis(control);
         cmPilote = new CreerModifierPiloteBis(control);
         
-        cmCourse=new CreerModifierCourse(control,evt,null);*/
+        //cmCourse=new CreerModifierCourse(control,evt,null);
         
         precedente = cce;
         courante = cce;
@@ -122,13 +122,14 @@ public class Vue implements Observer {
     }
     //Pb ici !!! il faut jouer avec le Observer/observable il me semble vu que le modele est mis à jour, la fenetre devrait être notifée du changement
     public void ouvrirCreerModifierVoiture(Voiture v){
+            System.out.println(v.toString());
         courante.masquer();
         precedente = evt;
         courante = cmVoiture;
-        if(v!=null){
+        courante.afficher();
+        if(v != null){
             cmVoiture.miseAJour(v);
         }
-        courante.afficher();
     }
     
     public void ouvrirCreerModifierPilote(){

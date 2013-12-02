@@ -369,13 +369,12 @@ public class EvenementBis extends JFrame implements MaFenetre {
         Object oV = jList2.getSelectedValue();
         if(oV == null){
              //Boîte du message d'erreur
-            JOptionPane jop3 = new JOptionPane();
-            jop3.showMessageDialog(null, "Vous devez sélectionner une voiture !", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Vous devez sélectionner une voiture !", "Erreur", JOptionPane.ERROR_MESSAGE);
         }else{
             String voiture = jList2.getSelectedValue().toString();
             int numV = Integer.parseInt(voiture);
             
-            controleur.ouvrirCreerModifierVoiture((Voiture) controleur.getVoituresEvenement().get(numV));
+            controleur.ouvrirCreerModifierVoiture((Voiture) controleur.getVoitureEvenementByNum(numV));
             
         }
     }                                        
@@ -383,8 +382,9 @@ public class EvenementBis extends JFrame implements MaFenetre {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Supprimer Voiture"
        if (!jList2.isSelectionEmpty()){
+            int numV = (int) jList2.getSelectedValue();
             int i = jList2.getSelectedIndex();
-            controleur.getVoituresEvenement().remove(i);
+            controleur.supprimerVoituresEvenement(numV);
             jList2.removeSelectionInterval(i-1, i);
             jList2.repaint();
         }
