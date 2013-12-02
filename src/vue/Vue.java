@@ -23,7 +23,7 @@ public class Vue implements Observer {
     private NouvelEvt newEvt;
     private ChargerEvtBis chargE;
     private EvenementBis evt;
-    private ChronoCourseBis chrono;
+    //private ChronoCourseBis chrono;
     
     private AjouterEnleverPiloteBis aePilote;
     private CreerModifierVoitureBis cmVoiture;
@@ -38,6 +38,9 @@ public class Vue implements Observer {
     //variable pour revenir aux fenetres precedentes
     private MaFenetre precedente;
     private MaFenetre courante;
+    private MaFenetre optionnelle;
+    
+    private ChronometreCourseBis chrono;
     
     public Vue(Controleur c){
         control = c;
@@ -50,15 +53,17 @@ public class Vue implements Observer {
         //chrono = new ChronoCourseBis(control);
        
         
-        /*aePilote = new AjouterEnleverPiloteBis(control);
+        aePilote = new AjouterEnleverPiloteBis(control);
         cmVoiture = new CreerModifierVoitureBis(control);
         aeVoiture = new AjouterEnleverVoitureBis(control);
         cmPilote = new CreerModifierPiloteBis(control);
         
-        cmCourse=new CreerModifierCourse(control,evt,null);*/
+        //cmCourse=new CreerModifierCourse(control,evt,null);
         
         precedente = cce;
         courante = cce;
+        
+        
         
     }
     
@@ -92,11 +97,14 @@ public class Vue implements Observer {
     }
     
     public void ouvrirChrono(){
-        chrono = new ChronoCourseBis(control);
+        chrono = new ChronometreCourseBis(control);
+        //chrono = new ChronoCourseBis(control);
         courante.masquer();
         precedente = evt; //creer charger evenement
         courante = chrono; // choix
         courante.afficher();
+        optionnelle = new TableurChronoBis(control);
+        optionnelle.afficher();
     }
     
     public void ouvrirAjouterEnleverPilote(){
@@ -114,13 +122,14 @@ public class Vue implements Observer {
     }
     //Pb ici !!! il faut jouer avec le Observer/observable il me semble vu que le modele est mis à jour, la fenetre devrait être notifée du changement
     public void ouvrirCreerModifierVoiture(Voiture v){
+            System.out.println(v.toString());
         courante.masquer();
         precedente = evt;
         courante = cmVoiture;
-        if(v!=null){
+        courante.afficher();
+        if(v != null){
             cmVoiture.miseAJour(v);
         }
-        courante.afficher();
     }
     
     public void ouvrirCreerModifierPilote(){
