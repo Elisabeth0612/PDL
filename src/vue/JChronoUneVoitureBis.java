@@ -280,27 +280,30 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
             jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
         }
         else{
-            String[] ligneTable = new String[8];
-            //on incrémente le nombre de tours finis
-            int nbTours =Integer.parseInt(jLabel12.getText());
-            nbTours++;
-            jLabel12.setText(Integer.toString(nbTours));
-            //on décrémente nombre de tours effectués
-            int nbToursMax =Integer.parseInt(jLabel10.getText());
-            nbToursMax--;
-            jLabel10.setText(Integer.toString(nbToursMax));
-            
-            ligneTable[0] = Integer.toString(nbTours);//num tours
-            ligneTable[1] = Integer.toString(numV);//numéro voiture
-            ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
-            ligneTable[3] ="";//jLabel9.getText() ;//temps
-            ligneTable[4] = "";
-            ligneTable[5] = "TOP IN";//type de top
-            ligneTable[6] = "";
-            ligneTable[7] = "";
-            
-            controleur.creerUnTop(ligneTable);
- 
+            if(Integer.parseInt(jLabel10.getText())!=0){
+                String[] ligneTable = new String[8];
+                //on incrémente le nombre de tours finis
+                int nbTours =Integer.parseInt(jLabel12.getText());
+                nbTours++;
+                jLabel12.setText(Integer.toString(nbTours));
+                //on décrémente nombre de tours effectués
+                int nbToursMax =Integer.parseInt(jLabel10.getText());
+                nbToursMax--;
+                jLabel10.setText(Integer.toString(nbToursMax));
+
+                ligneTable[0] = Integer.toString(nbTours);//num tours
+                ligneTable[1] = Integer.toString(numV);//numéro voiture
+                ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
+                ligneTable[3] ="";//jLabel9.getText() ;//temps
+                ligneTable[4] = "";
+                ligneTable[5] = "TOP IN";//type de top
+                ligneTable[6] = "";
+                ligneTable[7] = "";
+
+                controleur.creerUnTop(ligneTable);
+                
+                //on stoppera la barre de progression
+            }
         }
     }                                       
 
@@ -312,27 +315,30 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
             jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
         }
         else{
-            String[] ligneTable = new String[8];
-            //on incrémente le nombre de tours finis
-            int nbTours =Integer.parseInt(jLabel12.getText());
-            nbTours++;
-            jLabel12.setText(Integer.toString(nbTours));
-            //on décrémente nombre de tours effectués
-            int nbToursMax =Integer.parseInt(jLabel10.getText());
-            nbToursMax--;
-            jLabel10.setText(Integer.toString(nbToursMax));
-            
-            ligneTable[0] = Integer.toString(nbTours);//num tours
-            ligneTable[1] = Integer.toString(numV);//numéro voiture
-            ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
-            ligneTable[3] ="";//jLabel9.getText() ;//temps
-            ligneTable[4] = "";
-            ligneTable[5] = "TOP TOUR";//type de top
-            ligneTable[6] = "";
-            ligneTable[7] = "";
-            
-            controleur.creerUnTop(ligneTable);
- 
+            if(Integer.parseInt(jLabel10.getText())!=0){
+                String[] ligneTable = new String[8];
+                //on incrémente le nombre de tours finis
+                int nbTours =Integer.parseInt(jLabel12.getText());
+                nbTours++;
+                jLabel12.setText(Integer.toString(nbTours));
+                //on décrémente nombre de tours effectués
+                int nbToursMax =Integer.parseInt(jLabel10.getText());
+                nbToursMax--;
+                jLabel10.setText(Integer.toString(nbToursMax));
+
+                ligneTable[0] = Integer.toString(nbTours);//num tours
+                ligneTable[1] = Integer.toString(numV);//numéro voiture
+                ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
+                ligneTable[3] ="";//jLabel9.getText() ;//temps
+                ligneTable[4] = "";
+                ligneTable[5] = "TOP TOUR";//type de top
+                ligneTable[6] = "";
+                ligneTable[7] = "";
+
+                controleur.creerUnTop(ligneTable);
+                
+                //on mettra à jour les barres de progression
+            }
         }
     }                                       
 
@@ -344,27 +350,30 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
             jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
         }
         else{
-            String[] ligneTable = new String[8];
-            //on incrémente le nombre de tours finis
-            int nbTours =Integer.parseInt(jLabel12.getText());
-            nbTours++;
-            jLabel12.setText(Integer.toString(nbTours));
-            //on décrémente nombre de tours effectués
-            int nbToursMax =Integer.parseInt(jLabel10.getText());
-            nbToursMax--;
-            jLabel10.setText(Integer.toString(nbToursMax));
-            
-            ligneTable[0] = Integer.toString(nbTours);//num tours
-            ligneTable[1] = Integer.toString(numV);//numéro voiture
-            ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
-            ligneTable[3] ="";//jLabel9.getText() ;//temps
-            ligneTable[4] = "";
-            ligneTable[5] = "TOP OUT";//type de top
-            ligneTable[6] = "";
-            ligneTable[7] = "";
-            
-            controleur.creerUnTop(ligneTable);
-            
+            if(Integer.parseInt(jLabel10.getText())!=0){
+                String[] ligneTable = new String[8];
+                //on incrémente le nombre de tours finis
+                int nbTours =Integer.parseInt(jLabel12.getText());
+                nbTours++;
+                jLabel12.setText(Integer.toString(nbTours));
+                //on décrémente nombre de tours effectués
+                /*int nbToursMax =Integer.parseInt(jLabel10.getText());
+                nbToursMax--;
+                jLabel10.setText(Integer.toString(nbToursMax));*/
+
+                ligneTable[0] = Integer.toString(nbTours);//num tours
+                ligneTable[1] = Integer.toString(numV);//numéro voiture
+                ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
+                ligneTable[3] ="";//jLabel9.getText() ;//temps
+                ligneTable[4] = "";
+                ligneTable[5] = "TOP OUT";//type de top
+                ligneTable[6] = "";
+                ligneTable[7] = "";
+
+                controleur.creerUnTop(ligneTable);
+                
+                //on relance les barres de progression
+            }
  
         }
         
