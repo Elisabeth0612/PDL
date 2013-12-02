@@ -123,4 +123,6 @@ private Controleur control;
     public void raffraichir() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+   
 }

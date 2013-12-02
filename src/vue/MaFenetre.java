@@ -17,6 +17,7 @@ public interface MaFenetre  {
     public MaFenetre getPrecedent();
     public void vider();
     public void raffraichir();
+    //public String getTemps();
     //public void inititialiser();
     
 }

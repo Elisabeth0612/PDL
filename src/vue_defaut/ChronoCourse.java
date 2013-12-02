@@ -484,4 +484,6 @@ public class ChronoCourse extends javax.swing.JFrame implements MaFenetre {
     public void vider() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    
 }

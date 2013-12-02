@@ -107,6 +107,12 @@ public class Vue implements Observer {
         optionnelle.afficher();
     }
     
+    public void ajouterLigneTableurCourse(String[] ligneTable){//la taille est de 8
+        String temps = ((ChronometreCourseBis)courante).getTemps();
+        ligneTable[3] = temps;
+        //optionnelle.ajouterLigne();
+    }
+    
     public void ouvrirAjouterEnleverPilote(){
         courante.masquer();
         precedente = cmVoiture;

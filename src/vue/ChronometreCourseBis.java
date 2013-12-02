@@ -282,13 +282,15 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
                 
             });
             //on initialise une fenetre propriete voiture course
-            newVoiture = new JChronoUneVoitureBis(v.getNumVoiture());
+            newVoiture = new JChronoUneVoitureBis(control,v.getNumVoiture());
             newVoiture.afficher();
             this.lesFenetresVoitures.put(v.getNumVoiture(), newVoiture);
             //this.lesProprietesVoiture.add(newVoiture);
             
-        } 
-        
-        
+        }       
+    }
+    
+    public String getTemps(){
+        return jLabel9.getText();
     }
 }

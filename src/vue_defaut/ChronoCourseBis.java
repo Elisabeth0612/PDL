@@ -704,4 +704,6 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
     public void ajouterItem(String numV){
         jComboBox1.addItem(numV);
     }
+
+   
 }

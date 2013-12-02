@@ -247,6 +247,8 @@ public class NouvelEvt extends javax.swing.JFrame implements MaFenetre {
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 
+    
+
    
 
     

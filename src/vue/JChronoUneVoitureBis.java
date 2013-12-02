@@ -10,6 +10,12 @@
  */
 package vue;
 
+import controleur.Controleur;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modele.Pilote;
+
 /**
  *
  * @author 13008360
@@ -17,11 +23,13 @@ package vue;
 public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetre {
     //nos variables
     private int numV;
-    
+    private Controleur controleur;
+    private boolean chronoEnRoute = false;
     
     /** Creates new form jChronoUneVoiture */
-    public JChronoUneVoitureBis(int num) {
+    public JChronoUneVoitureBis(Controleur c,int num) {
         this.numV = num;
+        controleur = c;
         initComponents();
     }
 
@@ -65,12 +73,12 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Voiture n° :");
+        jLabel1.setText("Voiture n° :"+numV);
 
         jLabel2.setText("Pilote actuel : ");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
+        this.implementerListePilote();
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Nombre de tours par relais :");
 
@@ -264,18 +272,109 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         pack();
     }// </editor-fold>                        
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
+     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-}                                       
+        if(!this.chronoEnRoute){
+            //Boîte du message d'erreur
+            JOptionPane jop3 = new JOptionPane();
+            jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
+        }
+        else{
+            String[] ligneTable = new String[8];
+            //on incrémente le nombre de tours finis
+            int nbTours =Integer.parseInt(jLabel12.getText());
+            nbTours++;
+            jLabel12.setText(Integer.toString(nbTours));
+            //on décrémente nombre de tours effectués
+            int nbToursMax =Integer.parseInt(jLabel10.getText());
+            nbToursMax--;
+            jLabel10.setText(Integer.toString(nbToursMax));
+            
+            ligneTable[0] = Integer.toString(nbTours);//num tours
+            ligneTable[1] = Integer.toString(numV);//numéro voiture
+            ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
+            ligneTable[3] ="";//jLabel9.getText() ;//temps
+            ligneTable[4] = "";
+            ligneTable[5] = "TOP IN";//type de top
+            ligneTable[6] = "";
+            ligneTable[7] = "";
+            
+            //controleur.creerUnTop(ligneTable);
+ 
+        }
+    }                                       
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-}                                       
+        if(!this.chronoEnRoute){
+            //Boîte du message d'erreur
+            JOptionPane jop3 = new JOptionPane();
+            jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
+        }
+        else{
+            String[] ligneTable = new String[8];
+            //on incrémente le nombre de tours finis
+            int nbTours =Integer.parseInt(jLabel12.getText());
+            nbTours++;
+            jLabel12.setText(Integer.toString(nbTours));
+            //on décrémente nombre de tours effectués
+            int nbToursMax =Integer.parseInt(jLabel10.getText());
+            nbToursMax--;
+            jLabel10.setText(Integer.toString(nbToursMax));
+            
+            ligneTable[0] = Integer.toString(nbTours);//num tours
+            ligneTable[1] = Integer.toString(numV);//numéro voiture
+            ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
+            ligneTable[3] ="";//jLabel9.getText() ;//temps
+            ligneTable[4] = "";
+            ligneTable[5] = "TOP TOUR";//type de top
+            ligneTable[6] = "";
+            ligneTable[7] = "";
+            
+            //controleur.creerUnTop(ligneTable);
+ 
+        }
+    }                                       
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-}                                       
-
+        if(!this.chronoEnRoute){
+            //Boîte du message d'erreur
+            JOptionPane jop3 = new JOptionPane();
+            jop3.showMessageDialog(null, "Vous devez Démarrer la course !", "Erreur", JOptionPane.ERROR_MESSAGE); 
+        }
+        else{
+            String[] ligneTable = new String[8];
+            //on incrémente le nombre de tours finis
+            int nbTours =Integer.parseInt(jLabel12.getText());
+            nbTours++;
+            jLabel12.setText(Integer.toString(nbTours));
+            //on décrémente nombre de tours effectués
+            int nbToursMax =Integer.parseInt(jLabel10.getText());
+            nbToursMax--;
+            jLabel10.setText(Integer.toString(nbToursMax));
+            
+            ligneTable[0] = Integer.toString(nbTours);//num tours
+            ligneTable[1] = Integer.toString(numV);//numéro voiture
+            ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
+            ligneTable[3] ="";//jLabel9.getText() ;//temps
+            ligneTable[4] = "";
+            ligneTable[5] = "TOP OUT";//type de top
+            ligneTable[6] = "";
+            ligneTable[7] = "";
+            
+            //controleur.creerUnTop(ligneTable);
+            //DefaultTableModel modele3 = (DefaultTableModel)jTable1.getModel();   
+       
+              
+             //modele3.addRow(ligneTable); 
+             //jTable1.setModel(modele3); 
+             //jTable1.repaint(); 
+ 
+        }
+        
+    }  
+    
     
     // Variables declaration - do not modify                     
     private java.awt.Button button1;
@@ -334,5 +433,15 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
     public void raffraichir() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public void implementerListePilote(){
+        jComboBox2.removeAllItems();
+            List<Pilote> lesP = controleur.getPilotesVoiture(numV);
+            for (Pilote p  : lesP) {  
+                jComboBox2.addItem(p.getNom()+" - "+p.getPrenom());
+            }
+    }
+
+    
 }
 
