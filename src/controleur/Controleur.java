@@ -248,10 +248,6 @@ public class Controleur {
     public int getNbToursMaxCourse(){
         return courseEnCours.getNbToursMax();
     }
-
-    public void ouvrirCreerModifierCourse() {
-        vue.ouvrirCreerModifierCourse(null);
-    }
     
     public void ouvrirCreerModifierCourse(Course c){
         vue.ouvrirCreerModifierCourse(c);

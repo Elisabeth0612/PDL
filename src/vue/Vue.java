@@ -159,8 +159,8 @@ public class Vue implements Observer {
         courante.fermer();
         precedente=evt;
         courante=cmCourse;
+        cmCourse.setcModifier(c);
         courante.afficher();
-        //cmCourse.setcModifier(c);
     }
 
     @Override
