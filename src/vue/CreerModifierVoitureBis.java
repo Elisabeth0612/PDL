@@ -294,7 +294,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Ajouter/Enlever Pilote"
-        controleur.ouvrirAjouterEnleverPilote();
+        controleur.ouvrirAjouterEnleverPilote(voitureCourante);
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {

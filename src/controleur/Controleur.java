@@ -217,6 +217,10 @@ public class Controleur {
         }
     }
     
+    public void ouvrirAjouterEnleverPilote(Voiture v){
+        vue.ouvrirAjouterEnleverPilote(v);
+    }
+    
     public void ouvrirAjouterEnleverPilote(){
         vue.ouvrirAjouterEnleverPilote();
     }
@@ -238,9 +242,10 @@ public class Controleur {
     }
     
     public List<Pilote> getPilotesVoiture(int num){
-        Voiture v = getVoitureCourseByNum(num);
-        List<Pilote> lesP = v.getListP();
-        if(lesP.size()!=0){
+        System.out.println(num);
+         Voiture v = getVoitureEvenementByNum(num);
+        if(v.existListP()){
+            List<Pilote> lesP = v.getListP();
             return v.getListP();
         }else{
             return new ArrayList<Pilote>();
@@ -249,10 +254,6 @@ public class Controleur {
     
     public int getNbToursMaxCourse(){
         return courseEnCours.getNbToursMax();
-    }
-
-    public void ouvrirCreerModifierCourse() {
-        vue.ouvrirCreerModifierCourse(null);
     }
     
     public void ouvrirCreerModifierCourse(Course c){
@@ -280,6 +281,10 @@ public class Controleur {
     
     public List<Voiture> getListVoituresExistantes(){
         return GestionnaireExistant.getInstance().getVoituresExistantes();
+    }
+    
+    public List<Pilote> getListPilotesExistants(){
+        return GestionnaireExistant.getInstance().getPilotesExistants();
     }
     
     public Voiture getVoitureExistante(int numV){

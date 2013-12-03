@@ -410,6 +410,18 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
             cModifier.removeListV((Voiture) controleur.getVoituresEvenement().get(jList2.getSelectedIndex()));
         }
     }
+    
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+        if (cModifier!=null){
+            jTextField1.setText(cModifier.getNomCourse());
+            jTextField2.setText(cModifier.getHeureDeb().toString());
+            jTextField3.setText(cModifier.getHeureFin().toString());
+            jTextField4.setText(String.valueOf(cModifier.getNbToursMax()));
+            jTextField5.setText(String.valueOf(cModifier.getDureePilotageMaxParPilote()));
+            jTextField6.setText(String.valueOf(cModifier.getDureeConsecutivePilotageMaxParPilote()));
+            jTextField7.setText(cModifier.getMeteo());
+        }
+    }
 
 
     // Variables declaration - do not modify
