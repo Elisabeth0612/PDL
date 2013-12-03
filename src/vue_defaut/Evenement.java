@@ -109,6 +109,17 @@ public class Evenement extends javax.swing.JFrame implements MaFenetre {
             public Object getElementAt(int i) { return strings[i]; }
         });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                jList1AncestorMoved(evt);
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jList1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                jList1AncestorRemoved(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jList2.setModel(new javax.swing.AbstractListModel() {
@@ -312,6 +323,18 @@ public class Evenement extends javax.swing.JFrame implements MaFenetre {
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_formFocusGained
+
+    private void jList1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jList1AncestorAdded
+        jList1.repaint();
+    }//GEN-LAST:event_jList1AncestorAdded
+
+    private void jList1AncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jList1AncestorRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jList1AncestorRemoved
+
+    private void jList1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jList1AncestorMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jList1AncestorMoved
 
     
 

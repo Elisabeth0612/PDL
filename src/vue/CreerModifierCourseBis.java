@@ -124,6 +124,11 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                    }
              }
         });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12));
         jLabel1.setText("Nom de la course :");
@@ -159,7 +164,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         jLabel7.setText("Durée maximum consécutive de pilotage : ");
 
         jLabel8.setText("Météo :");
-        jList1.setSelectionMode(1);
+        
         jList1.setModel(new javax.swing.AbstractListModel() {
             //String[] lesV = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             //public int getSize() { return lesV.length; }
@@ -365,15 +370,15 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         pack();
     }// </editor-fold>
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) { 
+        raffraichir();
         controleur.retour();
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         if (!controleChampsSaisis()){
             JOptionPane.showMessageDialog(this,"Veuillez renseigner tous les champs pour créer la course","Erreur",JOptionPane.ERROR_MESSAGE);
-        }
-        if (cModifier==null){
+        }else if (cModifier==null){
             String typeFin=null;
             if (jRadioButton1.isSelected()){
                 typeFin=jRadioButton1.getText();
@@ -382,9 +387,11 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                 typeFin=jRadioButton2.getText();
             }
             controleur.getCoursesEvenement().add(new Course(jTextField1.getText(),null,null,Integer.parseInt(jTextField5.getText()),Integer.parseInt(jTextField6.getText()),jTextField7.getText(),Integer.parseInt(jTextField4.getText()),typeFin));
+            raffraichir();
             controleur.retour();
         }else{
             miseAJourCModifier();
+            raffraichir();
             controleur.retour();
         }
     }                                        
@@ -411,17 +418,17 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         }
     }
     
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {                                     
         if (cModifier!=null){
             jTextField1.setText(cModifier.getNomCourse());
-            jTextField2.setText(cModifier.getHeureDeb().toString());
-            jTextField3.setText(cModifier.getHeureFin().toString());
+            //jTextField2.setText(cModifier.getHeureDeb().toString());
+            //jTextField3.setText(cModifier.getHeureFin().toString());
             jTextField4.setText(String.valueOf(cModifier.getNbToursMax()));
             jTextField5.setText(String.valueOf(cModifier.getDureePilotageMaxParPilote()));
             jTextField6.setText(String.valueOf(cModifier.getDureeConsecutivePilotageMaxParPilote()));
             jTextField7.setText(cModifier.getMeteo());
         }
-    }
+    }  
 
 
     // Variables declaration - do not modify
@@ -468,7 +475,15 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     
     @Override
     public void raffraichir() {
-        //jPanel2.repaint();
+        jTextField1.setText(null);
+        jTextField2.setText(null);
+        jTextField3.setText(null);
+        jTextField4.setText(null);
+        jTextField5.setText(null);
+        jTextField6.setText(null);
+        jTextField7.setText(null);
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
     }
 
     @Override
