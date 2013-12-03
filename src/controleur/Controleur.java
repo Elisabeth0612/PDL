@@ -4,6 +4,7 @@
  */
 package controleur;
 
+import java.util.ArrayList;
 import xml.GestionnaireExistant;
 import java.util.Date;
 import java.util.List;
@@ -236,7 +237,12 @@ public class Controleur {
     
     public List<Pilote> getPilotesVoiture(int num){
         Voiture v = getVoitureCourseByNum(num);
-        return v.getListP();
+        List<Pilote> lesP = v.getListP();
+        if(lesP.size()!=0){
+            return v.getListP();
+        }else{
+            return new ArrayList<Pilote>();
+        }
     }
     
     public int getNbToursMaxCourse(){
@@ -318,4 +324,5 @@ public class Controleur {
             }
         }
     }
+
 }

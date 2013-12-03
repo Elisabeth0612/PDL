@@ -21,6 +21,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
 
     private Controleur controleur;
     private DefaultListModel<String> model;
+    private Voiture voitureCourante;
     /**
      * Creates new form CreerModifierVoiture
      */
@@ -69,6 +70,8 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     
     public void miseAJour(Voiture v){ 
         
+        this.voitureCourante=v;
+        
         String couleur = v.getCouleur();
         jTextField1.setText(couleur);
         jTextField1.repaint();
@@ -77,8 +80,8 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         jTextField2.setText(Integer.toString(NbToursRelai));
         jTextField2.repaint();
         
-      
-       List<Pilote> lesP = controleur.getPilotesVoiture(v.getNumVoiture());
+       List<Pilote> lesP = new ArrayList<Pilote>();
+       lesP = controleur.getPilotesVoiture(v.getNumVoiture());
        if(lesP.size()!=0){
             model = new DefaultListModel<String>();
             for(Pilote p : lesP){
@@ -282,7 +285,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     }// </editor-fold>
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // Checkbox "Voiture en Course (active)"
+        // Checkbox "Voiture en Course (active)"        
     }                                          
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
