@@ -443,14 +443,6 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private javax.swing.JTextField jTextField7;
     // End of variables declaration
 
-        @Override
-    public void afficher() {
-        raffraichir();
-        
-        //on affiche la fenetre
-        setVisible(true);
-        
-    }
 
     @Override
     public void masquer() {
@@ -475,5 +467,10 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     @Override
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void afficher() {
+        setVisible(true);
     }
 }
