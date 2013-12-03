@@ -144,7 +144,7 @@ public class Vue implements Observer {
         precedente = evt;
         courante = cmVoiture;
         if(v != null){
-            cmVoiture.miseAJour(v);
+            cmVoiture.charger(v);
         }
         courante.afficher();
     }
@@ -153,6 +153,16 @@ public class Vue implements Observer {
         courante.fermer();
         precedente = aeVoiture; // marche pas à revoir
         courante = cmVoiture;
+        courante.afficher();
+    }
+    
+    public void ouvrirCreerModifierPilote(Pilote p){
+        courante.fermer();
+        precedente = cmVoiture;
+        courante = cmPilote;
+        if(p != null){
+            cmPilote.charger(p);
+        }
         courante.afficher();
     }
     

@@ -39,7 +39,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     @Override
     public void afficher() {
         raffraichir();
-        miseAJour(voitureCourante);
+        charger(voitureCourante);
         //on affiche la fenetre
         setVisible(true);
         
@@ -70,7 +70,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         //throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public void miseAJour(Voiture v){ 
+    public void charger(Voiture v){ 
         
         this.voitureCourante=v;
         
@@ -335,7 +335,18 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Modifier Pilote"
-        controleur.ouvrirCreerModifierPilote();
+        int i = jList1.getSelectedIndex();
+                
+        if(jList1.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(this,"Veuillez sélectionner un pilote.","Erreur",JOptionPane.ERROR_MESSAGE);
+        }else{
+            String nomPrenomPilote = (String)jList1.getSelectedValue();
+            String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
+            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+            Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
+            
+            controleur.ouvrirCreerModifierPilote(p);
+        }
     }
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
