@@ -236,9 +236,10 @@ public class Controleur {
     }
     
     public List<Pilote> getPilotesVoiture(int num){
-        Voiture v = getVoitureCourseByNum(num);
-        List<Pilote> lesP = v.getListP();
-        if(lesP.size()!=0){
+        System.out.println(num);
+         Voiture v = getVoitureEvenementByNum(num);
+        if(v.existListP()){
+            List<Pilote> lesP = v.getListP();
             return v.getListP();
         }else{
             return new ArrayList<Pilote>();

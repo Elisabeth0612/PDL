@@ -85,6 +85,11 @@ public class Voiture {
 	public List<Pilote> getListP() {
 		return listP;
 	}
+        
+        public boolean existListP(){
+            System.out.println("ok");
+            return listP.size()!=0;
+        }
 
 	public void modifierVoiture(){
 
