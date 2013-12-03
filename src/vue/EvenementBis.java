@@ -178,11 +178,23 @@ public class EvenementBis extends JFrame implements MaFenetre {
         //implémentation de la liste des courses // on peut aussi utiliser hashtable pour les listes
         jList1.setModel(new javax.swing.AbstractListModel() {
             List<Course> lesC = new ArrayList<Course>();
+            //List<Course> lesC = controleur.getCoursesEvenement();
             //String[] strings = {lesC.get(0).getNomCourse(),lesC.get(1).getNomCourse()};
             public int getSize() { return lesC.size(); }
             public Object getElementAt(int i) { return lesC.get(i).getNomCourse(); }
         });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        /*jList1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                jList1AncestorMoved(evt);
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jList1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                jList1AncestorRemoved(evt);
+            }
+        });*/
         jScrollPane1.setViewportView(jList1);
         
         
@@ -380,6 +392,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
         // Bouton "Supprimer la course"
         if (!jList1.isSelectionEmpty()){
             controleur.getCoursesEvenement().remove(jList1.getSelectedIndex());
+            raffraichir();
         }
         else{
             JOptionPane.showMessageDialog(this,"Veuillez sélectionner la course que vous souhaitez supprimer.","Erreur",JOptionPane.ERROR_MESSAGE);
@@ -446,7 +459,19 @@ public class EvenementBis extends JFrame implements MaFenetre {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Annuler"
         controleur.retour();
-    }                                        
+    }      
+    
+    /*private void jList1AncestorAdded(javax.swing.event.AncestorEvent evt) {                                     
+        jList1.validate();
+    }                                    
+
+    private void jList1AncestorRemoved(javax.swing.event.AncestorEvent evt) {                                       
+        jList1.validate();
+    }                                      
+
+    private void jList1AncestorMoved(javax.swing.event.AncestorEvent evt) {                                     
+        jList1.validate();
+    }*/
 
     
 
