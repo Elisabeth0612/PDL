@@ -78,6 +78,8 @@ public class EvenementBis extends JFrame implements MaFenetre {
         jPanel2.repaint();
         jLabel3.revalidate();
         jLabel3.repaint();
+        jList1.revalidate();
+        jList1.repaint();
         
     }
 
