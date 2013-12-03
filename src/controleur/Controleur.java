@@ -263,16 +263,7 @@ public class Controleur {
     }
     
     public void compareListVoiture(Voiture v, List<Pilote> lesPVoitureTemp){
-        List<Pilote> lesPVoiture = v.getListP();
-        int i=0;
-        for(Pilote pTemp: lesPVoitureTemp){
-            while(i==lesPVoiture.size() || (lesPVoiture.get(i).getNom()==pTemp.getNom() && lesPVoiture.get(i).getPrenom()==pTemp.getPrenom())){
-                i++;
-            }
-            if(i!=lesPVoiture.size()){
-                v.addListP(pTemp);
-            }
-        }
+        v.setListP(lesPVoitureTemp);
     }
     
     public int getNbToursMaxCourse(){
@@ -354,16 +345,7 @@ public class Controleur {
     }
     
     public void compareListEvenement(List<Voiture> lesVtemp){
-        List<Voiture> lesVEvenement = evtS.getListV();
-        int i=0;
-        for(Voiture vtemp: lesVtemp){
-            while(i==lesVEvenement.size() || lesVEvenement.get(i).getNumVoiture()==vtemp.getNumVoiture()){
-                i++;
-            }
-            if(i!=lesVEvenement.size()){
-                evtS.addListV(vtemp);
-            }
-        }
+        evtS.setListV(lesVtemp);
     }
     
     public Course getCourseEnCours(){

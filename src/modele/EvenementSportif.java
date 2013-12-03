@@ -101,6 +101,10 @@ public class EvenementSportif extends Observable {
         return listV;
     }
     
+    public void setListV(List<Voiture> lesVTemp){
+        listV=lesVTemp;
+    }
+    
     public Course chercherCourse(String nomC){
         for(Course c : listC){
             if(c.getNomCourse()==nomC){
