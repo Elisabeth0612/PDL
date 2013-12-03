@@ -77,12 +77,12 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
         jTextField1.repaint();
         
         String prenom = p.getPrenom();
-        jTextField1.setText(prenom);
-        jTextField1.repaint();
+        jTextField2.setText(prenom);
+        jTextField2.repaint();
         
         String couleurCasque = p.getCouleursCasque();
-        jTextField1.setText(couleurCasque);
-        jTextField1.repaint();       
+        jTextField3.setText(couleurCasque);
+        jTextField3.repaint();       
     }
     
     /**
