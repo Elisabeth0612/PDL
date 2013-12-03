@@ -10,7 +10,9 @@ import controleur.Controleur;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -27,6 +29,9 @@ public class EvenementBis extends JFrame implements MaFenetre {
     //nos variables
     //private EvenementSportif evtS;
      private Controleur controleur;
+     
+     private DefaultListModel<String> model1;
+     private DefaultListModel<String> model2;
     /**
      * Creates new form Evt
      */
@@ -74,14 +79,40 @@ public class EvenementBis extends JFrame implements MaFenetre {
             jLabel3.setText("Evenement : "+controleur.getNomEvt()+" - ?? - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());  
         }*/
         
-        jPanel2.revalidate();
+        //jPanel2.revalidate();
         jPanel2.repaint();
-        jLabel3.revalidate();
+        //jLabel3.revalidate();
         jLabel3.repaint();
-        jList1.revalidate();
+        //jList1.revalidate();
         jList1.repaint();
+        charger();
         
     }
+    
+    public void charger(){
+        List<Course> lesC = controleur.getCoursesEvenement();
+        if(lesC.size()!=0){
+            model1 = new DefaultListModel<String>();
+            for(Course c : lesC){
+                model1.addElement(c.getNomCourse());
+            }
+            jList1.setModel(model1);
+            jList1.setSelectedIndex(0);
+            jList1.repaint();
+       }
+        
+        List<Voiture> lesV = controleur.getVoituresEvenement();
+        if(lesV.size()!=0){
+            model2 = new DefaultListModel<String>();
+            for(Voiture v : lesV){
+                model2.addElement(Integer.toString(v.getNumVoiture()));
+            }
+            jList2.setModel(model2);
+            jList2.setSelectedIndex(0);
+            jList2.repaint();
+       }
+    }
+   
 
     @Override
     public MaFenetre getPrecedent() {
@@ -146,8 +177,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
         jList1.setSelectionMode(1);
         //implémentation de la liste des courses // on peut aussi utiliser hashtable pour les listes
         jList1.setModel(new javax.swing.AbstractListModel() {
-            List<Course> lesC = controleur.getCoursesEvenement();
-            
+            List<Course> lesC = new ArrayList<Course>();
             //String[] strings = {lesC.get(0).getNomCourse(),lesC.get(1).getNomCourse()};
             public int getSize() { return lesC.size(); }
             public Object getElementAt(int i) { return lesC.get(i).getNomCourse(); }
@@ -158,7 +188,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
         
         
         jList2.setModel(new javax.swing.AbstractListModel() {
-            List<Voiture> lesV = controleur.getVoituresEvenement();
+            List<Voiture> lesV = new ArrayList<Voiture>();
             //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return lesV.size(); }
             public Object getElementAt(int i) { return lesV.get(i).getNumVoiture(); }
