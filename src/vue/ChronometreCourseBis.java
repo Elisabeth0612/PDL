@@ -12,6 +12,7 @@ package vue;
 
 import controleur.Controleur;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -266,6 +267,9 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
 
     public void implementerListeCheckBox() {
         //jPanel2.add(jLabel6);
+        //variable de placement des fenetres filles
+        int locationX = 0;
+        
         JCheckBox jcb = new JCheckBox();
         JChronoUneVoitureBis newVoiture;
         List<Voiture> lesV = control.getVoituresCourse();
@@ -283,7 +287,11 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
 
             });
             //on initialise une fenetre propriete voiture course
-            newVoiture = new JChronoUneVoitureBis(control, v.getNumVoiture());
+            if(locationX+250< Toolkit.getDefaultToolkit().getScreenSize().getWidth()){
+                locationX = locationX + 250;
+            }
+            int placeX = ((int) this.getLocation().getX())+locationX;
+            newVoiture = new JChronoUneVoitureBis(control, v.getNumVoiture(),placeX);
             newVoiture.afficher();
             this.lesFenetresVoitures.put(v.getNumVoiture(), newVoiture);
             //this.lesProprietesVoiture.add(newVoiture);

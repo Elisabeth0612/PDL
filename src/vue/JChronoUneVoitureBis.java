@@ -35,11 +35,13 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
     private long m = 0;
     private long s = 0;
     private long ms=0;
+    private int axeX;
     
     /** Creates new form jChronoUneVoiture */
-    public JChronoUneVoitureBis(Controleur c,int num) {
+    public JChronoUneVoitureBis(Controleur c,int num, int placeX) {
         this.numV = num;
         controleur = c;
+        this.axeX = placeX;
         initComponents();
     }
 
@@ -94,7 +96,8 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
             }});
         
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-
+        this.setLocation(axeX, 0);
+        
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N

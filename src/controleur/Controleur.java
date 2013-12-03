@@ -325,5 +325,9 @@ public class Controleur {
             }
         }
     }
+    
+    public Course getCourseEnCours(){
+        return courseEnCours;
+    }
 
 }

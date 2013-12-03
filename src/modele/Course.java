@@ -3,6 +3,7 @@ package modele;
 import graphique.GrapheCourse;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartPanel;
 
 
 public class Course {
@@ -160,5 +161,9 @@ public class Course {
         }
         graphe = new GrapheCourse(this.nbToursMax,voit,table);
         graphe.genererGraphe(nomCourse);
+    }
+    
+    public ChartPanel getPanelGraphe(){
+        return this.graphe.getPanelChart();
     }
 }
