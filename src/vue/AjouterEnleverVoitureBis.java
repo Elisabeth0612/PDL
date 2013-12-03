@@ -20,13 +20,16 @@ import modele.Voiture;
 public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFenetre{
 
      private Controleur controleur;
-     private DefaultListModel<String> model;
+     private DefaultListModel<String> model1;
+     private DefaultListModel<String> model2;
+     private List<Voiture> lesVtemp = new ArrayList<Voiture>();
     /**
      * Creates new form AjouterEnleverVoiture
      */
     public AjouterEnleverVoitureBis(Controleur c) {
         controleur = c;
         initComponents();
+        lesVtemp = controleur.getVoituresEvenement();
     }
 
     public void lancer(){
@@ -70,22 +73,22 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     public void charger(){
         List<Voiture> lesV = controleur.getListVoituresExistantes();
         if(lesV.size()!=0){
-            model = new DefaultListModel<String>();
+            model1 = new DefaultListModel<String>();
             for(Voiture v : lesV){
-                model.addElement(Integer.toString(v.getNumVoiture()));
+                model1.addElement(Integer.toString(v.getNumVoiture()));
             }
-            jList1.setModel(model);
+            jList1.setModel(model1);
             jList1.setSelectedIndex(0);
             jList1.repaint();
        }
         
         List<Voiture> lesVE = controleur.getVoituresEvenement();
         if(lesVE.size()!=0){
-            model = new DefaultListModel<String>();
+            model2 = new DefaultListModel<String>();
             for(Voiture v : lesVE){
-                model.addElement(Integer.toString(v.getNumVoiture()));
+                model2.addElement(Integer.toString(v.getNumVoiture()));
             }
-            jList2.setModel(model);
+            jList2.setModel(model2);
             jList2.setSelectedIndex(0);
             jList2.repaint();
        }
@@ -258,29 +261,48 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Bouton ">>" - ajoute VoituresExistantes à VoituresEvenements
-       /* int numV = (int) jList1.getSelectedValue();
-        if(controleur.getVoitureEvenementByNum(numV) != null){
-            JOptionPane.showMessageDialog(this,"La voiture est déjà présente dans l'Evenement.","Erreur",JOptionPane.ERROR_MESSAGE);
+        // Bouton ">>" - ajoute VoituresExistantes jList1 à VoituresEvenements Jlist2
+        int i = jList1.getSelectedIndex();
+        int numV = Integer.valueOf((String)jList1.getSelectedValue());
+        if(jList1.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
+            if(controleur.getVoitureEvenementByNum(numV) != null){
+                JOptionPane.showMessageDialog(this,"La voiture est déjà présente dans l'Evenement.","Erreur",JOptionPane.ERROR_MESSAGE);
+            }
             Voiture vE = controleur.getVoitureExistante(numV);
-            controleur.getVoituresEvenement().add(vE);
-        }*/
+            lesVtemp.add(vE);
+            model2.addElement(Integer.toString(vE.getNumVoiture()));
+            jList2.repaint();
+        }
         
     }
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Bouton "<<" - ajoute VoituresEvenements à VoituresExistantes
+        // Bouton "<<" - ajoute VoituresEvenements jList2 à VoituresExistantes JList1
+        int numV = Integer.valueOf((String)jList2.getSelectedValue());
+        int i = jList2.getSelectedIndex();
+        if(jList2.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
+        }else{
+            Voiture v = controleur.getVoitureEvenementByNum(numV);
+            lesVtemp.remove(v);
+            model2.remove(i);
+            jList2.repaint();
+        }
+        
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Créer une nouvelle voiture"
-        //controleur.ouvrirCreerModifierVoiture(null);
+        controleur.ouvrirCreerModifierVoiture(null);
         
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Valider la liste des participants"
+        controleur.compareListEvenement(lesVtemp);
+        controleur.retour();
     }
 
 

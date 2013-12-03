@@ -153,7 +153,7 @@ public class Controleur {
         List<Voiture> lesV = evtS.getListV();
         for(Voiture v:lesV){
             if(v.getNumVoiture()==numV){
-                lesV.remove(v);
+                evtS.remove(v);
                 return true;
             }
         }
@@ -304,5 +304,18 @@ public class Controleur {
 
     public void genererGraphiqueCourse(DefaultTableModel table) {
        courseEnCours.genererGaphique(table); 
+    }
+    
+    public void compareListEvenement(List<Voiture> lesVtemp){
+        List<Voiture> lesVEvenement = evtS.getListV();
+        int i=0;
+        for(Voiture vtemp: lesVtemp){
+            while(i==lesVEvenement.size() || lesVEvenement.get(i).getNumVoiture()==vtemp.getNumVoiture()){
+                i++;
+            }
+            if(i!=lesVEvenement.size()){
+                evtS.addListV(vtemp);
+            }
+        }
     }
 }
