@@ -94,8 +94,15 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
        }
        
         Pilote p = v.getPiloteActuel();
-        jTextField3.setText(p.getNom()+" "+p.getPrenom());
-        jTextField3.repaint();
+        Pilote p1 = controleur.getPiloteVoiture(v, p.getNom(), p.getPrenom());
+        if(p1!=null){
+            jTextField3.setText(p.getNom()+" "+p.getPrenom());
+            jTextField3.repaint();
+        }else{
+            controleur.setPiloteActuel(voitureCourante,null);
+            jTextField3.setText("");
+            jTextField3.repaint();
+        }
         
         Boolean voitureActive = v.getVoitureActive();
         jCheckBox1.setSelected(voitureActive);

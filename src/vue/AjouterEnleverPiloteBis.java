@@ -297,7 +297,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
             int indice = parcoursList(nomPilote, prenomPilote);
             if(indice!=-1){
                 lesPVoitureTemp.remove(indice);
-                // si c'est le pilote principale alors supprimer le pilote principale !
                 model2.remove(i);
                 jList2.repaint();
             }

@@ -266,6 +266,10 @@ public class Controleur {
         v.setListP(lesPVoitureTemp);
     }
     
+    public void setPiloteActuel(Voiture v, Pilote p){
+        v.setPiloteActuel(p);
+    }
+    
     public int getNbToursMaxCourse(){
         return courseEnCours.getNbToursMax();
     }
