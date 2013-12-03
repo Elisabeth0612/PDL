@@ -12,6 +12,7 @@ import controleur.Controleur;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import modele.Pilote;
 import modele.Voiture;
 
@@ -25,6 +26,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     private DefaultListModel<String> model1;
     private DefaultListModel<String> model2;
     private Voiture voitureCourante;
+    private List<Pilote> lesPVoitureTemp = new ArrayList<Pilote>();
     /**
      * Creates new form AjouterEnleverPilote
      */
@@ -40,7 +42,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     @Override
     public void afficher() {
         raffraichir();
-        
+        charger();
         //on affiche la fenetre
         setVisible(true);
         
@@ -96,7 +98,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     }
     
     public void miseAJour(Voiture v){
-        //v.setCouleur(couleur)
+        voitureCourante=v;
     }
 
     /**
@@ -248,11 +250,43 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     }// </editor-fold>
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Bouton ">>"
+        // Bouton ">>" jList1 PilotesExistants - jList2 PilotesVoiture
+        int i = jList1.getSelectedIndex();
+        String nomPrenomPilote = (String)jList1.getSelectedValue();
+        String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
+        String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+        
+        if(jList1.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
+        }else{
+            Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
+            if(p != null){
+                JOptionPane.showMessageDialog(this,"Le pilote appartient déjà à la voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
+            }else{
+                Pilote pE = controleur.getPiloteExistant(nomPilote, prenomPilote);
+                lesPVoitureTemp.add(pE);
+                model2.addElement(pE.getNom()+" "+pE.getPrenom());
+                jList2.repaint();
+            }
+        }
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Bouton "<<"
+        // Bouton "<<" jList1 PilotesExistants - jList2 PilotesVoiture
+        int i = jList2.getSelectedIndex();
+        
+        if(jList2.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
+        }else{
+            String nomPrenomPilote = (String)jList1.getSelectedValue();
+            String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
+            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+            
+            Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote,prenomPilote);
+            lesPVoitureTemp.remove(p);
+            model2.remove(i);
+            jList2.repaint();
+        }
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,10 +296,13 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
+        controleur.compareListVoiture(voitureCourante, lesPVoitureTemp);
+        controleur.retour();
     }
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
+        controleur.retour();
     }
 
    

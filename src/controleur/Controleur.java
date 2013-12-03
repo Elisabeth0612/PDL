@@ -252,6 +252,29 @@ public class Controleur {
         }
     }
     
+    public Pilote getPiloteVoiture(Voiture v, String nomPilote, String prenomPilote){
+        List<Pilote> lesPVoiture = v.getListP();
+        for(Pilote p:lesPVoiture){
+            if(p.getNom().equals(nomPilote) && p.getPrenom().equals(prenomPilote)){
+                return p;
+            }
+        }
+        return null;
+    }
+    
+    public void compareListVoiture(Voiture v, List<Pilote> lesPVoitureTemp){
+        List<Pilote> lesPVoiture = v.getListP();
+        int i=0;
+        for(Pilote pTemp: lesPVoitureTemp){
+            while(i==lesPVoiture.size() || (lesPVoiture.get(i).getNom()==pTemp.getNom() && lesPVoiture.get(i).getPrenom()==pTemp.getPrenom())){
+                i++;
+            }
+            if(i!=lesPVoiture.size()){
+                v.addListP(pTemp);
+            }
+        }
+    }
+    
     public int getNbToursMaxCourse(){
         return courseEnCours.getNbToursMax();
     }
@@ -292,6 +315,17 @@ public class Controleur {
         for(Voiture v:lesVE){
             if(v.getNumVoiture()==numV){
                 return v;
+            }
+        }
+        return null;
+    }
+    
+    public Pilote getPiloteExistant(String nomPilote, String prenomPilote){
+        List<Pilote> lesPVoitures = GestionnaireExistant.getInstance().getPilotesExistants();
+        
+        for(Pilote p : lesPVoitures){
+            if(p.getNom().equals(nomPilote) && p.getPrenom().equals(prenomPilote)){
+                return p;
             }
         }
         return null;
