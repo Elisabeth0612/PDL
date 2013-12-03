@@ -321,10 +321,17 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
             
             int indice = parcoursList(nomPilote, prenomPilote);
             if(indice!=-1){
+                String nomPrenomPiloteActuel = jTextField3.getText();
+                String nomPiloteActuel = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
+                String prenomPiloteActuel = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+                if(nomPilote.equals(nomPiloteActuel) && prenomPilote.equals(prenomPiloteActuel)){
+                    jTextField3.setText("");
+                    jTextField3.repaint();
+                }
                 lesPTemp.remove(indice);
                 model.remove(i);
                 jList1.repaint();
-            } 
+            }
         }
     }                                        
 
@@ -369,13 +376,18 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         controleur.compareListVoiture(voitureCourante, lesPTemp);
         
         String nomPrenomPilote = jTextField3.getText();
-        String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
-        String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
-        Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
-        
-        controleur.modifierVoiture(voitureCourante, jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected(), p);
-        //modifierVoiture(Voiture v, String couleur, int NbToursRelai, Booleant voitureEnCourse, Pilote p)
-        controleur.retour();
+        if(nomPrenomPilote!=""){
+            String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
+            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+            Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
+
+
+            controleur.modifierVoiture(voitureCourante, jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected(), p);
+            //modifierVoiture(Voiture v, String couleur, int NbToursRelai, Booleant voitureEnCourse, Pilote p)
+            controleur.retour();
+        }else{
+            JOptionPane.showMessageDialog(this,"Veuillez choisir un pilote actuel.","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
