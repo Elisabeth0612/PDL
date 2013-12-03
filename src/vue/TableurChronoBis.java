@@ -11,6 +11,7 @@
 package vue;
 
 import controleur.Controleur;
+import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,7 +41,10 @@ private Controleur control;
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-
+        //placement de la fenetre
+        Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+        this.setLocation(0, (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()-205);
+        
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 

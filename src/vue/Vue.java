@@ -10,6 +10,8 @@ import vue_defaut.ChronoCourse;
 import controleur.Controleur;
 import java.util.Observable;
 import java.util.Observer;
+import static javax.swing.GroupLayout.Alignment.CENTER;
+import javax.swing.JDialog;
 import modele.*;
 
 
@@ -182,13 +184,18 @@ public class Vue implements Observer {
     public void fermerChronoCourse() {
         control.genererGraphiqueCourse(((TableurChronoBis)optionnelle).getTable());
         optionnelle.fermer();
-        
+        fenetreGraphiqueCourse();
         //courante.fermer();
         this.ouvrirEvenement();
     }
     
     public void fenetreGraphiqueCourse(){
-        
+        JDialog fgraphe = new JDialog();
+	fgraphe.setTitle("Ratio Temps/Tours");
+        fgraphe.getContentPane().add(control.getCourseEnCours().getPanelGraphe());
+
+	fgraphe.pack();
+	fgraphe.setVisible(true);
     }
     
 }
