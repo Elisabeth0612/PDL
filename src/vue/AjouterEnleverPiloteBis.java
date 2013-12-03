@@ -85,17 +85,24 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
             jList1.repaint();
        }
         
-        List<Pilote> lesP = controleur.getPilotesVoiture(voitureCourante.getNumVoiture());
-        lesPVoitureTemp = lesP;
-        if(lesP.size()!=0){
+        if(voitureCourante!=null){
+            List<Pilote> lesP = controleur.getPilotesVoiture(voitureCourante.getNumVoiture());
+            lesPVoitureTemp = lesP;
+            if(lesP.size()!=0){
+                model2 = new DefaultListModel<String>();
+                for(Pilote p : lesP){
+                    model2.addElement(p.getNom()+" "+p.getPrenom());
+                }
+                jList2.setModel(model2);
+                jList2.setSelectedIndex(0);
+                jList2.repaint();
+           }
+        }else{
             model2 = new DefaultListModel<String>();
-            for(Pilote p : lesP){
-                model2.addElement(p.getNom()+" "+p.getPrenom());
-            }
             jList2.setModel(model2);
             jList2.setSelectedIndex(0);
             jList2.repaint();
-       }
+        }
     }
     
     public void miseAJour(Voiture v){

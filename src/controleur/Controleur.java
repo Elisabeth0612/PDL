@@ -246,7 +246,7 @@ public class Controleur {
     }
     
     public Pilote getPiloteVoiture(Voiture v, String nomPilote, String prenomPilote){
-        List<Pilote> lesPVoiture = v.getListP();
+        List<Pilote> lesPVoiture = v.getListP(); // erreur si créer nouvelle voiture = ajouter/enlever voiture
         for(Pilote p:lesPVoiture){
             if(p.getNom().equals(nomPilote) && p.getPrenom().equals(prenomPilote)){
                 return p;

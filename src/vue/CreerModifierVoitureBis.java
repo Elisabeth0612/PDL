@@ -70,46 +70,47 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         //throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public void charger(Voiture v){ 
-        
-        this.voitureCourante=v;
-        
-        String couleur = v.getCouleur();
-        jTextField1.setText(couleur);
-        jTextField1.repaint();
-        
-        int NbToursRelai = v.getNbToursParRelai();
-        jTextField2.setText(Integer.toString(NbToursRelai));
-        jTextField2.repaint();
-        
-       List<Pilote> lesP = new ArrayList<Pilote>();
-       lesP = controleur.getPilotesVoiture(v.getNumVoiture());
-       lesPTemp = lesP;
-       if(lesP.size()!=0){
-            model = new DefaultListModel<String>();
-            for(Pilote p : lesP){
-                model.addElement(p.getNom()+" "+p.getPrenom());
-                //System.out.println(p.getNom()+" "+p.getPrenom());
+    public void charger(Voiture v){  
+        if(v!=null){
+            this.voitureCourante=v;
+
+            String couleur = v.getCouleur();
+            jTextField1.setText(couleur);
+            jTextField1.repaint();
+
+            int NbToursRelai = v.getNbToursParRelai();
+            jTextField2.setText(Integer.toString(NbToursRelai));
+            jTextField2.repaint();
+
+           List<Pilote> lesP = new ArrayList<Pilote>();
+           lesP = controleur.getPilotesVoiture(v.getNumVoiture());
+           lesPTemp = lesP;
+           if(lesP.size()!=0){
+                model = new DefaultListModel<String>();
+                for(Pilote p : lesP){
+                    model.addElement(p.getNom()+" "+p.getPrenom());
+                    //System.out.println(p.getNom()+" "+p.getPrenom());
+                }
+                jList1.setModel(model);
+                jList1.setSelectedIndex(0);
+                jList1.repaint();
+           }
+
+            Pilote p = v.getPiloteActuel();
+            Pilote p1 = controleur.getPiloteVoiture(v, p.getNom(), p.getPrenom());
+            if(p1!=null){
+                jTextField3.setText(p.getNom()+" "+p.getPrenom());
+                jTextField3.repaint();
+            }else{
+                controleur.setPiloteActuel(voitureCourante,null);
+                jTextField3.setText("");
+                jTextField3.repaint();
             }
-            jList1.setModel(model);
-            jList1.setSelectedIndex(0);
-            jList1.repaint();
-       }
-       
-        Pilote p = v.getPiloteActuel();
-        Pilote p1 = controleur.getPiloteVoiture(v, p.getNom(), p.getPrenom());
-        if(p1!=null){
-            jTextField3.setText(p.getNom()+" "+p.getPrenom());
-            jTextField3.repaint();
-        }else{
-            controleur.setPiloteActuel(voitureCourante,null);
-            jTextField3.setText("");
-            jTextField3.repaint();
+
+            Boolean voitureActive = v.getVoitureActive();
+            jCheckBox1.setSelected(voitureActive);
+            jCheckBox1.repaint();
         }
-        
-        Boolean voitureActive = v.getVoitureActive();
-        jCheckBox1.setSelected(voitureActive);
-        jCheckBox1.repaint();
     }
     
     public int parcoursList(String nom, String prenom){
