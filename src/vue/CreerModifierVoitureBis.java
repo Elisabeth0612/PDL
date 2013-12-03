@@ -10,6 +10,7 @@ import controleur.Controleur;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import modele.Pilote;
 import modele.Voiture;
 
@@ -22,6 +23,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     private Controleur controleur;
     private DefaultListModel<String> model;
     private Voiture voitureCourante=null;
+    private List<Pilote> lesPTemp= new ArrayList<Pilote>();
     /**
      * Creates new form CreerModifierVoiture
      */
@@ -82,6 +84,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         
        List<Pilote> lesP = new ArrayList<Pilote>();
        lesP = controleur.getPilotesVoiture(v.getNumVoiture());
+       lesPTemp = lesP;
        if(lesP.size()!=0){
             model = new DefaultListModel<String>();
             for(Pilote p : lesP){
@@ -107,6 +110,16 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         Boolean voitureActive = v.getVoitureActive();
         jCheckBox1.setSelected(voitureActive);
         jCheckBox1.repaint();
+    }
+    
+    public int parcoursList(String nom, String prenom){
+        //System.out.println("nom ="+nom+" prenom="+prenom);
+        for(int i=0; i<lesPTemp.size();i++){
+            if(lesPTemp.get(i).getNom().equals(nom) && lesPTemp.get(i).getPrenom().equals(prenom)){
+                return i;
+            }
+        }
+        return -1;
     }
     
     
@@ -293,11 +306,26 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     }// </editor-fold>
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // Checkbox "Voiture en Course (active)"        
+        // Checkbox "Voiture en Course (active)"  -- aucune action      
     }                                          
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Supprimer Pilote"
+        int i = jList1.getSelectedIndex();
+        if(jList1.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
+        }else{
+            String nomPrenomPilote = (String)jList1.getSelectedValue();
+            String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
+            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+            
+            int indice = parcoursList(nomPilote, prenomPilote);
+            if(indice!=-1){
+                lesPTemp.remove(indice);
+                model.remove(i);
+                jList1.repaint();
+            } 
+        }
     }                                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,11 +339,32 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     }
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Bouton ">>"
+        // Bouton ">>" "Pilote actuel" -- jList1 = Liste des pilotes de la voiture
+        int i = jList1.getSelectedIndex();
+        if(jList1.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
+        }else{
+            String nomPrenomPilote = (String)jList1.getSelectedValue();
+            String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
+            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+
+            jTextField3.setText(nomPilote+" "+prenomPilote);
+            jTextField3.repaint();
+        }
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
+        controleur.compareListVoiture(voitureCourante, lesPTemp);
+        
+        String nomPrenomPilote = jTextField3.getText();
+        String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
+        String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+        Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
+        
+        controleur.modifierVoiture(voitureCourante, jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected(), p);
+        //modifierVoiture(Voiture v, String couleur, int NbToursRelai, Booleant voitureEnCourse, Pilote p)
+        controleur.retour();
     }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {

@@ -270,6 +270,13 @@ public class Controleur {
         v.setPiloteActuel(p);
     }
     
+    public void modifierVoiture(Voiture v,String couleur,int NbToursRelai,Boolean voitureEnCourse, Pilote p){
+        v.setCouleur(couleur);
+        v.setNbToursParRelai(NbToursRelai);
+        v.setVoitureActive(voitureEnCourse);
+        v.setPiloteActuel(p);
+    }
+    
     public int getNbToursMaxCourse(){
         return courseEnCours.getNbToursMax();
     }
