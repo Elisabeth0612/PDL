@@ -4,6 +4,7 @@
  */
 package controleur;
 
+import java.util.ArrayList;
 import xml.GestionnaireExistant;
 import java.util.Date;
 import java.util.List;
@@ -153,7 +154,7 @@ public class Controleur {
         List<Voiture> lesV = evtS.getListV();
         for(Voiture v:lesV){
             if(v.getNumVoiture()==numV){
-                lesV.remove(v);
+                evtS.remove(v);
                 return true;
             }
         }
@@ -227,7 +228,7 @@ public class Controleur {
     }
     
     public void ouvrirCreerModifierPilote(){
-        vue.ouvrirCreerModifierVoiture(null);
+        vue.ouvrirCreerModifierVoiture();
     }
     
     public Voiture getVoitureCourseByNum(int num){
@@ -236,7 +237,12 @@ public class Controleur {
     
     public List<Pilote> getPilotesVoiture(int num){
         Voiture v = getVoitureCourseByNum(num);
-        return v.getListP();
+        List<Pilote> lesP = v.getListP();
+        if(lesP.size()!=0){
+            return v.getListP();
+        }else{
+            return new ArrayList<Pilote>();
+        }
     }
     
     public int getNbToursMaxCourse(){
@@ -305,4 +311,18 @@ public class Controleur {
     public void genererGraphiqueCourse(DefaultTableModel table) {
        courseEnCours.genererGaphique(table); 
     }
+    
+    public void compareListEvenement(List<Voiture> lesVtemp){
+        List<Voiture> lesVEvenement = evtS.getListV();
+        int i=0;
+        for(Voiture vtemp: lesVtemp){
+            while(i==lesVEvenement.size() || lesVEvenement.get(i).getNumVoiture()==vtemp.getNumVoiture()){
+                i++;
+            }
+            if(i!=lesVEvenement.size()){
+                evtS.addListV(vtemp);
+            }
+        }
+    }
+
 }
