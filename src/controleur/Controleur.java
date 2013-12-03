@@ -215,6 +215,10 @@ public class Controleur {
         }
     }
     
+    public void ouvrirAjouterEnleverPilote(Voiture v){
+        vue.ouvrirAjouterEnleverPilote(v);
+    }
+    
     public void ouvrirAjouterEnleverPilote(){
         vue.ouvrirAjouterEnleverPilote();
     }
@@ -275,6 +279,10 @@ public class Controleur {
     
     public List<Voiture> getListVoituresExistantes(){
         return GestionnaireExistant.getInstance().getVoituresExistantes();
+    }
+    
+    public List<Pilote> getListPilotesExistants(){
+        return GestionnaireExistant.getInstance().getPilotesExistants();
     }
     
     public Voiture getVoitureExistante(int numV){

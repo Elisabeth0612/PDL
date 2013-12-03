@@ -8,6 +8,10 @@ package vue;
 
 import vue_defaut.AjouterEnleverPilote;
 import controleur.Controleur;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import modele.Pilote;
+import modele.Voiture;
 
 /**
  *
@@ -16,6 +20,9 @@ import controleur.Controleur;
 public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
     private Controleur controleur;
+    private DefaultListModel<String> model1;
+    private DefaultListModel<String> model2;
+    private Voiture voitureCourante;
     /**
      * Creates new form AjouterEnleverPilote
      */
@@ -62,7 +69,33 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         //throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    public void charger(){
+        List<Pilote> lesPE = controleur.getListPilotesExistants();
+        if(lesPE.size()!=0){
+            model1 = new DefaultListModel<String>();
+            for(Pilote p : lesPE){
+                model1.addElement(p.getNom()+" "+p.getPrenom());
+            }
+            jList1.setModel(model1);
+            jList1.setSelectedIndex(0);
+            jList1.repaint();
+       }
+        
+        List<Pilote> lesP = controleur.getListPilotesExistants();
+        if(lesP.size()!=0){
+            model2 = new DefaultListModel<String>();
+            for(Pilote p : lesP){
+                model2.addElement(p.getNom()+" "+p.getPrenom());
+            }
+            jList2.setModel(model2);
+            jList2.setSelectedIndex(0);
+            jList2.repaint();
+       }
+    }
     
+    public void miseAJour(Voiture v){
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
