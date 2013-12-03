@@ -8,6 +8,8 @@ package vue;
 
 import vue_defaut.AjouterEnleverPilote;
 import controleur.Controleur;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import modele.Pilote;
@@ -81,7 +83,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
             jList1.repaint();
        }
         
-        List<Pilote> lesP = controleur.getListPilotesExistants();
+        List<Pilote> lesP = controleur.getPilotesVoiture(voitureCourante.getNumVoiture()); // à revoir
         if(lesP.size()!=0){
             model2 = new DefaultListModel<String>();
             for(Pilote p : lesP){
@@ -94,7 +96,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     }
     
     public void miseAJour(Voiture v){
-        
+        //v.setCouleur(couleur)
     }
 
     /**
@@ -121,9 +123,10 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            List<Pilote> lesPE = new ArrayList<Pilote>();
+            public int getSize() { return lesPE.size();
+            }
+            public Object getElementAt(int i) { return lesPE.get(i); }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -131,9 +134,10 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         jLabel1.setText("Pilotes existants :");
 
         jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            List<Pilote> lesP = new ArrayList<Pilote>();
+            public int getSize() { return lesP.size();
+            }
+            public Object getElementAt(int i) { return lesP.get(i); }
         });
         jScrollPane2.setViewportView(jList2);
 
