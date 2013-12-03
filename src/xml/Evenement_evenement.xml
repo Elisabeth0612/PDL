@@ -11,8 +11,19 @@
     <Course Nom="Course 2" Heure_début="heure inconnue" Heure_fin="heure inconnue" durée_max_pilotage="2" durée_consecutive_pilotage="3" meteo="beau" type_fin="Tours" nb_tours_max="8">
       <les_voitures_course />
     </Course>
+    <Course Nom="Course 1" Heure_début="heure inconnue" Heure_fin="heure inconnue" durée_max_pilotage="2" durée_consecutive_pilotage="3" meteo="beau" type_fin="Tours" nb_tours_max="8">
+      <les_voitures_course>
+        <voiture Num_Voiture="1" />
+        <voiture Num_Voiture="2" />
+      </les_voitures_course>
+    </Course>
+    <Course Nom="Course 2" Heure_début="heure inconnue" Heure_fin="heure inconnue" durée_max_pilotage="2" durée_consecutive_pilotage="3" meteo="beau" type_fin="Tours" nb_tours_max="8">
+      <les_voitures_course />
+    </Course>
   </Les_Courses>
   <Les_Voitures>
+    <Voiture Num_Voiture="1" />
+    <Voiture Num_Voiture="2" />
     <Voiture Num_Voiture="1" />
     <Voiture Num_Voiture="2" />
   </Les_Voitures>

@@ -99,8 +99,10 @@ public class Controleur {
         
         Voiture v1 = new Voiture(1, v1p1,"rouge", 5,true);
         v1.addListP(v1p2);
+        v1.addListP(v1p1);
+        
         Voiture v2 = new Voiture(2, v2p1,"bleue", 5,true);
-        v2.addListP(v2p2);
+        v2.addListP(v2p1);
         //Ajout des voiture à l'evenement
         evtS.addListV(v1);
         evtS.addListV(v2);
@@ -327,6 +329,11 @@ public class Controleur {
     
     public Course getCourseEnCours(){
         return courseEnCours;
+    }
+    
+    public int getNbTourRelaiVoiture(int numV){
+        Voiture v = courseEnCours.getUneVoiture(numV);
+        return v.getNbToursParRelai();
     }
 
 }

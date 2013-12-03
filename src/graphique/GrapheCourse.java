@@ -35,6 +35,7 @@ public class GrapheCourse {
 
     public int[] getTempsDeCourse(int numV) {
         int[] temps = new int[nbTours];
+        int precedent=0;
 
         for (int x = 0; x < nbTours; x++) {
             temps[x] = 0;
@@ -43,17 +44,37 @@ public class GrapheCourse {
         for (int i = 0; i < resultats.getRowCount(); i++) {
             String sRes = (String) resultats.getValueAt(i, 1);
             if (Integer.parseInt(sRes) == numV) {
-                //parse du resultat
-                String res = (String) resultats.getValueAt(i, 3);
-                String[] res2 = res.split(":");
-                int h = Integer.parseInt(res2[0]);
-                int m = Integer.parseInt(res2[1]);
-                int s = Integer.parseInt(res2[2]);
-                int ms = Integer.parseInt(res2[3]);
-                int time = ms + (s * 1000) + (m * 60 * 1000) + (h * 60 * 60 * 1000);
-
-                temps[n] = time;
-                n++;
+                    //parse du resultat
+                    String res = (String) resultats.getValueAt(i, 3);
+                    String[] res2 = res.split(":");
+                    int h = Integer.parseInt(res2[0]);
+                    int m = Integer.parseInt(res2[1]);
+                    int s = Integer.parseInt(res2[2]);
+                    int ms = Integer.parseInt(res2[3]);
+                    int time = ms + (s * 1000) + (m * 60 * 1000) + (h * 60 * 60 * 1000);
+                    //si c'est un top in, on note le temps au tour et on garde ce temps pour calculer le temps passé dans le stand
+                    if(((String) resultats.getValueAt(i, 5)).compareTo("TOP IN")==0){
+                        precedent = time;
+                        temps[n] = time;
+                        n++;
+                    }
+                    //si c'est un top out, on garde le temps passé dans le stand
+                    if(((String) resultats.getValueAt(i, 5)).compareTo("TOP OUT")==0){
+                        precedent = time-precedent;
+                    }
+                    if(((String) resultats.getValueAt(i, 5)).compareTo("TOP TOUR")==0){
+                        //si le precedent top etait out, on enleve le temps passé dans le stand
+                        if(precedent!=0){
+                            temps[n] = time-precedent;
+                            n++;
+                            precedent = 0;
+                        }
+                        else{
+                            temps[n] = time;
+                            n++;
+                        }
+                    }
+                
             }
         }
 

@@ -13,6 +13,8 @@ package vue;
 import controleur.Controleur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -36,6 +38,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
     private long s = 0;
     private long ms=0;
     private int axeX;
+    private int nbRelai =1;
     
     /** Creates new form jChronoUneVoiture */
     public JChronoUneVoitureBis(Controleur c,int num, int placeX) {
@@ -107,6 +110,11 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         this.implementerListePilote();
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Nombre de tours par relais :");
 
@@ -120,7 +128,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         jLabel10.setText(Integer.toString(controleur.getNbToursMaxCourse()));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("nb");
+        jLabel11.setText(Integer.toString(controleur.getNbTourRelaiVoiture(numV)));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("0");
@@ -331,9 +339,12 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
                 ligneTable[1] = Integer.toString(numV);//numéro voiture
                 ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
                 ligneTable[3] ="";//jLabel9.getText() ;//temps
-                ligneTable[4] = "";
+                ligneTable[4] = Integer.toString(this.nbRelai);//nb relai
                 ligneTable[5] = "TOP IN";//type de top
-                ligneTable[6] = "";
+                SimpleDateFormat formatter2 = new SimpleDateFormat ("HH:mm" );
+                Date currentTime_12 = new Date();
+                String heureS = formatter2.format(currentTime_12);
+                ligneTable[6] = heureS;//heure systeme
                 ligneTable[7] = "";
 
                 controleur.creerUnTop(ligneTable);
@@ -372,15 +383,20 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
                 nbToursMax--;
                 jLabel10.setText(Integer.toString(nbToursMax));
                 
-                //on prépare la ligne de résultat
+                
                 ligneTable[0] = Integer.toString(nbTours);//num tours
                 ligneTable[1] = Integer.toString(numV);//numéro voiture
                 ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
                 ligneTable[3] ="";//jLabel9.getText() ;//temps
-                ligneTable[4] = "";
+                ligneTable[4] = Integer.toString(this.nbRelai);//nb relai
                 ligneTable[5] = "TOP TOUR";//type de top
-                ligneTable[6] = "";
+                SimpleDateFormat formatter2 = new SimpleDateFormat ("HH:mm" );
+                Date currentTime_12 = new Date();
+                String heureS = formatter2.format(currentTime_12);
+                ligneTable[6] = heureS;//heure systeme
                 ligneTable[7] = "";
+                
+                
                 //on insere la ligne dans le tableur
                 controleur.creerUnTop(ligneTable);
                 
@@ -423,9 +439,12 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
                 ligneTable[1] = Integer.toString(numV);//numéro voiture
                 ligneTable[2] = jComboBox2.getSelectedItem().toString();//nom - prénom du pilote
                 ligneTable[3] ="";//jLabel9.getText() ;//temps
-                ligneTable[4] = "";
+                ligneTable[4] = Integer.toString(this.nbRelai);//nb relai
                 ligneTable[5] = "TOP OUT";//type de top
-                ligneTable[6] = "";
+                SimpleDateFormat formatter2 = new SimpleDateFormat ("HH:mm" );
+                Date currentTime_12 = new Date();
+                String heureS = formatter2.format(currentTime_12);
+                ligneTable[6] = heureS;//heure systeme
                 ligneTable[7] = "";
 
                 controleur.creerUnTop(ligneTable);
@@ -437,6 +456,10 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         
     }  
     
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        this.nbRelai++;
+    }
     
     // Variables declaration - do not modify                     
     private java.awt.Button button1;
