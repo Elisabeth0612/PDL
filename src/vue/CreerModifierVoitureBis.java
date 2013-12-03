@@ -373,7 +373,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
-        controleur.compareListVoiture(voitureCourante, lesPTemp);
+        controleur.setListVoiture(voitureCourante, lesPTemp);
         
         String nomPrenomPilote = jTextField3.getText();
         if(nomPrenomPilote!=""){

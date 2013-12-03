@@ -311,7 +311,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
-        controleur.compareListVoiture(voitureCourante, lesPVoitureTemp);
+        controleur.setListVoiture(voitureCourante, lesPVoitureTemp);
         controleur.retour();
     }
 

@@ -70,17 +70,9 @@ public class Controleur {
         
         
     }
-   
-    /*
-    getters et setters
-    */
-    public void setVue(Vue v){
-        vue = v;
-    }
     
-    /*
-    *Gestion du modele
-    */
+    /*************************************  Gestion du model    **************************************/
+
     public void creerEvt(String nomE,Date d,String nomC,int longueur){
         evtS.modifierEvenement(nomE,d,nomC,longueur);
          /*
@@ -120,6 +112,9 @@ public class Controleur {
         
         vue.ouvrirEvenement();
     }  
+    
+    
+   /*************************************   Evenement *************************************/ 
     
    public void creerChargerEvt(String nomEvt){
        evtS = GestionnaireExistant.getInstance().chargerUnEvenementExistant(nomEvt);
@@ -163,23 +158,10 @@ public class Controleur {
         return false;
     }
     
-    public Voiture getVoitureEvenementByNum(int numV){
-        List<Voiture> lesV = evtS.getListV();
-        for(Voiture v: lesV){
-            if(v.getNumVoiture()==numV){
-                return v;
-            }
-        }
-        return null;
+     public void setListEvenement(List<Voiture> lesVtemp){
+        evtS.setListV(lesVtemp);
     }
-    
-    public List getVoituresCourse(){
-        return courseEnCours.getListV();
-    }
-    
-    /*
-    *Gestion de la vue
-    */
+    /*************************************  Gestion de la vue *************************************/
     public void ouvrirNouvelEvt(){
         vue.ouvrirNouvelEvt();
     }
@@ -192,30 +174,10 @@ public class Controleur {
         vue.precedent();
     }
     
-    public void demarrerCourse(String nomCourse){
-        Course c = evtS.chercherCourse(nomCourse);
-        if(c != null){
-            this.courseEnCours = c;
-            System.out.println("course courante "+courseEnCours.getNomCourse());
-            System.out.println("nb voitures = "+courseEnCours.getListV().size());
-            //on lance l'affichage de la fenetre de chrono
-            vue.ouvrirChrono();
-            
-        }
-        else{
-            ouvrirEvenement();
-        }
+    public void setVue(Vue v){
+        vue = v;
     }
-    
-    public boolean supprimerVoiture(int numVoiture){
-        if(evtS.supprimerVoiture(numVoiture)){
-            // voiture supprimé
-            return true;
-        }else{
-            // voiture non supprimé
-            return false;
-        }
-    }
+    /*************************************  Ouverture/Fermeture des fenetres *************************************/
     
     public void ouvrirAjouterEnleverPilote(Voiture v){
         vue.ouvrirAjouterEnleverPilote(v);
@@ -241,8 +203,35 @@ public class Controleur {
         vue.ouvrirCreerModifierPilote();
     }
     
-    public Voiture getVoitureCourseByNum(int num){
-        return courseEnCours.getUneVoiture(num);
+     public void ouvrirCreerModifierCourse(Course c){
+        vue.ouvrirCreerModifierCourse(c);
+    }
+     
+     
+    public void fermerChronoCourse() {
+        vue.fermerChronoCourse();
+    }
+    
+    /*************************************  Voiture *************************************/
+    
+    public Voiture getVoitureEvenementByNum(int numV){
+        List<Voiture> lesV = evtS.getListV();
+        for(Voiture v: lesV){
+            if(v.getNumVoiture()==numV){
+                return v;
+            }
+        }
+        return null;
+    }
+    
+    public boolean supprimerVoiture(int numVoiture){
+        if(evtS.supprimerVoiture(numVoiture)){
+            // voiture supprimé
+            return true;
+        }else{
+            // voiture non supprimé
+            return false;
+        }
     }
     
     public List<Pilote> getPilotesVoiture(int num){
@@ -266,7 +255,7 @@ public class Controleur {
         return null;
     }
     
-    public void compareListVoiture(Voiture v, List<Pilote> lesPVoitureTemp){
+    public void setListVoiture(Voiture v, List<Pilote> lesPVoitureTemp){
         v.setListP(lesPVoitureTemp);
     }
     
@@ -281,20 +270,72 @@ public class Controleur {
         v.setPiloteActuel(p);
     }
     
-    public void modifierPilote(Pilote p, String nom, String prenom, String couleurCasque){
-        p.setNom(nom);
-        p.setPrenom(prenom);
-        p.setCouleursCasque(couleurCasque);
+    /************************************* Top *************************************/
+    
+    public void demarrerCourse(String nomCourse){
+        Course c = evtS.chercherCourse(nomCourse);
+        if(c != null){
+            this.courseEnCours = c;
+            System.out.println("course courante "+courseEnCours.getNomCourse());
+            System.out.println("nb voitures = "+courseEnCours.getListV().size());
+            //on lance l'affichage de la fenetre de chrono
+            vue.ouvrirChrono();
+            
+        }
+        else{
+            ouvrirEvenement();
+        }
+    }
+    
+    public void creerUnTop(String[] ligneTable) {
+        vue.ajouterLigneTableurCourse(ligneTable);
+    }
+
+    
+    /*************************************  Course *************************************/    
+    public List getVoituresCourse(){
+        return courseEnCours.getListV();
+    }
+    
+    public Voiture getVoitureCourseByNum(int num){
+        return courseEnCours.getUneVoiture(num);
     }
     
     public int getNbToursMaxCourse(){
         return courseEnCours.getNbToursMax();
     }
     
-    public void ouvrirCreerModifierCourse(Course c){
-        vue.ouvrirCreerModifierCourse(c);
+    public int nbVoituresInscritesCourses(String course) {
+        Course c = evtS.chercherCourse(course);
+        if(c != null && c.getNbVoituresInscrites()!=0){
+            return c.getNbVoituresInscrites();
+        }
+        else{
+            return 0;
+        }
     }
     
+    public Course getCourseEnCours(){
+        return courseEnCours;
+    }
+    
+    public void genererGraphiqueCourse(DefaultTableModel table) {
+       courseEnCours.genererGaphique(table); 
+    }
+    
+    public int getNbTourRelaiVoiture(int numV){
+        Voiture v = courseEnCours.getUneVoiture(numV);
+        return v.getNbToursParRelai();
+    }
+    
+    /*************************************  Pilote *************************************/
+    public void modifierPilote(Pilote p, String nom, String prenom, String couleurCasque){
+        p.setNom(nom);
+        p.setPrenom(prenom);
+        p.setCouleursCasque(couleurCasque);
+    }
+   
+    /************************************* Gestion de l'Existant *************************************/
     public void enregistrer(){
         //GestionnaireExistant.getInstance().genererFichierEvenements(evtS);
         GestionnaireExistant.getInstance().enregistrementFermeture(evtS);
@@ -341,41 +382,6 @@ public class Controleur {
             }
         }
         return null;
-    }
-
-    public void creerUnTop(String[] ligneTable) {
-        vue.ajouterLigneTableurCourse(ligneTable);
-    }
-
-    public void fermerChronoCourse() {
-        vue.fermerChronoCourse();
-    }
-
-    public int nbVoituresInscritesCourses(String course) {
-        Course c = evtS.chercherCourse(course);
-        if(c != null && c.getNbVoituresInscrites()!=0){
-            return c.getNbVoituresInscrites();
-        }
-        else{
-            return 0;
-        }
-    }
-
-    public void genererGraphiqueCourse(DefaultTableModel table) {
-       courseEnCours.genererGaphique(table); 
-    }
-    
-    public void compareListEvenement(List<Voiture> lesVtemp){
-        evtS.setListV(lesVtemp);
-    }
-    
-    public Course getCourseEnCours(){
-        return courseEnCours;
-    }
-    
-    public int getNbTourRelaiVoiture(int numV){
-        Voiture v = courseEnCours.getUneVoiture(numV);
-        return v.getNbToursParRelai();
     }
 
 }

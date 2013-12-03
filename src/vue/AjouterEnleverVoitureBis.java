@@ -319,7 +319,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Valider la liste des participants"
-        controleur.compareListEvenement(lesVtemp);
+        controleur.setListEvenement(lesVtemp);
         controleur.retour();
     }
     // Variables declaration - do not modify
