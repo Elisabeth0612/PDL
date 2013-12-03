@@ -8,6 +8,7 @@ import xml.GestionnaireExistant;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 import modele.*;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import vue.MaFenetre;
@@ -299,5 +300,9 @@ public class Controleur {
         else{
             return 0;
         }
+    }
+
+    public void genererGraphiqueCourse(DefaultTableModel table) {
+       courseEnCours.genererGaphique(table); 
     }
 }

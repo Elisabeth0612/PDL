@@ -1,6 +1,8 @@
 package modele;
 
+import graphique.GrapheCourse;
 import java.util.*;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Course {
@@ -15,6 +17,7 @@ public class Course {
 	private String meteo;
 	private String typeFin;
 	private int nbToursMax;
+        private GrapheCourse graphe=null;
 
         public Course(){
             this.listT=new ArrayList<Top>();
@@ -149,4 +152,13 @@ public class Course {
         public int getNbVoituresInscrites(){
             return this.listV.size();
         }
+
+    public void genererGaphique(DefaultTableModel table) {
+        int[] voit = new int[listV.size()];
+        for(int i=0;i<this.listV.size();i++){
+            voit[i]=listV.get(i).getNumVoiture();
+        }
+        graphe = new GrapheCourse(this.nbToursMax,voit,table);
+        graphe.genererGraphe(nomCourse);
+    }
 }

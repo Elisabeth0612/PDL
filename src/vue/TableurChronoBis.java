@@ -123,12 +123,16 @@ private Controleur control;
 
     
 
-    void ajouterLigne(String[] ligneTable) {
+    public void ajouterLigne(String[] ligneTable) {
         DefaultTableModel modele3 = (DefaultTableModel)jTable1.getModel();   
         modele3.addRow(ligneTable); 
         jTable1.setModel(modele3); 
         jTable1.repaint(); 
     }
+    
+    public DefaultTableModel getTable(){
+        return (DefaultTableModel)jTable1.getModel();
+    } 
 
    
 }

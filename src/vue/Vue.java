@@ -174,9 +174,15 @@ public class Vue implements Observer {
     }
 
     public void fermerChronoCourse() {
+        control.genererGraphiqueCourse(((TableurChronoBis)optionnelle).getTable());
         optionnelle.fermer();
+        
         //courante.fermer();
         this.ouvrirEvenement();
+    }
+    
+    public void fenetreGraphiqueCourse(){
+        
     }
     
 }

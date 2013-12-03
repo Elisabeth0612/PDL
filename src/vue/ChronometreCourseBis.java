@@ -31,46 +31,46 @@ import vue_defaut.JChronoUneVoiture;
  *
  * @author 13008360
  */
-public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetre  {
+public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetre {
+
     //nos variables
     private Controleur control;
     private Timer chronometre;
-    private int timeCount=0;
-    private long h =0;
+    private int timeCount = 0;
+    private long h = 0;
     private long m = 0;
     private long s = 0;
-    private Hashtable<Integer,JChronoUneVoitureBis > lesFenetresVoitures;
-    
-    /** Creates new form ChronometreCourse */
+    private Hashtable<Integer, JChronoUneVoitureBis> lesFenetresVoitures;
+
+    /**
+     * Creates new form ChronometreCourse
+     */
     public ChronometreCourseBis(Controleur c) {
         control = c;
         initComponents();
     }
 
-    
-                    
     private void initComponents() {
-        chronometre = new Timer(1, new ActionListener(){
-            public void actionPerformed (ActionEvent e)
-            {	// Cas d'un evenement genere par le bouton
-                    timeCount++;
-                    if(timeCount>999){
-                        timeCount = 0;
-                        s++;
-                        if(s>59){
-                            m++;
-                            s=0;
-                            if(m>59){
-                                h++;
-                            }
+        chronometre = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {	// Cas d'un evenement genere par le bouton
+                timeCount++;
+                if (timeCount > 999) {
+                    timeCount = 0;
+                    s++;
+                    if (s > 59) {
+                        m++;
+                        s = 0;
+                        if (m > 59) {
+                            h++;
                         }
                     }
-                    
-                jLabel9.setText(""+h+":"+m+":"+s+":"+timeCount);
+                }
+
+                jLabel9.setText("" + h + ":" + m + ":" + s + ":" + timeCount);
             }
         }
         );
-        
+
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -79,26 +79,22 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
         jPanel3 = new javax.swing.JPanel();
         this.setPreferredSize(new Dimension(300, 239));
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        this.addWindowListener(new WindowAdapter(){
-             public void windowClosing(WindowEvent e){
-                   int reponse = JOptionPane.showConfirmDialog(null,
-                                        "Voulez-vous quitter la course?",
-                                        "Confirmation",
-                                        JOptionPane.YES_NO_OPTION,
-                                        JOptionPane.QUESTION_MESSAGE);
-                   if (reponse==JOptionPane.YES_OPTION){
-                       control.fermerChronoCourse();
-                       //controleur.fermerApplication();
-                       fermer();
-                   }
-                   
-                
-             }
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                int reponse = JOptionPane.showConfirmDialog(null,
+                        "Voulez-vous quitter la course?",
+                        "Confirmation",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                if (reponse == JOptionPane.YES_OPTION) {
+                    control.fermerChronoCourse();
+                    //controleur.fermerApplication();
+                    fermer();
+                }
+
+            }
         });
         setResizable(true);
-        
-        
-        
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Démarrer/Arrêter la course");
@@ -118,118 +114,109 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel6)))
-                .addContainerGap())
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel6)))
+                        .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addContainerGap(13, Short.MAX_VALUE))
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>                        
 
-    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         boolean prevenir = false;
-        if(!chronometre.isRunning()){
+        if (!chronometre.isRunning()) {
             chronometre.start();
             prevenir = true;
-        }
-        else{
+        } else {
             int reponse = JOptionPane.showConfirmDialog(null,
-                                        "Voulez-vous arreter la course (définitivement)?",
-                                        "Confirmation",
-                                        JOptionPane.YES_NO_OPTION,
-                                        JOptionPane.QUESTION_MESSAGE);
-            if (reponse==JOptionPane.YES_OPTION){
+                    "Voulez-vous arreter la course (définitivement)?",
+                    "Confirmation",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (reponse == JOptionPane.YES_OPTION) {
                 chronometre.stop();
                 jButton1.setEnabled(false);
                 prevenir = true;
             }
         }
-        
-        if(prevenir==true){
+
+        if (prevenir == true) {
             Enumeration e = this.lesFenetresVoitures.elements();
             //Parourir les valeurs
-            while(e.hasMoreElements()){
-                ((JChronoUneVoitureBis)e.nextElement()).setEtatChrono();
+            while (e.hasMoreElements()) {
+                ((JChronoUneVoitureBis) e.nextElement()).setEtatChrono();
             }
         }
     }
 
-   
-    
     private void jCheckBoxActionPerformed(ActionEvent evt) {
-        JCheckBox check = (JCheckBox)evt.getSource();
+        JCheckBox check = (JCheckBox) evt.getSource();
         String num = check.getText();
         int numV = Integer.parseInt(num);
-        if(!check.isSelected()){
+        if (!check.isSelected()) {
             this.lesFenetresVoitures.get(numV).masquer();
             //fermer une fenetre voiture
-            
-        }
-        else{
+
+        } else {
             //activer une fenetre voiture
             this.lesFenetresVoitures.get(numV).afficher();
         }
     }
-    
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }  
 
     
-    
+
     // Variables declaration - do not modify                  
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -240,7 +227,6 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration      
-
 
     @Override
     public void afficher() {
@@ -257,8 +243,8 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
     public void fermer() {
         Enumeration e = this.lesFenetresVoitures.elements();
         //Parourir les valeurs
-        while(e.hasMoreElements()){
-            ((JChronoUneVoitureBis)e.nextElement()).fermer();
+        while (e.hasMoreElements()) {
+            ((JChronoUneVoitureBis) e.nextElement()).fermer();
         }
         dispose();
     }
@@ -277,14 +263,14 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
     public void raffraichir() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    public void implementerListeCheckBox(){
+
+    public void implementerListeCheckBox() {
         //jPanel2.add(jLabel6);
         JCheckBox jcb = new JCheckBox();
         JChronoUneVoitureBis newVoiture;
         List<Voiture> lesV = control.getVoituresCourse();
-        this.lesFenetresVoitures = new Hashtable<Integer,JChronoUneVoitureBis>();
-        for (Voiture v  : lesV) {  
+        this.lesFenetresVoitures = new Hashtable<Integer, JChronoUneVoitureBis>();
+        for (Voiture v : lesV) {
             //jComboBox1.addItem(v.getNumVoiture());
             jcb = new JCheckBox();
             jcb.setSelected(true);
@@ -295,19 +281,18 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
                     jCheckBoxActionPerformed(evt);
                 }
 
-                
             });
             //on initialise une fenetre propriete voiture course
-            newVoiture = new JChronoUneVoitureBis(control,v.getNumVoiture());
+            newVoiture = new JChronoUneVoitureBis(control, v.getNumVoiture());
             newVoiture.afficher();
             this.lesFenetresVoitures.put(v.getNumVoiture(), newVoiture);
             //this.lesProprietesVoiture.add(newVoiture);
-            
-        }       
+
+        }
     }
-    
-    public String getTemps(){
+
+    public String getTemps() {
         return jLabel9.getText();
     }
-    
+
 }
