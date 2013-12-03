@@ -34,7 +34,7 @@ public class Voiture {
 		}
 	}
 	
-	public void removeListT(Voiture p){
+	public void removeListP(Pilote p){
 		listP.remove(p);
 	}
 	
@@ -85,6 +85,10 @@ public class Voiture {
 	public List<Pilote> getListP() {
 		return listP;
 	}
+        
+        public void setListP(List<Pilote> lesPTemp){
+            listP=lesPTemp;
+        }
         
         public boolean existListP(){
             System.out.println("ok");

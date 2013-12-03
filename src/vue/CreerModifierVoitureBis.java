@@ -21,7 +21,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
 
     private Controleur controleur;
     private DefaultListModel<String> model;
-    private Voiture voitureCourante;
+    private Voiture voitureCourante=null;
     /**
      * Creates new form CreerModifierVoiture
      */
@@ -37,7 +37,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     @Override
     public void afficher() {
         raffraichir();
-        
+        miseAJour(voitureCourante);
         //on affiche la fenetre
         setVisible(true);
         
@@ -86,6 +86,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
             model = new DefaultListModel<String>();
             for(Pilote p : lesP){
                 model.addElement(p.getNom()+" "+p.getPrenom());
+                //System.out.println(p.getNom()+" "+p.getPrenom());
             }
             jList1.setModel(model);
             jList1.setSelectedIndex(0);

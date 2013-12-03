@@ -85,7 +85,8 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
             jList1.repaint();
        }
         
-        List<Pilote> lesP = controleur.getPilotesVoiture(voitureCourante.getNumVoiture()); // à revoir
+        List<Pilote> lesP = controleur.getPilotesVoiture(voitureCourante.getNumVoiture());
+        lesPVoitureTemp = lesP;
         if(lesP.size()!=0){
             model2 = new DefaultListModel<String>();
             for(Pilote p : lesP){
@@ -99,6 +100,16 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     
     public void miseAJour(Voiture v){
         voitureCourante=v;
+    }
+    
+    public int parcoursList(String nom, String prenom){
+        //System.out.println("nom ="+nom+" prenom="+prenom);
+        for(int i=0; i<lesPVoitureTemp.size();i++){
+            if(lesPVoitureTemp.get(i).getNom().equals(nom) && lesPVoitureTemp.get(i).getPrenom().equals(prenom)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -264,6 +275,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
                 JOptionPane.showMessageDialog(this,"Le pilote appartient déjà à la voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
             }else{
                 Pilote pE = controleur.getPiloteExistant(nomPilote, prenomPilote);
+
                 lesPVoitureTemp.add(pE);
                 model2.addElement(pE.getNom()+" "+pE.getPrenom());
                 jList2.repaint();
@@ -278,14 +290,18 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         if(jList2.isSelectionEmpty()){
             JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
-            String nomPrenomPilote = (String)jList1.getSelectedValue();
+            String nomPrenomPilote = (String)jList2.getSelectedValue();
             String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
             String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
             
-            Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote,prenomPilote);
-            lesPVoitureTemp.remove(p);
-            model2.remove(i);
-            jList2.repaint();
+            int indice = parcoursList(nomPilote, prenomPilote);
+            if(indice!=-1){
+                lesPVoitureTemp.remove(indice);
+                // si c'est le pilote principale alors supprimer le pilote principale !
+                model2.remove(i);
+                jList2.repaint();
+            }
+            
         }
     }
 

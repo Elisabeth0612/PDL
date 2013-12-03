@@ -70,6 +70,15 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
         //throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    public int parcoursList(int numV){
+        for(int i=0; i<lesVtemp.size();i++){
+            if(lesVtemp.get(i).getNumVoiture()==numV){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
     public void charger(){
         List<Voiture> lesV = controleur.getListVoituresExistantes();
         if(lesV.size()!=0){
@@ -285,10 +294,12 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
         if(jList2.isSelectionEmpty()){
             JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
-            Voiture v = controleur.getVoitureEvenementByNum(numV);
-            lesVtemp.remove(v);
-            model2.remove(i);
-            jList2.repaint();
+            int indice = parcoursList(numV);
+            if(indice!=-1){
+                lesVtemp.remove(indice);
+                model2.remove(i);
+                jList2.repaint();
+            }
         }
         
     }

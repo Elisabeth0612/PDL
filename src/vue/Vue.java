@@ -143,10 +143,10 @@ public class Vue implements Observer {
         courante.fermer();
         precedente = evt;
         courante = cmVoiture;
-        courante.afficher();
         if(v != null){
             cmVoiture.miseAJour(v);
         }
+        courante.afficher();
     }
     
     public void ouvrirCreerModifierVoiture(){
