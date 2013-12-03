@@ -409,7 +409,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Supprimer Voiture"
        if (!jList2.isSelectionEmpty()){
-            int numV = (int) jList2.getSelectedValue();
+            int numV = Integer.parseInt((String)jList2.getSelectedValue());
             int i = jList2.getSelectedIndex();
             controleur.supprimerVoituresEvenement(numV);
             jList2.removeSelectionInterval(i-1, i);
