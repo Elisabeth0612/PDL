@@ -7,6 +7,11 @@
 package vue;
 
 import controleur.Controleur;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import modele.Pilote;
+import modele.Voiture;
 
 /**
  *
@@ -15,6 +20,7 @@ import controleur.Controleur;
 public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
     private Controleur controleur;
+    private Pilote piloteCourant;
     
     /**
      * Creates new form CréerModifierPilote
@@ -31,7 +37,7 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
     @Override
     public void afficher() {
         raffraichir();
-        
+        charger(piloteCourant);
         //on affiche la fenetre
         setVisible(true);
         
@@ -61,6 +67,24 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public void charger(Pilote p){ 
+        
+        this.piloteCourant=p;
+        
+        String nom = p.getNom();
+        jTextField1.setText(nom);
+        jTextField1.repaint();
+        
+        String prenom = p.getPrenom();
+        jTextField2.setText(prenom);
+        jTextField2.repaint();
+        
+        String couleurCasque = p.getCouleursCasque();
+        jTextField3.setText(couleurCasque);
+        jTextField3.repaint();       
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -176,6 +200,8 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
+        controleur.modifierPilote(piloteCourant, jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
+        controleur.retour();
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {

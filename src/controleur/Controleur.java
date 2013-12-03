@@ -233,8 +233,12 @@ public class Controleur {
         vue.ouvrirCreerModifierVoiture(v);
     }
     
+    public void ouvrirCreerModifierPilote(Pilote p){
+        vue.ouvrirCreerModifierPilote(p);
+    }
+    
     public void ouvrirCreerModifierPilote(){
-        vue.ouvrirCreerModifierVoiture();
+        vue.ouvrirCreerModifierPilote();
     }
     
     public Voiture getVoitureCourseByNum(int num){
@@ -268,6 +272,19 @@ public class Controleur {
     
     public void setPiloteActuel(Voiture v, Pilote p){
         v.setPiloteActuel(p);
+    }
+    
+    public void modifierVoiture(Voiture v,String couleur,int NbToursRelai,Boolean voitureEnCourse, Pilote p){
+        v.setCouleur(couleur);
+        v.setNbToursParRelai(NbToursRelai);
+        v.setVoitureActive(voitureEnCourse);
+        v.setPiloteActuel(p);
+    }
+    
+    public void modifierPilote(Pilote p, String nom, String prenom, String couleurCasque){
+        p.setNom(nom);
+        p.setPrenom(prenom);
+        p.setCouleursCasque(couleurCasque);
     }
     
     public int getNbToursMaxCourse(){
