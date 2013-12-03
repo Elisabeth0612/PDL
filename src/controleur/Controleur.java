@@ -227,7 +227,7 @@ public class Controleur {
     }
     
     public void ouvrirCreerModifierPilote(){
-        vue.ouvrirCreerModifierVoiture(null);
+        vue.ouvrirCreerModifierVoiture();
     }
     
     public Voiture getVoitureCourseByNum(int num){
