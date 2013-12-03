@@ -34,6 +34,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
     private long h =0;
     private long m = 0;
     private long s = 0;
+    private long ms=0;
     
     /** Creates new form jChronoUneVoiture */
     public JChronoUneVoitureBis(Controleur c,int num) {
@@ -75,9 +76,9 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
             public void actionPerformed (ActionEvent e)
             {	// Cas d'un evenement genere par le bouton
                     tempsEcoule++;
-                    
-                    if(tempsEcoule>999){
-                       tempsEcoule = 0;
+                    ms++;
+                    if(ms>999){
+                       ms = 0;
                         s++;
                         if(s>59){
                             m++;
@@ -87,7 +88,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
                             }
                         }
                     }
-                    jProgressBar1.setString(""+h+":"+m+":"+s+":"+tempsEcoule);
+                    jProgressBar1.setString(""+h+":"+m+":"+s+":"+ms);
                     jProgressBar1.setValue((int) tempsEcoule);
                   
             }});
@@ -311,6 +312,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
                 tempsEcouleTot = tempsEcouleTot + tempsEcoule;
                 tempsEcoule = 0;
                 chrono.stop();
+                //chrono.restart();
                 
                 String[] ligneTable = new String[8];
                 //on incrémente le nombre de tours finis
@@ -350,7 +352,12 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
             if(Integer.parseInt(jLabel10.getText())!=0){
                 tempsEcouleTot = tempsEcouleTot + tempsEcoule;
                 tempsEcoule = 0;
+                h=0;
+                s=0;
+                m=0;
+                ms=0;
                 chrono.restart();
+                
                 
                 String[] ligneTable = new String[8];
                 //on incrémente le nombre de tours finis
@@ -391,14 +398,19 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         else{
             if(Integer.parseInt(jLabel10.getText())!=0){
                 //on sort du stand donc on relance le chorono
+                h=0;
+                s=0;
+                m=0;
+                ms=0;
+                tempsEcoule=0;
                 chrono.restart();
                 chrono.start();
                 
                 String[] ligneTable = new String[8];
                 //on incrémente le nombre de tours finis
                 int nbTours =Integer.parseInt(jLabel12.getText());
-                nbTours++;
-                jLabel12.setText(Integer.toString(nbTours));
+                //nbTours++;
+                //jLabel12.setText(Integer.toString(nbTours));
                 //on décrémente nombre de tours effectués
                 /*int nbToursMax =Integer.parseInt(jLabel10.getText());
                 nbToursMax--;

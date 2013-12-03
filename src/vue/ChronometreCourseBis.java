@@ -180,18 +180,30 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        boolean prevenir = false;
         if(!chronometre.isRunning()){
             chronometre.start();
+            prevenir = true;
         }
         else{
-            chronometre.stop();
-            jButton1.invalidate();
+            int reponse = JOptionPane.showConfirmDialog(null,
+                                        "Voulez-vous arreter la course (définitivement)?",
+                                        "Confirmation",
+                                        JOptionPane.YES_NO_OPTION,
+                                        JOptionPane.QUESTION_MESSAGE);
+            if (reponse==JOptionPane.YES_OPTION){
+                chronometre.stop();
+                jButton1.setEnabled(false);
+                prevenir = true;
+            }
         }
         
-        Enumeration e = this.lesFenetresVoitures.elements();
-        //Parourir les valeurs
-        while(e.hasMoreElements()){
-            ((JChronoUneVoitureBis)e.nextElement()).setEtatChrono();
+        if(prevenir==true){
+            Enumeration e = this.lesFenetresVoitures.elements();
+            //Parourir les valeurs
+            while(e.hasMoreElements()){
+                ((JChronoUneVoitureBis)e.nextElement()).setEtatChrono();
+            }
         }
     }
 
