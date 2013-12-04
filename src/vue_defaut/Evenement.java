@@ -109,15 +109,14 @@ public class Evenement extends javax.swing.JFrame implements MaFenetre {
             public Object getElementAt(int i) { return strings[i]; }
         });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                jList1AncestorMoved(evt);
+        jList1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                jList1ComponentMoved(evt);
             }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jList1AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                jList1AncestorRemoved(evt);
+        });
+        jList1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                jList1ComponentRemoved(evt);
             }
         });
         jScrollPane1.setViewportView(jList1);
@@ -324,17 +323,13 @@ public class Evenement extends javax.swing.JFrame implements MaFenetre {
         // TODO add your handling code here:
     }//GEN-LAST:event_formFocusGained
 
-    private void jList1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jList1AncestorAdded
-        jList1.repaint();
-    }//GEN-LAST:event_jList1AncestorAdded
-
-    private void jList1AncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jList1AncestorRemoved
+    private void jList1ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jList1ComponentMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_jList1AncestorRemoved
+    }//GEN-LAST:event_jList1ComponentMoved
 
-    private void jList1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jList1AncestorMoved
+    private void jList1ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jList1ComponentRemoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_jList1AncestorMoved
+    }//GEN-LAST:event_jList1ComponentRemoved
 
     
 

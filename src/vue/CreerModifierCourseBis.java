@@ -9,7 +9,9 @@ package vue;
 import controleur.Controleur;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import modele.Course;
 import modele.Voiture;
@@ -24,6 +26,8 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private Controleur controleur;
     private MaFenetre jfPrecedente;
     private Course cModifier;
+    private DefaultListModel<String> model1;
+    private DefaultListModel<String> model2;
     /**
      * Creates new form CreerModifierCourse
      */
@@ -166,10 +170,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         jLabel8.setText("Météo :");
         
         jList1.setModel(new javax.swing.AbstractListModel() {
-            //String[] lesV = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            //public int getSize() { return lesV.length; }
-            //public Object getElementAt(int i) { return lesV[i];}
-            List<Voiture> lesV = controleur.getVoituresEvenement();
+            List<Voiture> lesV = new ArrayList<Voiture>();
             public int getSize() {return lesV.size(); }
             public Object getElementAt(int i) { return lesV.get(i).getNumVoiture(); }
         });
@@ -177,12 +178,9 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         jScrollPane1.setViewportView(jList1);
 
         jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] lesV = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return lesV.length; }
-            public Object getElementAt(int i) { return lesV[i];}
-            /*List<Voiture> lesV = cModifier.getListV();
+            List<Voiture> lesV = new ArrayList<Voiture>();
             public int getSize() { return lesV.size(); }
-            public Object getElementAt(int i) { return lesV.get(i).getNumVoiture();}*/
+            public Object getElementAt(int i) { return lesV.get(i).getNumVoiture();}
         });
         jScrollPane2.setViewportView(jList2);
 
@@ -407,14 +405,18 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         if (!jList1.isSelectionEmpty()){
             if (!cModifier.getListV().contains(controleur.getVoituresEvenement().get(jList1.getSelectedIndex()))){
-                cModifier.addListV((Voiture) controleur.getVoituresEvenement().get(jList1.getSelectedIndex()));
+                Voiture v= (Voiture) controleur.getVoituresEvenement().get(jList1.getSelectedIndex());
+                cModifier.addListV(v);
+                chargerVoitureCourse();
             }
         }
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         if (!jList2.isSelectionEmpty()){
+            System.out.println(jList2.getSelectedIndex());
             cModifier.removeListV((Voiture) controleur.getVoituresEvenement().get(jList2.getSelectedIndex()));
+            model2.remove(jList2.getSelectedIndex());
         }
     }
     
@@ -427,7 +429,9 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
             jTextField5.setText(String.valueOf(cModifier.getDureePilotageMaxParPilote()));
             jTextField6.setText(String.valueOf(cModifier.getDureeConsecutivePilotageMaxParPilote()));
             jTextField7.setText(cModifier.getMeteo());
+            chargerVoitureCourse();
         }
+        chargerVoitureEvenement();
     }  
 
 
@@ -486,6 +490,37 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         jRadioButton2.setSelected(false);
     }
 
+    public void chargerVoitureEvenement(){
+        List<Voiture> lesV = controleur.getVoituresEvenement();
+        if(lesV.size()!=0){
+            model1 = new DefaultListModel<String>();
+            for(Voiture v : lesV){
+                model1.addElement(Integer.toString(v.getNumVoiture()));
+            }
+            jList1.setModel(model1);
+            jList1.setSelectedIndex(0);
+            jList1.repaint();
+       }
+    }
+    
+    public void chargerVoitureCourse(){
+        List<Voiture> lesV = cModifier.getListV();
+        model2 = new DefaultListModel<String>();
+        if(lesV.size()!=0){
+            for(Voiture v : lesV){
+                model2.addElement(Integer.toString(v.getNumVoiture()));
+            }
+            jList2.setModel(model2);
+            jList2.setSelectedIndex(0);
+            jList2.repaint();
+        }else{
+            model2 = new DefaultListModel<String>();
+            jList2.setModel(model2);
+            jList2.setSelectedIndex(0);
+            jList2.repaint();
+        }
+    }
+    
     @Override
     public MaFenetre getPrecedent() {
        return jfPrecedente; 

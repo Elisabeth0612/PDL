@@ -184,17 +184,6 @@ public class EvenementBis extends JFrame implements MaFenetre {
             public Object getElementAt(int i) { return lesC.get(i).getNomCourse(); }
         });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        /*jList1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                jList1AncestorMoved(evt);
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jList1AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                jList1AncestorRemoved(evt);
-            }
-        });*/
         jScrollPane1.setViewportView(jList1);
         
         
@@ -391,7 +380,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Supprimer la course"
         if (!jList1.isSelectionEmpty()){
-            controleur.getCoursesEvenement().remove(jList1.getSelectedIndex());
+            controleur.getCoursesEvenement().remove(controleur.getCoursesEvenement().get(jList1.getSelectedIndex()));
             raffraichir();
         }
         else{
@@ -459,23 +448,8 @@ public class EvenementBis extends JFrame implements MaFenetre {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Annuler"
         controleur.retour();
-    }      
+    } 
     
-    /*private void jList1AncestorAdded(javax.swing.event.AncestorEvent evt) {                                     
-        jList1.validate();
-    }                                    
-
-    private void jList1AncestorRemoved(javax.swing.event.AncestorEvent evt) {                                       
-        jList1.validate();
-    }                                      
-
-    private void jList1AncestorMoved(javax.swing.event.AncestorEvent evt) {                                     
-        jList1.validate();
-    }*/
-
-    
-
-   
     // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
