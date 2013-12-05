@@ -6,15 +6,22 @@
 
 package vue;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
 import controleur.Controleur;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import modele.Course;
 import modele.Voiture;
+import org.w3c.dom.NodeList;
 import vue_defaut.Evenement;
 
 /**
@@ -59,21 +66,27 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     }
     
     public void miseAJourCModifier(){
-        cModifier.setNomCourse(jTextField1.getText());
-        cModifier.setHeureDeb(null);
-        cModifier.setHeureFin(null);
-        cModifier.setDureePilotageMaxParPilote(Integer.parseInt(jTextField5.getText()));
-        cModifier.setDureeConsecutivePilotageMaxParPilote(Integer.parseInt(jTextField6.getText()));
-        cModifier.setMeteo(jTextField7.getText());
-        String typeFin=null;
+        try {
+            cModifier.setNomCourse(jTextField1.getText());
+            Date deb = (Date) new SimpleDateFormat("hh:mm").parse(jFormattedTextField1.getText());
+            Date fin = (Date) new SimpleDateFormat("hh:mm").parse(jFormattedTextField1.getText());
+            cModifier.setHeureDeb(deb);
+            cModifier.setHeureFin(fin);
+            cModifier.setDureePilotageMaxParPilote(Integer.parseInt(jTextField5.getText()));
+            cModifier.setDureeConsecutivePilotageMaxParPilote(Integer.parseInt(jTextField6.getText()));
+            cModifier.setMeteo(jTextField7.getText());
+            String typeFin=null;
             if (jRadioButton1.isSelected()){
                 typeFin=jRadioButton1.getText();
             }
             else{
                 typeFin=jRadioButton2.getText();
             }
-        cModifier.setTypeFin(typeFin);
-        cModifier.setNbToursMax(Integer.parseInt(jTextField4.getText()));
+            cModifier.setTypeFin(typeFin);
+            cModifier.setNbToursMax(Integer.parseInt(jTextField4.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(CreerModifierCourseBis.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -231,6 +244,12 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
             }
         });
         
+        jFormattedTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFormattedTextField1FocusLost(evt);
+            }
+        });
+        
         try {
             jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
@@ -239,6 +258,12 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         jFormattedTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextField2ActionPerformed(evt);
+            }
+        });
+        
+        jFormattedTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFormattedTextField2FocusLost(evt);
             }
         });
 
@@ -401,16 +426,22 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         if (!controleChampsSaisis()){
             JOptionPane.showMessageDialog(this,"Veuillez renseigner tous les champs pour créer la course","Erreur",JOptionPane.ERROR_MESSAGE);
         }else if (cModifier==null){
-            String typeFin=null;
-            if (jRadioButton1.isSelected()){
-                typeFin=jRadioButton1.getText();
+            try {
+                String typeFin=null;
+                if (jRadioButton1.isSelected()){
+                    typeFin=jRadioButton1.getText();
+                }
+                else{
+                    typeFin=jRadioButton2.getText();
+                }
+                Date deb = (Date) new SimpleDateFormat("hh:mm").parse(jFormattedTextField1.getText());
+                Date fin = (Date) new SimpleDateFormat("hh:mm").parse(jFormattedTextField1.getText());
+                controleur.getCoursesEvenement().add(new Course(jTextField1.getText(),deb,fin,Integer.parseInt(jTextField5.getText()),Integer.parseInt(jTextField6.getText()),jTextField7.getText(),Integer.parseInt(jTextField4.getText()),typeFin));
+                raffraichir();
+                controleur.retour();
+            } catch (ParseException ex) {
+                Logger.getLogger(CreerModifierCourseBis.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else{
-                typeFin=jRadioButton2.getText();
-            }
-            controleur.getCoursesEvenement().add(new Course(jTextField1.getText(),null,null,Integer.parseInt(jTextField5.getText()),Integer.parseInt(jTextField6.getText()),jTextField7.getText(),Integer.parseInt(jTextField4.getText()),typeFin));
-            raffraichir();
-            controleur.retour();
         }else{
             miseAJourCModifier();
             raffraichir();
@@ -464,6 +495,24 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private void jFormattedTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         // TODO add your handling code here:
     }    
+    
+    private void jFormattedTextField1FocusLost(java.awt.event.FocusEvent evt) {                                      
+        String[] tab=jFormattedTextField1.getText().split(":");
+        if (Integer.parseInt(tab[0])>23 || Integer.parseInt(tab[1])>60){
+            jFormattedTextField1.setText(null);
+        } 
+    }   
+    
+    private void jFormattedTextField2FocusLost(java.awt.event.FocusEvent evt) {                                      
+        String[] tab=jFormattedTextField1.getText().split(":");
+        if (Integer.parseInt(tab[0])>23 || Integer.parseInt(tab[1])>60){
+            jFormattedTextField1.setText(null);
+        } 
+    }  
+    
+    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {                                      
+        
+    }  
 
 
     // Variables declaration - do not modify

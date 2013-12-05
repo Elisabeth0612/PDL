@@ -144,6 +144,12 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Type de fin :");
 
+        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField4FocusLost(evt);
+            }
+        });
+
         jLabel6.setText("Durée maximum de pilotage d'un pilote :");
 
         jLabel7.setText("Durée maximum consécutive de pilotage : ");
@@ -392,6 +398,10 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
+
+    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4FocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
