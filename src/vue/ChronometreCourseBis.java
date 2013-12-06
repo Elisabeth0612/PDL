@@ -190,6 +190,8 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
                 chronometre.stop();
                 jButton1.setEnabled(false);
                 prevenir = true;
+                //on enregistre les temps de course
+                //control.enregistrerLesTops();
             }
         }
 

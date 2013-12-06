@@ -39,7 +39,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
         super("Gestion de l'evenement");
         controleur = c;
         initComponents();
-        //this.setVisible(true);
+        
     }
 
     public void lancer(){
@@ -49,14 +49,11 @@ public class EvenementBis extends JFrame implements MaFenetre {
     
     @Override
     public void afficher() {
-        
-        
         //on affiche la fenetre
         setVisible(true);
         raffraichir();
         setVisible(true);
-        //jPanel2.updateUI();
-        //jPanel2.
+        
     }
 
     @Override
@@ -145,6 +142,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter(){
@@ -162,13 +160,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
              }
         });
         setResizable(false);
-        /*addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                repaint();
-                jPanel2.repaint();
-                System.out.println("focus on");
-            }
-        });*/
+        
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Courses :");
 
@@ -178,8 +170,6 @@ public class EvenementBis extends JFrame implements MaFenetre {
         //implémentation de la liste des courses // on peut aussi utiliser hashtable pour les listes
         jList1.setModel(new javax.swing.AbstractListModel() {
             List<Course> lesC = new ArrayList<Course>();
-            //List<Course> lesC = controleur.getCoursesEvenement();
-            //String[] strings = {lesC.get(0).getNomCourse(),lesC.get(1).getNomCourse()};
             public int getSize() { return lesC.size(); }
             public Object getElementAt(int i) { return lesC.get(i).getNomCourse(); }
         });
@@ -200,57 +190,65 @@ public class EvenementBis extends JFrame implements MaFenetre {
         jButton1.setText("Créer Nouvelle course");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonCreerCourse(evt);
             }
         });
 
         jButton2.setText("Modifier la course");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonModifierCourse(evt);
             }
         });
 
         jButton3.setText("Supprimer la course");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonSupprimerCourse(evt);
             }
         });
 
         jButton4.setText("Ajouter/enlever une voiture");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonAjouterVoiture(evt);
             }
         });
 
         jButton5.setText("Modifier la voiture");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonModifierVoiture(evt);
             }
         });
 
         jButton6.setText("Supprimer la voiture");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButtonSupprVoiture(evt);
             }
         });
 
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 0, 0));
         jButton7.setText("Lancer la course");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButtonDemarrerCourse(evt);
             }
         });
 
         jButton8.setText("Annuler");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButtonRetour(evt);
+            }
+        });
+        
+        jButton9.setText("Résultats de la course");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResultatsCourse(evt);
             }
         });
 
@@ -264,40 +262,46 @@ public class EvenementBis extends JFrame implements MaFenetre {
             jLabel3.setText("Evenement : "+controleur.getNomEvt()+" - ?? - "+controleur.getNomCircuit()+" - "+controleur.getLongueurCircuit());  
         }
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3)
                             .addComponent(jButton2)
                             .addComponent(jButton1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton6)
-                                    .addComponent(jButton5)
-                                    .addComponent(jButton4))
-                                .addGap(36, 36, 36))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jButton5))
+                                .addGap(102, 102, 102))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton4)
                                 .addContainerGap())))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(95, 95, 95))))
+                        .addGap(95, 95, 95))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton9)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(147, 147, 147)
+                .addGap(165, 165, 165)
                 .addComponent(jButton7)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,17 +315,14 @@ public class EvenementBis extends JFrame implements MaFenetre {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(jLabel3)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -334,12 +335,14 @@ public class EvenementBis extends JFrame implements MaFenetre {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton6))
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(jButton7)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(jButton9)
+                .addContainerGap())
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(377, Short.MAX_VALUE)
+                    .addContainerGap(378, Short.MAX_VALUE)
                     .addComponent(jButton8)
                     .addContainerGap()))
         );
@@ -354,20 +357,17 @@ public class EvenementBis extends JFrame implements MaFenetre {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        
-        
-        
-        
+
         pack();
     }// </editor-fold>                        
 
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButtonCreerCourse(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Creer nouvelle course"
         controleur.ouvrirCreerModifierCourse(null);
     }                                        
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButtonModifierCourse(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Modifier la course"
         if (!jList1.isSelectionEmpty()){
             controleur.ouvrirCreerModifierCourse((Course) controleur.getCoursesEvenement().get(jList1.getSelectedIndex()));
@@ -377,7 +377,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
         }
     }                                        
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButtonSupprimerCourse(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Supprimer la course"
         if (!jList1.isSelectionEmpty()){
             controleur.getCoursesEvenement().remove(controleur.getCoursesEvenement().get(jList1.getSelectedIndex()));
@@ -388,12 +388,12 @@ public class EvenementBis extends JFrame implements MaFenetre {
         }
     }                                        
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButtonAjouterVoiture(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Ajouter/Enlever Voiture"
         controleur.ouvrirAjouterEnleverVoiture();
     }                                        
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButtonModifierVoiture(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Modifier Voiture"
         Object oV = jList2.getSelectedValue();
         if(oV == null){
@@ -408,7 +408,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
         }
     }                                        
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButtonSupprVoiture(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Supprimer Voiture"
        if (!jList2.isSelectionEmpty()){
             int numV = Integer.parseInt((String)jList2.getSelectedValue());
@@ -423,7 +423,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
     }                                        
 
     
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButtonDemarrerCourse(java.awt.event.ActionEvent evt) {                                         
         //Bouton pour démarrer la course sélectionnée
         String course = (String)jList1.getSelectedValue();
         //System.out.println("course = "+course);
@@ -437,20 +437,42 @@ public class EvenementBis extends JFrame implements MaFenetre {
                 JOptionPane.showMessageDialog(null, "Aucune voiture n'est inscrite à cette course !", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
             else{
-                controleur.demarrerCourse(course);
+                if(controleur.courseTerminee(course)==true){
+                JOptionPane.showMessageDialog(null, "La course a déjà eu lieu","Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    controleur.demarrerCourse(course);
+                }
             }
         }
         
     } 
     
-     
+     private void jButtonResultatsCourse(java.awt.event.ActionEvent evt) {                                         
+        //Bouton pour démarrer la course sélectionnée
+        String course = (String)jList1.getSelectedValue();
+        //System.out.println("course = "+course);
+        if(course == null){
+            //Boîte du message d'erreur
+            JOptionPane jop3 = new JOptionPane();
+            jop3.showMessageDialog(null, "Vous devez sélectionner une course !", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            if(controleur.courseTerminee(course)==false){
+                JOptionPane.showMessageDialog(null, "La course n'a pas eu lieu","Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                controleur.ouvrirResultats(course);
+            }
+        }
+     }
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButtonRetour(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Annuler"
         controleur.retour();
     } 
     
-    // Variables declaration - do not modify
+    // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -459,15 +481,16 @@ public class EvenementBis extends JFrame implements MaFenetre {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel jPanel2;
-    // End of variables declaration
+    // End of variables declaration         
 
     
     

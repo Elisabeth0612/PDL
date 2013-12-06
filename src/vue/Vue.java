@@ -44,18 +44,16 @@ public class Vue implements Observer {
     private MaFenetre optionnelle;
     
     private ChronometreCourseBis chrono;
+    private MaFenetre resultats;
     
     public Vue(Controleur c){
         control = c;
-        //evtS = new EvenementSportif();
         cce = new CreerChargerEvt(control);
         newEvt = new NouvelEvt(control,cce);
         chargE = new ChargerEvtBis(control,cce);
         evt = new EvenementBis(control);
         evt.dispose();
-        //chrono = new ChronoCourseBis(control);
-       
-        
+          
         aePilote = new AjouterEnleverPiloteBis(control);
         cmVoiture = new CreerModifierVoitureBis(control);
         aeVoiture = new AjouterEnleverVoitureBis(control);
@@ -221,6 +219,16 @@ public class Vue implements Observer {
 
 	fgraphe.pack();
 	fgraphe.setVisible(true);
+    }
+
+    public void ouvrirResultats(String course) {
+        resultats = new ResultatsCourse(control,course);
+        //chrono = new ChronoCourseBis(control);
+        courante.fermer();
+        precedente = evt; //fenetre EvtBis
+        courante = resultats;
+        courante.afficher();
+        
     }
     
 }

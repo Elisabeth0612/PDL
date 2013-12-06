@@ -415,4 +415,19 @@ public class Controleur {
         return null;
     }
 
+    
+    public boolean courseTerminee(String course) {
+        Course c = evtS.chercherCourse(course);
+        if(c!=null){
+            if(c.getListT().size()!=0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void ouvrirResultats(String course) {
+        vue.ouvrirResultats(course);
+    }
+
 }
