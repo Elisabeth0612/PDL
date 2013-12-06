@@ -401,4 +401,11 @@ public class Controleur {
         return evtS.chercherCourse(nomC).getListV();
     }
 
+    public void fermerResultatsCourse() {
+        vue.precedent();
+    }
+
+    public void quitter(){
+        vue.quitter();
+    }
 }

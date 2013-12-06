@@ -8,9 +8,12 @@ package vue;
 
 import vue_defaut.ResultatsCourse;
 import controleur.Controleur;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modele.Top;
 import modele.Voiture;
@@ -32,6 +35,8 @@ public class ResultatsCourseBis extends javax.swing.JFrame implements MaFenetre 
         controleur = control;
         nomC = course;
          initComponents();
+         this.editierClassement();
+         this.ajouterLignes();
     }
 
     /**
@@ -60,8 +65,24 @@ public class ResultatsCourseBis extends javax.swing.JFrame implements MaFenetre 
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                int reponse = JOptionPane.showConfirmDialog(null,
+                        "Voulez-vous quitter la fenetre de résultats?",
+                        "Confirmation",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                if (reponse == JOptionPane.YES_OPTION) {
+                    controleur.fermerResultatsCourse();
+                    //controleur.fermerApplication();
+                    fermer();
+                }
 
+            }
+        });
+        setResizable(false);
+        
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Résultats de la course : ");
 
@@ -106,12 +127,7 @@ public class ResultatsCourseBis extends javax.swing.JFrame implements MaFenetre 
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                
             },
             new String [] {
                 "N° Tour", "N° Voiture", "Pilote", "Temps", "Relai", "Etat", "Heure", "Commentaire"
@@ -320,8 +336,9 @@ public class ResultatsCourseBis extends javax.swing.JFrame implements MaFenetre 
             ligneTable[5] = top.getTypeTop();
             ligneTable[6] = top.getHeure().toString();
             ligneTable[7] = top.getCommentaire();
+            modele.addRow(ligneTable);
         }
-        modele.addRow(ligneTable); 
+        
         jTable1.setModel(modele); 
         jTable1.repaint(); 
     }

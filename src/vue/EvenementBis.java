@@ -155,6 +155,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
                    if (reponse==JOptionPane.YES_OPTION){
                        controleur.enregistrer();
                        //controleur.fermerApplication();
+                       controleur.quitter();
                        dispose();
                    }
              }

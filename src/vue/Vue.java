@@ -6,12 +6,9 @@
 
 package vue;
 
-import vue_defaut.ResultatsCourse;
-import vue_defaut.ChronoCourse;
 import controleur.Controleur;
 import java.util.Observable;
 import java.util.Observer;
-import static javax.swing.GroupLayout.Alignment.CENTER;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 import modele.*;
@@ -232,4 +229,26 @@ public class Vue implements Observer {
         
     }
     
+    
+    public void quitter(){
+        cce.fermer();
+        newEvt.fermer();
+        chargE.fermer();
+        evt.fermer();
+        aePilote.fermer();
+        cmVoiture.fermer();
+        aeVoiture.fermer();
+        cmPilote.fermer();
+
+        cmCourse.fermer();
+
+        precedente.fermer();
+        courante.fermer();
+        if(optionnelle!=null){
+            optionnelle.fermer();
+        }
+        if(chrono!=null)chrono.fermer();
+        if(resultats!=null)resultats.fermer();
+    
+    }
 }
