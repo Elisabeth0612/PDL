@@ -12,6 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 import static javax.swing.GroupLayout.Alignment.CENTER;
 import javax.swing.JDialog;
+import javax.swing.table.DefaultTableModel;
 import modele.*;
 
 
@@ -115,6 +116,8 @@ public class Vue implements Observer {
         ((TableurChronoBis)optionnelle).ajouterLigne(ligneTable);
     }
     
+    
+    
     public void ouvrirAjouterEnleverPilote(){
         courante.fermer();
         precedente = cmVoiture;
@@ -202,7 +205,9 @@ public class Vue implements Observer {
     }
 
     public void fermerChronoCourse() {
-        control.genererGraphiqueCourse(((TableurChronoBis)optionnelle).getTable());
+        DefaultTableModel table = ((TableurChronoBis)optionnelle).getTable();
+        control.genererGraphiqueCourse(table);
+        control.enregistrerLesTops(table);
         optionnelle.fermer();
         fenetreGraphiqueCourse();
         //courante.fermer();

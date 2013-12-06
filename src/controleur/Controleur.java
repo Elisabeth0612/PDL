@@ -4,10 +4,14 @@
  */
 package controleur;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import xml.GestionnaireExistant;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import modele.*;
@@ -93,7 +97,7 @@ public class Controleur {
         v1.addListP(v1p2);
         v1.addListP(v1p1);
         
-        Voiture v2 = new Voiture(2, v2p1,"bleue", 5,true);
+        Voiture v2 = new Voiture(3, v2p1,"bleue", 5,true);
         v2.addListP(v2p1);
         //Ajout des voiture à l'evenement
         evtS.addListV(v1);
@@ -289,6 +293,33 @@ public class Controleur {
     
     public void creerUnTop(String[] ligneTable) {
         vue.ajouterLigneTableurCourse(ligneTable);
+    }
+    
+    
+    public void enregistrerLesTops(DefaultTableModel table){
+        //parcour du tableau
+        int n = 0;
+        for (int i = 0; i < table.getRowCount(); i++) {
+            //parse du resultat
+            int tour = Integer.parseInt((String)table.getValueAt(i, 0));
+            Voiture v = this.getVoitureEvenementByNum(Integer.parseInt((String)table.getValueAt(i, 1)));
+            Pilote p = v.getPiloteActuel();
+            String res = (String) table.getValueAt(i, 3);
+            String[] tempsSplit = res.split(":");
+            long tempsT = (Integer.parseInt(tempsSplit[3]))+(Integer.parseInt(tempsSplit[2])*1000)+(Integer.parseInt(tempsSplit[1])*1000*60)+(Integer.parseInt(tempsSplit[0])*1000*60*60);
+            int relai = Integer.parseInt((String)table.getValueAt(i, 4));
+            String type = (String)table.getValueAt(i, 5);
+            SimpleDateFormat formatter2 = new SimpleDateFormat("HH:mm");
+            Date h = null;
+            try {
+                h = formatter2.parse((String)table.getValueAt(i,6));
+            } catch (ParseException ex) {
+                Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String comment = (String)table.getValueAt(i,7);
+            this.courseEnCours.addListT(new Top(tour,type,v,p,relai,h,comment,tempsT));
+        }  
+       
     }
 
     
