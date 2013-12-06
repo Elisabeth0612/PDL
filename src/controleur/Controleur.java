@@ -36,43 +36,6 @@ public class Controleur {
         courseEnCours = new Course();
       
         
-        /*
-        * pour tester on remplie quelques données
-        */
-        /*Course c1 = new Course("Course 1",null, null, 2, 3,"beau", 8, "Tours");
-        Course c2 = new Course("Course 2",null,null, 2, 3,"beau", 8, "Tours");
-        //ajout des courses
-        evtS.addListC(c1);
-        evtS.addListC(c2);
-        Pilote v1p1 = new Pilote("nomV1P1", "prenomV1P1","rouge");
-        Pilote v1p2 = new Pilote("nomV1P2", "prenomV1P2","rouge");
-        Pilote v2p1 = new Pilote("nomV2P1", "prenomV2P1","bleu");
-        Pilote v2p2 = new Pilote("nomV2P2", "prenomV2P2","bleu");
-        
-        Voiture v1 = new Voiture(1, v1p1,"rouge", 5,true);
-        v1.addListP(v1p2);
-        Voiture v2 = new Voiture(2, v2p1,"bleue", 5,true);
-        v2.addListP(v2p2);
-        //Ajout des voiture à l'evenement
-        evtS.addListV(v1);
-        evtS.addListV(v2);
-        
-        //ajout des voiture à une course
-        c1.addListV(v1);
-        c1.addListV(v2);
-        
-        //ajout des courses
-        evtS.addListC(c1);
-        evtS.addListC(c2);*/
-        
-        /*GestionnaireExistant.getInstance().creerNouveauPilote(v2p2);
-        GestionnaireExistant.getInstance().creerNouveauPilote(v1p2);
-        GestionnaireExistant.getInstance().creerNouveauPilote(v2p1);
-        GestionnaireExistant.getInstance().creerNouveauPilote(v1p1);
-        GestionnaireExistant.getInstance().creerNouvelleVoiture(v2);
-        GestionnaireExistant.getInstance().creerNouvelleVoiture(v1);*/
-        
-        
     }
     
     /*************************************  Gestion du model    **************************************/
@@ -428,6 +391,14 @@ public class Controleur {
 
     public void ouvrirResultats(String course) {
         vue.ouvrirResultats(course);
+    }
+
+    public List getLesTopsCourse(String nomC) {
+        return evtS.chercherCourse(nomC).getListT();
+    }
+
+    public List getVoituresCourse(String nomC) {
+        return evtS.chercherCourse(nomC).getListV();
     }
 
 }

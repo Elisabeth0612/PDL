@@ -214,6 +214,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
                 button3ActionPerformed(evt);
             }
         });
+        button3.setEnabled(false);
 
         jProgressBar1.setToolTipText("");
         jProgressBar1.setString("Temps");
@@ -318,6 +319,10 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         }
         else{
             if(Integer.parseInt(jLabel10.getText())!=0){
+                //on bloque les boutons top in et top tour car la voiture devra forcément ressostir du stand
+                button1.setEnabled(false);
+                button2.setEnabled(false);
+                button3.setEnabled(true);
                 //on stoppe les chrono quand la voiture est dans le stand
                 //on prépare afin de relancer à la sortie du stand
                 tempsEcouleTot = tempsEcouleTot + tempsEcoule;
@@ -355,7 +360,9 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         }
     }                                       
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {
+         //on bloque le bouton top out tant que la voiture ne rentre pas dans le stand
+                button3.setEnabled(false);
         // TODO add your handling code here:
         if(!this.chronoEnRoute){
             //Boîte du message d'erreur
@@ -416,6 +423,10 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         }
         else{
             if(Integer.parseInt(jLabel10.getText())!=0){
+                 //on débloque les boutons top in et top tour car la voiture est sorti du stand et on bloque le top out car elle doit y rerentrer avant
+                button1.setEnabled(true);
+                button2.setEnabled(true);
+                button3.setEnabled(false);
                 //on sort du stand donc on relance le chorono
                 h=0;
                 s=0;

@@ -6,6 +6,7 @@
 
 package vue;
 
+import vue_defaut.ResultatsCourse;
 import vue_defaut.ChronoCourse;
 import controleur.Controleur;
 import java.util.Observable;
@@ -222,7 +223,7 @@ public class Vue implements Observer {
     }
 
     public void ouvrirResultats(String course) {
-        resultats = new ResultatsCourse(control,course);
+        resultats = new ResultatsCourseBis(control,course);
         //chrono = new ChronoCourseBis(control);
         courante.fermer();
         precedente = evt; //fenetre EvtBis

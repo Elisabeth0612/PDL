@@ -78,6 +78,7 @@ public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetr
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        
         this.setPreferredSize(new Dimension(300, 239));
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
