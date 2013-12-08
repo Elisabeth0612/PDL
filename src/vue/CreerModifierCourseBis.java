@@ -7,6 +7,7 @@
 package vue;
 
 import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 import controleur.Controleur;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +65,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         if (jFormattedTextField4.getText().isEmpty()) ok=false;
         if (jFormattedTextField5.getText().isEmpty()) ok=false;
         if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) ok=false;
-        if (jList2.getComponentCount()==0) ok=false;
+        System.out.println("jList2.getComponentCount()");
         return ok;
     }
     
@@ -457,27 +459,31 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         if (!jList1.isSelectionEmpty()){
-            if (!cModifier.getListV().contains(controleur.getVoituresEvenement().get(jList1.getSelectedIndex()))){
-                Voiture v= (Voiture) controleur.getVoituresEvenement().get(jList1.getSelectedIndex());
-                cModifier.addListV(v);
-                chargerVoitureCourse();
+            if (cModifier!=null){
+                if (!cModifier.getListV().contains(controleur.getVoituresEvenement().get(jList1.getSelectedIndex()))){
+                    Voiture v= (Voiture) controleur.getVoituresEvenement().get(jList1.getSelectedIndex());
+                    cModifier.addListV(v);
+                    chargerVoitureCourse();
+                }
             }
         }
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         if (!jList2.isSelectionEmpty()){
-            System.out.println(jList2.getSelectedIndex());
-            cModifier.removeListV((Voiture) controleur.getVoituresEvenement().get(jList2.getSelectedIndex()));
-            model2.remove(jList2.getSelectedIndex());
+            if (cModifier!=null){
+                cModifier.removeListV((Voiture) controleur.getVoituresEvenement().get(jList2.getSelectedIndex()));
+                model2.remove(jList2.getSelectedIndex());
+            }
         }
     }
     
     private void formWindowActivated(java.awt.event.WindowEvent evt) {                                     
         if (cModifier!=null){
             jTextField1.setText(cModifier.getNomCourse());
-            jFormattedTextField1.setText(cModifier.getHeureDeb().toString());
-            jFormattedTextField2.setText(cModifier.getHeureFin().toString());
+            SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
+            jFormattedTextField1.setText(sdf.format(cModifier.getHeureDeb()));
+            jFormattedTextField2.setText(sdf.format(cModifier.getHeureFin()));
             jFormattedTextField3.setText(String.valueOf(cModifier.getNbToursMax()));
             jFormattedTextField4.setText(String.valueOf(cModifier.getDureePilotageMaxParPilote()));
             jFormattedTextField5.setText(String.valueOf(cModifier.getDureeConsecutivePilotageMaxParPilote()));
