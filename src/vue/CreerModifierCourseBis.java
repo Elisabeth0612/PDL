@@ -65,15 +65,14 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         if (jFormattedTextField4.getText().isEmpty()) ok=false;
         if (jFormattedTextField5.getText().isEmpty()) ok=false;
         if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) ok=false;
-        System.out.println("jList2.getComponentCount()");
         return ok;
     }
     
     public void miseAJourCModifier(){
         try {
             cModifier.setNomCourse(jTextField1.getText());
-            Date deb = (Date) new SimpleDateFormat("hh:mm").parse(jFormattedTextField1.getText());
-            Date fin = (Date) new SimpleDateFormat("hh:mm").parse(jFormattedTextField1.getText());
+            Date deb = (Date) new SimpleDateFormat("HH:mm").parse(jFormattedTextField1.getText());
+            Date fin = (Date) new SimpleDateFormat("HH:mm").parse(jFormattedTextField1.getText());
             cModifier.setHeureDeb(deb);
             cModifier.setHeureFin(fin);
             cModifier.setDureePilotageMaxParPilote(Integer.parseInt(jFormattedTextField4.getText()));
@@ -434,8 +433,8 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                 else{
                     typeFin=jRadioButton2.getText();
                 }
-                Date deb = (Date) new SimpleDateFormat("hh:mm").parse(jFormattedTextField1.getText());
-                Date fin = (Date) new SimpleDateFormat("hh:mm").parse(jFormattedTextField1.getText());
+                Date deb = (Date) new SimpleDateFormat("HH:mm").parse(jFormattedTextField1.getText());
+                Date fin = (Date) new SimpleDateFormat("HH:mm").parse(jFormattedTextField2.getText());
                 controleur.getCoursesEvenement().add(new Course(jTextField1.getText(),deb,fin,Integer.parseInt(jFormattedTextField4.getText()),Integer.parseInt(jFormattedTextField5.getText()),jTextField7.getText(),Integer.parseInt(jFormattedTextField3.getText()),typeFin));
                 raffraichir();
                 controleur.retour();
@@ -481,13 +480,19 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private void formWindowActivated(java.awt.event.WindowEvent evt) {                                     
         if (cModifier!=null){
             jTextField1.setText(cModifier.getNomCourse());
-            SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
+            SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
             jFormattedTextField1.setText(sdf.format(cModifier.getHeureDeb()));
             jFormattedTextField2.setText(sdf.format(cModifier.getHeureFin()));
             jFormattedTextField3.setText(String.valueOf(cModifier.getNbToursMax()));
             jFormattedTextField4.setText(String.valueOf(cModifier.getDureePilotageMaxParPilote()));
             jFormattedTextField5.setText(String.valueOf(cModifier.getDureeConsecutivePilotageMaxParPilote()));
             jTextField7.setText(cModifier.getMeteo());
+            if (cModifier.getTypeFin().equals(jRadioButton1.getText())){
+                jRadioButton1.setSelected(true);
+            }
+            else{
+                jRadioButton2.setSelected(true);
+            }
             chargerVoitureCourse();
         }
         chargerVoitureEvenement();
@@ -563,6 +568,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         jTextField1.setText(null);
         jFormattedTextField1.setText(null);
         jFormattedTextField2.setText(null);
+        jFormattedTextField3.setText(null);
         jFormattedTextField4.setText(null);
         jFormattedTextField5.setText(null);
         jTextField7.setText(null);
