@@ -178,7 +178,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
         jScrollPane1.setViewportView(jList1);
         
         
-        
+        jList2.setSelectionMode(1);
         jList2.setModel(new javax.swing.AbstractListModel() {
             List<Voiture> lesV = new ArrayList<Voiture>();
             //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -411,11 +411,14 @@ public class EvenementBis extends JFrame implements MaFenetre {
 
     private void jButtonSupprVoiture(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Supprimer Voiture"
+        System.out.println("Suppression ="+jList2.isSelectionEmpty());
        if (!jList2.isSelectionEmpty()){
             int numV = Integer.parseInt((String)jList2.getSelectedValue());
             int i = jList2.getSelectedIndex();
+            System.out.println("numV ="+numV+" - indice="+i);
             controleur.supprimerVoituresEvenement(numV);
-            jList2.removeSelectionInterval(i-1, i);
+            //jList2.removeSelectionInterval(i-1, i);
+            ((DefaultListModel)jList2.getModel()).removeElementAt(i);
             jList2.repaint();
         }
         else{
