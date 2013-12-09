@@ -97,7 +97,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
 
            List<Pilote> lesP = new ArrayList<Pilote>();
            if(v.existListP()){
-               lesP = controleur.getPilotesVoitureCourante(v.getNumVoiture());
+               lesP = v.getListP();
                remplir(lesP, lesPTemp);
                if(lesP.size()!=0){
                     model = new DefaultListModel<String>();
@@ -415,7 +415,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
         if(voitureCourante==null){
-            if(jTextField4.getText()=="" && jTextField1.getText()=="" && jTextField2.getText()==""){
+            if(jTextField4.getText().equals("") && jTextField1.getText().equals("") && jTextField2.getText().equals("")){
                 JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
             }else{
                 Boolean b = controleur.enregistrerVoiture(Integer.parseInt(jTextField4.getText()),jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected());
@@ -423,23 +423,25 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
                     JOptionPane.showMessageDialog(this,"Voiture non enregistré le numéro du véhicule existe déjà.","Erreur",JOptionPane.ERROR_MESSAGE);
                 }else{
                     voitureCourante = controleur.getVoitureExistante(Integer.parseInt(jTextField4.getText()));
-                    JOptionPane.showMessageDialog(this,"Voiture enregistré.","",JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(this,"Voiture enregistrée.","",JOptionPane.PLAIN_MESSAGE);
                 }
             }
         }else{
             voitureCourante.setListP(lesPTemp);
             String nomPrenomPilote = jTextField3.getText();
-            if(nomPrenomPilote!=""){
+            System.out.println("Pilote actuel :"+nomPrenomPilote+".");
+            if(!nomPrenomPilote.equals("")){
                 String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
                 String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
                 Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
 
-                if(jTextField4.getText()=="" && jTextField1.getText()=="" && jTextField2.getText()==""){
+                if(jTextField4.getText().equals("") && jTextField1.getText().equals("") && jTextField2.getText().equals("")){
                     JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
                 }else{
                     controleur.modifierVoiture(voitureCourante, jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected(), p);
                     //modifierVoiture(Voiture v, String couleur, int NbToursRelai, Booleant voitureEnCourse, Pilote p)
                     vider();
+                    System.out.println("retour");
                     controleur.retour();
                 }
             }else{
