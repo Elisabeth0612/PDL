@@ -684,7 +684,7 @@ public class ChronoCourseBis extends javax.swing.JFrame implements MaFenetre {
         if(jComboBox1.getSelectedItem()!=null){
             String sNumV = jComboBox1.getSelectedItem().toString();
             int numV = Integer.parseInt(sNumV);
-            List<Pilote> lesP = controleur.getPilotesVoiture(numV);
+            List<Pilote> lesP = controleur.getPilotesVoitureExistante(numV);
             for (Pilote p  : lesP) {  
                 jComboBox2.addItem(p.getNom()+" - "+p.getPrenom());
             }

@@ -201,9 +201,20 @@ public class Controleur {
         }
     }
     
-    public List<Pilote> getPilotesVoiture(int num){
+    public List<Pilote> getPilotesVoitureExistante(int num){
         System.out.println(num);
          Voiture v = getVoitureExistante(num);
+        if(v.existListP()){
+            List<Pilote> lesP = v.getListP();
+            return v.getListP();
+        }else{
+            return new ArrayList<Pilote>();
+        }
+    }
+    
+    public List<Pilote> getPilotesVoitureCourante(int num){
+        System.out.println(num);
+         Voiture v = getVoitureEvenementByNum(num);
         if(v.existListP()){
             List<Pilote> lesP = v.getListP();
             return v.getListP();
@@ -215,6 +226,7 @@ public class Controleur {
     public Pilote getPiloteVoiture(Voiture v, String nomPilote, String prenomPilote){
         List<Pilote> lesPVoiture = v.getListP();
         for(Pilote p:lesPVoiture){
+            System.out.println("Voiture ="+v.getNumVoiture()+" pilote="+p.getNom()+" "+p.getPrenom());
             if(p.getNom().equals(nomPilote) && p.getPrenom().equals(prenomPilote)){
                 return p;
             }

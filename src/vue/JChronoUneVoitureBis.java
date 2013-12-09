@@ -532,7 +532,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
     
     public void implementerListePilote(){
         jComboBox2.removeAllItems();
-            List<Pilote> lesP = controleur.getPilotesVoiture(numV);
+            List<Pilote> lesP = controleur.getPilotesVoitureCourante(numV);
             for (Pilote p  : lesP) {  
                 jComboBox2.addItem(p.getNom()+" - "+p.getPrenom());
             }

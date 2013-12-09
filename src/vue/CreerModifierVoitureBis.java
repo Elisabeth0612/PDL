@@ -90,7 +90,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
 
            List<Pilote> lesP = new ArrayList<Pilote>();
            if(v.existListP()){
-               lesP = controleur.getPilotesVoiture(v.getNumVoiture());
+               lesP = controleur.getPilotesVoitureCourante(v.getNumVoiture());
                lesPTemp = lesP;
                if(lesP.size()!=0){
                     model = new DefaultListModel<String>();
@@ -352,8 +352,8 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
             int indice = parcoursList(nomPilote, prenomPilote);
             if(indice!=-1){
                 String nomPrenomPiloteActuel = jTextField3.getText();
-                String nomPiloteActuel = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
-                String prenomPiloteActuel = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+                String nomPiloteActuel = nomPrenomPiloteActuel.substring(0,nomPrenomPiloteActuel.lastIndexOf(" "));
+                String prenomPiloteActuel = nomPrenomPiloteActuel.substring(nomPrenomPiloteActuel.lastIndexOf(" ")+1,nomPrenomPiloteActuel.length());
                 if(nomPilote.equals(nomPiloteActuel) && prenomPilote.equals(prenomPiloteActuel)){
                     jTextField3.setText("");
                     jTextField3.repaint();
