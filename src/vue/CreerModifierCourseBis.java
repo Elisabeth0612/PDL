@@ -72,7 +72,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         try {
             cModifier.setNomCourse(jTextField1.getText());
             Date deb = (Date) new SimpleDateFormat("HH:mm").parse(jFormattedTextField1.getText());
-            Date fin = (Date) new SimpleDateFormat("HH:mm").parse(jFormattedTextField1.getText());
+            Date fin = (Date) new SimpleDateFormat("HH:mm").parse(jFormattedTextField2.getText());
             cModifier.setHeureDeb(deb);
             cModifier.setHeureFin(fin);
             cModifier.setDureePilotageMaxParPilote(Integer.parseInt(jFormattedTextField4.getText()));
@@ -459,10 +459,11 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         if (!jList1.isSelectionEmpty()){
             if (cModifier!=null){
-                if (!cModifier.getListV().contains(controleur.getVoituresEvenement().get(jList1.getSelectedIndex()))){
-                    Voiture v= (Voiture) controleur.getVoituresEvenement().get(jList1.getSelectedIndex());
+                Voiture v= (Voiture) controleur.getVoituresEvenement().get(jList1.getSelectedIndex());
+                System.out.println(cModifier.getListV().contains(v));
+                if (!cModifier.getListV().contains(v)){
                     cModifier.addListV(v);
-                    chargerVoitureCourse();
+                    model2.addElement(Integer.toString(v.getNumVoiture()));
                 }
             }
         }
@@ -471,13 +472,15 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         if (!jList2.isSelectionEmpty()){
             if (cModifier!=null){
-                cModifier.removeListV((Voiture) controleur.getVoituresEvenement().get(jList2.getSelectedIndex()));
+                Voiture v=(Voiture) controleur.getVoituresEvenement().get(jList2.getSelectedIndex());
+                cModifier.removeListV(v);
+                System.out.println(cModifier.getListV().contains(v));
                 model2.remove(jList2.getSelectedIndex());
             }
         }
     }
     
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {                                     
+   private void formWindowActivated(java.awt.event.WindowEvent evt) {                                     
         if (cModifier!=null){
             jTextField1.setText(cModifier.getNomCourse());
             SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
@@ -497,6 +500,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         }
         chargerVoitureEvenement();
     }  
+    
     private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         // TODO add your handling code here:
     }    
