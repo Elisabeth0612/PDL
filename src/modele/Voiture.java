@@ -20,6 +20,14 @@ public class Voiture {
 		this.nbToursParRelai=nbToursParRelai;
 		this.voitureActive=voitureActive;
 	}
+        
+        public Voiture(int numVoiture, String couleur, int nbToursParRelai, boolean voitureActive){
+		this.numVoiture=numVoiture;
+		this.listP=new ArrayList<Pilote>();
+		this.couleur=couleur;
+		this.nbToursParRelai=nbToursParRelai;
+		this.voitureActive=voitureActive;
+	}
 	
 	public void modifierVoiture(Pilote piloteActuel, String couleur, int nbToursParRelai, boolean voitureActive){
 		setPiloteActuel(piloteActuel);

@@ -213,7 +213,7 @@ public class Controleur {
     }
     
     public Pilote getPiloteVoiture(Voiture v, String nomPilote, String prenomPilote){
-        List<Pilote> lesPVoiture = v.getListP(); // erreur si créer nouvelle voiture = ajouter/enlever voiture
+        List<Pilote> lesPVoiture = v.getListP();
         for(Pilote p:lesPVoiture){
             if(p.getNom().equals(nomPilote) && p.getPrenom().equals(prenomPilote)){
                 return p;
@@ -230,11 +230,26 @@ public class Controleur {
         v.setPiloteActuel(p);
     }
     
-    public void modifierVoiture(Voiture v,String couleur,int NbToursRelai,Boolean voitureEnCourse, Pilote p){
+    public void modifierVoiture(Voiture v,String couleur,int nbToursRelai,Boolean voitureEnCourse, Pilote p){
         v.setCouleur(couleur);
-        v.setNbToursParRelai(NbToursRelai);
+        v.setNbToursParRelai(nbToursRelai);
         v.setVoitureActive(voitureEnCourse);
         v.setPiloteActuel(p);
+    }
+    
+    public boolean enregistrerVoiture(int numV, String couleur,int nbToursRelai,Boolean voitureEnCourse){
+        Boolean b = true;
+        List<Voiture> lesV = GestionnaireExistant.getInstance().getVoituresExistantes();
+        for(Voiture vlist : lesV){
+            if(vlist.getNumVoiture()==numV){
+                b=false;
+            }
+        }
+        if(b){
+            Voiture v = new Voiture(numV,couleur,nbToursRelai,voitureEnCourse);
+            GestionnaireExistant.getInstance().creerNouvelleVoiture(v);
+        }
+        return b;
     }
     
     /************************************* Top *************************************/

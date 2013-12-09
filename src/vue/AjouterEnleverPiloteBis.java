@@ -86,17 +86,25 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
        }
         
         if(voitureCourante!=null){
-            List<Pilote> lesP = controleur.getPilotesVoiture(voitureCourante.getNumVoiture());
-            lesPVoitureTemp = lesP;
-            if(lesP.size()!=0){
-                model2 = new DefaultListModel<String>();
-                for(Pilote p : lesP){
-                    model2.addElement(p.getNom()+" "+p.getPrenom());
+            System.out.println("Voiture v="+voitureCourante.getNumVoiture());
+            if(voitureCourante.existListP()){
+                List<Pilote> lesP = controleur.getPilotesVoiture(voitureCourante.getNumVoiture());
+                lesPVoitureTemp = lesP;
+                if(lesP.size()!=0){
+                    model2 = new DefaultListModel<String>();
+                    for(Pilote p : lesP){
+                        model2.addElement(p.getNom()+" "+p.getPrenom());
+                    }
+                    jList2.setModel(model2);
+                    jList2.setSelectedIndex(0);
+                    jList2.repaint();
                 }
+            }else{
+                model2 = new DefaultListModel<String>();
                 jList2.setModel(model2);
                 jList2.setSelectedIndex(0);
                 jList2.repaint();
-           }
+            }
         }else{
             model2 = new DefaultListModel<String>();
             jList2.setModel(model2);
@@ -282,9 +290,10 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
                 JOptionPane.showMessageDialog(this,"Le pilote appartient déjà à la voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
             }else{
                 Pilote pE = controleur.getPiloteExistant(nomPilote, prenomPilote);
-
+                
                 lesPVoitureTemp.add(pE);
-                model2.addElement(pE.getNom()+" "+pE.getPrenom());
+                System.out.println(((DefaultListModel)jList2.getModel()).toString());
+                ((DefaultListModel)jList2.getModel()).addElement(pE.getNom()+" "+pE.getPrenom()); 
                 jList2.repaint();
             }
         }

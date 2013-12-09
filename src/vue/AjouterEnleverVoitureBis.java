@@ -127,6 +127,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jList1.setSelectionMode(1);
         jList1.setModel(new javax.swing.AbstractListModel() {
             List<Voiture> lesV = new ArrayList<Voiture>();
 
@@ -140,6 +141,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
         });
         jScrollPane1.setViewportView(jList1);
 
+        jList2.setSelectionMode(1);
         jList2.setModel(new javax.swing.AbstractListModel() {
             List<Voiture> lesVE = new ArrayList<Voiture>();
 
