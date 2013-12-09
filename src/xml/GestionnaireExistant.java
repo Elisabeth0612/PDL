@@ -376,10 +376,16 @@ public class GestionnaireExistant {
                     int nb = Integer.parseInt(elementFils.getChildren().get(2).getText());
                     boolean active = Boolean.parseBoolean(elementFils.getChildren().get(3).getText());
                     String piloteAct = elementFils.getChildren().get(4).getText();
+                    Pilote p = null;
+                    if(piloteAct.compareTo("null")==0){
+                        p = null;
+                    }
+                    else{
                         String nomP = piloteAct.split("-")[0];
                         String prenonP = piloteAct.split("-")[1];
-                        Pilote p = this.getUnPilote(nomP, prenonP);
-                   
+                        p = this.getUnPilote(nomP, prenonP);
+                    }
+                        
                    Voiture v = new Voiture(num,p,couleur,nb,active);
                    /*
                    *on charge la liste des pilotes associés

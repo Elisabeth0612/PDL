@@ -202,6 +202,8 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
+        // oubli enregistrerNouveauPilote
+        
         if(jTextField1.getText()!="" && jTextField2.getText()!="" && jTextField3.getText()!=""){
             controleur.modifierPilote(piloteCourant, jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
             controleur.retour();
