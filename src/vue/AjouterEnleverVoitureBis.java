@@ -29,7 +29,13 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     public AjouterEnleverVoitureBis(Controleur c) {
         controleur = c;
         initComponents();
-        lesVtemp = controleur.getVoituresEvenement();
+        remplir(controleur.getVoituresEvenement(),lesVtemp);
+    }
+    
+    public void remplir(List<Voiture> depart, List<Voiture> temp){
+        for(Voiture v:depart){
+            temp.add(v);
+        }
     }
 
     public void lancer() {

@@ -33,6 +33,12 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         initComponents();
     }
 
+    public void remplir(List<Pilote> depart, List<Pilote> temp){
+        for(Pilote p:depart){
+            temp.add(p);
+        }
+    }
+
     public void lancer(){
         setVisible(true);
     }
@@ -92,7 +98,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
            List<Pilote> lesP = new ArrayList<Pilote>();
            if(v.existListP()){
                lesP = controleur.getPilotesVoitureCourante(v.getNumVoiture());
-               lesPTemp = lesP;
+               remplir(lesP, lesPTemp);
                if(lesP.size()!=0){
                     model = new DefaultListModel<String>();
                     for(Pilote p : lesP){

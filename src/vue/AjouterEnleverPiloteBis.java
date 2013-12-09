@@ -35,6 +35,12 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         initComponents();
     }
     
+    public void remplir(List<Pilote> depart, List<Pilote> temp){
+        for(Pilote p:depart){
+            temp.add(p);
+        }
+    }
+    
     public void lancer(){
         setVisible(true);
     }
@@ -91,7 +97,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
             System.out.println("Voiture v="+voitureCourante.getNumVoiture());
             if(voitureCourante.existListP()){
                 List<Pilote> lesP = controleur.getPilotesVoitureCourante(voitureCourante.getNumVoiture());
-                lesPVoitureTemp = lesP;
+                remplir(lesP,lesPVoitureTemp);
                 if(lesP.size()!=0){
                     model2 = new DefaultListModel<String>();
                     for(Pilote p : lesP){
