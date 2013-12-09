@@ -28,10 +28,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
      */
     public AjouterEnleverVoitureBis(Controleur c) {
         controleur = c;
-        List<Voiture> lesV = controleur.getVoituresEvenement();
-        remplir(lesV);
         initComponents();
-        charger();
     }
     
     public void remplir(List<Voiture> depart){
@@ -49,6 +46,9 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     @Override
     public void afficher() {
         raffraichir();
+        List<Voiture> lesV = controleur.getVoituresEvenement();
+        remplir(lesV);
+        charger();
         //on affiche la fenetre
         setVisible(true);
 

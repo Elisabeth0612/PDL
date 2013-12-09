@@ -427,7 +427,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
                 }
             }
         }else{
-            controleur.setListVoiture(voitureCourante, lesPTemp);
+            voitureCourante.setListP(lesPTemp);
             String nomPrenomPilote = jTextField3.getText();
             if(nomPrenomPilote!=""){
                 String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));

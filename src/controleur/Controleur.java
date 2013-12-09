@@ -240,9 +240,9 @@ public class Controleur {
         return null;
     }
     
-    public void setListVoiture(Voiture v, List<Pilote> lesPVoitureTemp){
+    /*public void setListVoiture(Voiture v, List<Pilote> lesPVoitureTemp){
         v.setListP(lesPVoitureTemp);
-    }
+    }*/
     
     public void setPiloteActuel(Voiture v, Pilote p){
         v.setPiloteActuel(p);

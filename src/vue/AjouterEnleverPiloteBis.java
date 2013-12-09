@@ -35,9 +35,9 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         initComponents();
     }
     
-    public void remplir(List<Pilote> depart, List<Pilote> temp){
+    public void remplir(List<Pilote> depart){
         for(Pilote p:depart){
-            temp.add(p);
+            lesPVoitureTemp.add(p);
         }
     }
     
@@ -97,7 +97,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
             System.out.println("Voiture v="+voitureCourante.getNumVoiture());
             if(voitureCourante.existListP()){
                 List<Pilote> lesP = controleur.getPilotesVoitureCourante(voitureCourante.getNumVoiture());
-                remplir(lesP,lesPVoitureTemp);
+                remplir(lesP);
                 if(lesP.size()!=0){
                     model2 = new DefaultListModel<String>();
                     for(Pilote p : lesP){
@@ -335,7 +335,9 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
-        controleur.setListVoiture(voitureCourante, lesPVoitureTemp);
+        System.out.println("VoitureCourante aePilote="+voitureCourante.getNumVoiture());
+        voitureCourante.setListP(lesPVoitureTemp);
+        //controleur.setListVoiture(voitureCourante, lesPVoitureTemp);
         vider();
         controleur.retour();
     }
