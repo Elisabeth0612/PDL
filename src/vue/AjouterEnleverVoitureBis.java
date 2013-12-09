@@ -68,6 +68,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     @Override
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
+        lesVtemp = new ArrayList<Voiture>();
     }
 
     public int parcoursList(int numV) {
@@ -90,7 +91,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
             jList1.setSelectedIndex(0);
             jList1.repaint();
         }
-
+        
         List<Voiture> lesVE = controleur.getVoituresEvenement();
         if (lesVE.size() != 0) {
             model2 = new DefaultListModel<String>();
@@ -275,6 +276,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
+        vider();
         controleur.retour();
     }
 
@@ -322,6 +324,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Valider la liste des participants"
         controleur.setListEvenement(lesVtemp);
+        vider();
         controleur.retour();
     }
     // Variables declaration - do not modify

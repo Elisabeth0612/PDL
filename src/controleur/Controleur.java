@@ -203,7 +203,7 @@ public class Controleur {
     
     public List<Pilote> getPilotesVoiture(int num){
         System.out.println(num);
-         Voiture v = getVoitureEvenementByNum(num);
+         Voiture v = getVoitureExistante(num);
         if(v.existListP()){
             List<Pilote> lesP = v.getListP();
             return v.getListP();

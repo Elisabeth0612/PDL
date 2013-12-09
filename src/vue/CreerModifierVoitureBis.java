@@ -68,6 +68,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     @Override
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
+        lesPTemp= new ArrayList<Pilote>();
     }
     
     public void charger(Voiture v){  
@@ -87,28 +88,37 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
             jTextField2.repaint();
 
            List<Pilote> lesP = new ArrayList<Pilote>();
-           lesP = controleur.getPilotesVoiture(v.getNumVoiture());
-           lesPTemp = lesP;
-           if(lesP.size()!=0){
+           if(v.existListP()){
+               lesP = controleur.getPilotesVoiture(v.getNumVoiture());
+               lesPTemp = lesP;
+               if(lesP.size()!=0){
+                    model = new DefaultListModel<String>();
+                    for(Pilote p : lesP){
+                        model.addElement(p.getNom()+" "+p.getPrenom());
+                        //System.out.println(p.getNom()+" "+p.getPrenom());
+                    }
+                    jList1.setModel(model);
+                    jList1.setSelectedIndex(0);
+                    jList1.repaint();
+               }
+           }else{
                 model = new DefaultListModel<String>();
-                for(Pilote p : lesP){
-                    model.addElement(p.getNom()+" "+p.getPrenom());
-                    //System.out.println(p.getNom()+" "+p.getPrenom());
-                }
                 jList1.setModel(model);
                 jList1.setSelectedIndex(0);
                 jList1.repaint();
            }
 
             Pilote p = v.getPiloteActuel();
-            Pilote p1 = controleur.getPiloteVoiture(v, p.getNom(), p.getPrenom());
-            if(p1!=null){
-                jTextField3.setText(p.getNom()+" "+p.getPrenom());
-                jTextField3.repaint();
-            }else{
-                controleur.setPiloteActuel(voitureCourante,null);
-                jTextField3.setText("");
-                jTextField3.repaint();
+            if(p!=null){
+                Pilote p1 = controleur.getPiloteVoiture(v, p.getNom(), p.getPrenom());
+                if(p1!=null){
+                    jTextField3.setText(p.getNom()+" "+p.getPrenom());
+                    jTextField3.repaint();
+                }else{
+                    controleur.setPiloteActuel(voitureCourante,null);
+                    jTextField3.setText("");
+                    jTextField3.repaint();
+                }
             }
 
             Boolean voitureActive = v.getVoitureActive();
@@ -415,6 +425,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
 
                 controleur.modifierVoiture(voitureCourante, jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected(), p);
                 //modifierVoiture(Voiture v, String couleur, int NbToursRelai, Booleant voitureEnCourse, Pilote p)
+                vider();
                 controleur.retour();
             }else{
                 JOptionPane.showMessageDialog(this,"Veuillez choisir un pilote actuel.","Erreur",JOptionPane.ERROR_MESSAGE);
@@ -424,6 +435,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
+        vider();
         controleur.retour();
     }
 

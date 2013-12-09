@@ -71,6 +71,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     @Override
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
+        lesPVoitureTemp = new ArrayList<Pilote>();
     }
     
     public void charger(){
@@ -328,11 +329,13 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
         controleur.setListVoiture(voitureCourante, lesPVoitureTemp);
+        vider();
         controleur.retour();
     }
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
+        vider();
         controleur.retour();
     }
 
