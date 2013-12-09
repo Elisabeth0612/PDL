@@ -10,6 +10,7 @@ import controleur.Controleur;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import modele.Pilote;
 import modele.Voiture;
 
@@ -200,8 +201,12 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
-        controleur.modifierPilote(piloteCourant, jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
-        controleur.retour();
+        if(jTextField1.getText()!="" && jTextField2.getText()!="" && jTextField3.getText()!=""){
+            controleur.modifierPilote(piloteCourant, jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
+            controleur.retour();
+        }else{
+            JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
