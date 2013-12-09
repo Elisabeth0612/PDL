@@ -21,7 +21,7 @@ import modele.Voiture;
 public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
     private Controleur controleur;
-    private Pilote piloteCourant;
+    private Pilote piloteCourant=null;
     
     /**
      * Creates new form CréerModifierPilote
@@ -67,6 +67,7 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
     @Override
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
+        piloteCourant=null;
     }
     
     public void charger(Pilote p){ 

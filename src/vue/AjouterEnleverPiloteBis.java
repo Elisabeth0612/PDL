@@ -25,7 +25,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     private Controleur controleur;
     private DefaultListModel<String> model1;
     private DefaultListModel<String> model2;
-    private Voiture voitureCourante;
+    private Voiture voitureCourante=null;
     private List<Pilote> lesPVoitureTemp = new ArrayList<Pilote>();
     /**
      * Creates new form AjouterEnleverPilote
@@ -72,6 +72,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
         lesPVoitureTemp = new ArrayList<Pilote>();
+        voitureCourante = null;
     }
     
     public void charger(){

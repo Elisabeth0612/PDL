@@ -70,6 +70,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
         lesPTemp= new ArrayList<Pilote>();
+        voitureCourante=null;
     }
     
     public void charger(Voiture v){  
@@ -408,7 +409,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
         if(voitureCourante==null){
-            if(jTextField4.getText()!="" && jTextField1.getText()!="" && jTextField2.getText()!=""){
+            if(jTextField4.getText()=="" && jTextField1.getText()=="" && jTextField2.getText()==""){
                 JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
             }else{
                 Boolean b = controleur.enregistrerVoiture(Integer.parseInt(jTextField4.getText()),jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected());
@@ -427,7 +428,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
                 String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
                 Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
 
-                if(jTextField4.getText()!="" && jTextField1.getText()!="" && jTextField2.getText()!=""){
+                if(jTextField4.getText()=="" && jTextField1.getText()=="" && jTextField2.getText()==""){
                     JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
                 }else{
                     controleur.modifierVoiture(voitureCourante, jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected(), p);
