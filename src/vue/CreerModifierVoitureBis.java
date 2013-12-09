@@ -7,6 +7,7 @@
 package vue;
 
 import controleur.Controleur;
+import graphique.IntegerField;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -150,7 +151,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField2 = new IntegerField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
@@ -164,7 +165,7 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
         jButton6 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jTextField4 = new IntegerField();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -456,8 +457,8 @@ public class CreerModifierVoitureBis extends javax.swing.JFrame implements MaFen
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private IntegerField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private IntegerField jTextField4;
     // End of variables declaration
 }
