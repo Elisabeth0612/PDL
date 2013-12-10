@@ -96,7 +96,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
        }
         
         if(voitureCourante!=null){
-            System.out.println("Voiture v="+voitureCourante.getNumVoiture());
+            System.out.println("Voiture v="+voitureCourante.getNumVoiture()+" existListP ="+voitureCourante.existListP());
             if(voitureCourante.existListP()){
                 List<Pilote> lesP = controleur.getPilotesVoitureCourante(voitureCourante.getNumVoiture());
                 remplir(lesP);
@@ -125,11 +125,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     
     public void miseAJour(Voiture v){
         System.out.println("voiture n="+v.getNumVoiture());
-        if(v.existListP()){
-            voitureCourante=new Voiture(v.getNumVoiture(),v.getPiloteActuel(),v.getCouleur(),v.getNbToursParRelai(),v.getVoitureActive());
-        }else{
-            voitureCourante=new Voiture(v.getNumVoiture(),v.getCouleur(),v.getNbToursParRelai(),v.getVoitureActive());
-        }
+        voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
     }
     
     public int parcoursList(String nom, String prenom){
@@ -363,7 +359,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         // Bouton "Enregistrer"
         System.out.println("aePilote ="+voitureCourante.getNumVoiture());
         voitureCourante.setListP(lesPVoitureTemp);
-        controleur.modifierVoitureExistante(voitureCourante);
+        controleur.modifierVoitureEvenement(voitureCourante);
         //controleur.setListVoiture(voitureCourante, lesPVoitureTemp);
         controleur.ouvrirModifierVoiture(voitureCourante);
     }

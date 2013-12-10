@@ -95,11 +95,13 @@ public class Voiture {
 	}
         
         public void setListP(List<Pilote> lesPTemp){
-            listP=lesPTemp;
+            listP = new ArrayList<Pilote>();
+            for(Pilote p:lesPTemp){
+                listP.add(new Pilote(p.getNom(),p.getPrenom(),p.getCouleursCasque()));
+            }
         }
         
         public boolean existListP(){
-            System.out.println("ok");
             return listP.size()!=0;
         }
 

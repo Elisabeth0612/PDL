@@ -236,7 +236,7 @@ public class Controleur {
     public Pilote getPiloteVoiture(Voiture v, String nomPilote, String prenomPilote){
         List<Pilote> lesPVoiture = v.getListP();
         for(Pilote p:lesPVoiture){
-            System.out.println("Voiture ="+v.getNumVoiture()+" pilote="+p.getNom()+" "+p.getPrenom());
+            //System.out.println("Voiture ="+v.getNumVoiture()+" pilote="+p.getNom()+" "+p.getPrenom());
             if(p.getNom().equals(nomPilote) && p.getPrenom().equals(prenomPilote)){
                 return p;
             }
@@ -252,8 +252,11 @@ public class Controleur {
                 vtemp.setNbToursParRelai(v.getNbToursParRelai());
                 vtemp.setVoitureActive(v.getVoitureActive());
                 vtemp.setPiloteActuel(v.getPiloteActuel());
+                vtemp.setListP(v.getListP());
+                System.out.println("ModifierVEvt ="+vtemp.existListP());
             }
         }
+        modifierVoitureExistante(v);
     }
     
     public void modifierVoitureExistante(Voiture v){
