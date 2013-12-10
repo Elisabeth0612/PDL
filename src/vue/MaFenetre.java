@@ -11,13 +11,36 @@ package vue;
  * grpe 1A
  */
 public interface MaFenetre  {
+    
+    /**
+     * Affiche la fenetre
+     */
     public void afficher();
+    
+    /**
+     * Masque la fenetre
+     */
     public void masquer();
+    
+    /**
+     * Ferme la fenetre
+     */
     public void fermer();
+    
+    /**
+     * Retourne la fentre precedente
+     * @return MaFenetre
+     */
     public MaFenetre getPrecedent();
+    
+    /**
+     * Vide la fenetre de son contenu
+     */
     public void vider();
+    
+    /**
+     * Permet de mettre à jour les champs de la fenetre
+     */
     public void raffraichir();
-    //public String getTemps();
-    //public void inititialiser();
     
 }
