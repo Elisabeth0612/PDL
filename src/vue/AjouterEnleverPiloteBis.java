@@ -86,9 +86,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     }
     
     public void charger(){
-        System.out.println("charger aePilote pour la voiture="+voitureCourante.getNumVoiture());
-        
-        jLabel3.setText("Véhicule n°"+voitureCourante.getNumVoiture());
         
         List<Pilote> lesPE = controleur.getListPilotesExistants();
         if(lesPE.size()!=0){
@@ -102,6 +99,9 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
        }
         
         if(voitureCourante!=null){
+            jLabel3.setText("Véhicule n°"+voitureCourante.getNumVoiture());
+            System.out.println("charger aePilote pour la voiture="+voitureCourante.getNumVoiture());
+            
             if(voitureCourante.existListP()){
                 List<Pilote> lesP = voitureCourante.getListP();
                 remplir(lesP);
@@ -356,7 +356,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Creer nouveau pilote"
-        controleur.ouvrirCreerModifierPilote();
+        controleur.ouvrirCreerPilote(voitureCourante);
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,7 +369,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
-        controleur.retour();
+        controleur.ouvrirModifierVoiture(voitureCourante);
     }
 
    

@@ -385,11 +385,15 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Ajouter/Enlever Pilote"
-        if(voitureCourante==null){
-            voitureCourante = new Voiture(Integer.parseInt(jTextField4.getText()),jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected());
-            controleur.ouvrirAjouterEnleverPilote(voitureCourante);
+        if(jTextField4.getText().equals("") && jTextField1.getText().equals("") && jTextField2.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs avant d'ajouter des pilotes.","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
-            controleur.ouvrirAjouterEnleverPilote(voitureCourante);
+            if(voitureCourante==null){
+                voitureCourante = new Voiture(Integer.parseInt(jTextField4.getText()),jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected());
+                controleur.ouvrirAjouterEnleverPilote(voitureCourante);
+            }else{
+                controleur.ouvrirAjouterEnleverPilote(voitureCourante);
+            }
         }
     }
 
@@ -405,7 +409,7 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
             String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
             Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
             
-            controleur.ouvrirCreerModifierPilote(p);
+            controleur.ouvrirModifierPilote(voitureCourante,p);
         }
     }
 
@@ -429,30 +433,11 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
         if(jTextField4.getText().equals("") && jTextField1.getText().equals("") && jTextField2.getText().equals("")){
             JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
-            System.out.println("cVoiture *Enregistrer* pour la voiture="+voitureCourante.getNumVoiture());
             if(voitureCourante==null){
                 voitureCourante = new Voiture(Integer.parseInt(jTextField4.getText()),jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected());
-            }/*else{
-                voitureCourante.setListP(lesPTemp);
-                String nomPrenomPilote = jTextField3.getText();
-                //System.out.println("Pilote actuel :"+nomPrenomPilote+".");
-                if(!nomPrenomPilote.equals("")){
-                    String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
-                    String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
-                    Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
-                    
-                    voitureCourante.setCouleur(jTextField1.getText());
-                    voitureCourante.setNbToursParRelai(Integer.parseInt(jTextField2.getText()));
-                    voitureCourante.setVoitureActive(jCheckBox1.isSelected());
-                    voitureCourante.setPiloteActuel(p);
-                    controleur.enregistrerVoiture(voitureCourante);
-                    
-                    vider();
-                    controleur.retour();
-                }else{
-                    JOptionPane.showMessageDialog(this,"Veuillez choisir un pilote actuel.","Erreur",JOptionPane.ERROR_MESSAGE);
-                }
-            }*/
+                System.out.println("cVoiture *Enregistrer* pour la voiture="+voitureCourante.getNumVoiture());
+                JOptionPane.showMessageDialog(this,"La voiture a été crée mais pas enregistré, ajouter des pilotes pour l'enregistrer.","Information",JOptionPane.INFORMATION_MESSAGE);
+            }
         }     
     }
 

@@ -18,15 +18,15 @@ import modele.Voiture;
  *
  * @author Co
  */
-public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
+public class ModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
     private Controleur controleur;
     private Pilote piloteCourant=null;
-    
+    private Voiture voiturePrecedente=null;
     /**
      * Creates new form CréerModifierPilote
      */
-    public CreerModifierPiloteBis(Controleur c) {
+    public ModifierPiloteBis(Controleur c) {
         controleur = c;
         initComponents();
     }
@@ -69,13 +69,14 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
         piloteCourant=null;
+        voiturePrecedente=null;
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
     }
     
     public void charger(){ 
-        System.out.println("charger cmPilote pour le pilote="+piloteCourant.getNom()+" "+piloteCourant.getPrenom());
+        System.out.println("charger mPilote pour le pilote="+piloteCourant.getNom()+" "+piloteCourant.getPrenom());
                 
         String nom = piloteCourant.getNom();
         jTextField1.setText(nom);
@@ -90,9 +91,10 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
         jTextField3.repaint();       
     }
     
-    public void miseAJour(Pilote p){
+    public void miseAJour(Voiture v, Pilote p){
         //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
         this.piloteCourant=p;
+        this.voiturePrecedente=v;
     }
     
     /**
@@ -213,7 +215,7 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
         // oubli enregistrerNouveauPilote
         
         if(!jTextField1.getText().equals("") && !jTextField2.getText().equals("") && !jTextField3.getText().equals("")){
-            controleur.modifierPilote(piloteCourant, jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
+            controleur.modifierPiloteExistant(voiturePrecedente, piloteCourant, jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
             vider();
             controleur.retour();
         }else{
@@ -224,7 +226,7 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
         vider();
-        controleur.retour();
+        controleur.ouvrirAjouterEnleverPilote(voiturePrecedente);
     }
 
 

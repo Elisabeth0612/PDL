@@ -168,12 +168,12 @@ public class Controleur {
         vue.ouvrirCreerVoiture(v);
     }
     
-    public void ouvrirCreerModifierPilote(Pilote p){
-        vue.ouvrirCreerModifierPilote(p);
+    public void ouvrirCreerPilote(Voiture v){
+        vue.ouvrirCreerPilote(v);
     }
     
-    public void ouvrirCreerModifierPilote(){
-        vue.ouvrirCreerModifierPilote();
+    public void ouvrirModifierPilote(Voiture v, Pilote p){
+        vue.ouvrirModifierPilote(v, p);
     }
     
      public void ouvrirCreerModifierCourse(Course c){
@@ -373,10 +373,48 @@ public class Controleur {
     }
     
     /*************************************  Pilote *************************************/
-    public void modifierPilote(Pilote p, String nom, String prenom, String couleurCasque){
-        p.setNom(nom);
-        p.setPrenom(prenom);
-        p.setCouleursCasque(couleurCasque);
+    public void modifierPiloteVoiture(Voiture v, Pilote p, String nom, String prenom, String couleurCasque){
+        List<Pilote> lesP = v.getListP();
+        for(Pilote ptemp : lesP){
+            if(ptemp.getNom().equals(p.getNom()) && ptemp.getPrenom().equals(p.getPrenom())){
+                ptemp.setCouleursCasque(couleurCasque);
+                ptemp.setNom(nom);
+                ptemp.setPrenom(prenom);
+            }
+        }
+    }
+    
+    public void modifierPiloteExistant(Voiture v, Pilote p, String nom, String prenom, String couleurCasque){
+        List<Pilote> lesP = GestionnaireExistant.getInstance().getPilotesExistants();
+        Boolean b=false;
+        for(Pilote ptemp : lesP){
+            if(ptemp.getNom().equals(p.getNom()) && ptemp.getPrenom().equals(p.getPrenom())){
+                ptemp.setCouleursCasque(couleurCasque);
+                ptemp.setNom(nom);
+                ptemp.setPrenom(prenom);
+                b=true;
+            }
+        }
+        if(b){
+            if(v!=null){
+                modifierPiloteVoiture(v, p,nom,prenom,couleurCasque);
+            }
+        }else{
+            enregistrerVoiture(v);
+        }
+    }
+    
+    public void enregistrerPiloteExistant(Pilote p){
+        Boolean b = true;
+        List<Pilote> lesP = GestionnaireExistant.getInstance().getPilotesExistants();
+        for(Pilote plist : lesP){
+            if(plist.getNom().equals(p.getNom()) && plist.getPrenom().equals(p.getPrenom())){
+                b=false;
+            }
+        }
+        if(b){
+            GestionnaireExistant.getInstance().creerNouveauPilote(p);
+        }
     }
    
     /************************************* Gestion de l'Existant *************************************/

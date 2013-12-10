@@ -405,7 +405,7 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
             String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
             String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
             Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
-            controleur.ouvrirCreerModifierPilote(p);
+            controleur.ouvrirModifierPilote(voitureCourante, p);
         }
     }
 
@@ -445,8 +445,7 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
                     voitureCourante.setVoitureActive(jCheckBox1.isSelected());
                     voitureCourante.setPiloteActuel(p);
                     controleur.modifierVoitureExistante(voitureCourante);
-                    vider();
-                    controleur.retour();
+                    controleur.ouvrirAjouterEnleverPilote(voitureCourante);
                 }
             }else{
                 JOptionPane.showMessageDialog(this,"Veuillez choisir un pilote actuel.","Erreur",JOptionPane.ERROR_MESSAGE);

@@ -30,7 +30,8 @@ public class Vue implements Observer {
     private ModifierVoitureBis mVoiture;
     private CreerVoitureBis cVoiture;
     private AjouterEnleverVoitureBis aeVoiture;
-    private CreerModifierPiloteBis cmPilote;
+    private CreerPiloteBis cPilote;
+    private ModifierPiloteBis mPilote;
     
     private CreerModifierCourseBis cmCourse;
     
@@ -57,7 +58,8 @@ public class Vue implements Observer {
         mVoiture = new ModifierVoitureBis(control);
         cVoiture = new CreerVoitureBis(control);
         aeVoiture = new AjouterEnleverVoitureBis(control);
-        cmPilote = new CreerModifierPiloteBis(control);
+        cPilote = new CreerPiloteBis(control);
+        mPilote = new ModifierPiloteBis(control);
         
         cmCourse=new CreerModifierCourseBis(control,evt,null);
         
@@ -119,6 +121,7 @@ public class Vue implements Observer {
         precedente = mVoiture;
         courante = aePilote;
         if(v != null){
+            System.out.println("oaePilote ="+v.getNumVoiture());
             aePilote.miseAJour(v);
         }
         courante.afficher();
@@ -151,20 +154,23 @@ public class Vue implements Observer {
         courante.afficher();
     }
     
-    public void ouvrirCreerModifierPilote(Pilote p){
+    public void ouvrirCreerPilote(Voiture v){
         courante.fermer();
-        precedente = mVoiture;
-        courante = cmPilote;
-        if(p != null){
-            cmPilote.miseAJour(p);
+        precedente = aePilote;
+        courante = cPilote;
+        if(v != null){
+            cPilote.miseAJour(v);
         }
         courante.afficher();
     }
     
-    public void ouvrirCreerModifierPilote(){
+    public void ouvrirModifierPilote(Voiture v,Pilote p){
         courante.fermer();
         precedente = mVoiture;
-        courante = cmPilote;
+        courante = mPilote;
+        if(p != null){
+            mPilote.miseAJour(v,p);
+        }
         courante.afficher();
     }
     
@@ -235,7 +241,8 @@ public class Vue implements Observer {
         mVoiture.fermer();
         cVoiture.fermer();
         aeVoiture.fermer();
-        cmPilote.fermer();
+        cPilote.fermer();
+        mPilote.fermer();
 
         cmCourse.fermer();
 
