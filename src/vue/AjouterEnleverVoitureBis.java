@@ -46,8 +46,6 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     @Override
     public void afficher() {
         raffraichir();
-        List<Voiture> lesV = controleur.getVoituresEvenement();
-        remplir(lesV);
         charger();
         //on affiche la fenetre
         setVisible(true);
@@ -94,6 +92,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
 
     public void charger() {
         List<Voiture> lesV = controleur.getListVoituresExistantes();
+
         if (lesV.size() != 0) {
             model1 = new DefaultListModel<String>();
             for (Voiture v : lesV) {
@@ -102,9 +101,17 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
             jList1.setModel(model1);
             jList1.setSelectedIndex(0);
             jList1.repaint();
-        }
+        }else{
+            model1 = new DefaultListModel<String>();
+            jList1.setModel(model1);
+            jList1.setSelectedIndex(0);
+            jList1.repaint();
+       }
         
         //List<Voiture> lesVE = controleur.getVoituresEvenement();
+                
+        List<Voiture> lesVE = controleur.getVoituresEvenement();
+        remplir(lesVE);
         
         if (lesVtemp.size() != 0) {
             model2 = new DefaultListModel<String>();
@@ -114,7 +121,12 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
             jList2.setModel(model2);
             jList2.setSelectedIndex(0);
             jList2.repaint();
-        }
+        }else{
+            model2 = new DefaultListModel<String>();
+            jList2.setModel(model2);
+            jList2.setSelectedIndex(0);
+            jList2.repaint();
+       }
     }
 
     /**

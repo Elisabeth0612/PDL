@@ -96,6 +96,11 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
             jList1.setModel(model1);
             jList1.setSelectedIndex(0);
             jList1.repaint();
+       }else{
+            model1 = new DefaultListModel<String>();
+            jList1.setModel(model1);
+            jList1.setSelectedIndex(0);
+            jList1.repaint();
        }
         
         if(voitureCourante!=null){

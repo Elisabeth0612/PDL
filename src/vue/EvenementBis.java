@@ -51,6 +51,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
     public void afficher() {
         //on affiche la fenetre
         setVisible(true);
+        charger();
         raffraichir();
         setVisible(true);
         
@@ -96,14 +97,25 @@ public class EvenementBis extends JFrame implements MaFenetre {
             jList1.setModel(model1);
             jList1.setSelectedIndex(0);
             jList1.repaint();
+       }else{
+            model1 = new DefaultListModel<String>();
+            jList1.setModel(model1);
+            jList1.setSelectedIndex(0);
+            jList1.repaint();
        }
         
         List<Voiture> lesV = controleur.getVoituresEvenement();
+        System.out.println("Evenement ="+lesV.size());
         if(lesV.size()!=0){
             model2 = new DefaultListModel<String>();
             for(Voiture v : lesV){
                 model2.addElement(Integer.toString(v.getNumVoiture()));
             }
+            jList2.setModel(model2);
+            jList2.setSelectedIndex(0);
+            jList2.repaint();
+       }else{
+            model2 = new DefaultListModel<String>();
             jList2.setModel(model2);
             jList2.setSelectedIndex(0);
             jList2.repaint();
