@@ -38,6 +38,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private Course cModifier;
     private DefaultListModel<String> model1;
     private DefaultListModel<String> model2;
+    private List<Voiture> voitures;
     /**
      * Creates new form CreerModifierCourse
      */
@@ -442,6 +443,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                 Logger.getLogger(CreerModifierCourseBis.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
+            
             miseAJourCModifier();
             raffraichir();
             controleur.retour();
@@ -457,12 +459,18 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     }                                             
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        //>>
         if (!jList1.isSelectionEmpty()){
+            Voiture v= (Voiture) controleur.getVoituresEvenement().get(jList1.getSelectedIndex());
             if (cModifier!=null){
-                Voiture v= (Voiture) controleur.getVoituresEvenement().get(jList1.getSelectedIndex());
-                //System.out.println(cModifier.getListV().contains(v));
                 if (!cModifier.getListV().contains(v)){
                     cModifier.addListV(v);
+                    model2.addElement(Integer.toString(v.getNumVoiture()));
+                }
+            }
+            else{
+                if (!voitures.contains(v)){
+                    voitures.add(v);
                     model2.addElement(Integer.toString(v.getNumVoiture()));
                 }
             }
@@ -470,11 +478,16 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        //<<
         if (!jList2.isSelectionEmpty()){
+            Voiture v=(Voiture) controleur.getVoituresEvenement().get(jList2.getSelectedIndex());
             if (cModifier!=null){
-                Voiture v=(Voiture) controleur.getVoituresEvenement().get(jList2.getSelectedIndex());
                 cModifier.removeListV(v);
                 System.out.println(cModifier.getListV().contains(v));
+                model2.remove(jList2.getSelectedIndex());
+            }
+            else{
+                voitures.remove(v);
                 model2.remove(jList2.getSelectedIndex());
             }
         }
@@ -497,6 +510,13 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                 jRadioButton2.setSelected(true);
             }
             chargerVoitureCourse();
+        }
+        else{
+            jList2.setModel(new javax.swing.AbstractListModel() {
+            List<Voiture> voitures = new ArrayList<Voiture>();
+            public int getSize() { return voitures.size(); }
+            public Object getElementAt(int i) { return voitures.get(i).getNumVoiture();}
+            });
         }
         chargerVoitureEvenement();
     }  
