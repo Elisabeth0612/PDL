@@ -3,6 +3,9 @@ package modele;
 import java.util.*;
 
 
+/**
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE grpe 1A
+ */
 public class Voiture{
 
 	private List<Pilote> listP;
@@ -13,7 +16,16 @@ public class Voiture{
 	private boolean voitureActive;
         
 	
-	public Voiture(int numVoiture, Pilote piloteActuel, String couleur, int nbToursParRelai, boolean voitureActive){
+    /**
+     * Instanciation d'une voiture
+     * 
+     * @param numVoiture int
+     * @param piloteActuel Pilote
+     * @param couleur String
+     * @param nbToursParRelai int
+     * @param voitureActive Voiture
+     */
+    public Voiture(int numVoiture, Pilote piloteActuel, String couleur, int nbToursParRelai, boolean voitureActive){
 		this.numVoiture=numVoiture;
 		this.piloteActuel=piloteActuel;
 		this.listP=new ArrayList<Pilote>();
