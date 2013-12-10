@@ -10,11 +10,16 @@ import vue_defaut.ResultatsCourse;
 import controleur.Controleur;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import modele.Top;
 import modele.Voiture;
 
@@ -88,7 +93,7 @@ public class ResultatsCourseBis extends javax.swing.JFrame implements MaFenetre 
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel2.setText("jLabel2");
+        jLabel2.setText(nomC);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 204, 0));
@@ -138,6 +143,11 @@ public class ResultatsCourseBis extends javax.swing.JFrame implements MaFenetre 
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Enregistrer les résultats");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enregistrerResultats(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -239,40 +249,45 @@ public class ResultatsCourseBis extends javax.swing.JFrame implements MaFenetre 
         pack();
     }// </editor-fold>                        
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void enregistrerResultats(java.awt.event.ActionEvent evt) { 
+        TableModel table = jTable1.getModel();
+        File fic = new File("../"+nomC+".html"); 
+        if(fic.exists())fic.delete();
+        try{
+            FileWriter fw = new FileWriter("../"+nomC+".html", true);
+            BufferedWriter output = new BufferedWriter(fw);
+            output.write("<TABLE BORDER=\"1\"> \n" +
+                "  <CAPTION> "+nomC+" </CAPTION> \n" +
+                "  <TR> \n" +
+                " <TH> Num Tour </TH> \n" +
+                " <TH> Num Voiture </TH> \n" +
+                " <TH> Pilote </TH> \n" +
+                " <TH> Temps </TH> \n" +
+                         " <TH> Relai </TH> \n" +
+                         " <TH> Etat </TH> \n" +
+                         " <TH> Heure </TH> \n" +
+                         " <TH> Commentaire </TH> \n" +
+                "  </TR>");
+            for (int i = 0; i < table.getRowCount(); i++) {
+                output.write("<TR> \n" +
+                    " <TD> "+(String)table.getValueAt(i, 0)+" </TD> " +
+                        " <TD> "+(String)table.getValueAt(i, 1)+" </TD> " +
+                        " <TD> "+(String)table.getValueAt(i, 2)+" </TD> " +
+                        " <TD> "+(String)table.getValueAt(i, 3)+" </TD> " +
+                        " <TD> "+(String)table.getValueAt(i, 4)+" </TD> " +
+                        " <TD> "+(String)table.getValueAt(i, 5)+" </TD> " +
+                        " <TD> "+(String)table.getValueAt(i, 6)+" </TD> " +
+                        " <TD> "+(String)table.getValueAt(i, 7)+" </TD> " +
+                        "  </TR>");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ResultatsCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ResultatsCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ResultatsCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ResultatsCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            output.flush();
+            output.close();
+            JOptionPane.showMessageDialog(null,"Les résultats ont été enregistrés");
+	}
+	catch(IOException ioe){
+            ioe.printStackTrace();
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ResultatsCourse().setVisible(true);
-            }
-        });
-    }
+    } 
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;

@@ -297,6 +297,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Enregistrer les r&#xe9;sultats"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

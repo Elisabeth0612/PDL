@@ -70,12 +70,7 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jProgressBar2 = new javax.swing.JProgressBar();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        
 
         chrono = new Timer(1, new ActionListener(){
             public void actionPerformed (ActionEvent e)
@@ -278,23 +273,9 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Fichier");
+        
 
-        jMenuItem1.setText("Quitter");
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Paramètres");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Feuille de temps");
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("Aide");
-        jMenuBar1.add(jMenu4);
-
-        setJMenuBar(jMenuBar1);
+        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -487,12 +468,6 @@ public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetr
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;

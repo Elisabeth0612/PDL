@@ -168,83 +168,86 @@ public class GestionnaireExistant {
             
             //on s'occupe de l'evenement
             SAXBuilder builder = new SAXBuilder();
-            Document document = builder.build(new File("./src/xml/Evenement_"+nomEvenement+".xml"));
-            Element racine = (Element) document.getRootElement();
-            
-            Element infEvt = racine.getChildren().get(0);
-                String nomE = racine.getChildren().get(0).getAttributeValue("Nom_Evenement");
-                String date = racine.getChildren().get(0).getAttributeValue("Date_Evenement");
-                Date dateE = null;
-                if(date.compareTo("Date inconnue")!=0){
-                    
-                
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-                    try {
-                        dateE = sdf.parse(racine.getChildren().get(0).getAttributeValue("Date_Evenement"));
-                    } catch (ParseException ex) {
-                        Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
+            File fic = new File("./src/xml/Evenement_"+nomEvenement+".xml");
+            if(fic.exists() && fic.length()!=0){
+                Document document = builder.build(new File("./src/xml/Evenement_"+nomEvenement+".xml"));
+                Element racine = (Element) document.getRootElement();
+
+                Element infEvt = racine.getChildren().get(0);
+                    String nomE = racine.getChildren().get(0).getAttributeValue("Nom_Evenement");
+                    String date = racine.getChildren().get(0).getAttributeValue("Date_Evenement");
+                    Date dateE = null;
+                    if(date.compareTo("Date inconnue")!=0){
+
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+                        try {
+                            dateE = sdf.parse(racine.getChildren().get(0).getAttributeValue("Date_Evenement"));
+                        } catch (ParseException ex) {
+                            Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
                     }
-                    
-                }
-                String nomCircuit = racine.getChildren().get(0).getAttributeValue("Nom_Circuit");
-                int longueur = Integer.parseInt(racine.getChildren().get(0).getAttributeValue("Longueur_Circuit"));
-                //on crée l'evenement..
-                evtS = new EvenementSportif(nomE,dateE,nomCircuit,longueur);
-                
-            Element infCourses = racine.getChildren().get(1);
-            List filsCourses = infCourses.getContent();
-            Iterator iterator = filsCourses.iterator();
-            while (iterator.hasNext()) {
-                Object objetFils = iterator.next();
-                if (objetFils instanceof Element) {
-                    Element course = (Element) objetFils;
-                    String nomC = course.getAttributeValue("Nom");
-                    //modifier ici
-                    Date hdeb = null;
-                    Date hfin = null;
-                    //*******
-                    int dureeMP = Integer.parseInt(course.getAttributeValue("durée_max_pilotage"));
-                    int dureeCP =  Integer.parseInt(course.getAttributeValue("durée_consecutive_pilotage"));
-                    String meteo = course.getAttributeValue("meteo");
-                    String fin = course.getAttributeValue("type_fin");
-                    int nbTours = Integer.parseInt(course.getAttributeValue("nb_tours_max"));
-                    //on crée la course et on l'ajoute à levenement
-                    Course c = new Course(nomC,hdeb, hfin, dureeMP, dureeCP, meteo, nbTours, fin);
-                    
-                    //on s'occupe des voitures de la course
-                    Element infVoituresCourse = course.getChildren().get(0);
-                    List filsVoitures = infVoituresCourse.getContent();
-                    Iterator iterator2 = filsVoitures.iterator();
-                    while (iterator2.hasNext()) {
-                        Object objetFils2 = iterator2.next();
-                        if (objetFils2 instanceof Element) {
-                            Element voiture = (Element) objetFils2;
-                            int numV = Integer.parseInt(voiture.getAttributeValue("Num_Voiture"));
-                            Voiture v =this.getUneVoiture(numV);
-                            if(v!=null){
-                                c.addListV(v);
+                    String nomCircuit = racine.getChildren().get(0).getAttributeValue("Nom_Circuit");
+                    int longueur = Integer.parseInt(racine.getChildren().get(0).getAttributeValue("Longueur_Circuit"));
+                    //on crée l'evenement..
+                    evtS = new EvenementSportif(nomE,dateE,nomCircuit,longueur);
+
+                Element infCourses = racine.getChildren().get(1);
+                List filsCourses = infCourses.getContent();
+                Iterator iterator = filsCourses.iterator();
+                while (iterator.hasNext()) {
+                    Object objetFils = iterator.next();
+                    if (objetFils instanceof Element) {
+                        Element course = (Element) objetFils;
+                        String nomC = course.getAttributeValue("Nom");
+                        //modifier ici
+                        Date hdeb = null;
+                        Date hfin = null;
+                        //*******
+                        int dureeMP = Integer.parseInt(course.getAttributeValue("durée_max_pilotage"));
+                        int dureeCP =  Integer.parseInt(course.getAttributeValue("durée_consecutive_pilotage"));
+                        String meteo = course.getAttributeValue("meteo");
+                        String fin = course.getAttributeValue("type_fin");
+                        int nbTours = Integer.parseInt(course.getAttributeValue("nb_tours_max"));
+                        //on crée la course et on l'ajoute à levenement
+                        Course c = new Course(nomC,hdeb, hfin, dureeMP, dureeCP, meteo, nbTours, fin);
+
+                        //on s'occupe des voitures de la course
+                        Element infVoituresCourse = course.getChildren().get(0);
+                        List filsVoitures = infVoituresCourse.getContent();
+                        Iterator iterator2 = filsVoitures.iterator();
+                        while (iterator2.hasNext()) {
+                            Object objetFils2 = iterator2.next();
+                            if (objetFils2 instanceof Element) {
+                                Element voiture = (Element) objetFils2;
+                                int numV = Integer.parseInt(voiture.getAttributeValue("Num_Voiture"));
+                                Voiture v =this.getUneVoiture(numV);
+                                if(v!=null){
+                                    c.addListV(v);
+                                }
                             }
                         }
+
+                        evtS.addListC(c);
                     }
-                    
-                    evtS.addListC(c);
+
+
                 }
-                    
-                
-            }
-            
-            //on recupere la liste des voitures de levenement
-            Element infVoituresE = racine.getChildren().get(2);
-            List filsVoituresE = infVoituresE.getContent();
-            Iterator iterator3 = filsVoituresE.iterator();
-            while (iterator3.hasNext()) {
-                Object objetFils3 = iterator3.next();
-                if (objetFils3 instanceof Element) {
-                    Element voitE = (Element) objetFils3;
-                    int numVE = Integer.parseInt(voitE.getAttributeValue("Num_Voiture"));
-                    Voiture v2 = this.getUneVoiture(numVE);
-                    if(v2!=null){
-                        evtS.addListV(v2);
+
+                //on recupere la liste des voitures de levenement
+                Element infVoituresE = racine.getChildren().get(2);
+                List filsVoituresE = infVoituresE.getContent();
+                Iterator iterator3 = filsVoituresE.iterator();
+                while (iterator3.hasNext()) {
+                    Object objetFils3 = iterator3.next();
+                    if (objetFils3 instanceof Element) {
+                        Element voitE = (Element) objetFils3;
+                        int numVE = Integer.parseInt(voitE.getAttributeValue("Num_Voiture"));
+                        Voiture v2 = this.getUneVoiture(numVE);
+                        if(v2!=null){
+                            evtS.addListV(v2);
+                        }
                     }
                 }
             }
@@ -298,18 +301,21 @@ public class GestionnaireExistant {
             
             //on s'occupe de la liste des evenements
             SAXBuilder builder = new SAXBuilder();
-            Document document = builder.build(new File("./src/xml/listeEvenements.xml"));
-            Element racine = (Element) document.getRootElement();
-            
-            List fils = racine.getContent();
-            Iterator iterator = fils.iterator();
-            while (iterator.hasNext()) {
-                //System.out.println("on fait 1 tour");
-                Object objetFils = iterator.next();
-                if (objetFils instanceof Element) {
-                    Element elementFils = (Element) objetFils;
-                    this.lesEvtExistants.add(elementFils.getChildren().get(0).getText());
-                    
+            File fic = new File("./src/xml/listeEvenements.xml");
+            if(fic.exists() && fic.length()!=0){
+                Document document = builder.build(new File("./src/xml/listeEvenements.xml"));
+                Element racine = (Element) document.getRootElement();
+
+                List fils = racine.getContent();
+                Iterator iterator = fils.iterator();
+                while (iterator.hasNext()) {
+                    //System.out.println("on fait 1 tour");
+                    Object objetFils = iterator.next();
+                    if (objetFils instanceof Element) {
+                        Element elementFils = (Element) objetFils;
+                        this.lesEvtExistants.add(elementFils.getChildren().get(0).getText());
+
+                    }
                 }
             }
         } catch (JDOMException ex) {
@@ -361,50 +367,53 @@ public class GestionnaireExistant {
             
             //on s'occupe de la liste des evenements
             SAXBuilder builder = new SAXBuilder();
-            Document document = builder.build(new File("./src/xml/listeVoitures.xml"));
-            Element racine = (Element) document.getRootElement();
-            
-            List fils = racine.getContent();
-            Iterator iterator = fils.iterator();
-            //pour chaque element <Voiture>
-            while (iterator.hasNext()) {
-                Object objetFils = iterator.next();
-                if (objetFils instanceof Element) {
-                    Element elementFils = (Element) objetFils;
-                    int num = Integer.parseInt(elementFils.getChildren().get(0).getText());
-                    String couleur = elementFils.getChildren().get(1).getText();
-                    int nb = Integer.parseInt(elementFils.getChildren().get(2).getText());
-                    boolean active = Boolean.parseBoolean(elementFils.getChildren().get(3).getText());
-                    String piloteAct = elementFils.getChildren().get(4).getText();
-                    Pilote p = null;
-                    if(piloteAct.compareTo("null")==0){
-                        p = null;
-                    }
-                    else{
-                        String nomP = piloteAct.split("-")[0];
-                        String prenonP = piloteAct.split("-")[1];
-                        p = this.getUnPilote(nomP, prenonP);
-                    }
-                        
-                   Voiture v = new Voiture(num,p,couleur,nb,active);
-                   /*
-                   *on charge la liste des pilotes associés
-                   */
-                   List lesPilotes = elementFils.getChildren().get(5).getContent();
-                   Iterator iterator2 = lesPilotes.iterator();
-                    //pour chaque element <Pilote>
-                    while (iterator2.hasNext()) {
-                        Object objetFils2 = iterator2.next();
-                        if (objetFils2 instanceof Element) {
-                            Element unPilote = (Element) objetFils2;
-                            //System.out.println(unPilote.getText());
-                            String nomP2 = unPilote.getText().split("-")[0];
-                            String prenomP2 = unPilote.getText().split("-")[1];
-                            Pilote p2 = this.getUnPilote(nomP2, prenomP2);
-                            v.addListP(p2);
+            File fic = new File("./src/xml/listeVoitures.xml");
+            if(fic.exists() && fic.length()!=0){
+                Document document = builder.build(new File("./src/xml/listeVoitures.xml"));
+                Element racine = (Element) document.getRootElement();
+
+                List fils = racine.getContent();
+                Iterator iterator = fils.iterator();
+                //pour chaque element <Voiture>
+                while (iterator.hasNext()) {
+                    Object objetFils = iterator.next();
+                    if (objetFils instanceof Element) {
+                        Element elementFils = (Element) objetFils;
+                        int num = Integer.parseInt(elementFils.getChildren().get(0).getText());
+                        String couleur = elementFils.getChildren().get(1).getText();
+                        int nb = Integer.parseInt(elementFils.getChildren().get(2).getText());
+                        boolean active = Boolean.parseBoolean(elementFils.getChildren().get(3).getText());
+                        String piloteAct = elementFils.getChildren().get(4).getText();
+                        Pilote p = null;
+                        if(piloteAct.compareTo("null")==0){
+                            p = null;
                         }
+                        else{
+                            String nomP = piloteAct.split("-")[0];
+                            String prenonP = piloteAct.split("-")[1];
+                            p = this.getUnPilote(nomP, prenonP);
+                        }
+
+                       Voiture v = new Voiture(num,p,couleur,nb,active);
+                       /*
+                       *on charge la liste des pilotes associés
+                       */
+                       List lesPilotes = elementFils.getChildren().get(5).getContent();
+                       Iterator iterator2 = lesPilotes.iterator();
+                        //pour chaque element <Pilote>
+                        while (iterator2.hasNext()) {
+                            Object objetFils2 = iterator2.next();
+                            if (objetFils2 instanceof Element) {
+                                Element unPilote = (Element) objetFils2;
+                                //System.out.println(unPilote.getText());
+                                String nomP2 = unPilote.getText().split("-")[0];
+                                String prenomP2 = unPilote.getText().split("-")[1];
+                                Pilote p2 = this.getUnPilote(nomP2, prenomP2);
+                                v.addListP(p2);
+                            }
+                        }
+                       this.lesVoituresExistantes.add(v);
                     }
-                   this.lesVoituresExistantes.add(v);
                 }
             }
         } catch (JDOMException ex) {
@@ -439,26 +448,29 @@ public class GestionnaireExistant {
             
             //on s'occupe de la liste des evenements
             SAXBuilder builder = new SAXBuilder();
-            Document document = builder.build(new File("./src/xml/listePilotes.xml"));
-            Element racine = (Element) document.getRootElement();
-            
-            List fils = racine.getContent();
-            Iterator iterator = fils.iterator();
-            //pour chaque element <Pilote>
-            while (iterator.hasNext()) {
-                Object objetFils = iterator.next();
-                if (objetFils instanceof Element) {
-                    Element elementFils = (Element) objetFils;
-                    String nomP = elementFils.getChildren().get(0).getText();
-                    String prenomP = elementFils.getChildren().get(1).getText();
-                    String couleur = elementFils.getChildren().get(2).getText();
-                    
-                   Pilote p  = new Pilote(nomP,prenomP,couleur);
-                   /*
-                   *ici ajout des pilotes à la liste voiture
-                   */
-                   
-                   this.lesPilotesExistants.add(p);
+            File fic = new File("./src/xml/listePilotes.xml");
+            if(fic.exists() && fic.length()!=0){
+                Document document = builder.build(new File("./src/xml/listePilotes.xml"));
+                Element racine = (Element) document.getRootElement();
+
+                List fils = racine.getContent();
+                Iterator iterator = fils.iterator();
+                //pour chaque element <Pilote>
+                while (iterator.hasNext()) {
+                    Object objetFils = iterator.next();
+                    if (objetFils instanceof Element) {
+                        Element elementFils = (Element) objetFils;
+                        String nomP = elementFils.getChildren().get(0).getText();
+                        String prenomP = elementFils.getChildren().get(1).getText();
+                        String couleur = elementFils.getChildren().get(2).getText();
+
+                       Pilote p  = new Pilote(nomP,prenomP,couleur);
+                       /*
+                       *ici ajout des pilotes à la liste voiture
+                       */
+
+                       this.lesPilotesExistants.add(p);
+                    }
                 }
             }
         } catch (JDOMException ex) {
