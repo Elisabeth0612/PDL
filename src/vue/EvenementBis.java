@@ -105,7 +105,6 @@ public class EvenementBis extends JFrame implements MaFenetre {
        }
         
         List<Voiture> lesV = controleur.getVoituresEvenement();
-        System.out.println("Evenement ="+lesV.size());
         if(lesV.size()!=0){
             model2 = new DefaultListModel<String>();
             for(Voiture v : lesV){
@@ -423,7 +422,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
 
     private void jButtonSupprVoiture(java.awt.event.ActionEvent evt) {                                         
         // Bouton "Supprimer Voiture"
-        System.out.println("Suppression ="+jList2.isSelectionEmpty());
+        //System.out.println("Suppression ="+jList2.isSelectionEmpty());
        if (!jList2.isSelectionEmpty()){
             int numV = Integer.parseInt((String)jList2.getSelectedValue());
             int i = jList2.getSelectedIndex();

@@ -77,7 +77,7 @@ public class ModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
     
     public void charger(){ 
         if(piloteCourant!=null){
-            System.out.println("charger mPilote pour le pilote="+piloteCourant.getNom()+" "+piloteCourant.getPrenom());
+           // System.out.println("charger mPilote pour le pilote="+piloteCourant.getNom()+" "+piloteCourant.getPrenom());
 
             String nom = piloteCourant.getNom();
             jTextField1.setText(nom);
