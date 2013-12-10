@@ -45,8 +45,8 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
         if (jTextField1.getText().isEmpty()) ok=false;
         if (jFormattedTextField1.getText().isEmpty()) ok=false;
         if (jFormattedTextField2.getText().isEmpty()) ok=false;
-        if (jFormattedTextField4.getText().isEmpty()) ok=false;
-        if (jFormattedTextField5.getText().isEmpty()) ok=false;
+        //if (jFormattedTextField4.getText().isEmpty()) ok=false;
+        //if (jFormattedTextField5.getText().isEmpty()) ok=false;
         if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) ok=false;
         return ok;
     }
@@ -55,8 +55,8 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
         cModifier.setNomCourse(jTextField1.getText());
         cModifier.setHeureDeb(null);
         cModifier.setHeureFin(null);
-        cModifier.setDureePilotageMaxParPilote(Integer.parseInt(jFormattedTextField4.getText()));
-        cModifier.setDureeConsecutivePilotageMaxParPilote(Integer.parseInt(jFormattedTextField5.getText()));
+        //cModifier.setDureePilotageMaxParPilote(Integer.parseInt(jFormattedTextField4.getText()));
+        //cModifier.setDureeConsecutivePilotageMaxParPilote(Integer.parseInt(jFormattedTextField5.getText()));
         cModifier.setMeteo(jTextField7.getText());
         String typeFin=null;
             if (jRadioButton1.isSelected()){
@@ -66,7 +66,7 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
                 typeFin=jRadioButton2.getText();
             }
         cModifier.setTypeFin(typeFin);
-        cModifier.setNbToursMax(Integer.parseInt(jFormattedTextField3.getText()));
+        //cModifier.setNbToursMax(Integer.parseInt(jFormattedTextField3.getText()));
     }
 
     /**
@@ -103,9 +103,9 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
         jLabel10 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -222,20 +222,9 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
                                     .addComponent(jFormattedTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                                     .addComponent(jFormattedTextField1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jFormattedTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                                        .addComponent(jFormattedTextField5, javax.swing.GroupLayout.Alignment.LEADING))))))
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(37, 37, 37)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -246,8 +235,23 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton1)
                             .addComponent(jRadioButton2)))
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(37, 37, 37)
+                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(178, 178, 178))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -284,7 +288,7 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButton1)
@@ -293,11 +297,11 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -364,7 +368,7 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
             else{
                 typeFin=jRadioButton2.getText();
             }
-            controleur.getCoursesEvenement().add(new Course(jTextField1.getText(),null,null,Integer.parseInt(jFormattedTextField4.getText()),Integer.parseInt(jFormattedTextField5.getText()),jTextField7.getText(),Integer.parseInt(jFormattedTextField3.getText()),typeFin));
+            //controleur.getCoursesEvenement().add(new Course(jTextField1.getText(),null,null,Integer.parseInt(jFormattedTextField4.getText()),Integer.parseInt(jFormattedTextField5.getText()),jTextField7.getText(),Integer.parseInt(jFormattedTextField3.getText()),typeFin));
             controleur.retour();
         }else{
             miseAJourCModifier();
@@ -396,9 +400,6 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
     private javax.swing.JButton jButton4;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -417,6 +418,9 @@ public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 

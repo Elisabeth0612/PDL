@@ -9,6 +9,7 @@ package vue;
 import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 import controleur.Controleur;
+import graphique.IntegerField;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.NumberFormat;
@@ -47,6 +48,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         this.jfPrecedente=evt;
         this.cModifier=c;  
         initComponents(); 
+        voitures=new ArrayList<Voiture>();
     }
 
     public Course getcModifier() {
@@ -62,9 +64,9 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         if (jTextField1.getText().isEmpty()) ok=false;
         if (jFormattedTextField1.getText().isEmpty()) ok=false;
         if (jFormattedTextField2.getText().isEmpty()) ok=false;
-        if (jFormattedTextField3.getText().isEmpty()) ok=false;
-        if (jFormattedTextField4.getText().isEmpty()) ok=false;
-        if (jFormattedTextField5.getText().isEmpty()) ok=false;
+        if (jTextField2.toString().isEmpty()) ok=false;
+        if (jTextField3.toString().isEmpty()) ok=false;
+        if (jTextField4.toString().isEmpty()) ok=false;
         if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) ok=false;
         return ok;
     }
@@ -76,8 +78,8 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
             Date fin = (Date) new SimpleDateFormat("HH:mm").parse(jFormattedTextField2.getText());
             cModifier.setHeureDeb(deb);
             cModifier.setHeureFin(fin);
-            cModifier.setDureePilotageMaxParPilote(Integer.parseInt(jFormattedTextField4.getText()));
-            cModifier.setDureeConsecutivePilotageMaxParPilote(Integer.parseInt(jFormattedTextField5.getText()));
+            cModifier.setDureePilotageMaxParPilote(Integer.parseInt(jTextField3.getText()));
+            cModifier.setDureeConsecutivePilotageMaxParPilote(Integer.parseInt(jTextField4.getText()));
             cModifier.setMeteo(jTextField7.getText());
             String typeFin=null;
             if (jRadioButton1.isSelected()){
@@ -87,7 +89,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                 typeFin=jRadioButton2.getText();
             }
             cModifier.setTypeFin(typeFin);
-            cModifier.setNbToursMax(Integer.parseInt(jFormattedTextField3.getText()));
+            cModifier.setNbToursMax(Integer.parseInt(jTextField2.getText()));
         } catch (ParseException ex) {
             Logger.getLogger(CreerModifierCourseBis.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -127,11 +129,11 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         jLabel10 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField(NumberFormat.getNumberInstance());
-        jFormattedTextField4 = new javax.swing.JFormattedTextField(NumberFormat.getNumberInstance());
-        jFormattedTextField5 = new javax.swing.JFormattedTextField(NumberFormat.getNumberInstance());
+        jTextField2 = new IntegerField();
+        jTextField3 = new IntegerField();
+        jTextField4 = new IntegerField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter(){
              public void windowClosing(WindowEvent e){
                    int reponse = JOptionPane.showConfirmDialog(null,
@@ -295,20 +297,9 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                                     .addComponent(jFormattedTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                                     .addComponent(jFormattedTextField1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jFormattedTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                                        .addComponent(jFormattedTextField5, javax.swing.GroupLayout.Alignment.LEADING))))))
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(37, 37, 37)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -319,8 +310,23 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton1)
                             .addComponent(jRadioButton2)))
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(37, 37, 37)
+                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(178, 178, 178))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -357,7 +363,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButton1)
@@ -366,11 +372,11 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -422,9 +428,10 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         controleur.retour();
     }                                        
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {   
+        //enregistrer
         if (!controleChampsSaisis()){
-            JOptionPane.showMessageDialog(this,"Veuillez renseigner tous les champs pour créer la course","Erreur",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Veuillez renseigner tous les champs pour créer/modifier la course","Erreur",JOptionPane.ERROR_MESSAGE);
         }else if (cModifier==null){
             try {
                 String typeFin=null;
@@ -436,7 +443,9 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
                 }
                 Date deb = (Date) new SimpleDateFormat("HH:mm").parse(jFormattedTextField1.getText());
                 Date fin = (Date) new SimpleDateFormat("HH:mm").parse(jFormattedTextField2.getText());
-                controleur.getCoursesEvenement().add(new Course(jTextField1.getText(),deb,fin,Integer.parseInt(jFormattedTextField4.getText()),Integer.parseInt(jFormattedTextField5.getText()),jTextField7.getText(),Integer.parseInt(jFormattedTextField3.getText()),typeFin));
+                cModifier=new Course(jTextField1.getText(),deb,fin,Integer.parseInt(jTextField2.getText()),Integer.parseInt(jTextField3.getText()),jTextField7.getText(),Integer.parseInt(jTextField4.getText()),typeFin);
+                controleur.getCoursesEvenement().add(cModifier);
+                cModifier.setListV(voitures);
                 raffraichir();
                 controleur.retour();
             } catch (ParseException ex) {
@@ -499,9 +508,9 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
             SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
             jFormattedTextField1.setText(sdf.format(cModifier.getHeureDeb()));
             jFormattedTextField2.setText(sdf.format(cModifier.getHeureFin()));
-            jFormattedTextField3.setText(String.valueOf(cModifier.getNbToursMax()));
-            jFormattedTextField4.setText(String.valueOf(cModifier.getDureePilotageMaxParPilote()));
-            jFormattedTextField5.setText(String.valueOf(cModifier.getDureeConsecutivePilotageMaxParPilote()));
+            jTextField2.setText(String.valueOf(cModifier.getNbToursMax()));
+            jTextField3.setText(String.valueOf(cModifier.getDureePilotageMaxParPilote()));
+            jTextField4.setText(String.valueOf(cModifier.getDureeConsecutivePilotageMaxParPilote()));
             jTextField7.setText(cModifier.getMeteo());
             if (cModifier.getTypeFin().equals(jRadioButton1.getText())){
                 jRadioButton1.setSelected(true);
@@ -509,15 +518,8 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
             else{
                 jRadioButton2.setSelected(true);
             }
-            chargerVoitureCourse();
         }
-        else{
-            jList2.setModel(new javax.swing.AbstractListModel() {
-            List<Voiture> voitures = new ArrayList<Voiture>();
-            public int getSize() { return voitures.size(); }
-            public Object getElementAt(int i) { return voitures.get(i).getNumVoiture();}
-            });
-        }
+        chargerVoitureCourse();
         chargerVoitureEvenement();
     }  
     
@@ -529,18 +531,22 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         // TODO add your handling code here:
     }    
     
-    private void jFormattedTextField1FocusLost(java.awt.event.FocusEvent evt) {                                      
-        String[] tab=jFormattedTextField1.getText().split(":");
-        if (Integer.parseInt(tab[0])>23 || Integer.parseInt(tab[1])>60){
-            jFormattedTextField1.setText(null);
-        } 
+    private void jFormattedTextField1FocusLost(java.awt.event.FocusEvent evt) { 
+        if (!jFormattedTextField1.getText().contains(" ")){
+            String[] tab=jFormattedTextField1.getText().split(":");
+            if (Integer.parseInt(tab[0])>23 || Integer.parseInt(tab[1])>60){
+                jFormattedTextField1.setText(null);
+            } 
+        }
     }   
     
-    private void jFormattedTextField2FocusLost(java.awt.event.FocusEvent evt) {                                      
-        String[] tab=jFormattedTextField2.getText().split(":");
-        if (Integer.parseInt(tab[0])>23 || Integer.parseInt(tab[1])>60){
-            jFormattedTextField2.setText(null);
-        } 
+    private void jFormattedTextField2FocusLost(java.awt.event.FocusEvent evt) { 
+        if (!jFormattedTextField2.getText().contains(" ")){
+            String[] tab=jFormattedTextField2.getText().split(":");
+            if (Integer.parseInt(tab[0])>23 || Integer.parseInt(tab[1])>60){
+                jFormattedTextField2.setText(null);
+            }
+        }
     }  
     
 
@@ -552,9 +558,6 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private javax.swing.JButton jButton4;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -573,6 +576,9 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private IntegerField jTextField2;
+    private IntegerField jTextField3;
+    private IntegerField jTextField4;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration
 
@@ -592,17 +598,17 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         jTextField1.setText(null);
         jFormattedTextField1.setText(null);
         jFormattedTextField2.setText(null);
-        jFormattedTextField3.setText(null);
-        jFormattedTextField4.setText(null);
-        jFormattedTextField5.setText(null);
+        jTextField2.setText(null);
+        jTextField3.setText(null);
+        jTextField4.setText(null);
         jTextField7.setText(null);
         jRadioButton1.setSelected(false);
         jRadioButton2.setSelected(false);
     }
-
+    
     public void chargerVoitureEvenement(){
         List<Voiture> lesV = controleur.getVoituresEvenement();
-        if(lesV.size()!=0){
+        if(!lesV.isEmpty()){
             model1 = new DefaultListModel<String>();
             for(Voiture v : lesV){
                 model1.addElement(Integer.toString(v.getNumVoiture()));
@@ -614,20 +620,38 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     }
     
     public void chargerVoitureCourse(){
-        List<Voiture> lesV = cModifier.getListV();
-        model2 = new DefaultListModel<String>();
-        if(lesV.size()!=0){
-            for(Voiture v : lesV){
-                model2.addElement(Integer.toString(v.getNumVoiture()));
-            }
-            jList2.setModel(model2);
-            jList2.setSelectedIndex(0);
-            jList2.repaint();
-        }else{
+        if (cModifier!=null){
+            List<Voiture> lesV = cModifier.getListV();
             model2 = new DefaultListModel<String>();
-            jList2.setModel(model2);
-            jList2.setSelectedIndex(0);
-            jList2.repaint();
+            if(!lesV.isEmpty()){
+                for(Voiture v : lesV){
+                    model2.addElement(Integer.toString(v.getNumVoiture()));
+                }
+                jList2.setModel(model2);
+                jList2.setSelectedIndex(0);
+                jList2.repaint();
+            }else{
+                model2 = new DefaultListModel<String>();
+                jList2.setModel(model2);
+                jList2.setSelectedIndex(0);
+                jList2.repaint();
+            }
+        }else{
+            List<Voiture> lesV = voitures;
+            model2 = new DefaultListModel<String>();
+            if(!lesV.isEmpty()){
+                for(Voiture v : lesV){
+                    model2.addElement(Integer.toString(v.getNumVoiture()));
+                }
+                jList2.setModel(model2);
+                jList2.setSelectedIndex(0);
+                jList2.repaint();
+            }else{
+                model2 = new DefaultListModel<String>();
+                jList2.setModel(model2);
+                jList2.setSelectedIndex(0);
+                jList2.repaint();
+            }
         }
     }
     
