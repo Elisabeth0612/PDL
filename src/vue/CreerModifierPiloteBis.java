@@ -38,7 +38,7 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
     @Override
     public void afficher() {
         raffraichir();
-        charger(piloteCourant);
+        charger();
         //on affiche la fenetre
         setVisible(true);
         
@@ -51,6 +51,7 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
 
     @Override
     public void fermer() {
+        vider();
         dispose();
     }
     
@@ -73,21 +74,25 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
         jTextField3.setText("");
     }
     
-    public void charger(Pilote p){ 
-        
-        this.piloteCourant=p;
-        
-        String nom = p.getNom();
+    public void charger(){ 
+        System.out.println("charger cmPilote pour le pilote="+piloteCourant.getNom()+" "+piloteCourant.getPrenom());
+                
+        String nom = piloteCourant.getNom();
         jTextField1.setText(nom);
         jTextField1.repaint();
         
-        String prenom = p.getPrenom();
+        String prenom = piloteCourant.getPrenom();
         jTextField2.setText(prenom);
         jTextField2.repaint();
         
-        String couleurCasque = p.getCouleursCasque();
+        String couleurCasque = piloteCourant.getCouleursCasque();
         jTextField3.setText(couleurCasque);
         jTextField3.repaint();       
+    }
+    
+    public void miseAJour(Pilote p){
+        //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
+        this.piloteCourant=p;
     }
     
     /**

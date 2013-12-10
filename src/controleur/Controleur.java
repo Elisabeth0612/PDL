@@ -252,7 +252,6 @@ public class Controleur {
                 System.out.println("ModifierVEvt ="+vtemp.existListP());
             }
         }
-        modifierVoitureExistante(v);
     }
     
     public void modifierVoitureExistante(Voiture v){
@@ -266,6 +265,7 @@ public class Controleur {
                 vtemp.setListP(v.getListP());
             }
         }
+        modifierVoitureEvenement(v);
     }
     
     public boolean enregistrerVoiture(int numV, String couleur,int nbToursRelai,Boolean voitureEnCourse){

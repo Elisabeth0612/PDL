@@ -79,6 +79,8 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
         lesVtemp = new ArrayList<Voiture>();
+        jList1.removeAll();
+        jList2.removeAll();
     }
 
     public int parcoursList(int numV) {

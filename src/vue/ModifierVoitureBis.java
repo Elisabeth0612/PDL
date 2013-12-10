@@ -87,9 +87,10 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
     }
     
     public void charger(){ 
-        System.out.println("Modifier Voiture ="+voitureCourante.getNumVoiture());
         
         if(voitureCourante!=null){
+            System.out.println("charger mVoiture pour la voiture="+voitureCourante.getNumVoiture());
+            
             int numV = voitureCourante.getNumVoiture();
             jTextField4.setText(Integer.toString(numV));
             jTextField1.repaint();
@@ -103,16 +104,15 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
             jTextField2.repaint();
 
            List<Pilote> lesP = new ArrayList<Pilote>();
-           //System.out.println("Modifier Voiture : exist="+voitureCourante.existListP());
+           
            if(voitureCourante.existListP()){
                lesP = voitureCourante.getListP();
-               //System.out.println("Modifier Voiture : lesP size="+lesP.size());
+               
                remplir(lesP);
                if(lesP.size()!=0){
                     model = new DefaultListModel<String>();
                     for(Pilote p : lesP){
                         model.addElement(p.getNom()+" "+p.getPrenom());
-                        //System.out.println(p.getNom()+" "+p.getPrenom());
                     }
                     jList1.setModel(model);
                     jList1.setSelectedIndex(0);
@@ -124,7 +124,6 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
                 jList1.setSelectedIndex(0);
                 jList1.repaint();
            }
-           //System.out.println("Modifier Voiture : jList1 size="+jList1.getModel().getSize());
 
             Pilote p = voitureCourante.getPiloteActuel();
             if(p!=null){
@@ -146,13 +145,11 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
     }
     
     public void miseAJour(Voiture v){
-        System.out.println("voiture n="+v.getNumVoiture());
         //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
         voitureCourante=v;
     }
     
     public int parcoursList(String nom, String prenom){
-        //System.out.println("nom ="+nom+" prenom="+prenom);
         for(int i=0; i<lesPTemp.size();i++){
             if(lesPTemp.get(i).getNom().equals(nom) && lesPTemp.get(i).getPrenom().equals(prenom)){
                 return i;
@@ -429,10 +426,12 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
+        System.out.println("mVoiture *Enregistrer* pour la voiture="+voitureCourante.getNumVoiture());
         if(voitureCourante==null){
             JOptionPane.showMessageDialog(this,"Erreur...","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
             voitureCourante.setListP(lesPTemp);
+            
             String nomPrenomPilote = jTextField3.getText();
             System.out.println("Pilote actuel :"+nomPrenomPilote+".");
             if(!nomPrenomPilote.equals("")){
@@ -447,9 +446,8 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
                     voitureCourante.setNbToursParRelai(Integer.parseInt(jTextField2.getText()));
                     voitureCourante.setVoitureActive(jCheckBox1.isSelected());
                     voitureCourante.setPiloteActuel(p);
-                    controleur.modifierVoitureEvenement(voitureCourante);
+                    controleur.modifierVoitureExistante(voitureCourante);
                     vider();
-                    System.out.println("retour");
                     controleur.retour();
                 }
             }else{

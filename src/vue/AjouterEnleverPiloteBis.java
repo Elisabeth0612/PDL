@@ -80,9 +80,14 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         //throw new UnsupportedOperationException("Not supported yet.");
         lesPVoitureTemp = new ArrayList<Pilote>();
         voitureCourante = null;
+        jLabel3.setText("");
+        jList1.repaint();
+        
     }
     
     public void charger(){
+        System.out.println("charger aePilote pour la voiture="+voitureCourante.getNumVoiture());
+        
         jLabel3.setText("Véhicule n°"+voitureCourante.getNumVoiture());
         
         List<Pilote> lesPE = controleur.getListPilotesExistants();
@@ -97,7 +102,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
        }
         
         if(voitureCourante!=null){
-            System.out.println("Voiture v="+voitureCourante.getNumVoiture()+" existListP ="+voitureCourante.existListP());
             if(voitureCourante.existListP()){
                 List<Pilote> lesP = voitureCourante.getListP();
                 remplir(lesP);
@@ -125,7 +129,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     }
     
     public void miseAJour(Voiture v){
-        System.out.println("voiture n="+v.getNumVoiture());
         //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
         voitureCourante=v;
     }
@@ -306,7 +309,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         if(jList1.isSelectionEmpty()){
             JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
-            System.out.println("jList1 size="+jList2.getModel().getSize());
             if(jList2.getModel().getSize()!=0){
                 //Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
                 int indice = parcoursList(nomPilote, prenomPilote);
@@ -359,7 +361,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
-        System.out.println("aePilote ="+voitureCourante.getNumVoiture());
         voitureCourante.setListP(lesPVoitureTemp);
         controleur.modifierVoitureEvenement(voitureCourante);
         //controleur.setListVoiture(voitureCourante, lesPVoitureTemp);

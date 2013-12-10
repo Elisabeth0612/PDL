@@ -59,6 +59,7 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
 
     @Override
     public void fermer() {
+        vider();
         dispose();
     }
     
@@ -87,6 +88,7 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
     
     public void charger(){  
         if(voitureCourante!=null){
+            System.out.println("charger cVoiture pour la voiture="+voitureCourante.getNumVoiture());
             
             int numV = voitureCourante.getNumVoiture();
             jTextField4.setText(Integer.toString(numV));
@@ -108,7 +110,6 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
                     model = new DefaultListModel<String>();
                     for(Pilote p : lesP){
                         model.addElement(p.getNom()+" "+p.getPrenom());
-                        //System.out.println(p.getNom()+" "+p.getPrenom());
                     }
                     jList1.setModel(model);
                     jList1.setSelectedIndex(0);
@@ -141,8 +142,8 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
     }
     
     public void miseAJour(Voiture v){
-        System.out.println("voiture n="+v.getNumVoiture());
-        voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
+        //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
+        voitureCourante = v;
     }
     
     public int parcoursList(String nom, String prenom){
@@ -428,6 +429,7 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
         if(jTextField4.getText().equals("") && jTextField1.getText().equals("") && jTextField2.getText().equals("")){
             JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
+            System.out.println("cVoiture *Enregistrer* pour la voiture="+voitureCourante.getNumVoiture());
             if(voitureCourante==null){
                 voitureCourante = new Voiture(Integer.parseInt(jTextField4.getText()),jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected());
             }else{
