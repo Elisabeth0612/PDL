@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vue;
 
 import vue_defaut.AjouterEnleverPilote;
@@ -27,6 +26,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     private DefaultListModel<String> model2;
     private Voiture voitureCourante;
     private List<Pilote> lesPVoitureTemp = new ArrayList<Pilote>();
+
     /**
      * Creates new form AjouterEnleverPilote
      */
@@ -34,24 +34,24 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         controleur = c;
         initComponents();
     }
-    
-    public void remplir(List<Pilote> depart){
-        for(Pilote p:depart){
+
+    public void remplir(List<Pilote> depart) {
+        for (Pilote p : depart) {
             lesPVoitureTemp.add(p);
         }
     }
-    
-    public void lancer(){
+
+    public void lancer() {
         setVisible(true);
     }
-    
+
     @Override
     public void afficher() {
         raffraichir();
         charger();
         //on affiche la fenetre
         setVisible(true);
-        
+
     }
 
     @Override
@@ -64,7 +64,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         vider();
         dispose();
     }
-    
+
     @Override
     public void raffraichir() {
         //jPanel2.repaint();
@@ -72,9 +72,9 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     @Override
     public MaFenetre getPrecedent() {
-       return null; 
+        return null;
     }
-    
+
     @Override
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
@@ -82,66 +82,66 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         voitureCourante = null;
         jLabel3.setText("");
         jList1.repaint();
-        
+
     }
-    
-    public void charger(){
-        
+
+    public void charger() {
+
         List<Pilote> lesPE = controleur.getListPilotesExistants();
-        if(lesPE.size()!=0){
+        if (lesPE.size() != 0) {
             model1 = new DefaultListModel<String>();
-            for(Pilote p : lesPE){
-                model1.addElement(p.getNom()+" "+p.getPrenom());
+            for (Pilote p : lesPE) {
+                model1.addElement(p.getNom() + " " + p.getPrenom());
             }
             jList1.setModel(model1);
             jList1.setSelectedIndex(0);
             jList1.repaint();
-       }else{
+        } else {
             model1 = new DefaultListModel<String>();
             jList1.setModel(model1);
             jList1.setSelectedIndex(0);
             jList1.repaint();
-       }
-        
-        if(voitureCourante!=null){
-            jLabel3.setText("Véhicule n°"+voitureCourante.getNumVoiture());
+        }
+
+        if (voitureCourante != null) {
+            jLabel3.setText("Véhicule n°" + voitureCourante.getNumVoiture());
             //System.out.println("charger aePilote pour la voiture="+voitureCourante.getNumVoiture());
-            
-            if(voitureCourante.existListP()){
+
+            if (voitureCourante.existListP()) {
                 List<Pilote> lesP = voitureCourante.getListP();
                 remplir(lesP);
-                if(lesP.size()!=0){
+                if (lesP.size() != 0) {
                     model2 = new DefaultListModel<String>();
-                    for(Pilote p : lesP){
-                        model2.addElement(p.getNom()+" "+p.getPrenom());
+                    for (Pilote p : lesP) {
+                        model2.addElement(p.getNom() + " " + p.getPrenom());
                     }
                     jList2.setModel(model2);
                     jList2.setSelectedIndex(0);
                     jList2.repaint();
                 }
-            }else{
+            } else {
                 model2 = new DefaultListModel<String>();
                 jList2.setModel(model2);
                 jList2.setSelectedIndex(0);
                 jList2.repaint();
             }
-        }else{
+        } else {
             model2 = new DefaultListModel<String>();
             jList2.setModel(model2);
             jList2.setSelectedIndex(0);
             jList2.repaint();
         }
     }
-    
-    public void miseAJour(Voiture v){
+
+    public void miseAJour(Voiture v) {
         //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
-        voitureCourante=v;
+        voitureCourante = v;
     }
-    
-    public int parcoursList(String nom, String prenom){
+
+    public int parcoursList(String nom, String prenom) {
         //System.out.println("nom ="+nom+" prenom="+prenom);
-        for(int i=0; i<lesPVoitureTemp.size();i++){
-            if(lesPVoitureTemp.get(i).getNom().equals(nom) && lesPVoitureTemp.get(i).getPrenom().equals(prenom)){
+        for (int i = 0; i < lesPVoitureTemp.size(); i++) {
+            if (lesPVoitureTemp.get(i).getNom().equals(nom) && lesPVoitureTemp.get(i).getPrenom().equals(prenom)) {
                 return i;
             }
         }
@@ -174,9 +174,14 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             List<Pilote> lesPE = new ArrayList<Pilote>();
-            public int getSize() { return lesPE.size();
+
+            public int getSize() {
+                return lesPE.size();
             }
-            public Object getElementAt(int i) { return lesPE.get(i); }
+
+            public Object getElementAt(int i) {
+                return lesPE.get(i);
+            }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -185,9 +190,14 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
         jList2.setModel(new javax.swing.AbstractListModel() {
             List<Pilote> lesP = new ArrayList<Pilote>();
-            public int getSize() { return lesP.size();
+
+            public int getSize() {
+                return lesP.size();
             }
-            public Object getElementAt(int i) { return lesP.get(i); }
+
+            public Object getElementAt(int i) {
+                return lesP.get(i);
+            }
         });
         jScrollPane2.setViewportView(jList2);
 
@@ -235,104 +245,102 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(70, 70, 70))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addComponent(jButton1))
+                .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(70, 70, 70))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel3)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jButton3)
+                .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createSequentialGroup()
                 .addGap(201, 201, 201)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addComponent(jButton5)
-                .addContainerGap())
-        );
+                .addContainerGap()));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jButton3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(159, 159, 159)))
+                .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(159, 159, 159)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(11, 11, 11)
-                        .addComponent(jButton4)
-                        .addGap(36, 36, 36))))
-        );
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jButton5)
+                .addContainerGap())
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(11, 11, 11)
+                .addComponent(jButton4)
+                .addGap(36, 36, 36)))));
 
         pack();
     }// </editor-fold>
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton ">>" jList1 PilotesExistants - jList2 PilotesVoiture
-        if(jList1.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
-        }else{
+        if (jList1.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(this, "Veuillez sélectionner une voiture.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        } else {
             int i = jList1.getSelectedIndex();
-            String nomPrenomPilote = (String)jList1.getSelectedValue();
-            String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
-            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+            String nomPrenomPilote = (String) jList1.getSelectedValue();
+            String nomPilote = nomPrenomPilote.substring(0, nomPrenomPilote.lastIndexOf(" "));
+            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ") + 1, nomPrenomPilote.length());
 
-            if(jList2.getModel().getSize()!=0){
+            if (jList2.getModel().getSize() != 0) {
                 //Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
                 int indice = parcoursList(nomPilote, prenomPilote);
-                if(indice!=-1){
-                    JOptionPane.showMessageDialog(this,"Le pilote appartient déjà à la voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
-                }else{
+                if (indice != -1) {
+                    JOptionPane.showMessageDialog(this, "Le pilote appartient déjà à la voiture.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                } else {
                     Pilote pE = controleur.getPiloteExistant(nomPilote, prenomPilote);
-                    if(!lesPVoitureTemp.contains(pE)){
+                    if (!lesPVoitureTemp.contains(pE)) {
                         lesPVoitureTemp.add(pE);
-                        ((DefaultListModel)jList2.getModel()).addElement(pE.getNom()+" "+pE.getPrenom()); 
+                        ((DefaultListModel) jList2.getModel()).addElement(pE.getNom() + " " + pE.getPrenom());
                         jList2.repaint();
                     }
                 }
-            }else{
+            } else {
                 Pilote pE = controleur.getPiloteExistant(nomPilote, prenomPilote);
 
                 lesPVoitureTemp.add(pE);
                 //System.out.println(((DefaultListModel)jList2.getModel()).toString());
-                ((DefaultListModel)jList2.getModel()).addElement(pE.getNom()+" "+pE.getPrenom()); 
+                ((DefaultListModel) jList2.getModel()).addElement(pE.getNom() + " " + pE.getPrenom());
                 jList2.repaint();
             }
         }
@@ -340,22 +348,22 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "<<" jList1 PilotesExistants - jList2 PilotesVoiture
-        
-        if(jList2.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
-        }else{
+
+        if (jList2.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(this, "Veuillez sélectionner une voiture.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        } else {
             int i = jList2.getSelectedIndex();
-            String nomPrenomPilote = (String)jList2.getSelectedValue();
-            String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
-            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
-            
+            String nomPrenomPilote = (String) jList2.getSelectedValue();
+            String nomPilote = nomPrenomPilote.substring(0, nomPrenomPilote.lastIndexOf(" "));
+            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ") + 1, nomPrenomPilote.length());
+
             int indice = parcoursList(nomPilote, prenomPilote);
-            if(indice!=-1){
+            if (indice != -1) {
                 lesPVoitureTemp.remove(indice);
                 model2.remove(i);
                 jList2.repaint();
             }
-            
+
         }
     }
 
@@ -376,8 +384,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         // Bouton "Annuler"
         controleur.ouvrirModifierVoiture(voitureCourante);
     }
-
-   
     // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

@@ -30,10 +30,10 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
         controleur = c;
         initComponents();
     }
-    
-    public void remplir(List<Voiture> depart){
+
+    public void remplir(List<Voiture> depart) {
         //System.out.println("size="+depart.size());
-        for(Voiture v:depart){
+        for (Voiture v : depart) {
             lesVtemp.add(v);
             //System.out.println("Voiture ="+v.getNumVoiture());
         }
@@ -101,18 +101,18 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
             jList1.setModel(model1);
             jList1.setSelectedIndex(0);
             jList1.repaint();
-        }else{
+        } else {
             model1 = new DefaultListModel<String>();
             jList1.setModel(model1);
             jList1.setSelectedIndex(0);
             jList1.repaint();
-       }
-        
+        }
+
         //List<Voiture> lesVE = controleur.getVoituresEvenement();
-                
+
         List<Voiture> lesVE = controleur.getVoituresEvenement();
         remplir(lesVE);
-        
+
         if (lesVtemp.size() != 0) {
             model2 = new DefaultListModel<String>();
             for (Voiture v : lesVtemp) {
@@ -121,12 +121,12 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
             jList2.setModel(model2);
             jList2.setSelectedIndex(0);
             jList2.repaint();
-        }else{
+        } else {
             model2 = new DefaultListModel<String>();
             jList2.setModel(model2);
             jList2.setSelectedIndex(0);
             jList2.repaint();
-       }
+        }
     }
 
     /**
@@ -315,7 +315,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
                 JOptionPane.showMessageDialog(this, "La voiture est déjà présente dans l'Evenement.", "Erreur", JOptionPane.ERROR_MESSAGE);
             } else {
                 Voiture vE = controleur.getVoitureExistante(numV);
-                if(!lesVtemp.contains(vE)){
+                if (!lesVtemp.contains(vE)) {
                     lesVtemp.add(vE);
                     model2.addElement(Integer.toString(vE.getNumVoiture()));
                     jList2.repaint();
