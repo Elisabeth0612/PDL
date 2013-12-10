@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartPanel;
 
 
-public class Course extends Observable{
+public class Course{
 	
 	private List<Top> listT;
 	private List<Voiture> listV;
@@ -20,8 +20,6 @@ public class Course extends Observable{
 	private int nbToursMax;
         private GrapheCourse graphe=null;
         
-        //liste des observeurs
-        private ArrayList<Observer> lesObserveurs = new ArrayList<Observer>();
 
         public Course(){
             this.listT=new ArrayList<Top>();
@@ -170,18 +168,4 @@ public class Course extends Observable{
         return this.graphe.getPanelChart();
     }
     
-    //Implémentation du pattern observer
-    public void addObserver(Observer obs) {
-        this.lesObserveurs.add(obs);
-    }
-
-    public void notifyObserver() {
-        for (Observer obs : lesObserveurs) {
-            obs.update(this,this);
-        }
-    }
-
-    public void removeObserver() {
-        lesObserveurs = new ArrayList<Observer>();
-    }
 }

@@ -3,7 +3,7 @@ package modele;
 import java.util.*;
 
 
-public class Voiture extends Observable{
+public class Voiture{
 
 	private List<Pilote> listP;
 	private int numVoiture;
@@ -12,8 +12,6 @@ public class Voiture extends Observable{
 	private int nbToursParRelai; //nb de tours avant changement de pilote
 	private boolean voitureActive;
         
-        //liste des observeurs
-        private ArrayList<Observer> lesObserveurs = new ArrayList<Observer>();
 	
 	public Voiture(int numVoiture, Pilote piloteActuel, String couleur, int nbToursParRelai, boolean voitureActive){
 		this.numVoiture=numVoiture;
@@ -117,20 +115,5 @@ public class Voiture extends Observable{
             if(p.getNom().compareTo(nom)==0 && p.getPrenom().compareTo(prenom)==0)return p;
         }
         return null;
-    }
-    
-    //Implémentation du pattern observer
-    public void addObserver(Observer obs) {
-        this.lesObserveurs.add(obs);
-    }
-
-    public void notifyObserver() {
-        for (Observer obs : lesObserveurs) {
-            obs.update(this,this);
-        }
-    }
-
-    public void removeObserver() {
-        lesObserveurs = new ArrayList<Observer>();
     }
 }
