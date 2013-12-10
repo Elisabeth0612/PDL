@@ -3,7 +3,7 @@ package modele;
 import java.util.*;
 
 
-public class Voiture {
+public class Voiture extends Observable{
 
 	private List<Pilote> listP;
 	private int numVoiture;
@@ -11,6 +11,9 @@ public class Voiture {
 	private String couleur;
 	private int nbToursParRelai; //nb de tours avant changement de pilote
 	private boolean voitureActive;
+        
+        //liste des observeurs
+        private ArrayList<Observer> lesObserveurs = new ArrayList<Observer>();
 	
 	public Voiture(int numVoiture, Pilote piloteActuel, String couleur, int nbToursParRelai, boolean voitureActive){
 		this.numVoiture=numVoiture;

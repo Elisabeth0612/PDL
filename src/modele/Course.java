@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartPanel;
 
 
-public class Course {
+public class Course extends Observable{
 	
 	private List<Top> listT;
 	private List<Voiture> listV;
@@ -19,6 +19,9 @@ public class Course {
 	private String typeFin;
 	private int nbToursMax;
         private GrapheCourse graphe=null;
+        
+        //liste des observeurs
+        private ArrayList<Observer> lesObserveurs = new ArrayList<Observer>();
 
         public Course(){
             this.listT=new ArrayList<Top>();
