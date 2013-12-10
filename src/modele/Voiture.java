@@ -106,4 +106,11 @@ public class Voiture {
 	public void modifierVoiture(){
 
 	}
+
+    public Pilote trouverUnPilote(String nom, String prenom) {
+        for(Pilote p : listP){
+            if(p.getNom().compareTo(nom)==0 && p.getPrenom().compareTo(prenom)==0)return p;
+        }
+        return null;
+    }
 }

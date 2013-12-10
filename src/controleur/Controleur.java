@@ -299,7 +299,9 @@ public class Controleur {
             //parse du resultat
             int tour = Integer.parseInt((String)table.getValueAt(i, 0));
             Voiture v = this.getVoitureEvenementByNum(Integer.parseInt((String)table.getValueAt(i, 1)));
-            Pilote p = v.getPiloteActuel();
+            String nom = ((String)table.getValueAt(i, 2)).split(" - ")[0];
+            String prenom = ((String)table.getValueAt(i, 2)).split(" - ")[1];
+            Pilote p = v.trouverUnPilote(nom,prenom);
             String res = (String) table.getValueAt(i, 3);
             String[] tempsSplit = res.split(":");
             long tempsT = (Integer.parseInt(tempsSplit[3]))+(Integer.parseInt(tempsSplit[2])*1000)+(Integer.parseInt(tempsSplit[1])*1000*60)+(Integer.parseInt(tempsSplit[0])*1000*60*60);
