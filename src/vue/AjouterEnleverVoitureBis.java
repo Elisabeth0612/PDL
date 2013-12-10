@@ -32,10 +32,10 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     }
     
     public void remplir(List<Voiture> depart){
-        System.out.println("size="+depart.size());
+        //System.out.println("size="+depart.size());
         for(Voiture v:depart){
             lesVtemp.add(v);
-            System.out.println("Voiture ="+v.getNumVoiture());
+            //System.out.println("Voiture ="+v.getNumVoiture());
         }
     }
 

@@ -46,6 +46,7 @@ public class GrapheCourse {
             if (Integer.parseInt(sRes) == numV) {
                     //parse du resultat
                     String res = (String) resultats.getValueAt(i, 3);
+                    
                     String[] res2 = res.split(":");
                     int h = Integer.parseInt(res2[0]);
                     int m = Integer.parseInt(res2[1]);
@@ -73,6 +74,7 @@ public class GrapheCourse {
                             temps[n] = time;
                             n++;
                         }
+                        
                     }
                 
             }
@@ -91,7 +93,9 @@ public class GrapheCourse {
             //1er tours
             series.add(1, temps[0]);
             for (int j = 1; j < nbTours; j++) {
-                series.add(j + 1, (temps[j] - temps[j - 1]));
+                if(temps[j]!=0){
+                    series.add(j+1, (temps[j] - temps[j - 1]));}
+                else{series.add(j+1,0);}
             }
             // Add the series to your data set
             dataset.addSeries(series);
@@ -118,10 +122,5 @@ public class GrapheCourse {
     
     
 			
-    /*
-     try {
-     ChartUtilities.saveChartAsJPEG(new File("./src/graphique/"+nomC+"_chart.jpg"), chart, 500, 300);
-     } catch (IOException e) {
-     System.err.println("Problem occurred creating chart.");
-     }*/
+    
 }

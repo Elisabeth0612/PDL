@@ -460,7 +460,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         if (!jList1.isSelectionEmpty()){
             if (cModifier!=null){
                 Voiture v= (Voiture) controleur.getVoituresEvenement().get(jList1.getSelectedIndex());
-                System.out.println(cModifier.getListV().contains(v));
+                //System.out.println(cModifier.getListV().contains(v));
                 if (!cModifier.getListV().contains(v)){
                     cModifier.addListV(v);
                     model2.addElement(Integer.toString(v.getNumVoiture()));

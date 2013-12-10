@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -249,44 +251,62 @@ public class ResultatsCourseBis extends javax.swing.JFrame implements MaFenetre 
         pack();
     }// </editor-fold>                        
 
-    private void enregistrerResultats(java.awt.event.ActionEvent evt) { 
-        TableModel table = jTable1.getModel();
-        File fic = new File("../"+nomC+".html"); 
-        if(fic.exists())fic.delete();
-        try{
-            FileWriter fw = new FileWriter("../"+nomC+".html", true);
-            BufferedWriter output = new BufferedWriter(fw);
-            output.write("<TABLE BORDER=\"1\"> \n" +
-                "  <CAPTION> "+nomC+" </CAPTION> \n" +
-                "  <TR> \n" +
-                " <TH> Num Tour </TH> \n" +
-                " <TH> Num Voiture </TH> \n" +
-                " <TH> Pilote </TH> \n" +
-                " <TH> Temps </TH> \n" +
-                         " <TH> Relai </TH> \n" +
-                         " <TH> Etat </TH> \n" +
-                         " <TH> Heure </TH> \n" +
-                         " <TH> Commentaire </TH> \n" +
-                "  </TR>");
-            for (int i = 0; i < table.getRowCount(); i++) {
-                output.write("<TR> \n" +
-                    " <TD> "+(String)table.getValueAt(i, 0)+" </TD> " +
-                        " <TD> "+(String)table.getValueAt(i, 1)+" </TD> " +
-                        " <TD> "+(String)table.getValueAt(i, 2)+" </TD> " +
-                        " <TD> "+(String)table.getValueAt(i, 3)+" </TD> " +
-                        " <TD> "+(String)table.getValueAt(i, 4)+" </TD> " +
-                        " <TD> "+(String)table.getValueAt(i, 5)+" </TD> " +
-                        " <TD> "+(String)table.getValueAt(i, 6)+" </TD> " +
-                        " <TD> "+(String)table.getValueAt(i, 7)+" </TD> " +
-                        "  </TR>");
+    private void enregistrerResultats(java.awt.event.ActionEvent evt) {
+        //Choix du dossier
+        JFileChooser choix = new JFileChooser();
+        choix.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int retour = choix.showOpenDialog(new JFrame());
+        if(retour == JFileChooser.APPROVE_OPTION) {
+            // un fichier a été choisi ( sortie par OK)
+            String dossier = choix.getSelectedFile().getAbsolutePath();// chemin absolu du dossier choisi
+            
+            //on enregistre les resultats dans le dossier choisi
+            TableModel table = jTable1.getModel();
+            File fic = new File(dossier+"/"+nomC+".html"); 
+            if(fic.exists())fic.delete();
+            try{
+                FileWriter fw = new FileWriter(dossier+"/"+nomC+".html", true);
+                BufferedWriter output = new BufferedWriter(fw);
+                output.write("<TABLE BORDER=\"1\"> \n" +
+                    "  <CAPTION> "+nomC+" </CAPTION> \n" +
+                    "  <TR> \n" +
+                    " <TH> Num Tour </TH> \n" +
+                    " <TH> Num Voiture </TH> \n" +
+                    " <TH> Pilote </TH> \n" +
+                    " <TH> Temps </TH> \n" +
+                             " <TH> Relai </TH> \n" +
+                             " <TH> Etat </TH> \n" +
+                             " <TH> Heure </TH> \n" +
+                             " <TH> Commentaire </TH> \n" +
+                    "  </TR>");
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    output.write("<TR> \n" +
+                        " <TD> "+(String)table.getValueAt(i, 0)+" </TD> " +
+                            " <TD> "+(String)table.getValueAt(i, 1)+" </TD> " +
+                            " <TD> "+(String)table.getValueAt(i, 2)+" </TD> " +
+                            " <TD> "+(String)table.getValueAt(i, 3)+" </TD> " +
+                            " <TD> "+(String)table.getValueAt(i, 4)+" </TD> " +
+                            " <TD> "+(String)table.getValueAt(i, 5)+" </TD> " +
+                            " <TD> "+(String)table.getValueAt(i, 6)+" </TD> " +
+                            " <TD> "+(String)table.getValueAt(i, 7)+" </TD> " +
+                            "  </TR>");
+                }
+                output.flush();
+                output.close();
+                JOptionPane.showMessageDialog(null,"Les résultats ont été enregistrés");
             }
-            output.flush();
-            output.close();
-            JOptionPane.showMessageDialog(null,"Les résultats ont été enregistrés");
-	}
-	catch(IOException ioe){
-            ioe.printStackTrace();
+            catch(IOException ioe){
+                JOptionPane.showMessageDialog(null,"Les résultats n'ont pas été enregistrés");
+            }
+            
+        } 
+        else {
+            JOptionPane.showMessageDialog(null,"Les résultats n'ont pas été enregistrés");
         }
+        
+        
+        
+        
     } 
 
     // Variables declaration - do not modify                     
