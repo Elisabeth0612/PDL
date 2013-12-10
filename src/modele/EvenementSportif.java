@@ -102,7 +102,13 @@ public class EvenementSportif extends Observable {
     }
     
     public void setListV(List<Voiture> lesVTemp){
-        listV=lesVTemp;
+        listV = new ArrayList<Voiture>();
+        for(Voiture vtemp:lesVTemp){
+            Voiture v = new Voiture(vtemp.getNumVoiture(),vtemp.getPiloteActuel(),vtemp.getCouleur(),vtemp.getNbToursParRelai(),vtemp.getVoitureActive());
+            v.setListP(vtemp.getListP());
+            listV.add(v);
+        }
+        
     }
     
     public Course chercherCourse(String nomC){

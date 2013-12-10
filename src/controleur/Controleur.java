@@ -156,10 +156,6 @@ public class Controleur {
         vue.ouvrirAjouterEnleverPilote(v);
     }
     
-    public void ouvrirAjouterEnleverPilote(){
-        vue.ouvrirAjouterEnleverPilote();
-    }
-    
     public void ouvrirAjouterEnleverVoiture(){
         vue.ouvrirAjouterEnleverVoiture();
     }

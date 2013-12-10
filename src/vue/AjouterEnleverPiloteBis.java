@@ -61,6 +61,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     @Override
     public void fermer() {
+        vider();
         dispose();
     }
     
@@ -98,7 +99,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         if(voitureCourante!=null){
             System.out.println("Voiture v="+voitureCourante.getNumVoiture()+" existListP ="+voitureCourante.existListP());
             if(voitureCourante.existListP()){
-                List<Pilote> lesP = controleur.getPilotesVoitureCourante(voitureCourante.getNumVoiture());
+                List<Pilote> lesP = voitureCourante.getListP();
                 remplir(lesP);
                 if(lesP.size()!=0){
                     model2 = new DefaultListModel<String>();
@@ -125,7 +126,8 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     
     public void miseAJour(Voiture v){
         System.out.println("voiture n="+v.getNumVoiture());
-        voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
+        //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
+        voitureCourante=v;
     }
     
     public int parcoursList(String nom, String prenom){

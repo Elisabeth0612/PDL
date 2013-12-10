@@ -59,6 +59,7 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
 
     @Override
     public void fermer() {
+        vider();
         dispose();
     }
     
@@ -146,7 +147,8 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
     
     public void miseAJour(Voiture v){
         System.out.println("voiture n="+v.getNumVoiture());
-        voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
+        //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
+        voitureCourante=v;
     }
     
     public int parcoursList(String nom, String prenom){

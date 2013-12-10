@@ -114,15 +114,6 @@ public class Vue implements Observer {
         ((TableurChronoBis)optionnelle).ajouterLigne(ligneTable);
     }
     
-    
-    
-    public void ouvrirAjouterEnleverPilote(){
-        courante.fermer();
-        precedente = cVoiture;
-        courante = aePilote;
-        courante.afficher();
-    }
-    
     public void ouvrirAjouterEnleverPilote(Voiture v){
         courante.fermer();
         precedente = mVoiture;
