@@ -48,19 +48,30 @@ public class GestionnaireExistant {
          //chargerExistants();
          //on va charger ici les données à partir des fichiers xml
      }
-     public static GestionnaireExistant getInstance() {
+     
+     /**
+     * Créer une instance unique du Gestionnaire de la Sauvegarde : Pattern Singleton
+     * @return instance
+     */
+    public static GestionnaireExistant getInstance() {
         return INSTANCE; // Il n'y a qu'un seul Gestionnaire
      }
      
-     //genere la liste des existants
-     public void chargerExistants(){
+     /**
+     * Genere la liste des existants
+     */
+    public void chargerExistants(){
          chargerExistantsEvenement();
          chargerExistantsPilote();
          chargerExistantsVoiture();
      }
      
-     //genere les fichiers des existants
-     public void enregistrementFermeture(EvenementSportif evtS){
+
+     /**
+     * Genere les fichiers des existants
+     * @param evtS EvenementSportif
+     */
+    public void enregistrementFermeture(EvenementSportif evtS){
          genererFichierEvenements(evtS);
          genererFichierPilotes();
          genererFichierVoitures();
@@ -68,8 +79,13 @@ public class GestionnaireExistant {
     }
    
      
-     //cree le fichier
-     public void creerFichier(String nomFic,Document document){
+     /**
+     * Cree le fichier
+     * 
+     * @param nomFic String
+     * @param document Document
+     */
+    public void creerFichier(String nomFic,Document document){
          try {
              //enregistrement fichier
              FileOutputStream fos = new FileOutputStream(nomFic) ;
@@ -82,8 +98,12 @@ public class GestionnaireExistant {
 
      }
      
-     //Gestion fichier un evenement
-     public void genererFichierUnEvtExistant(EvenementSportif evtS){
+     /**
+     * Gestion fichier un evenement
+     * 
+     * @param evtS EvenementSportif
+     */
+    public void genererFichierUnEvtExistant(EvenementSportif evtS){
          //on s'occupe de l'evenement courant
          Element racine = new Element("Evenement"+evtS.getNomEvt());
         Document document = new Document(racine);
@@ -162,7 +182,13 @@ public class GestionnaireExistant {
         creerFichier(fic,document);
      }
      
-     public EvenementSportif chargerUnEvenementExistant(String nomEvenement){
+     /**
+     * Charge un evenement existant
+     * 
+     * @param nomEvenement String
+     * @return EvenementSportif
+     */
+    public EvenementSportif chargerUnEvenementExistant(String nomEvenement){
          EvenementSportif evtS = null;
          try {
             
@@ -260,8 +286,12 @@ public class GestionnaireExistant {
      }
            
      
-     //Gestion Existants Evenement
-     public void genererFichierEvenements(EvenementSportif e){
+     /**
+     * Gestion de l'existant du fichier Evenement
+     * 
+     * @param e EvenementSportif
+     */
+    public void genererFichierEvenements(EvenementSportif e){
          //Test si le fichier est déjà existant ou non
          File f= new File("./src/xml/listeEvenements.xml");
          if(f.exists()==true){
@@ -296,7 +326,10 @@ public class GestionnaireExistant {
      }
      
      
-     public void chargerExistantsEvenement(){
+     /**
+     * Charge les evenements existants
+     */
+    public void chargerExistantsEvenement(){
         try {
             
             //on s'occupe de la liste des evenements
@@ -325,8 +358,10 @@ public class GestionnaireExistant {
         }
      }
      
-     //Gestion Existants Voiture
-     public void genererFichierVoitures(){
+     /**
+     * Gestion de l'existant du fichier Voiture
+     */
+    public void genererFichierVoitures(){
          Element racine = new Element("Voitures");
          Document document = new Document(racine);
          for(Voiture v : this.lesVoituresExistantes){
@@ -362,7 +397,10 @@ public class GestionnaireExistant {
          creerFichier(fic,document);
      }
 
-     public void chargerExistantsVoiture(){
+     /**
+     * Charge les voitures existantes
+     */
+    public void chargerExistantsVoiture(){
          try {
             
             //on s'occupe de la liste des evenements
@@ -423,8 +461,10 @@ public class GestionnaireExistant {
         }
      }
      
-     //Gestion Existants Pilote
-     public void genererFichierPilotes(){
+     /**
+     * Gestion de l'existant du fichier Pilote
+     */
+    public void genererFichierPilotes(){
          Element racine = new Element("Pilotes");
          Document document = new Document(racine);
          for(Pilote p : this.lesPilotesExistants){
@@ -443,7 +483,10 @@ public class GestionnaireExistant {
          creerFichier(fic,document);
      }
      
-     public void chargerExistantsPilote(){
+     /**
+     * Charge les pilotes existants
+     */
+    public void chargerExistantsPilote(){
          try {
             
             //on s'occupe de la liste des evenements
@@ -481,18 +524,38 @@ public class GestionnaireExistant {
      }
      
      //les getteurs
+    
+    /**
+     * Retourne la liste des evenements existants
+     * @return liste de String contenant les nom des evenements existants
+     */
     public List<String> getEvenementsExistants() {
         return this.lesEvtExistants; 
     }
     
+    /**
+     * Retourne la liste des pilotes existants
+     * @return liste de Pilote
+     */
     public List<Pilote> getPilotesExistants(){
         return this.lesPilotesExistants;
     }
     
+    /**
+     * Retourne la liste des voitures existantes
+     * @return liste de Voiture
+     */
     public List<Voiture> getVoituresExistantes(){
         return this.lesVoituresExistantes;
     }
     
+    /**
+     * Méthode permettant de récupérer un Pilote existant
+     * 
+     * @param nom String
+     * @param prenom String
+     * @return Pilote
+     */
     public Pilote getUnPilote(String nom,String prenom){
         for(Pilote p : this.lesPilotesExistants){
             if(p.getNom().compareTo(nom)==0 && p.getPrenom().compareTo(prenom)==0){
@@ -502,6 +565,12 @@ public class GestionnaireExistant {
         return null;
     }
     
+    /**
+     * Méthode permettant de récupéer une Voiture existante
+     * 
+     * @param numV int
+     * @return Voiture
+     */
     public Voiture getUneVoiture(int numV){
         for(Voiture v : this.lesVoituresExistantes){
             if(v.getNumVoiture()==numV){
@@ -510,11 +579,21 @@ public class GestionnaireExistant {
         }
         return null;
     }
+    
     //les setteurs
+    
+    /**
+     * Méthode permettant de créer une nouvelle voiture ajoutée à l'existant
+     * @param v Voiture
+     */
     public void creerNouvelleVoiture(Voiture v){
         this.lesVoituresExistantes.add(v);
     }
     
+    /**
+     * Méthode permettant de créer un nouveau pilote ajouté à l'existant
+     * @param p Pilote
+     */
     public void creerNouveauPilote(Pilote p){
         this.lesPilotesExistants.add(p);
     }
