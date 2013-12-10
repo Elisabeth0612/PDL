@@ -29,8 +29,8 @@ import org.w3c.dom.NodeList;
 import vue_defaut.Evenement;
 
 /**
- * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
- * grpe 1A
+ *
+ * @author Co
  */
 public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFenetre{
     
@@ -42,6 +42,9 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private List<Voiture> voitures;
     /**
      * Creates new form CreerModifierCourse
+     * @param control
+     * @param evt
+     * @param c
      */
     public CreerModifierCourseBis(Controleur control, EvenementBis evt,Course c) {
         this.controleur=control;
@@ -51,14 +54,26 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         voitures=new ArrayList<Voiture>();
     }
 
+    /**
+     *Methode qui retourne la course a modifier
+     * @return
+     */
     public Course getcModifier() {
         return cModifier;
     }
 
+    /**
+     *Modifie la course à modifier
+     * @param cModifier
+     */
     public void setcModifier(Course cModifier) {
         this.cModifier = cModifier;
     }
-   
+
+    /**
+     *Renvoie true si tous les champs ont été rempli
+     * @return
+     */
     public boolean controleChampsSaisis(){
         boolean ok=true;
         if (jTextField1.getText().isEmpty()) ok=false;
@@ -70,7 +85,10 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) ok=false;
         return ok;
     }
-    
+
+    /**
+     * Met à jour la course à modifier
+     */
     public void miseAJourCModifier(){
         try {
             cModifier.setNomCourse(jTextField1.getText());
@@ -81,7 +99,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
             cModifier.setDureePilotageMaxParPilote(Integer.parseInt(jTextField3.getText()));
             cModifier.setDureeConsecutivePilotageMaxParPilote(Integer.parseInt(jTextField4.getText()));
             cModifier.setMeteo(jTextField7.getText());
-            String typeFin=null;
+            String typeFin;
             if (jRadioButton1.isSelected()){
                 typeFin=jRadioButton1.getText();
             }
@@ -424,17 +442,18 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     }// </editor-fold>
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) { 
+        //Bouton retour
         raffraichir();
         controleur.retour();
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {   
-        //enregistrer
+        //Bouton enregistrer
         if (!controleChampsSaisis()){
             JOptionPane.showMessageDialog(this,"Veuillez renseigner tous les champs pour créer/modifier la course","Erreur",JOptionPane.ERROR_MESSAGE);
         }else if (cModifier==null){
             try {
-                String typeFin=null;
+                String typeFin;
                 if (jRadioButton1.isSelected()){
                     typeFin=jRadioButton1.getText();
                 }
@@ -459,16 +478,18 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         }
     }                                        
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {       
+        //Cocher bouton radio 1
         jRadioButton2.setSelected(!jRadioButton1.isSelected());
     }                                             
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        //Cocher bouton radio 2
         jRadioButton1.setSelected(!jRadioButton2.isSelected());
     }                                             
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        //>>
+        //Bouton >>
         if (!jList1.isSelectionEmpty()){
             Voiture v= (Voiture) controleur.getVoituresEvenement().get(jList1.getSelectedIndex());
             if (cModifier!=null){
@@ -487,7 +508,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        //<<
+        //Bouton <<
         if (!jList2.isSelectionEmpty()){
             Voiture v=(Voiture) controleur.getVoituresEvenement().get(jList2.getSelectedIndex());
             if (cModifier!=null){
@@ -502,7 +523,8 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         }
     }
     
-   private void formWindowActivated(java.awt.event.WindowEvent evt) {                                     
+   private void formWindowActivated(java.awt.event.WindowEvent evt) { 
+       // Sur activation de la fenetre
         if (cModifier!=null){
             jTextField1.setText(cModifier.getNomCourse());
             SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
@@ -532,6 +554,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     }    
     
     private void jFormattedTextField1FocusLost(java.awt.event.FocusEvent evt) { 
+        //Sur perte focus de heure debut
         if (!jFormattedTextField1.getText().contains(" ")){
             String[] tab=jFormattedTextField1.getText().split(":");
             if (Integer.parseInt(tab[0])>23 || Integer.parseInt(tab[1])>60){
@@ -540,7 +563,8 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         }
     }   
     
-    private void jFormattedTextField2FocusLost(java.awt.event.FocusEvent evt) { 
+    private void jFormattedTextField2FocusLost(java.awt.event.FocusEvent evt) {
+        //Sur perte focus de heure fin
         if (!jFormattedTextField2.getText().contains(" ")){
             String[] tab=jFormattedTextField2.getText().split(":");
             if (Integer.parseInt(tab[0])>23 || Integer.parseInt(tab[1])>60){
@@ -582,17 +606,25 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     private javax.swing.JTextField jTextField7;
     // End of variables declaration
 
-
+    /**
+     *Masque la fenetre
+     */
     @Override
     public void masquer() {
         setVisible(false);
     }
-
+    
+    /**
+     * Fermer
+     */
     @Override
     public void fermer() {
         dispose();
     }
-    
+
+    /**
+     *Mais tous les jTextField a null et les bouton radios a false
+     */
     @Override
     public void raffraichir() {
         jTextField1.setText(null);
@@ -605,7 +637,10 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         jRadioButton1.setSelected(false);
         jRadioButton2.setSelected(false);
     }
-    
+
+    /**
+     * Chargement des donnees voiture de l evenement en cours
+     */
     public void chargerVoitureEvenement(){
         List<Voiture> lesV = controleur.getVoituresEvenement();
         if(!lesV.isEmpty()){
@@ -619,6 +654,9 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
        }
     }
     
+    /**
+     *Chargement des donnees Voiture de la course selectionnee
+     */
     public void chargerVoitureCourse(){
         if (cModifier!=null){
             List<Voiture> lesV = cModifier.getListV();
@@ -655,6 +693,10 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         }
     }
     
+    /**
+     *Retourne la fenetre precedente
+     * @return
+     */
     @Override
     public MaFenetre getPrecedent() {
        return jfPrecedente; 
@@ -665,6 +707,9 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
         //throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     *Affiche la fenetre
+     */
     @Override
     public void afficher() {
         setVisible(true);
