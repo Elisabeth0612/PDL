@@ -167,5 +167,8 @@ public class Course{
     public ChartPanel getPanelGraphe(){
         return this.graphe.getPanelChart();
     }
-    
+
+    public void setListV(List<Voiture> listV) {
+        this.listV = listV;
+    }
 }
