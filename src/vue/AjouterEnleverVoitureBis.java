@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 import modele.Voiture;
 
 /**
- *
- * @author Co
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFenetre {
 
