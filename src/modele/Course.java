@@ -169,4 +169,19 @@ public class Course extends Observable{
     public ChartPanel getPanelGraphe(){
         return this.graphe.getPanelChart();
     }
+    
+    //Implémentation du pattern observer
+    public void addObserver(Observer obs) {
+        this.lesObserveurs.add(obs);
+    }
+
+    public void notifyObserver() {
+        for (Observer obs : lesObserveurs) {
+            obs.update(this,this);
+        }
+    }
+
+    public void removeObserver() {
+        lesObserveurs = new ArrayList<Observer>();
+    }
 }
