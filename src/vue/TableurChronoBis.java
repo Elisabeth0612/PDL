@@ -15,8 +15,8 @@ import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author 13008360
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class TableurChronoBis extends javax.swing.JFrame implements MaFenetre {
 private Controleur control;

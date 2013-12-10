@@ -9,8 +9,8 @@ package vue;
 import controleur.Controleur;
 
 /**
- *
- * @author Co
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 
 public class CreerChargerEvt extends javax.swing.JFrame implements MaFenetre {

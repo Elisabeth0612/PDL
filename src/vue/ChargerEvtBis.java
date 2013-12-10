@@ -11,8 +11,8 @@ import java.util.List;
 import modele.Voiture;
 
 /**
- *
- * @author Co
+* @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class ChargerEvtBis extends javax.swing.JFrame implements MaFenetre {
 

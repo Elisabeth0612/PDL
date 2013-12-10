@@ -2,6 +2,10 @@ package modele;
 
 import java.util.*;
 
+/**
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
+ */
 public class EvenementSportif extends Observable {
 
     private List<Course> listC;

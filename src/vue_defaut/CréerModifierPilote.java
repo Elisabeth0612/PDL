@@ -7,8 +7,8 @@
 package vue_defaut;
 
 /**
- *
- * @author Co
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class CréerModifierPilote extends javax.swing.JFrame {
 

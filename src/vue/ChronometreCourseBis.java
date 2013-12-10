@@ -29,8 +29,8 @@ import modele.Voiture;
 import vue_defaut.JChronoUneVoiture;
 
 /**
- *
- * @author 13008360
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class ChronometreCourseBis extends javax.swing.JFrame implements MaFenetre {
 

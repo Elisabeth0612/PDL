@@ -33,8 +33,8 @@ import org.jdom2.output.XMLOutputter;
 
 
 /**
- *
- * @author 13008360
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class GestionnaireExistant {
     private List<String> lesEvtExistants = new ArrayList<String>();

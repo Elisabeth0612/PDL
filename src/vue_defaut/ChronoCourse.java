@@ -13,8 +13,8 @@ import javax.swing.JCheckBox;
 import vue.MaFenetre;
 
 /**
- *
- * @author Co
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class ChronoCourse extends javax.swing.JFrame implements MaFenetre {
 

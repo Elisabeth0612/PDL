@@ -6,6 +6,10 @@ import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartPanel;
 
 
+/**
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
+ */
 public class Course{
 	
 	private List<Top> listT;

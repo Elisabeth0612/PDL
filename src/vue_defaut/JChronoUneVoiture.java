@@ -11,8 +11,8 @@
 package vue_defaut;
 
 /**
- *
- * @author 13008360
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class JChronoUneVoiture extends javax.swing.JFrame {
 

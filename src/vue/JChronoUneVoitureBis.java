@@ -21,8 +21,8 @@ import javax.swing.Timer;
 import modele.Pilote;
 
 /**
- *
- * @author 13008360
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class JChronoUneVoitureBis extends javax.swing.JFrame implements MaFenetre {
     //nos variables

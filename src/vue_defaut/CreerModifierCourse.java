@@ -14,8 +14,8 @@ import vue.MaFenetre;
 import vue_defaut.Evenement;
 
 /**
- *
- * @author Co
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class CreerModifierCourse extends javax.swing.JFrame implements MaFenetre{
     

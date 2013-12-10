@@ -5,8 +5,8 @@
 package graphique;
 
 /**
- *
- * @author 13003814
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;

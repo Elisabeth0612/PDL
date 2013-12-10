@@ -4,6 +4,10 @@ import java.util.Date;
 
 
 
+/**
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
+ */
 public class Top {
 	private int numTour;
         private String typeTop;

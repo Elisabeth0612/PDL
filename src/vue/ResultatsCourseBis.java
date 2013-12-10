@@ -26,8 +26,8 @@ import modele.Top;
 import modele.Voiture;
 
 /**
- *
- * @author Co
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class ResultatsCourseBis extends javax.swing.JFrame implements MaFenetre {
 

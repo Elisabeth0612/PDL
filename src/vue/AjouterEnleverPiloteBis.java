@@ -16,8 +16,8 @@ import modele.Pilote;
 import modele.Voiture;
 
 /**
- *
- * @author Co
+ * @author Coralie GENDRIER - Corinne BECHEPOIS - Elisabeth RECULE - M1 MIAGE
+ * grpe 1A
  */
 public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
