@@ -120,6 +120,7 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
                 jList1.setSelectedIndex(0);
                 jList1.repaint();
            }
+           System.out.println("jList1 size="+jList1.getModel().getSize());
 
             Pilote p = voitureCourante.getPiloteActuel();
             if(p!=null){
@@ -128,7 +129,7 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
                     jTextField3.setText(p.getNom()+" "+p.getPrenom());
                     jTextField3.repaint();
                 }else{
-                    controleur.setPiloteActuel(voitureCourante,null);
+                    voitureCourante.setPiloteActuel(null);
                     jTextField3.setText("");
                     jTextField3.repaint();
                 }
@@ -441,8 +442,11 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
                 if(jTextField4.getText().equals("") && jTextField1.getText().equals("") && jTextField2.getText().equals("")){
                     JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
                 }else{
-                    controleur.modifierVoiture(voitureCourante, jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected(), p);
-                    //modifierVoiture(Voiture v, String couleur, int NbToursRelai, Booleant voitureEnCourse, Pilote p)
+                    voitureCourante.setCouleur(jTextField1.getText());
+                    voitureCourante.setNbToursParRelai(Integer.parseInt(jTextField2.getText()));
+                    voitureCourante.setVoitureActive(jCheckBox1.isSelected());
+                    voitureCourante.setPiloteActuel(p);
+                    controleur.modifierVoitureEvenement(voitureCourante);
                     vider();
                     System.out.println("retour");
                     controleur.retour();

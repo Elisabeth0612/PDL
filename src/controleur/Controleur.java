@@ -244,19 +244,29 @@ public class Controleur {
         return null;
     }
     
-    /*public void setListVoiture(Voiture v, List<Pilote> lesPVoitureTemp){
-        v.setListP(lesPVoitureTemp);
-    }*/
-    
-    public void setPiloteActuel(Voiture v, Pilote p){
-        v.setPiloteActuel(p);
+    public void modifierVoitureEvenement(Voiture v){
+        List<Voiture> lesV = evtS.getListV();
+        for(Voiture vtemp : lesV){
+            if(v.getNumVoiture()==vtemp.getNumVoiture()){
+                vtemp.setCouleur(v.getCouleur());
+                vtemp.setNbToursParRelai(v.getNbToursParRelai());
+                vtemp.setVoitureActive(v.getVoitureActive());
+                vtemp.setPiloteActuel(v.getPiloteActuel());
+            }
+        }
     }
     
-    public void modifierVoiture(Voiture v,String couleur,int nbToursRelai,Boolean voitureEnCourse, Pilote p){
-        v.setCouleur(couleur);
-        v.setNbToursParRelai(nbToursRelai);
-        v.setVoitureActive(voitureEnCourse);
-        v.setPiloteActuel(p);
+    public void modifierVoitureExistante(Voiture v){
+        List<Voiture> lesV = GestionnaireExistant.getInstance().getVoituresExistantes();
+        for(Voiture vtemp : lesV){
+            if(v.getNumVoiture()==vtemp.getNumVoiture()){
+                vtemp.setCouleur(v.getCouleur());
+                vtemp.setNbToursParRelai(v.getNbToursParRelai());
+                vtemp.setVoitureActive(v.getVoitureActive());
+                vtemp.setPiloteActuel(v.getPiloteActuel());
+                vtemp.setListP(v.getListP());
+            }
+        }
     }
     
     public boolean enregistrerVoiture(int numV, String couleur,int nbToursRelai,Boolean voitureEnCourse){

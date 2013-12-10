@@ -363,7 +363,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         // Bouton "Enregistrer"
         System.out.println("aePilote ="+voitureCourante.getNumVoiture());
         voitureCourante.setListP(lesPVoitureTemp);
-        controleur.enregistrerVoiture(voitureCourante);
+        controleur.modifierVoitureExistante(voitureCourante);
         //controleur.setListVoiture(voitureCourante, lesPVoitureTemp);
         controleur.ouvrirModifierVoiture(voitureCourante);
     }

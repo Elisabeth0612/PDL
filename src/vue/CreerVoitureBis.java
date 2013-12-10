@@ -129,7 +129,7 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
                     jTextField3.setText(p.getNom()+" "+p.getPrenom());
                     jTextField3.repaint();
                 }else{
-                    controleur.setPiloteActuel(voitureCourante,null);
+                    voitureCourante.setPiloteActuel(null);
                     jTextField3.setText("");
                     jTextField3.repaint();
                 }
