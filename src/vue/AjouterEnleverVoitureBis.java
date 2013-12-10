@@ -61,6 +61,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
 
     @Override
     public void fermer() {
+        vider();
         dispose();
     }
 
