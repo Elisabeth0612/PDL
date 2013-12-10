@@ -318,7 +318,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
                     Pilote pE = controleur.getPiloteExistant(nomPilote, prenomPilote);
 
                     lesPVoitureTemp.add(pE);
-                    System.out.println(((DefaultListModel)jList2.getModel()).toString());
+                    //System.out.println(((DefaultListModel)jList2.getModel()).toString());
                     ((DefaultListModel)jList2.getModel()).addElement(pE.getNom()+" "+pE.getPrenom()); 
                     jList2.repaint();
                 }
@@ -326,7 +326,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
                 Pilote pE = controleur.getPiloteExistant(nomPilote, prenomPilote);
 
                 lesPVoitureTemp.add(pE);
-                System.out.println(((DefaultListModel)jList2.getModel()).toString());
+                //System.out.println(((DefaultListModel)jList2.getModel()).toString());
                 ((DefaultListModel)jList2.getModel()).addElement(pE.getNom()+" "+pE.getPrenom()); 
                 jList2.repaint();
             }

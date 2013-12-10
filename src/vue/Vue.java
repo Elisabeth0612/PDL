@@ -72,7 +72,7 @@ public class Vue implements Observer {
     public void precedent(){
         courante.fermer();
         courante=precedente;
-        System.out.println("objet dans courante = "+(Object)courante.getClass().toString());
+        //System.out.println("objet dans courante = "+(Object)courante.getClass().toString());
         //courante.afficher();
         if(courante.getPrecedent()!=null){
             precedente = courante.getPrecedent();

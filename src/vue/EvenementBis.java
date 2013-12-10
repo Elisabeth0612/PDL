@@ -415,7 +415,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
        if (!jList2.isSelectionEmpty()){
             int numV = Integer.parseInt((String)jList2.getSelectedValue());
             int i = jList2.getSelectedIndex();
-            System.out.println("numV ="+numV+" - indice="+i);
+            //System.out.println("numV ="+numV+" - indice="+i);
             controleur.supprimerVoituresEvenement(numV);
             //jList2.removeSelectionInterval(i-1, i);
             ((DefaultListModel)jList2.getModel()).removeElementAt(i);
