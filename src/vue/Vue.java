@@ -145,7 +145,7 @@ public class Vue implements Observer {
         precedente = evt;
         courante = mVoiture;
         if(v != null){
-            mVoiture.charger(v);
+            mVoiture.miseAJour(v);
         }
         courante.afficher();
     }

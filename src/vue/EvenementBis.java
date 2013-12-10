@@ -404,7 +404,7 @@ public class EvenementBis extends JFrame implements MaFenetre {
             String voiture = jList2.getSelectedValue().toString();
             int numV = Integer.parseInt(voiture);
             
-            controleur.ouvrirModifierVoiture((Voiture) controleur.getVoitureEvenementByNum(numV));
+            controleur.ouvrirModifierVoiture(controleur.getVoitureEvenementByNum(numV));
             
         }
     }                                        

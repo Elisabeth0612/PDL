@@ -33,9 +33,9 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
         initComponents();
     }
 
-    public void remplir(List<Pilote> depart, List<Pilote> temp){
+    public void remplir(List<Pilote> depart){
         for(Pilote p:depart){
-            temp.add(p);
+            lesPTemp.add(p);
         }
     }
 
@@ -46,7 +46,7 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
     @Override
     public void afficher() {
         raffraichir();
-        charger(voitureCourante);
+        charger();
         //on affiche la fenetre
         setVisible(true);
         
@@ -85,26 +85,25 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
         jList1.removeAll();
     }
     
-    public void charger(Voiture v){  
-        if(v!=null){
-            this.voitureCourante=v;
-            
-            int numV = v.getNumVoiture();
+    public void charger(){ 
+        System.out.println("Modifier Voiture ="+voitureCourante.getNumVoiture());
+        if(voitureCourante!=null){
+            int numV = voitureCourante.getNumVoiture();
             jTextField4.setText(Integer.toString(numV));
             jTextField1.repaint();
             
-            String couleur = v.getCouleur();
+            String couleur = voitureCourante.getCouleur();
             jTextField1.setText(couleur);
             jTextField1.repaint();
 
-            int NbToursRelai = v.getNbToursParRelai();
+            int NbToursRelai = voitureCourante.getNbToursParRelai();
             jTextField2.setText(Integer.toString(NbToursRelai));
             jTextField2.repaint();
 
            List<Pilote> lesP = new ArrayList<Pilote>();
-           if(v.existListP()){
-               lesP = v.getListP();
-               remplir(lesP, lesPTemp);
+           if(voitureCourante.existListP()){
+               lesP = voitureCourante.getListP();
+               remplir(lesP);
                if(lesP.size()!=0){
                     model = new DefaultListModel<String>();
                     for(Pilote p : lesP){
@@ -122,9 +121,9 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
                 jList1.repaint();
            }
 
-            Pilote p = v.getPiloteActuel();
+            Pilote p = voitureCourante.getPiloteActuel();
             if(p!=null){
-                Pilote p1 = controleur.getPiloteVoiture(v, p.getNom(), p.getPrenom());
+                Pilote p1 = controleur.getPiloteVoiture(voitureCourante, p.getNom(), p.getPrenom());
                 if(p1!=null){
                     jTextField3.setText(p.getNom()+" "+p.getPrenom());
                     jTextField3.repaint();
@@ -135,9 +134,18 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
                 }
             }
 
-            Boolean voitureActive = v.getVoitureActive();
+            Boolean voitureActive = voitureCourante.getVoitureActive();
             jCheckBox1.setSelected(voitureActive);
             jCheckBox1.repaint();
+        }
+    }
+    
+    public void miseAJour(Voiture v){
+        System.out.println("voiture n="+v.getNumVoiture());
+        if(v.existListP()){
+            voitureCourante=new Voiture(v.getNumVoiture(),v.getPiloteActuel(),v.getCouleur(),v.getNbToursParRelai(),v.getVoitureActive());
+        }else{
+            voitureCourante=new Voiture(v.getNumVoiture(),v.getCouleur(),v.getNbToursParRelai(),v.getVoitureActive());
         }
     }
     
