@@ -46,6 +46,10 @@ public class Vue implements Observer {
     private ChronometreCourseBis chrono;
     private MaFenetre resultats;
     
+    /**
+     * Instanciation de la vue : instancie également toutes les fenetres et le controleur
+     * @param c Controleur
+     */
     public Vue(Controleur c){
         control = c;
         cce = new CreerChargerEvt(control);
@@ -65,12 +69,12 @@ public class Vue implements Observer {
         
         precedente = cce;
         courante = cce;
-        
-        
-        
     }
     
     
+    /**
+     * Ouvre la fenetre precedente
+     */
     public void precedent(){
         courante.fermer();
         courante=precedente;
@@ -82,6 +86,23 @@ public class Vue implements Observer {
         courante.afficher();
     }
     
+    /**
+     * Ouvre la fenetre courante
+     */
+    public void lancer(){
+        courante.afficher();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        //System.out.println("On update");
+        courante.raffraichir();
+        //courante.afficher();
+    }
+    
+    /**
+     * Ouvre la fenetre NouvelEvt (creation d'un nouvel evenement sportif)
+     */
     public void ouvrirNouvelEvt(){
         precedente = courante;
         precedente.fermer();
@@ -89,6 +110,9 @@ public class Vue implements Observer {
         courante.afficher();
     }
     
+    /**
+     * Ouvre la fenetre Evenement (fenetre principale de l'application)
+     */
     public void ouvrirEvenement(){
         evt = new EvenementBis(control);
         courante.fermer();
@@ -99,6 +123,9 @@ public class Vue implements Observer {
         
     }
     
+    /**
+     * Ouvre la fenetre Chrono
+     */
     public void ouvrirChrono(){
         chrono = new ChronometreCourseBis(control);
         //chrono = new ChronoCourseBis(control);
@@ -110,12 +137,20 @@ public class Vue implements Observer {
         optionnelle.afficher();
     }
     
+    /**
+     * 
+     * @param ligneTable String[]
+     */
     public void ajouterLigneTableurCourse(String[] ligneTable){//la taille est de 8
         String temps = ((ChronometreCourseBis)courante).getTemps();
         ligneTable[3] = temps;
         ((TableurChronoBis)optionnelle).ajouterLigne(ligneTable);
     }
     
+    /**
+     * Ouvre la fenetre AjouterEnleverPilote
+     * @param v Voiture courante de la fenetre auquel on ajoute/enleve des pilotes
+     */
     public void ouvrirAjouterEnleverPilote(Voiture v){
         courante.fermer();
         precedente = mVoiture;
@@ -127,13 +162,21 @@ public class Vue implements Observer {
         courante.afficher();
     }
     
+    /**
+     * Ouvre la fenetre AjouterEnleverVoiture
+     */
     public void ouvrirAjouterEnleverVoiture(){
         courante.fermer();
         precedente = evt;
         courante = aeVoiture;
         courante.afficher();
     }
+    
     //Pb ici !!! il faut jouer avec le Observer/observable il me semble vu que le modele est mis à jour, la fenetre devrait être notifée du changement
+    /**
+     * Ouvre la fenetre ModifierVoiture
+     * @param v Voiture courante qui va etre modifier
+     */
     public void ouvrirModifierVoiture(Voiture v){
         courante.fermer();
         precedente = evt;
@@ -144,6 +187,10 @@ public class Vue implements Observer {
         courante.afficher();
     }
     
+    /**
+     * Ouvre la fenetre CreerVoiture
+     * @param v Voiture courante qui va etre creer
+     */
     public void ouvrirCreerVoiture(Voiture v){
         courante.fermer();
         precedente = aeVoiture; // marche pas à revoir
@@ -154,6 +201,10 @@ public class Vue implements Observer {
         courante.afficher();
     }
     
+    /**
+     * Ouvre la fenetre CreerPilote
+     * @param v Voiture courante de le fenetre precedente (aePilote)
+     */
     public void ouvrirCreerPilote(Voiture v){
         courante.fermer();
         precedente = aePilote;
@@ -164,6 +215,12 @@ public class Vue implements Observer {
         courante.afficher();
     }
     
+    /**
+     * Ouvre la fenetre ModifierPilote
+     * 
+     * @param v Voiture courante de la fenetre precedente (mVoiture)
+     * @param p Pilote courant qui va etre modifié
+     */
     public void ouvrirModifierPilote(Voiture v,Pilote p){
         courante.fermer();
         precedente = mVoiture;
@@ -174,10 +231,12 @@ public class Vue implements Observer {
         courante.afficher();
     }
     
-    public void lancer(){
-        courante.afficher();
-    }
     
+    /**
+     * Ouvre la fenetre CreerModifierCourse
+     * 
+     * @param c Course courante qui va etre modifié
+     */
     public void ouvrirCreerModifierCourse(Course c){
         courante.fermer();
         precedente=evt;
@@ -186,13 +245,9 @@ public class Vue implements Observer {
         courante.afficher();
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        //System.out.println("On update");
-        courante.raffraichir();
-        //courante.afficher();
-    }
-
+    /**
+     * Ouvre la fenetre ChargerEvenement
+     */
     public void ouvrirChargerEvenement() {
         precedente = courante;
         precedente.fermer();
@@ -201,7 +256,23 @@ public class Vue implements Observer {
         courante.afficher();
         
     }
+    
+    /**
+     * Ouvre la fenetre Resultats
+     * @param course Striing nom de la Course courante
+     */
+    public void ouvrirResultats(String course) {
+        resultats = new ResultatsCourseBis(control,course);
+        //chrono = new ChronoCourseBis(control);
+        courante.fermer();
+        precedente = evt; //fenetre EvtBis
+        courante = resultats;
+        courante.afficher();
+    }
 
+    /**
+     * Permet de fermer les fenetres liés au lancement d'une course
+     */
     public void fermerChronoCourse() {
         DefaultTableModel table = ((TableurChronoBis)optionnelle).getTable();
         control.genererGraphiqueCourse(table);
@@ -212,6 +283,9 @@ public class Vue implements Observer {
         this.ouvrirEvenement();
     }
     
+    /**
+     * Permet de fermer la fenetre contenant le graphique de la course
+     */
     public void fenetreGraphiqueCourse(){
         JDialog fgraphe = new JDialog();
 	fgraphe.setTitle("Ratio Temps/Tours");
@@ -221,17 +295,11 @@ public class Vue implements Observer {
 	fgraphe.setVisible(true);
     }
 
-    public void ouvrirResultats(String course) {
-        resultats = new ResultatsCourseBis(control,course);
-        //chrono = new ChronoCourseBis(control);
-        courante.fermer();
-        precedente = evt; //fenetre EvtBis
-        courante = resultats;
-        courante.afficher();
-        
-    }
     
     
+    /**
+     * Ferme l'ensemble des fenetres
+     */
     public void quitter(){
         cce.fermer();
         newEvt.fermer();
