@@ -31,6 +31,10 @@ public class Controleur {
     
     private Course courseEnCours;
     
+    /**
+     * Instanciation du controleur
+     * @param e EvenementSportif
+     */
     public Controleur(EvenementSportif e){
         evtS = e;
         courseEnCours = new Course();
@@ -135,58 +139,132 @@ public class Controleur {
         evtS.setListV(lesVtemp);
     }
     /*************************************  Gestion de la vue *************************************/
-    public void ouvrirNouvelEvt(){
+    
+     /**
+     * Appel la vue pour ouvrir la fenetre NouvelEvt
+     */
+     public void ouvrirNouvelEvt(){
         vue.ouvrirNouvelEvt();
     }
     
+    /**
+     * Appel la vue pour ouvrir la fenetre Evenement
+     */
     public void ouvrirEvenement(){
         vue.ouvrirEvenement();
     }
     
+    /**
+     * Retourne à la fenetre precedente
+     */
     public void retour(){
         vue.precedent();
     }
     
+    /**
+     * Modifier la vue associé au controleur
+     * @param v Vue
+     */
     public void setVue(Vue v){
         vue = v;
     }
+    
     /*************************************  Ouverture/Fermeture des fenetres *************************************/
     
+    /**
+     * Appel la vue pour ouvrir la fenetre AjouterEnleverPilote 
+     * @param v Voiture courante de la fenetre
+     */
     public void ouvrirAjouterEnleverPilote(Voiture v){
         vue.ouvrirAjouterEnleverPilote(v);
     }
     
+    /**
+     * Appel la vue pour ouvrir la fenetre AjouterEnleverVoiture 
+     */
     public void ouvrirAjouterEnleverVoiture(){
         vue.ouvrirAjouterEnleverVoiture();
     }
     
+    /**
+     * Appel la vue pour ouvrir la fenetre ModifierVoiture 
+     * @param v Voiture courante de la fenetre
+     */
     public void ouvrirModifierVoiture(Voiture v){
         vue.ouvrirModifierVoiture(v);
     }
     
+    /**
+     * Appel la vue pour ouvrir la fenetre CreerVoiture 
+     * @param v Voiture courante de la fenetre
+     */
     public void ouvrirCreerVoiture(Voiture v){
         vue.ouvrirCreerVoiture(v);
     }
     
+    /**
+     * Appel la vue pour ouvrir la fenetre AjouterEnleverPilote 
+     * @param v Voiture courante de la fenetre precedente
+     */
     public void ouvrirCreerPilote(Voiture v){
         vue.ouvrirCreerPilote(v);
     }
     
+    /**
+     * Appel la vue pour ouvrir la fenetre ModifierPilote 
+     * @param v Voiture courante de la fenetre precedente
+     * @param p Pilote courant à modifier
+     */
     public void ouvrirModifierPilote(Voiture v, Pilote p){
         vue.ouvrirModifierPilote(v, p);
     }
     
-     public void ouvrirCreerModifierCourse(Course c){
+     /**
+     * Appel la vue pour ouvrir la fenetre CreerModifierCourse 
+     * @param c Course courante de la fenetre
+     */
+    public void ouvrirCreerModifierCourse(Course c){
         vue.ouvrirCreerModifierCourse(c);
     }
      
      
+    /**
+     * Appel la vue pour fermer les fenetres liées au démarrage de la course
+     */
     public void fermerChronoCourse() {
         vue.fermerChronoCourse();
     }
     
+    
+    /**
+     * Appel la vue pour ouvrir la fenetre resultat
+     * @param course String - nom de la Course courante de la fenetre
+     */
+    public void ouvrirResultats(String course) {
+        vue.ouvrirResultats(course);
+    }    
+    
+    /**
+     * Appel la vue afin de retourner a la fenetre precendente
+     */
+    public void fermerResultatsCourse() {
+        vue.precedent();
+    }
+
+    /**
+     * Appel la vue afin de quitter l'application
+     */
+    public void quitter(){
+        vue.quitter();
+    }
+    
     /*************************************  Voiture *************************************/
     
+    /**
+     * Méthode retournant une voiture de l'évènement à partir de son numero
+     * @param numV int
+     * @return Voiture
+     */
     public Voiture getVoitureEvenementByNum(int numV){
         List<Voiture> lesV = evtS.getListV();
         for(Voiture v: lesV){
@@ -197,6 +275,11 @@ public class Controleur {
         return null;
     }
     
+    /**
+     * Supprime une voiture de l'evenement à partir d'un numero de voiture
+     * @param numVoiture int
+     * @return
+     */
     public boolean supprimerVoiture(int numVoiture){
         if(evtS.supprimerVoiture(numVoiture)){
             // voiture supprimé
@@ -207,6 +290,11 @@ public class Controleur {
         }
     }
     
+    /**
+     * Retourne la liste des pilotes de la voiture existante à partir d'un numero de voiture
+     * @param num int
+     * @return Liste de Pilotes
+     */
     public List<Pilote> getPilotesVoitureExistante(int num){
         
          Voiture v = getVoitureExistante(num);
@@ -218,6 +306,11 @@ public class Controleur {
         }
     }
     
+    /**
+     * Retourne la liste des pilotes d'une voiture de l'evenement à partir d'un numero de voiture
+     * @param num int
+     * @return Liste de Pilote
+     */
     public List<Pilote> getPilotesVoitureCourante(int num){
         
          Voiture v = getVoitureEvenementByNum(num);
@@ -229,6 +322,13 @@ public class Controleur {
         }
     }
     
+    /**
+     * Retourne un Pilote a partir d'une voiture, du nom et du prenom du pilote
+     * @param v Voiture
+     * @param nomPilote String
+     * @param prenomPilote String
+     * @return Pilote
+     */
     public Pilote getPiloteVoiture(Voiture v, String nomPilote, String prenomPilote){
         List<Pilote> lesPVoiture = v.getListP();
         for(Pilote p:lesPVoiture){
@@ -239,6 +339,10 @@ public class Controleur {
         return null;
     }
     
+    /**
+     * Modifier la voiture de l'evenement à partir des informations de la voiture en parametre
+     * @param v Voiture
+     */
     public void modifierVoitureEvenement(Voiture v){
         List<Voiture> lesV = evtS.getListV();
         for(Voiture vtemp : lesV){
@@ -252,6 +356,10 @@ public class Controleur {
         }
     }
     
+    /**
+     * Modifier la voiture existante à partir des informations de la voiture en paramètre puis appel la méthode modifierVoitureEvenement(Voiture v)
+     * @param v Voiture
+     */
     public void modifierVoitureExistante(Voiture v){
         List<Voiture> lesV = GestionnaireExistant.getInstance().getVoituresExistantes();
         int numV =-1;
@@ -271,7 +379,13 @@ public class Controleur {
         modifierVoitureEvenement(v);
     }
     
-     public boolean enregistrerVoiture(Voiture v){
+     /**
+     * Enregistrement d'une nouvelle voiture existante
+     * 
+     * @param v Voiture
+     * @return boolean
+     */
+    public boolean enregistrerVoiture(Voiture v){
         Boolean b = true;
         List<Voiture> lesV = GestionnaireExistant.getInstance().getVoituresExistantes();
         for(Voiture vlist : lesV){
@@ -372,7 +486,37 @@ public class Controleur {
         return v.getNbToursParRelai();
     }
     
+    
+    public boolean courseTerminee(String course) {
+        Course c = evtS.chercherCourse(course);
+        if(c!=null){
+            if(c.getListT().size()!=0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public List getLesTopsCourse(String nomC) {
+        return evtS.chercherCourse(nomC).getListT();
+    }
+
+    public List getVoituresCourse(String nomC) {
+        return evtS.chercherCourse(nomC).getListV();
+    }
+    
     /*************************************  Pilote *************************************/
+    
+    /**
+     * Modifie le Pilote d'une voiture à partir des informations en paramètre
+     * 
+     * @param v Voiture
+     * @param p Pilote
+     * @param nom String nom du Pilote
+     * @param prenom String prenom du Pilote
+     * @param couleurCasque String couleur du casque
+     */
     public void modifierPiloteVoiture(Voiture v, Pilote p, String nom, String prenom, String couleurCasque){
         List<Pilote> lesP = v.getListP();
         for(Pilote ptemp : lesP){
@@ -384,6 +528,15 @@ public class Controleur {
         }
     }
     
+    /**
+     * Modifie un Pilote existant à partir des informations en paramètre et appel la méthode modifierPiloteVoiture utilisant le paramètre v
+     * 
+     * @param v Voiture
+     * @param p Pilote
+     * @param nom String nom du Pilote
+     * @param prenom String prenom du Pilote
+     * @param couleurCasque String couleur du casque
+     */
     public void modifierPiloteExistant(Voiture v, Pilote p, String nom, String prenom, String couleurCasque){
         List<Pilote> lesP = GestionnaireExistant.getInstance().getPilotesExistants();
         Boolean b=false;
@@ -404,6 +557,10 @@ public class Controleur {
         }
     }
     
+    /**
+     * Enregistre un nouveau Pilote existant avec les paramètres du pilote passé en parametre
+     * @param p Pilote
+     */
     public void enregistrerPiloteExistant(Pilote p){
         Boolean b = true;
         List<Pilote> lesP = GestionnaireExistant.getInstance().getPilotesExistants();
@@ -466,34 +623,4 @@ public class Controleur {
         return null;
     }
 
-    
-    public boolean courseTerminee(String course) {
-        Course c = evtS.chercherCourse(course);
-        if(c!=null){
-            if(c.getListT().size()!=0){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void ouvrirResultats(String course) {
-        vue.ouvrirResultats(course);
-    }
-
-    public List getLesTopsCourse(String nomC) {
-        return evtS.chercherCourse(nomC).getListT();
-    }
-
-    public List getVoituresCourse(String nomC) {
-        return evtS.chercherCourse(nomC).getListV();
-    }
-
-    public void fermerResultatsCourse() {
-        vue.precedent();
-    }
-
-    public void quitter(){
-        vue.quitter();
-    }
 }
