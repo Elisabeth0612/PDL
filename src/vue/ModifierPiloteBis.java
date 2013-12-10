@@ -76,19 +76,21 @@ public class ModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
     }
     
     public void charger(){ 
-        System.out.println("charger mPilote pour le pilote="+piloteCourant.getNom()+" "+piloteCourant.getPrenom());
-                
-        String nom = piloteCourant.getNom();
-        jTextField1.setText(nom);
-        jTextField1.repaint();
-        
-        String prenom = piloteCourant.getPrenom();
-        jTextField2.setText(prenom);
-        jTextField2.repaint();
-        
-        String couleurCasque = piloteCourant.getCouleursCasque();
-        jTextField3.setText(couleurCasque);
-        jTextField3.repaint();       
+        if(piloteCourant!=null){
+            System.out.println("charger mPilote pour le pilote="+piloteCourant.getNom()+" "+piloteCourant.getPrenom());
+
+            String nom = piloteCourant.getNom();
+            jTextField1.setText(nom);
+            jTextField1.repaint();
+
+            String prenom = piloteCourant.getPrenom();
+            jTextField2.setText(prenom);
+            jTextField2.repaint();
+
+            String couleurCasque = piloteCourant.getCouleursCasque();
+            jTextField3.setText(couleurCasque);
+            jTextField3.repaint();
+        }
     }
     
     public void miseAJour(Voiture v, Pilote p){
@@ -216,8 +218,7 @@ public class ModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
         
         if(!jTextField1.getText().equals("") && !jTextField2.getText().equals("") && !jTextField3.getText().equals("")){
             controleur.modifierPiloteExistant(voiturePrecedente, piloteCourant, jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
-            vider();
-            controleur.retour();
+            controleur.ouvrirAjouterEnleverPilote(voiturePrecedente);
         }else{
             JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
         }
@@ -225,7 +226,6 @@ public class ModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
-        vider();
         controleur.ouvrirAjouterEnleverPilote(voiturePrecedente);
     }
 

@@ -445,7 +445,7 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
                     voitureCourante.setVoitureActive(jCheckBox1.isSelected());
                     voitureCourante.setPiloteActuel(p);
                     controleur.modifierVoitureExistante(voitureCourante);
-                    controleur.ouvrirAjouterEnleverPilote(voitureCourante);
+                    controleur.retour();
                 }
             }else{
                 JOptionPane.showMessageDialog(this,"Veuillez choisir un pilote actuel.","Erreur",JOptionPane.ERROR_MESSAGE);

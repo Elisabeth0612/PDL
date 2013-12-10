@@ -220,7 +220,6 @@ public class CreerPiloteBis extends javax.swing.JFrame implements MaFenetre {
         if(!jTextField1.getText().equals("") && !jTextField2.getText().equals("") && !jTextField3.getText().equals("")){
             piloteCourant = new Pilote(jTextField1.getText(),jTextField2.getText(),jTextField3.getText());
             controleur.enregistrerPiloteExistant(piloteCourant);
-            System.out.println("enreg");
             controleur.ouvrirAjouterEnleverPilote(voiturePrecedente);
         }else{
             JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
@@ -229,8 +228,7 @@ public class CreerPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
-        vider();
-        controleur.retour();
+        controleur.ouvrirAjouterEnleverPilote(voiturePrecedente);
     }
 
 
