@@ -301,14 +301,14 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton ">>" jList1 PilotesExistants - jList2 PilotesVoiture
-        int i = jList1.getSelectedIndex();
-        String nomPrenomPilote = (String)jList1.getSelectedValue();
-        String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
-        String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
-        
         if(jList1.isSelectionEmpty()){
             JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
+            int i = jList1.getSelectedIndex();
+            String nomPrenomPilote = (String)jList1.getSelectedValue();
+            String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
+            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
+
             if(jList2.getModel().getSize()!=0){
                 //Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
                 int indice = parcoursList(nomPilote, prenomPilote);
@@ -316,11 +316,11 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
                     JOptionPane.showMessageDialog(this,"Le pilote appartient déjà à la voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
                 }else{
                     Pilote pE = controleur.getPiloteExistant(nomPilote, prenomPilote);
-
-                    lesPVoitureTemp.add(pE);
-                    //System.out.println(((DefaultListModel)jList2.getModel()).toString());
-                    ((DefaultListModel)jList2.getModel()).addElement(pE.getNom()+" "+pE.getPrenom()); 
-                    jList2.repaint();
+                    if(!lesPVoitureTemp.contains(pE)){
+                        lesPVoitureTemp.add(pE);
+                        ((DefaultListModel)jList2.getModel()).addElement(pE.getNom()+" "+pE.getPrenom()); 
+                        jList2.repaint();
+                    }
                 }
             }else{
                 Pilote pE = controleur.getPiloteExistant(nomPilote, prenomPilote);
@@ -335,11 +335,11 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "<<" jList1 PilotesExistants - jList2 PilotesVoiture
-        int i = jList2.getSelectedIndex();
         
         if(jList2.isSelectionEmpty()){
             JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
+            int i = jList2.getSelectedIndex();
             String nomPrenomPilote = (String)jList2.getSelectedValue();
             String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
             String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());

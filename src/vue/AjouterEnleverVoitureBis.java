@@ -295,17 +295,19 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton ">>" - ajoute VoituresExistantes jList1 à VoituresEvenements Jlist2
-        int numV = Integer.valueOf((String) jList1.getSelectedValue());
         if (jList1.isSelectionEmpty()) {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une voiture.", "Erreur", JOptionPane.ERROR_MESSAGE);
         } else {
+            int numV = Integer.valueOf((String) jList1.getSelectedValue());
             if (controleur.getVoitureEvenementByNum(numV) != null) {
                 JOptionPane.showMessageDialog(this, "La voiture est déjà présente dans l'Evenement.", "Erreur", JOptionPane.ERROR_MESSAGE);
             } else {
                 Voiture vE = controleur.getVoitureExistante(numV);
-                lesVtemp.add(vE);
-                model2.addElement(Integer.toString(vE.getNumVoiture()));
-                jList2.repaint();
+                if(!lesVtemp.contains(vE)){
+                    lesVtemp.add(vE);
+                    model2.addElement(Integer.toString(vE.getNumVoiture()));
+                    jList2.repaint();
+                }
             }
         }
 
@@ -313,11 +315,11 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "<<" - ajoute VoituresEvenements jList2 à VoituresExistantes JList1
-        int numV = Integer.valueOf((String) jList2.getSelectedValue());
-        int i = jList2.getSelectedIndex();
         if (jList2.isSelectionEmpty()) {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une voiture.", "Erreur", JOptionPane.ERROR_MESSAGE);
         } else {
+            int numV = Integer.valueOf((String) jList2.getSelectedValue());
+            int i = jList2.getSelectedIndex();
             int indice = parcoursList(numV);
             if (indice != -1) {
                 lesVtemp.remove(indice);
