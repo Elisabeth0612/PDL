@@ -433,7 +433,6 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
             voitureCourante.setListP(lesPTemp);
             
             String nomPrenomPilote = jTextField3.getText();
-            //System.out.println("Pilote actuel :"+nomPrenomPilote+".");
             if(!nomPrenomPilote.equals("")){
                 String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
                 String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());

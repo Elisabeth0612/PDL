@@ -432,7 +432,7 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
             System.out.println("cVoiture *Enregistrer* pour la voiture="+voitureCourante.getNumVoiture());
             if(voitureCourante==null){
                 voitureCourante = new Voiture(Integer.parseInt(jTextField4.getText()),jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected());
-            }else{
+            }/*else{
                 voitureCourante.setListP(lesPTemp);
                 String nomPrenomPilote = jTextField3.getText();
                 //System.out.println("Pilote actuel :"+nomPrenomPilote+".");
@@ -452,7 +452,7 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
                 }else{
                     JOptionPane.showMessageDialog(this,"Veuillez choisir un pilote actuel.","Erreur",JOptionPane.ERROR_MESSAGE);
                 }
-            }
+            }*/
         }     
     }
 

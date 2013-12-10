@@ -254,6 +254,7 @@ public class Controleur {
     
     public void modifierVoitureExistante(Voiture v){
         List<Voiture> lesV = GestionnaireExistant.getInstance().getVoituresExistantes();
+        int numV =-1;
         for(Voiture vtemp : lesV){
             if(v.getNumVoiture()==vtemp.getNumVoiture()){
                 vtemp.setCouleur(v.getCouleur());
@@ -261,24 +262,13 @@ public class Controleur {
                 vtemp.setVoitureActive(v.getVoitureActive());
                 vtemp.setPiloteActuel(v.getPiloteActuel());
                 vtemp.setListP(v.getListP());
+                numV = vtemp.getNumVoiture();
             }
+        }
+        if(numV==-1){
+            enregistrerVoiture(v);
         }
         modifierVoitureEvenement(v);
-    }
-    
-    public boolean enregistrerVoiture(int numV, String couleur,int nbToursRelai,Boolean voitureEnCourse){
-        Boolean b = true;
-        List<Voiture> lesV = GestionnaireExistant.getInstance().getVoituresExistantes();
-        for(Voiture vlist : lesV){
-            if(vlist.getNumVoiture()==numV){
-                b=false;
-            }
-        }
-        if(b){
-            Voiture v = new Voiture(numV,couleur,nbToursRelai,voitureEnCourse);
-            GestionnaireExistant.getInstance().creerNouvelleVoiture(v);
-        }
-        return b;
     }
     
      public boolean enregistrerVoiture(Voiture v){
