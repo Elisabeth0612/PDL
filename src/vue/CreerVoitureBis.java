@@ -88,7 +88,7 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
     
     public void charger(){  
         if(voitureCourante!=null){
-            System.out.println("charger cVoiture pour la voiture="+voitureCourante.getNumVoiture());
+            //System.out.println("charger cVoiture pour la voiture="+voitureCourante.getNumVoiture());
             
             int numV = voitureCourante.getNumVoiture();
             jTextField4.setText(Integer.toString(numV));
@@ -174,8 +174,6 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
@@ -215,19 +213,7 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
         
         jLabel3.setText("Liste des pilotes pour la voiture :");
 
-        jButton1.setText("Modifier le pilote");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
-        jButton2.setText("Supprimer le pilote");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jButton3.setText(">>");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -276,8 +262,6 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton5)
-                                    .addComponent(jButton1)
-                                    .addComponent(jButton2)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButton3)
                                         .addGap(18, 18, 18)
@@ -331,10 +315,6 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -355,33 +335,7 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // Checkbox "Voiture en Course (active)"  -- aucune action      
-    }                                          
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // Bouton "Supprimer Pilote"
-        int i = jList1.getSelectedIndex();
-        if(jList1.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(this,"Veuillez sélectionner une voiture.","Erreur",JOptionPane.ERROR_MESSAGE);
-        }else{
-            String nomPrenomPilote = (String)jList1.getSelectedValue();
-            String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
-            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
-            
-            int indice = parcoursList(nomPilote, prenomPilote);
-            if(indice!=-1){
-                String nomPrenomPiloteActuel = jTextField3.getText();
-                String nomPiloteActuel = nomPrenomPiloteActuel.substring(0,nomPrenomPiloteActuel.lastIndexOf(" "));
-                String prenomPiloteActuel = nomPrenomPiloteActuel.substring(nomPrenomPiloteActuel.lastIndexOf(" ")+1,nomPrenomPiloteActuel.length());
-                if(nomPilote.equals(nomPiloteActuel) && prenomPilote.equals(prenomPiloteActuel)){
-                    jTextField3.setText("");
-                    jTextField3.repaint();
-                }
-                lesPTemp.remove(indice);
-                model.remove(i);
-                jList1.repaint();
-            }
-        }
-    }                                        
+    }                                                                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Ajouter/Enlever Pilote"
@@ -394,22 +348,6 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
             }else{
                 controleur.ouvrirAjouterEnleverPilote(voitureCourante);
             }
-        }
-    }
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Bouton "Modifier Pilote"
-        int i = jList1.getSelectedIndex();
-                
-        if(jList1.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(this,"Veuillez sélectionner un pilote.","Erreur",JOptionPane.ERROR_MESSAGE);
-        }else{
-            String nomPrenomPilote = (String)jList1.getSelectedValue();
-            String nomPilote = nomPrenomPilote.substring(0,nomPrenomPilote.lastIndexOf(" "));
-            String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ")+1,nomPrenomPilote.length());
-            Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
-            
-            controleur.ouvrirModifierPilote(voitureCourante,p);
         }
     }
 
@@ -435,7 +373,6 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
         }else{
             if(voitureCourante==null){
                 voitureCourante = new Voiture(Integer.parseInt(jTextField4.getText()),jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected());
-                System.out.println("cVoiture *Enregistrer* pour la voiture="+voitureCourante.getNumVoiture());
                 JOptionPane.showMessageDialog(this,"La voiture a été crée mais pas enregistré, ajouter des pilotes pour l'enregistrer.","Information",JOptionPane.INFORMATION_MESSAGE);
             }
         }     
@@ -449,8 +386,6 @@ public class CreerVoitureBis extends javax.swing.JFrame implements MaFenetre {
 
 
     // Variables declaration - do not modify
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

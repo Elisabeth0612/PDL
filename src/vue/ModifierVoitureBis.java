@@ -89,7 +89,7 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
     public void charger(){ 
         
         if(voitureCourante!=null){
-            System.out.println("charger mVoiture pour la voiture="+voitureCourante.getNumVoiture());
+            //System.out.println("charger mVoiture pour la voiture="+voitureCourante.getNumVoiture());
             
             int numV = voitureCourante.getNumVoiture();
             jTextField4.setText(Integer.toString(numV));

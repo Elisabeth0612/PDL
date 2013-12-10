@@ -78,7 +78,7 @@ public class CreerPiloteBis extends javax.swing.JFrame implements MaFenetre {
     
     public void charger(){ 
         if(piloteCourant!=null){
-            System.out.println("charger cPilote pour le pilote="+piloteCourant.getNom()+" "+piloteCourant.getPrenom());
+            //System.out.println("charger cPilote pour le pilote="+piloteCourant.getNom()+" "+piloteCourant.getPrenom());
 
             String nom = piloteCourant.getNom();
             jTextField1.setText(nom);
@@ -97,7 +97,6 @@ public class CreerPiloteBis extends javax.swing.JFrame implements MaFenetre {
     public void miseAJour(Voiture v){
         //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
         this.voiturePrecedente=v;
-        System.out.println("creerPilote voiture="+voiturePrecedente.getNumVoiture());
     }
     
     /**

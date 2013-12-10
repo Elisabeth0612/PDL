@@ -218,7 +218,7 @@ public class ModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
         
         if(!jTextField1.getText().equals("") && !jTextField2.getText().equals("") && !jTextField3.getText().equals("")){
             controleur.modifierPiloteExistant(voiturePrecedente, piloteCourant, jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
-            controleur.ouvrirAjouterEnleverPilote(voiturePrecedente);
+            controleur.ouvrirModifierVoiture(voiturePrecedente);
         }else{
             JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
         }
@@ -226,7 +226,7 @@ public class ModifierPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
-        controleur.ouvrirAjouterEnleverPilote(voiturePrecedente);
+        controleur.ouvrirModifierVoiture(voiturePrecedente);
     }
 
 

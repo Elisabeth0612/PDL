@@ -100,7 +100,7 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         
         if(voitureCourante!=null){
             jLabel3.setText("Véhicule n°"+voitureCourante.getNumVoiture());
-            System.out.println("charger aePilote pour la voiture="+voitureCourante.getNumVoiture());
+            //System.out.println("charger aePilote pour la voiture="+voitureCourante.getNumVoiture());
             
             if(voitureCourante.existListP()){
                 List<Pilote> lesP = voitureCourante.getListP();
