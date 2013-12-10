@@ -27,7 +27,8 @@ public class Vue implements Observer {
     //private ChronoCourseBis chrono;
     
     private AjouterEnleverPiloteBis aePilote;
-    private CreerModifierVoitureBis cmVoiture;
+    private ModifierVoitureBis mVoiture;
+    private CreerVoitureBis cVoiture;
     private AjouterEnleverVoitureBis aeVoiture;
     private CreerModifierPiloteBis cmPilote;
     
@@ -53,7 +54,8 @@ public class Vue implements Observer {
         evt.dispose();
           
         aePilote = new AjouterEnleverPiloteBis(control);
-        cmVoiture = new CreerModifierVoitureBis(control);
+        mVoiture = new ModifierVoitureBis(control);
+        cVoiture = new CreerVoitureBis(control);
         aeVoiture = new AjouterEnleverVoitureBis(control);
         cmPilote = new CreerModifierPiloteBis(control);
         
@@ -116,14 +118,14 @@ public class Vue implements Observer {
     
     public void ouvrirAjouterEnleverPilote(){
         courante.fermer();
-        precedente = cmVoiture;
+        precedente = cVoiture;
         courante = aePilote;
         courante.afficher();
     }
     
     public void ouvrirAjouterEnleverPilote(Voiture v){
         courante.fermer();
-        precedente = cmVoiture;
+        precedente = mVoiture;
         courante = aePilote;
         if(v != null){
             aePilote.miseAJour(v);
@@ -138,26 +140,29 @@ public class Vue implements Observer {
         courante.afficher();
     }
     //Pb ici !!! il faut jouer avec le Observer/observable il me semble vu que le modele est mis à jour, la fenetre devrait être notifée du changement
-    public void ouvrirCreerModifierVoiture(Voiture v){
+    public void ouvrirModifierVoiture(Voiture v){
         courante.fermer();
         precedente = evt;
-        courante = cmVoiture;
+        courante = mVoiture;
         if(v != null){
-            cmVoiture.charger(v);
+            mVoiture.charger(v);
         }
         courante.afficher();
     }
     
-    public void ouvrirCreerModifierVoiture(){
+    public void ouvrirCreerVoiture(Voiture v){
         courante.fermer();
         precedente = aeVoiture; // marche pas à revoir
-        courante = cmVoiture;
+        courante = cVoiture;
+        if(v != null){
+            cVoiture.miseAJour(v);
+        }
         courante.afficher();
     }
     
     public void ouvrirCreerModifierPilote(Pilote p){
         courante.fermer();
-        precedente = cmVoiture;
+        precedente = mVoiture;
         courante = cmPilote;
         if(p != null){
             cmPilote.charger(p);
@@ -167,7 +172,7 @@ public class Vue implements Observer {
     
     public void ouvrirCreerModifierPilote(){
         courante.fermer();
-        precedente = cmVoiture;
+        precedente = mVoiture;
         courante = cmPilote;
         courante.afficher();
     }
@@ -236,7 +241,8 @@ public class Vue implements Observer {
         chargE.fermer();
         evt.fermer();
         aePilote.fermer();
-        cmVoiture.fermer();
+        mVoiture.fermer();
+        cVoiture.fermer();
         aeVoiture.fermer();
         cmPilote.fermer();
 

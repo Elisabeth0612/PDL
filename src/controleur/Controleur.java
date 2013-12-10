@@ -164,8 +164,12 @@ public class Controleur {
         vue.ouvrirAjouterEnleverVoiture();
     }
     
-    public void ouvrirCreerModifierVoiture(Voiture v){
-        vue.ouvrirCreerModifierVoiture(v);
+    public void ouvrirModifierVoiture(Voiture v){
+        vue.ouvrirModifierVoiture(v);
+    }
+    
+    public void ouvrirCreerVoiture(Voiture v){
+        vue.ouvrirCreerVoiture(v);
     }
     
     public void ouvrirCreerModifierPilote(Pilote p){
@@ -265,6 +269,20 @@ public class Controleur {
         }
         if(b){
             Voiture v = new Voiture(numV,couleur,nbToursRelai,voitureEnCourse);
+            GestionnaireExistant.getInstance().creerNouvelleVoiture(v);
+        }
+        return b;
+    }
+    
+     public boolean enregistrerVoiture(Voiture v){
+        Boolean b = true;
+        List<Voiture> lesV = GestionnaireExistant.getInstance().getVoituresExistantes();
+        for(Voiture vlist : lesV){
+            if(vlist.getNumVoiture()==v.getNumVoiture()){
+                b=false;
+            }
+        }
+        if(b){
             GestionnaireExistant.getInstance().creerNouvelleVoiture(v);
         }
         return b;

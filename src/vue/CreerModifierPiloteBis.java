@@ -68,6 +68,9 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
     public void vider() {
         //throw new UnsupportedOperationException("Not supported yet.");
         piloteCourant=null;
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
     }
     
     public void charger(Pilote p){ 
@@ -206,6 +209,7 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
         
         if(!jTextField1.getText().equals("") && !jTextField2.getText().equals("") && !jTextField3.getText().equals("")){
             controleur.modifierPilote(piloteCourant, jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
+            vider();
             controleur.retour();
         }else{
             JOptionPane.showMessageDialog(this,"Veuillez remplir tous les champs.","Erreur",JOptionPane.ERROR_MESSAGE);
@@ -214,6 +218,7 @@ public class CreerModifierPiloteBis extends javax.swing.JFrame implements MaFene
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Annuler"
+        vider();
         controleur.retour();
     }
 
