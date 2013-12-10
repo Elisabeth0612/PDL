@@ -426,7 +426,6 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
-        System.out.println("mVoiture *Enregistrer* pour la voiture="+voitureCourante.getNumVoiture());
         if(voitureCourante==null){
             JOptionPane.showMessageDialog(this,"Erreur...","Erreur",JOptionPane.ERROR_MESSAGE);
         }else{
