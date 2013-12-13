@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package graphique;
 
 /**
@@ -15,7 +11,7 @@ import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
 /**
- * A JTextField that accepts only integers.
+ * Un JTextField n'acceptant que les entiers
  *
  */
 public class IntegerField extends JTextField {
