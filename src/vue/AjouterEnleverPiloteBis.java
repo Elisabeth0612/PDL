@@ -27,20 +27,29 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
     private Voiture voitureCourante;
     private List<Pilote> lesPVoitureTemp = new ArrayList<Pilote>();
 
+
     /**
-     * Creates new form AjouterEnleverPilote
+     * Instanciation
+     * @param c Controleur
      */
     public AjouterEnleverPiloteBis(Controleur c) {
         controleur = c;
         initComponents();
     }
 
+    /**
+     * Méthode pour remplir la liste temporaire avec une autre liste de manière à éviter les problèmes de référence
+     * @param depart Liste de Pilote
+     */
     public void remplir(List<Pilote> depart) {
         for (Pilote p : depart) {
             lesPVoitureTemp.add(p);
         }
     }
 
+    /**
+     * Fonction permettant l'ouverture de la fenetre
+     */
     public void lancer() {
         setVisible(true);
     }
@@ -77,7 +86,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     @Override
     public void vider() {
-        //throw new UnsupportedOperationException("Not supported yet.");
         lesPVoitureTemp = new ArrayList<Pilote>();
         voitureCourante = null;
         jLabel3.setText("");
@@ -85,6 +93,9 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
     }
 
+    /**
+     * Méthode permettant de charger les listes
+     */
     public void charger() {
 
         List<Pilote> lesPE = controleur.getListPilotesExistants();
@@ -105,7 +116,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
 
         if (voitureCourante != null) {
             jLabel3.setText("Véhicule n°" + voitureCourante.getNumVoiture());
-            //System.out.println("charger aePilote pour la voiture="+voitureCourante.getNumVoiture());
 
             if (voitureCourante.existListP()) {
                 List<Pilote> lesP = voitureCourante.getListP();
@@ -133,13 +143,22 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         }
     }
 
+    /**
+     * Méthode permettant à partir du controleur et de la vue de donnée une valeur à la voiture courante
+     * @param v Voiture
+     */
     public void miseAJour(Voiture v) {
-        //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
         voitureCourante = v;
     }
 
+    /**
+     * Méthode permettant d'avoir l'indice dans la liste temporaire d'une pilote
+     * 
+     * @param nom String
+     * @param prenom String
+     * @return int - indice
+     */
     public int parcoursList(String nom, String prenom) {
-        //System.out.println("nom ="+nom+" prenom="+prenom);
         for (int i = 0; i < lesPVoitureTemp.size(); i++) {
             if (lesPVoitureTemp.get(i).getNom().equals(nom) && lesPVoitureTemp.get(i).getPrenom().equals(prenom)) {
                 return i;
@@ -323,7 +342,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
             String prenomPilote = nomPrenomPilote.substring(nomPrenomPilote.lastIndexOf(" ") + 1, nomPrenomPilote.length());
 
             if (jList2.getModel().getSize() != 0) {
-                //Pilote p = controleur.getPiloteVoiture(voitureCourante, nomPilote, prenomPilote);
                 int indice = parcoursList(nomPilote, prenomPilote);
                 if (indice != -1) {
                     JOptionPane.showMessageDialog(this, "Le pilote appartient déjà à la voiture.", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -339,7 +357,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
                 Pilote pE = controleur.getPiloteExistant(nomPilote, prenomPilote);
 
                 lesPVoitureTemp.add(pE);
-                //System.out.println(((DefaultListModel)jList2.getModel()).toString());
                 ((DefaultListModel) jList2.getModel()).addElement(pE.getNom() + " " + pE.getPrenom());
                 jList2.repaint();
             }
@@ -376,7 +393,6 @@ public class AjouterEnleverPiloteBis extends javax.swing.JFrame implements MaFen
         // Bouton "Enregistrer"
         voitureCourante.setListP(lesPVoitureTemp);
         controleur.modifierVoitureEvenement(voitureCourante);
-        //controleur.setListVoiture(voitureCourante, lesPVoitureTemp);
         controleur.ouvrirModifierVoiture(voitureCourante);
     }
 

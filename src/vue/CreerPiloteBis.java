@@ -23,14 +23,19 @@ public class CreerPiloteBis extends javax.swing.JFrame implements MaFenetre {
     private Pilote piloteCourant = null;
     private Voiture voiturePrecedente = null;
 
+
     /**
-     * Creates new form CréerModifierPilote
+     * Instanciation
+     * @param c Controleur
      */
     public CreerPiloteBis(Controleur c) {
         controleur = c;
         initComponents();
     }
 
+    /**
+     * Fonction permettant l'ouverture de la fenetre
+     */
     public void lancer() {
         setVisible(true);
     }
@@ -67,7 +72,6 @@ public class CreerPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
     @Override
     public void vider() {
-        //throw new UnsupportedOperationException("Not supported yet.");
         piloteCourant = null;
         voiturePrecedente = null;
         jTextField1.setText("");
@@ -75,9 +79,11 @@ public class CreerPiloteBis extends javax.swing.JFrame implements MaFenetre {
         jTextField3.setText("");
     }
 
+    /**
+     * Méthode permettant de charger les champs de la fenetre
+     */
     public void charger() {
         if (piloteCourant != null) {
-            //System.out.println("charger cPilote pour le pilote="+piloteCourant.getNom()+" "+piloteCourant.getPrenom());
 
             String nom = piloteCourant.getNom();
             jTextField1.setText(nom);
@@ -93,8 +99,12 @@ public class CreerPiloteBis extends javax.swing.JFrame implements MaFenetre {
         }
     }
 
+    /**
+     * Méthode permettant à partir du controleur et de la vue de donnée une valeur à la voiture précéndente afin de parcourir les fenetres facilement
+     * 
+     * @param v Voiture
+     */
     public void miseAJour(Voiture v) {
-        //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
         this.voiturePrecedente = v;
     }
 
@@ -209,7 +219,6 @@ public class CreerPiloteBis extends javax.swing.JFrame implements MaFenetre {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // Bouton "Enregistrer"
-        // oubli enregistrerNouveauPilote
 
         if (!jTextField1.getText().equals("") && !jTextField2.getText().equals("") && !jTextField3.getText().equals("")) {
             piloteCourant = new Pilote(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());

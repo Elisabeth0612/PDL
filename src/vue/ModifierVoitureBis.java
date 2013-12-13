@@ -25,20 +25,29 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
     private Voiture voitureCourante = null;
     private List<Pilote> lesPTemp = new ArrayList<Pilote>();
 
+   
     /**
-     * Creates new form CreerModifierVoiture
+     * Instanciation
+     * @param c Controleur
      */
     public ModifierVoitureBis(Controleur c) {
         controleur = c;
         initComponents();
     }
 
+    /**
+     * Méthode pour remplir la liste temporaire avec une autre liste de manière à éviter les problèmes de référence
+     * @param depart Liste de Pilote
+     */
     public void remplir(List<Pilote> depart) {
         for (Pilote p : depart) {
             lesPTemp.add(p);
         }
     }
 
+    /**
+     * Fonction permettant l'ouverture de la fenetre
+     */
     public void lancer() {
         setVisible(true);
     }
@@ -75,7 +84,6 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
 
     @Override
     public void vider() {
-        //throw new UnsupportedOperationException("Not supported yet.");
         lesPTemp = new ArrayList<Pilote>();
         voitureCourante = null;
         jTextField1.setText("");
@@ -86,10 +94,12 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
         jList1.removeAll();
     }
 
+    /**
+     * Méthode permettant de charger les champs et la liste de la fenetre
+     */
     public void charger() {
 
         if (voitureCourante != null) {
-            //System.out.println("charger mVoiture pour la voiture="+voitureCourante.getNumVoiture());
 
             int numV = voitureCourante.getNumVoiture();
             jTextField4.setText(Integer.toString(numV));
@@ -144,11 +154,20 @@ public class ModifierVoitureBis extends javax.swing.JFrame implements MaFenetre 
         }
     }
 
+    /**
+     * Méthode permettant à partir du controleur et de la vue de donnée une valeur à la voiture courante
+     * @param v
+     */
     public void miseAJour(Voiture v) {
-        //voitureCourante=controleur.getVoitureExistante(v.getNumVoiture());
         voitureCourante = v;
     }
 
+    /**
+     * Méthode permettant d'avoir l'indice dans la liste temporaire d'un pilote
+     * @param nom String
+     * @param prenom String
+     * @return int - indice
+     */
     public int parcoursList(String nom, String prenom) {
         for (int i = 0; i < lesPTemp.size(); i++) {
             if (lesPTemp.get(i).getNom().equals(nom) && lesPTemp.get(i).getPrenom().equals(prenom)) {

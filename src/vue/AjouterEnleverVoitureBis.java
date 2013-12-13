@@ -23,22 +23,29 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
     private DefaultListModel<String> model2;
     private List<Voiture> lesVtemp = new ArrayList<Voiture>();
 
+
     /**
-     * Creates new form AjouterEnleverVoiture
+     * Instanciation
+     * @param c Controleur
      */
     public AjouterEnleverVoitureBis(Controleur c) {
         controleur = c;
         initComponents();
     }
 
+    /**
+     * Méthode pour remplir la liste temporaire avec une autre liste de manière à éviter les problèmes de référence
+     * @param depart Liste de Voiture
+     */
     public void remplir(List<Voiture> depart) {
-        //System.out.println("size="+depart.size());
         for (Voiture v : depart) {
             lesVtemp.add(v);
-            //System.out.println("Voiture ="+v.getNumVoiture());
         }
     }
 
+    /**
+     * Fonction permettant l'ouverture de la fenetre
+     */
     public void lancer() {
         setVisible(true);
     }
@@ -81,6 +88,12 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
         jList2.removeAll();
     }
 
+    /**
+     * Méthode permettant d'avoir l'indice dans la liste temporaire d'une voiture
+     * 
+     * @param numV int
+     * @return int - indice
+     */
     public int parcoursList(int numV) {
         for (int i = 0; i < lesVtemp.size(); i++) {
             if (lesVtemp.get(i).getNumVoiture() == numV) {
@@ -90,6 +103,9 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
         return -1;
     }
 
+    /**
+     * Méthode permettant de charger les listes
+     */
     public void charger() {
         List<Voiture> lesV = controleur.getListVoituresExistantes();
 
@@ -108,7 +124,6 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
             jList1.repaint();
         }
 
-        //List<Voiture> lesVE = controleur.getVoituresEvenement();
 
         List<Voiture> lesVE = controleur.getVoituresEvenement();
         remplir(lesVE);
