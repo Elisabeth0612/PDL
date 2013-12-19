@@ -326,7 +326,7 @@ public class AjouterEnleverVoitureBis extends javax.swing.JFrame implements MaFe
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une voiture.", "Erreur", JOptionPane.ERROR_MESSAGE);
         } else {
             int numV = Integer.valueOf((String) jList1.getSelectedValue());
-            if (controleur.getVoitureEvenementByNum(numV) != null) {
+            if (parcoursList(numV) != -1) {
                 JOptionPane.showMessageDialog(this, "La voiture est déjà présente dans l'Evenement.", "Erreur", JOptionPane.ERROR_MESSAGE);
             } else {
                 Voiture vE = controleur.getVoitureExistante(numV);
