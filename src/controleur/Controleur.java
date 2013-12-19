@@ -12,11 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import modele.*;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-import vue.MaFenetre;
 import vue.Vue;
 
 
@@ -401,6 +398,10 @@ public class Controleur {
     
     /************************************* Top *************************************/
     
+    /**
+     * Top
+     * @param nomCourse String
+     */
     public void demarrerCourse(String nomCourse){
         Course c = evtS.chercherCourse(nomCourse);
         if(c != null){
@@ -416,11 +417,18 @@ public class Controleur {
         }
     }
     
+    /**
+     * Permet d'envoyer les données liées à un top à la vue
+     * @param ligneTable
+     */
     public void creerUnTop(String[] ligneTable) {
         vue.ajouterLigneTableurCourse(ligneTable);
     }
-    
-    
+
+    /**
+     * Permet d'enregistrer le top dans la course en cours
+     * @param table DefaultTableModel
+     */
     public void enregistrerLesTops(DefaultTableModel table){
         //parcour du tableau
         int n = 0;
@@ -473,20 +481,37 @@ public class Controleur {
         }
     }
     
+    /**
+     * Retourne la voiture qui se déroule
+     * @return Course
+     */
     public Course getCourseEnCours(){
         return courseEnCours;
     }
     
+    /**
+     * Génère le graphique de résultat de la course qui vient de se terminer
+     * @param table
+     */
     public void genererGraphiqueCourse(DefaultTableModel table) {
        courseEnCours.genererGaphique(table); 
     }
     
+    /**
+     * Retourne le nombre de tour par relai d'une voiture
+     * @param numV int
+     * @return int
+     */
     public int getNbTourRelaiVoiture(int numV){
         Voiture v = courseEnCours.getUneVoiture(numV);
         return v.getNbToursParRelai();
     }
-    
-    
+
+    /**
+     * Indique si une course est terminée
+     * @param course String
+     * @return boolean
+     */
     public boolean courseTerminee(String course) {
         Course c = evtS.chercherCourse(course);
         if(c!=null){
@@ -497,11 +522,20 @@ public class Controleur {
         return false;
     }
 
-
+    /**
+     * 
+     * @param nomC String
+     * @return List
+     */
     public List getLesTopsCourse(String nomC) {
         return evtS.chercherCourse(nomC).getListT();
     }
 
+    /**
+     * Retourne les voitures inscrites à une course
+     * @param nomC String
+     * @return Liste
+     */
     public List getVoituresCourse(String nomC) {
         return evtS.chercherCourse(nomC).getListV();
     }
@@ -575,13 +609,14 @@ public class Controleur {
     }
    
     /************************************* Gestion de l'Existant *************************************/
+    
     public void enregistrer(){
-        //GestionnaireExistant.getInstance().genererFichierEvenements(evtS);
-        GestionnaireExistant.getInstance().enregistrementFermeture(evtS);
-        //EvenementSportifXML eXML = new EvenementSportifXML(evtS);
-        //eXML.executer();
+       GestionnaireExistant.getInstance().enregistrementFermeture(evtS); 
     }
 
+    /**
+     * Initialise les données existantes
+     */
     public void chargerExistant() {
         GestionnaireExistant.getInstance().chargerExistants();
     }
