@@ -26,7 +26,6 @@ import javax.swing.JOptionPane;
 import modele.Course;
 import modele.Voiture;
 import org.w3c.dom.NodeList;
-import vue_defaut.Evenement;
 
 /**
  *

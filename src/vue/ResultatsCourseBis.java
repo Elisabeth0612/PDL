@@ -6,7 +6,7 @@
 
 package vue;
 
-import vue_defaut.ResultatsCourse;
+
 import controleur.Controleur;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

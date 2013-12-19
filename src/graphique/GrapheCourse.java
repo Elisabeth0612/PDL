@@ -33,6 +33,11 @@ public class GrapheCourse {
         this.resultats = modele;
     }
 
+    /**
+     * Retourne les temps de course pour une voiture donnée
+     * @param numV int
+     * @return int[]
+     */
     public int[] getTempsDeCourse(int numV) {
         int[] temps = new int[nbTours];
         int precedent=0;
@@ -83,6 +88,10 @@ public class GrapheCourse {
         return temps;
     }
 
+    /**
+     * Genere un graphe pour une course
+     * @param nomC String
+     */
     public void genererGraphe(String nomC) {
         XYSeriesCollection dataset = new XYSeriesCollection();
 

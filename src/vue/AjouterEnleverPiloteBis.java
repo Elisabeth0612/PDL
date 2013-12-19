@@ -5,7 +5,6 @@
  */
 package vue;
 
-import vue_defaut.AjouterEnleverPilote;
 import controleur.Controleur;
 
 import java.util.ArrayList;

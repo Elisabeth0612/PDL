@@ -621,22 +621,42 @@ public class Controleur {
         GestionnaireExistant.getInstance().chargerExistants();
     }
 
+    /**
+     * Ouvre la fenetre permettant de charger un evenement
+     */
     public void chargerEvenement() {
         vue.ouvrirChargerEvenement();
     }
 
+    /**
+     * Retourne une liste des evenements existants
+     * @return List
+     */
     public List<String> getEvenementsExistants() {
         return GestionnaireExistant.getInstance().getEvenementsExistants();
     }
     
+    /**
+     * Retourne une liste des voitures existantes
+     * @return List
+     */
     public List<Voiture> getListVoituresExistantes(){
         return GestionnaireExistant.getInstance().getVoituresExistantes();
     }
     
+    /**
+     * Retourne une liste des pilotes existants
+     * @return List
+     */
     public List<Pilote> getListPilotesExistants(){
         return GestionnaireExistant.getInstance().getPilotesExistants();
     }
     
+    /**
+     * Retourne une voiture existante dans les données
+     * @param numV int
+     * @return Voiture
+     */
     public Voiture getVoitureExistante(int numV){
         List<Voiture> lesVE = GestionnaireExistant.getInstance().getVoituresExistantes();
         for(Voiture v:lesVE){
@@ -646,7 +666,13 @@ public class Controleur {
         }
         return null;
     }
-    
+
+    /**
+     * Retourne un pilote existant dans les données
+     * @param nomPilote String
+     * @param prenomPilote String
+     * @return Pilote
+     */
     public Pilote getPiloteExistant(String nomPilote, String prenomPilote){
         List<Pilote> lesPVoitures = GestionnaireExistant.getInstance().getPilotesExistants();
         
