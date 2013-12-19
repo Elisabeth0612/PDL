@@ -2,13 +2,13 @@
 <Evenementevenement>
   <Information_Evenement Nom_Evenement="evenement" Date_Evenement="Date inconnue" Nom_Circuit="circuit" Longueur_Circuit="0" />
   <Les_Courses>
-    <Course Nom="Course 1" Heure_début="heure inconnue" Heure_fin="heure inconnue" durée_max_pilotage="2" durée_consecutive_pilotage="3" meteo="beau" type_fin="Tours" nb_tours_max="8">
+    <Course Nom="Course 1" Heure_début="Thu Jan 01 12:00:00 CET 1970" Heure_fin="Thu Jan 01 14:30:00 CET 1970" durée_max_pilotage="2" durée_consecutive_pilotage="3" meteo="beau" type_fin="Tours" nb_tours_max="8">
       <les_voitures_course>
         <voiture Num_Voiture="1" />
         <voiture Num_Voiture="3" />
       </les_voitures_course>
     </Course>
-    <Course Nom="Course 2" Heure_début="heure inconnue" Heure_fin="heure inconnue" durée_max_pilotage="2" durée_consecutive_pilotage="3" meteo="beau" type_fin="Tours" nb_tours_max="8">
+    <Course Nom="Course 2" Heure_début="Thu Jan 01 12:00:00 CET 1970" Heure_fin="Thu Jan 01 14:30:00 CET 1970" durée_max_pilotage="2" durée_consecutive_pilotage="3" meteo="beau" type_fin="Tours" nb_tours_max="8">
       <les_voitures_course />
     </Course>
   </Les_Courses>

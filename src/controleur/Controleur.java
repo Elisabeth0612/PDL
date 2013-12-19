@@ -42,12 +42,12 @@ public class Controleur {
     /*************************************  Gestion du model    **************************************/
 
     public void creerEvt(String nomE,Date d,String nomC,int longueur){
-        try {
+        //try {
             evtS.modifierEvenement(nomE,d,nomC,longueur);
             /*
             * pour tester on remplie quelques données
             * A ENLEVER !!!!
-            */
+            
             Date deb = (Date) new SimpleDateFormat("HH:mm").parse("12:00");
             Date fin = (Date) new SimpleDateFormat("HH:mm").parse("14:30");
             Course c1 = new Course("Course 1",deb, fin, 2, 3,"beau", 8, "Tours");
@@ -77,14 +77,14 @@ public class Controleur {
             //ajout des courses
             evtS.addListC(c1);
             evtS.addListC(c2);
-            /*
+            
             * fin ajout test
             */
             
             vue.ouvrirEvenement();
-        } catch (ParseException ex) {
+        /*} catch (ParseException ex) {
             Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }  
     
     
