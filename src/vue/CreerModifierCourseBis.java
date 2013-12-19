@@ -56,7 +56,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
 
     /**
      *Methode qui retourne la course a modifier
-     * @return
+     * @return Course
      */
     public Course getcModifier() {
         return cModifier;
@@ -72,7 +72,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
 
     /**
      *Renvoie true si tous les champs ont été rempli
-     * @return
+     * @return boolean
      */
     public boolean controleChampsSaisis(){
         boolean ok=true;
@@ -695,7 +695,7 @@ public class CreerModifierCourseBis extends javax.swing.JFrame implements MaFene
     
     /**
      *Retourne la fenetre precedente
-     * @return
+     * @return MeFenetre
      */
     @Override
     public MaFenetre getPrecedent() {

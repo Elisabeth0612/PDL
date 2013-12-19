@@ -275,7 +275,7 @@ public class Controleur {
     /**
      * Supprime une voiture de l'evenement à partir d'un numero de voiture
      * @param numVoiture int
-     * @return
+     * @return boolean
      */
     public boolean supprimerVoiture(int numVoiture){
         if(evtS.supprimerVoiture(numVoiture)){
