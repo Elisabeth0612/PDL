@@ -40,11 +40,13 @@ public class GestionnaireExistant {
     private List<String> lesEvtExistants = new ArrayList<String>();
     private List<Voiture> lesVoituresExistantes=new ArrayList<Voiture>();
     private List<Pilote> lesPilotesExistants = new ArrayList<Pilote>();
+    private String path;
     //private List<Course> lesCoursesExistantes;*/
     
      private static final GestionnaireExistant INSTANCE = new GestionnaireExistant();
     
      private GestionnaireExistant() {
+         path = System.getProperty("user.dir" );
          //chargerExistants();
          //on va charger ici les données à partir des fichiers xml
      }
@@ -178,7 +180,7 @@ public class GestionnaireExistant {
         }
         racine.addContent(infVoitures);
         
-        String fic = "./src/xml/Evenement_"+evtS.getNomEvt()+".xml";
+        String fic = ""+path+"/Evenement_"+evtS.getNomEvt()+".xml";
         creerFichier(fic,document);
      }
      
@@ -194,9 +196,9 @@ public class GestionnaireExistant {
             
             //on s'occupe de l'evenement
             SAXBuilder builder = new SAXBuilder();
-            File fic = new File("./src/xml/Evenement_"+nomEvenement+".xml");
+            File fic = new File(path+"/Evenement_"+nomEvenement+".xml");
             if(fic.exists() && fic.length()!=0){
-                Document document = builder.build(new File("./src/xml/Evenement_"+nomEvenement+".xml"));
+                Document document = builder.build(new File(path+"/Evenement_"+nomEvenement+".xml"));
                 Element racine = (Element) document.getRootElement();
 
                 Element infEvt = racine.getChildren().get(0);
@@ -293,11 +295,11 @@ public class GestionnaireExistant {
      */
     public void genererFichierEvenements(EvenementSportif e){
          //Test si le fichier est déjà existant ou non
-         File f= new File("./src/xml/listeEvenements.xml");
+         File f= new File(path+"/listeEvenements.xml");
          if(f.exists()==true){
              try {
                  SAXBuilder builder = new SAXBuilder();
-                 Document document = builder.build(new File("./src/xml/listeEvenements.xml"));
+                 Document document = builder.build(new File(path+"/listeEvenements.xml"));
                  Element racine = (Element) document.getRootElement();
                  // Ajouter un nouvel élément
                  Element evt = new Element("Evenement");
@@ -305,7 +307,7 @@ public class GestionnaireExistant {
                 Element nomE = new Element("Nom_Evenement").setText(e.getNomEvt());
                 evt.addContent(nomE);
                  //evt.addContent(new Element("Nom_Evenement").setText(e.getNomEvt()));
-                 String fic = "./src/xml/listeEvenements.xml";
+                 String fic = path+"/listeEvenements.xml";
                  creerFichier(fic,document);
              } catch (JDOMException ex) {
                  Logger.getLogger(GestionnaireExistant.class.getName()).log(Level.SEVERE, null, ex);
@@ -320,7 +322,7 @@ public class GestionnaireExistant {
              racine.addContent(evt);
              Element nomE = new Element("Nom_Evenement").setText(e.getNomEvt());
              evt.addContent(nomE);
-             String fic = "./src/xml/listeEvenements.xml";
+             String fic = ""+path+"/listeEvenements.xml";
              creerFichier(fic,document);
         }
      }
@@ -334,9 +336,9 @@ public class GestionnaireExistant {
             
             //on s'occupe de la liste des evenements
             SAXBuilder builder = new SAXBuilder();
-            File fic = new File("./src/xml/listeEvenements.xml");
+            File fic = new File(path+"/listeEvenements.xml");
             if(fic.exists() && fic.length()!=0){
-                Document document = builder.build(new File("./src/xml/listeEvenements.xml"));
+                Document document = builder.build(new File(path+"/listeEvenements.xml"));
                 Element racine = (Element) document.getRootElement();
 
                 List fils = racine.getContent();
@@ -393,7 +395,7 @@ public class GestionnaireExistant {
              racine.addContent(voiture);
          }
          
-         String fic = "./src/xml/listeVoitures.xml";
+         String fic = path+"/listeVoitures.xml";
          creerFichier(fic,document);
      }
 
@@ -405,9 +407,9 @@ public class GestionnaireExistant {
             
             //on s'occupe de la liste des evenements
             SAXBuilder builder = new SAXBuilder();
-            File fic = new File("./src/xml/listeVoitures.xml");
+            File fic = new File(path+"listeVoitures.xml");
             if(fic.exists() && fic.length()!=0){
-                Document document = builder.build(new File("./src/xml/listeVoitures.xml"));
+                Document document = builder.build(new File(path+"/listeVoitures.xml"));
                 Element racine = (Element) document.getRootElement();
 
                 List fils = racine.getContent();
@@ -479,7 +481,7 @@ public class GestionnaireExistant {
              racine.addContent(pilote);
          }
          
-         String fic = "./src/xml/listePilotes.xml";
+         String fic = "listePilotes.xml";
          creerFichier(fic,document);
      }
      
@@ -491,9 +493,9 @@ public class GestionnaireExistant {
             
             //on s'occupe de la liste des evenements
             SAXBuilder builder = new SAXBuilder();
-            File fic = new File("./src/xml/listePilotes.xml");
+            File fic = new File(path+"/listePilotes.xml");
             if(fic.exists() && fic.length()!=0){
-                Document document = builder.build(new File("./src/xml/listePilotes.xml"));
+                Document document = builder.build(new File(path+"/listePilotes.xml"));
                 Element racine = (Element) document.getRootElement();
 
                 List fils = racine.getContent();

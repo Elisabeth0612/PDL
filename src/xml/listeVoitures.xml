@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Voitures>
   <Voiture>
-    <Num_Voiture>2</Num_Voiture>
-    <Couleur_voiture>bleue</Couleur_voiture>
-    <nb_tours_relai>5</nb_tours_relai>
-    <Voiture_active>true</Voiture_active>
-    <Pilote_actuel>nomV2P1-prenomV2P1</Pilote_actuel>
-    <Les_pilotes>
-      <nomP-PrenomP>nomV2P2-prenomV2P2</nomP-PrenomP>
-    </Les_pilotes>
-  </Voiture>
-  <Voiture>
     <Num_Voiture>1</Num_Voiture>
-    <Couleur_voiture>rouge</Couleur_voiture>
-    <nb_tours_relai>5</nb_tours_relai>
+    <Couleur_voiture>bleu</Couleur_voiture>
+    <nb_tours_relai>10</nb_tours_relai>
     <Voiture_active>true</Voiture_active>
-    <Pilote_actuel>nomV1P1-prenomV1P1</Pilote_actuel>
+    <Pilote_actuel>nom1-prenom1</Pilote_actuel>
     <Les_pilotes>
-      <nomP-PrenomP>nomV1P2-prenomV1P2</nomP-PrenomP>
+      <nomP-PrenomP>nom1-prenom1</nomP-PrenomP>
     </Les_pilotes>
   </Voiture>
 </Voitures>
