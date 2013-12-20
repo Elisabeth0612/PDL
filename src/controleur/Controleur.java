@@ -457,20 +457,37 @@ public class Controleur {
        
     }
 
-    
-    /*************************************  Course *************************************/    
+    /*************************************  Course *************************************/
+    /**
+     * Retourne la liste de voitures de la course en cours
+     * @return
+     */
     public List getVoituresCourse(){
         return courseEnCours.getListV();
     }
     
+    /**
+     * Retourne la voiture numero num
+     * @param num
+     * @return
+     */
     public Voiture getVoitureCourseByNum(int num){
         return courseEnCours.getUneVoiture(num);
     }
     
+    /**
+     * Retourne le nombre de tours maximum de la course
+     * @return
+     */
     public int getNbToursMaxCourse(){
         return courseEnCours.getNbToursMax();
     }
     
+    /**
+     * Retourne le nombre de voitures inscrites a la course
+     * @param course
+     * @return
+     */
     public int nbVoituresInscritesCourses(String course) {
         Course c = evtS.chercherCourse(course);
         if(c != null && c.getNbVoituresInscrites()!=0){
@@ -482,7 +499,7 @@ public class Controleur {
     }
     
     /**
-     * Retourne la voiture qui se déroule
+     * Retourne la course qui se déroule
      * @return Course
      */
     public Course getCourseEnCours(){
